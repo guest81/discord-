@@ -4,7 +4,7 @@
   "description": "Discord bot to show Roblox script users online",
   "main": "index4.js",
   "scripts": {
-    "start": "node index1.js"
+    "start": "node index4.js"
   },
   "dependencies": {
     "discord.js": "^14.12.0",
