@@ -2,7 +2,7 @@
   "name": "discord-bot",
   "version": "1.0.0",
   "description": "Discord bot to show Roblox script users online",
-  "main": "index1.js",
+  "main": "index4.js",
   "scripts": {
     "start": "node index1.js"
   },
