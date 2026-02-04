@@ -1,0 +1,16 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot to show Roblox script users online",
+  "main": "index1.js",
+  "scripts": {
+    "start": "node index1.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.12.0",
+    "axios": "^1.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
