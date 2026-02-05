@@ -1,40 +1,68 @@
-// index4.js
+// index.js
 const { Client, GatewayIntentBits } = require("discord.js");
 const axios = require("axios");
 const express = require("express");
-require("dotenv").config();
+require("dotenv").config(); // يجيب TOKEN من ملف .env
 
 const TOKEN = process.env.TOKEN;
 const API = "https://roblox-api-production-08e4.up.railway.app/count";
-const CHANNEL_ID = "1468033384176423064";
-const INTERVAL = 3000;
+const CHANNEL_ID = "1468033384176423064"; // حط هنا ID الروم
+const INTERVAL = 3000; // كل 3 ثواني
 
+// إعداد البوت
 const client = new Client({
   intents: [GatewayIntentBits.Guilds]
 });
 
-// سيرفر ping لمنع النوم
+// إعداد سيرفر صغير للـ ping
 const app = express();
 app.get("/ping", (req, res) => res.send("pong"));
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log("Ping server running on port", PORT));
 
-let lastOnlineMessage = null;
-let lastBestMessage = null;
+// متغيرات الرسائل
+let messageNow = null;
+let messageBest = null;
 let bestCount = 0;
 
+// دالة لإنشاء الرسائل لأول مرة
+async function initMessages(channel) {
+  messageNow = await channel.send("PhantomX Online Users Now: **None**");
+  messageBest = await channel.send("Best Number Of PhantomX Users: **0**");
+}
+
+// حدث جاهزية البوت
 client.once("ready", async () => {
   console.log("Bot ready!");
   const channel = await client.channels.fetch(CHANNEL_ID);
+  await initMessages(channel);
 
-  // تشغيل التحديث كل INTERVAL
   setInterval(async () => {
     try {
       const res = await axios.get(API);
       const count = Number(res.data.online) || 0;
 
-      // تحديث رسالة Online Now
-      if (lastOnlineMessage) {
+      // حذف الرسالة القديمة للعدد الحالي
+      if (messageNow) await messageNow.delete();
+      messageNow = await channel.send(`PhantomX Online Users Now: **${count}**`);
+
+      // تحديث ستاتوس البوت
+      client.user.setActivity(`Online: ${count}`);
+
+      // تحديث رسالة أفضل عدد
+      if (count > bestCount) {
+        bestCount = count;
+        if (messageBest) await messageBest.delete();
+        messageBest = await channel.send(`Best Number Of PhantomX Users: **${bestCount}**`);
+      }
+    } catch (e) {
+      console.log("API or Discord error:", e.message);
+    }
+  }, INTERVAL);
+});
+
+// تسجيل دخول البوت
+client.login(TOKEN);      if (lastOnlineMessage) {
         try { await lastOnlineMessage.delete(); } catch {}
       }
       lastOnlineMessage = await channel.send(`PhantomX Online Users Now: **${count}**`);
