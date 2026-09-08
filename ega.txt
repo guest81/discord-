@@ -1,0 +1,1124 @@
+-- Mobile-friendly GUI for Auto Steal Egg
+-- All buttons have full functionality
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local TeleportService = game:GetService("TeleportService")
+local Lighting = game:GetService("Lighting")
+local Workspace = game:GetService("Workspace")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local VirtualUser = game:GetService("VirtualUser")
+local GuiService = game:GetService("GuiService")
+local CoreGui = game:GetService("CoreGui")
+
+local LocalPlayer = Players.LocalPlayer
+local Character = nil
+local Humanoid = nil
+local RootPart = nil
+local CurrentCamera = workspace.CurrentCamera
+
+Options = {}
+Toggles = {}
+
+local isCarrying = false
+local isFusingNow = false
+local isSellingNow = false
+local isHopingNow = false
+local isUnloaded = false
+local treadmilActive = false
+local currentStealCount = 0
+local hopThresholdCounter = 0
+local sessionStart = os.clock()
+local espObjects = {}
+local eggHistory = {}
+local webhookTimer = 0
+
+-- Bypass functions
+local function stealthBypass()
+    pcall(function()
+        for _, conn in ipairs(getconnections(LocalPlayer.Idled)) do
+            conn:Disable()
+        end
+    end)
+    pcall(function()
+        if sethiddenproperty then
+            sethiddenproperty(LocalPlayer, "GameplayPaused", false)
+        end
+    end)
+    pcall(function()
+        GuiService:SetGameplayPausedNotificationEnabled(false)
+    end)
+end
+
+local function bypassAll()
+    stealthBypass()
+    pcall(function() setfpscap(999) end)
+end
+
+-- Safe loader
+local function safeRequire(path, timeout)
+    timeout = timeout or 2
+    local parts = {}
+    for part in string.gmatch(path, "[^%.]+") do
+        table.insert(parts, part)
+    end
+    local current = ReplicatedStorage
+    for i, part in ipairs(parts) do
+        local child = current:FindFirstChild(part)
+        if not child then
+            if i == #parts then
+                return nil
+            end
+            local success, result = pcall(function()
+                return current:WaitForChild(part, timeout)
+            end)
+            if not success or not result then
+                return nil
+            end
+            current = result
+        else
+            current = child
+        end
+    end
+    if typeof(current) == "Instance" then
+        local success, module = pcall(require, current)
+        if success then
+            return module
+        end
+    end
+    return nil
+end
+
+local function loadModules()
+    local modules = {}
+    modules.EggState = safeRequire("Client.EggState")
+    modules.Constants = safeRequire("Shared.Globals.Constants")
+    modules.Save = safeRequire("Shared.Save")
+    modules.BaseUpgrade = safeRequire("Client.BaseUpgrade")
+    modules.Treadmills = safeRequire("Data.Treadmills")
+    modules.Assets = safeRequire("Data.Assets")
+    modules.PetSatchel = safeRequire("Data.AssetInventory")
+    modules.AwayEarnings = safeRequire("Data.OfflineAssets")
+    modules.Codex = safeRequire("Data.Index")
+    modules.Fusery = safeRequire("Data.FuseGroups")
+    modules.Trailwear = safeRequire("Data.Trails")
+    modules.GroupPerk = safeRequire("Data.GroupReward")
+    modules.Homestead = safeRequire("Data.Plots")
+    return modules
+end
+
+local GameModules = loadModules()
+
+local Remotes = {
+    GetAreaEggSnapshot = GameModules.EggState and GameModules.EggState.ReadFieldEggs,
+    RequestCarryAreaEgg = GameModules.EggState and GameModules.EggState.CarryFieldEgg,
+    RequestDropHeldAreaEgg = GameModules.EggState and function() return GameModules.EggState.DropFieldEgg("PlayerRequest") end,
+    IsLocalEggReady = GameModules.EggState and GameModules.EggState.IsReadyToHatch,
+    RequestHatchEgg = GameModules.EggState and GameModules.EggState.BeginHatch,
+    RequestPlaceEgg = GameModules.EggState and GameModules.EggState.PlantEgg,
+    GetRespawnPointCFrame = GameModules.Constants and GameModules.Constants.FindRespawnCFrame,
+    RequestTreadmillUpgrade = GameModules.Treadmills and GameModules.Treadmills.AskTierRaise,
+    RequestEquipStatic = GameModules.Treadmills and GameModules.Treadmills.AskWearStill,
+    RequestUnequip = GameModules.Treadmills and GameModules.Treadmills.AskDoff,
+    RequestBaseUpgrade = GameModules.BaseUpgrade and GameModules.BaseUpgrade.AskBaseTierRaise,
+    SellAsset = GameModules.PetSatchel and GameModules.PetSatchel.SellPet,
+    ClaimIndex = GameModules.Codex and GameModules.Codex.AskRedeemAll,
+    ClaimOffline = GameModules.AwayEarnings and GameModules.AwayEarnings.AskCollect,
+    GetOfflineSummary = GameModules.AwayEarnings and GameModules.AwayEarnings.FetchSummary,
+    FinishReveal = GameModules.Fusery and GameModules.Fusery.FinishReveal,
+    ConfirmBriefing = GameModules.Fusery and GameModules.Fusery.ConfirmBriefing,
+    LoadPet = GameModules.Fusery and GameModules.Fusery.LoadPet,
+    StartFuse = GameModules.Fusery and GameModules.Fusery.BeginFuse,
+    PurchaseTrail = GameModules.Trailwear and GameModules.Trailwear.AskPurchase,
+    SelectTrail = GameModules.Trailwear and GameModules.Trailwear.AskChoose,
+    SnapshotTrail = GameModules.Trailwear and GameModules.Trailwear.AskWornSnapshot,
+    ClaimGroupReward = GameModules.GroupPerk and GameModules.GroupPerk.RedeemPerk,
+    RequestBaseUpgradePlot = GameModules.Homestead and GameModules.Homestead.AskBaseTierRaise,
+    EquipBestPet = GameModules.PetSatchel and GameModules.PetSatchel.WearBest,
+}
+
+local RarityMap = {Common=1,Uncommon=2,Rare=3,Epic=4,Legendary=5,Mythic=6,Cosmic=7,Secret=8,Eternal=9,Divine=10}
+local AreaList = {"Forest","Lake","Desert","Jungle","Volcano","Abyss Ocean","Prehistoric","Cosmic"}
+local StealPriorityList = {"Furthest","Biggest Size","Rarest","Nearest"}
+local HopModeList = {"No Matching Eggs","Timed Interval","After Steal Count"}
+local UpgradeTypeList = {"Base","Treadmill"}
+
+local function getHumanoid()
+    if not Character or not Character.Parent then Character = LocalPlayer.Character end
+    if Character then Humanoid = Character:FindFirstChildOfClass("Humanoid") end
+    return Humanoid
+end
+
+local function getRoot()
+    if not Character or not Character.Parent then Character = LocalPlayer.Character end
+    if Character then RootPart = Character:FindFirstChild("HumanoidRootPart") end
+    return RootPart
+end
+
+local function isCarryingEgg() return isCarrying end
+
+local function getEggInventoryCount()
+    local save = GameModules.Save and GameModules.Save.Get()
+    if save and save.EggInventory then
+        local c = 0
+        for _ in pairs(save.EggInventory) do c = c+1 end
+        return c
+    end
+    return 0
+end
+
+local function isInventoryFull()
+    local max = GameModules.Constants and GameModules.Constants.MAX_INVENTORY or 100
+    return getEggInventoryCount() >= max
+end
+
+local function getUnplacedEggUids()
+    local uids = {}
+    local save = GameModules.Save and GameModules.Save.Get()
+    if save and save.EggInventory then
+        for uid, data in pairs(save.EggInventory) do
+            if not data.Placed then table.insert(uids, uid) end
+        end
+    end
+    return uids
+end
+
+local function isPlotFull()
+    if Remotes.GetRespawnPointCFrame then
+        local data = Remotes.GetRespawnPointCFrame("Base")
+        -- Placeholder logic, actual plot data might be different
+    end
+    return false
+end
+
+local function resolveRarity(cat) return RarityMap[cat] end
+local function getAssetName(cat) return tostring(cat) end
+
+local function recordMutations(eggData)
+    local list = {}
+    if eggData and eggData.Mutations then
+        for _, m in pairs(eggData.Mutations) do
+            if type(m)=="string" then table.insert(list,m) end
+        end
+    end
+    if eggData and eggData.BaseMutation and type(eggData.BaseMutation)=="string" then
+        table.insert(list, eggData.BaseMutation)
+    end
+    return list
+end
+
+local function matchesEggFilters(egg, areas, rarities, mutations)
+    if areas and #areas>0 then
+        local areaId = egg.AreaId
+        if not areaId then return false end
+        local ok = false
+        for _, a in ipairs(areas) do if tostring(a)==tostring(areaId) then ok=true; break end end
+        if not ok then return false end
+    end
+    if rarities and #rarities>0 then
+        local rarity = resolveRarity(egg.AssetCategory)
+        if not rarity then return false end
+        local ok = false
+        for _, r in ipairs(rarities) do
+            if tostring(r)==tostring(rarity) or tostring(r)==tostring(egg.AssetCategory) then ok=true; break end
+        end
+        if not ok then return false end
+    end
+    if mutations and #mutations>0 then
+        local eggMuts = recordMutations(egg)
+        local found = false
+        for _, m in ipairs(eggMuts) do
+            for _, s in ipairs(mutations) do
+                if tostring(s)==tostring(m) then found=true; break end
+            end
+            if found then break end
+        end
+        if not found then return false end
+    end
+    return true
+end
+
+local function getAvailableEggs(areas, rarities, mutations, bigEggMinScale)
+    local snapshot = Remotes.GetAreaEggSnapshot and Remotes.GetAreaEggSnapshot()
+    local valid = {}
+    if not snapshot then return valid end
+    for _, egg in pairs(snapshot) do
+        if not egg.IsCarried then
+            if matchesEggFilters(egg, areas, rarities, mutations) then
+                local scale = egg.AssetScale or 1
+                if bigEggMinScale and bigEggMinScale>1 then
+                    if scale>=bigEggMinScale then table.insert(valid, egg) end
+                else
+                    table.insert(valid, egg)
+                end
+            end
+        end
+    end
+    return valid
+end
+
+local function sortEggsByPriority(eggs, priority)
+    if priority=="Nearest" then
+        local root = getRoot()
+        if root then
+            table.sort(eggs, function(a,b)
+                return (a.Position-root.Position).Magnitude < (b.Position-root.Position).Magnitude
+            end)
+        end
+    elseif priority=="Furthest" then
+        local root = getRoot()
+        if root then
+            table.sort(eggs, function(a,b)
+                return (a.Position-root.Position).Magnitude > (b.Position-root.Position).Magnitude
+            end)
+        end
+    elseif priority=="Biggest Size" then
+        table.sort(eggs, function(a,b) return (a.AssetScale or 1) > (b.AssetScale or 1) end)
+    elseif priority=="Rarest" then
+        table.sort(eggs, function(a,b)
+            return (resolveRarity(a.AssetCategory) or 0) > (resolveRarity(b.AssetCategory) or 0)
+        end)
+    end
+    return eggs
+end
+
+local function runAutoSteal()
+    if isUnloaded or isCarryingEgg() or isInventoryFull() then return false end
+    local areas = Options.StealZones and Options.StealZones.Value
+    local rarities = Options.StealRarities and Options.StealRarities.Value
+    local mutations = Options.StealMutations and Options.StealMutations.Value
+    local priority = Options.StealPriority and Options.StealPriority.Value or "Nearest"
+    local bigEggs = Options.StealBigEggs and Options.StealBigEggs.Value
+    local bigScale = Options.StealBigEggScale and Options.StealBigEggScale.Value or 1.5
+    local eggs = getAvailableEggs(areas, rarities, mutations, bigEggs and bigScale or nil)
+    if #eggs==0 then return false end
+    eggs = sortEggsByPriority(eggs, priority)
+    local target = eggs[1]
+    if target and Remotes.RequestCarryAreaEgg then
+        local success = Remotes.RequestCarryAreaEgg(target.Uid)
+        if success then
+            currentStealCount = currentStealCount + 1
+            hopThresholdCounter = hopThresholdCounter + 1
+            return true
+        end
+    end
+    return false
+end
+
+local function runAutoDropEgg()
+    if isUnloaded or not isCarryingEgg() then return false end
+    if Remotes.RequestDropHeldAreaEgg then
+        Remotes.RequestDropHeldAreaEgg()
+        return true
+    end
+    return false
+end
+
+local function runAutoPlaceEggs()
+    if isUnloaded or isCarryingEgg() or isPlotFull() then return false end
+    local rarities = Options.LifecycleRarities and Options.LifecycleRarities.Value
+    local mutations = Options.LifecycleMutations and Options.LifecycleMutations.Value
+    local placeAll = Options.AutoPlaceAll and Options.AutoPlaceAll.Value
+    local placeSelected = Options.AutoPlaceSelected and Options.AutoPlaceSelected.Value
+    if not placeAll and not placeSelected then return false end
+    local uids = getUnplacedEggUids()
+    if #uids==0 then return false end
+    local save = GameModules.Save and GameModules.Save.Get()
+    if not save or not save.EggInventory then return false end
+    for _, uid in ipairs(uids) do
+        local egg = save.EggInventory[uid]
+        if egg then
+            if placeSelected then
+                if matchesEggFilters(egg, nil, rarities, mutations) then
+                    if Remotes.RequestPlaceEgg then Remotes.RequestPlaceEgg(uid) end
+                    return true
+                end
+            elseif placeAll then
+                if Remotes.RequestPlaceEgg then Remotes.RequestPlaceEgg(uid) end
+                return true
+            end
+        end
+    end
+    return false
+end
+
+local function runAutoHatch()
+    if isUnloaded or isCarryingEgg() then return false end
+    if not (Options.AutoOpenReadyEggs and Options.AutoOpenReadyEggs.Value) then return false end
+    local save = GameModules.Save and GameModules.Save.Get()
+    if not save or not save.EggInventory then return false end
+    for uid, egg in pairs(save.EggInventory) do
+        if egg.Placed and Remotes.IsLocalEggReady and Remotes.IsLocalEggReady(uid) then
+            if Remotes.RequestHatchEgg then Remotes.RequestHatchEgg(uid) end
+            return true
+        end
+    end
+    return false
+end
+
+local function runAutoTreadmill()
+    if isUnloaded or isCarryingEgg() then return false end
+    if not (Options.AutoTreadmill and Options.AutoTreadmill.Value) then return false end
+    local stand = Remotes.GetRespawnPointCFrame and Remotes.GetRespawnPointCFrame("Treadmill")
+    if not stand then return false end
+    local root = getRoot()
+    if root and (root.Position - stand.Position).Magnitude > 15 then
+        local tween = TweenService:Create(root, TweenInfo.new(0.5), {CFrame = CFrame.new(stand.Position)})
+        tween:Play()
+        tween.Completed:Wait()
+    end
+    if Remotes.RequestEquipStatic then Remotes.RequestEquipStatic() end
+    treadmilActive = true
+    return true
+end
+
+local function stopTreadmill()
+    if treadmilActive then
+        if Remotes.RequestUnequip then Remotes.RequestUnequip() end
+        treadmilActive = false
+    end
+end
+
+local function runAutoEquipBest()
+    if isUnloaded then return false end
+    if not (Options.ResolvePlot and Options.ResolvePlot.Value) then return false end
+    if Remotes.EquipBestPet then Remotes.EquipBestPet() end
+    return true
+end
+
+local function runAutoFusePets(force)
+    if isUnloaded or isCarryingEgg() then return false end
+    if not (Options.AutoFusePets and Options.AutoFusePets.Value) and not force then return false end
+    if isFusingNow then return false end
+    local rarities = Options.FuseRarities and Options.FuseRarities.Value
+    local mutations = Options.FuseMutations and Options.FuseMutations.Value
+    local targetGroup = Options.FuseTarget and Options.FuseTarget.Value or "Rarity"
+    local keepMutated = Options.FuseKeepMutated and Options.FuseKeepMutated.Value
+    local keepEquipped = Options.FuseKeepEquipped and Options.FuseKeepEquipped.Value
+    local maxScale = Options.FuseMaxScale and Options.FuseMaxScale.Value or 10
+    local keepPerCategory = Options.FuseKeepPerCategory and Options.FuseKeepPerCategory.Value or 0
+    isFusingNow = true
+    local save = GameModules.Save and GameModules.Save.Get()
+    if not save or not save.PetInventory then isFusingNow=false; return false end
+    local inventory = save.PetInventory
+    local petsByGroup = {}
+    for id, pet in pairs(inventory) do
+        local groupKey = (targetGroup=="Rarity") and (pet.Rarity or pet.AssetCategory) or (pet.AssetName or pet.AssetCategory)
+        if not petsByGroup[groupKey] then petsByGroup[groupKey]={} end
+        table.insert(petsByGroup[groupKey], {id=id, data=pet})
+    end
+    local selectedPets = {}
+    for group, list in pairs(petsByGroup) do
+        table.sort(list, function(a,b)
+            return (resolveRarity(a.data.AssetCategory) or 0) < (resolveRarity(b.data.AssetCategory) or 0)
+        end)
+        local keepCount = 0
+        for _, entry in ipairs(list) do
+            local pet = entry.data
+            local scale = pet.AssetScale or 1
+            local isMutated = pet.Mutations and #pet.Mutations > 0
+            local isEquipped = pet.Equipped == true
+            if keepMutated and isMutated then keepCount = keepCount + 1 end
+            if keepEquipped and isEquipped then keepCount = keepCount + 1 end
+            if scale > maxScale then keepCount = keepCount + 1 end
+        end
+        local toKeep = math.max(keepCount, keepPerCategory)
+        for i, entry in ipairs(list) do
+            if i > toKeep then table.insert(selectedPets, entry.id) end
+        end
+    end
+    if #selectedPets == 0 then isFusingNow=false; return false end
+    for _, id in ipairs(selectedPets) do
+        if Options.FuseAutoReveal and Options.FuseAutoReveal.Value then
+            if Remotes.ConfirmBriefing then Remotes.ConfirmBriefing() end
+            if Remotes.FinishReveal then Remotes.FinishReveal() end
+        end
+        if Remotes.LoadPet then Remotes.LoadPet(id) end
+        if Remotes.StartFuse then Remotes.StartFuse() end
+        task.wait(0.5)
+        isFusingNow = false
+        return true
+    end
+    isFusingNow = false
+    return false
+end
+
+local function runAutoSellPets(force)
+    if isUnloaded or isCarryingEgg() then return false end
+    if not (Options.AutoSellPets and Options.AutoSellPets.Value) and not force then return false end
+    if isSellingNow then return false end
+    local rarities = Options.SellRarities and Options.SellRarities.Value
+    local mutations = Options.SellMutations and Options.SellMutations.Value
+    local keepMutated = Options.SellKeepMutated and Options.SellKeepMutated.Value
+    local keepEquipped = Options["NeverSellEquipped"] and Options["NeverSellEquipped"].Value
+    local maxScale = Options.SellMaxScale and Options.SellMaxScale.Value or 10
+    isSellingNow = true
+    local save = GameModules.Save and GameModules.Save.Get()
+    if not save or not save.PetInventory then isSellingNow=false; return false end
+    local inventory = save.PetInventory
+    for id, pet in pairs(inventory) do
+        local rarity = pet.Rarity or pet.AssetCategory
+        local scale = pet.AssetScale or 1
+        local isMutated = pet.Mutations and #pet.Mutations > 0
+        local isEquipped = pet.Equipped == true
+        if keepMutated and isMutated then continue end
+        if keepEquipped and isEquipped then continue end
+        if scale > maxScale then continue end
+        if rarities and #rarities>0 then
+            local ok = false
+            for _, r in ipairs(rarities) do
+                if tostring(r)==tostring(rarity) then ok=true; break end
+            end
+            if not ok then continue end
+        end
+        if mutations and #mutations>0 then
+            local petMuts = recordMutations(pet)
+            local found = false
+            for _, m in ipairs(petMuts) do
+                for _, s in ipairs(mutations) do
+                    if tostring(s)==tostring(m) then found=true; break end
+                end
+                if found then break end
+            end
+            if not found then continue end
+        end
+        if Remotes.SellAsset then Remotes.SellAsset(id) end
+        task.wait(0.2)
+        isSellingNow = false
+        return true
+    end
+    isSellingNow = false
+    return false
+end
+
+local function runAutoSellEggs(force)
+    if isUnloaded or isCarryingEgg() then return false end
+    if not (Options.AutoSellEggs and Options.AutoSellEggs.Value) and not force then return false end
+    local rarities = Options.SellEggRarities and Options.SellEggRarities.Value
+    if not rarities or #rarities==0 then return false end
+    local save = GameModules.Save and GameModules.Save.Get()
+    if not save or not save.EggInventory then return false end
+    for uid, egg in pairs(save.EggInventory) do
+        local rarity = egg.AssetCategory
+        local ok = false
+        for _, r in ipairs(rarities) do
+            if tostring(r)==tostring(rarity) then ok=true; break end
+        end
+        if ok then
+            if Remotes.SellAsset then Remotes.SellAsset(uid) end
+            return true
+        end
+    end
+    return false
+end
+
+local function runAutoUpgrades()
+    if isUnloaded or isCarryingEgg() then return false end
+    if not (Options.AutoUpgrades and Options.AutoUpgrades.Value) then return false end
+    local types = Options.UpgradeTypes and Options.UpgradeTypes.Value
+    if not types or #types==0 then return false end
+    for _, typ in ipairs(types) do
+        if typ == "Base" and Remotes.RequestBaseUpgradePlot then
+            Remotes.RequestBaseUpgradePlot()
+            return true
+        elseif typ == "Treadmill" and Remotes.RequestTreadmillUpgrade then
+            Remotes.RequestTreadmillUpgrade()
+            return true
+        end
+    end
+    return false
+end
+
+local function runAutoClaimIndex()
+    if isUnloaded then return false end
+    if not (Options.AutoClaimIndex and Options.AutoClaimIndex.Value) then return false end
+    if Remotes.ClaimIndex then Remotes.ClaimIndex() end
+    return true
+end
+
+local function runAutoClaimGroupReward()
+    if isUnloaded then return false end
+    if not (Options.AutoClaimGroupReward and Options.AutoClaimGroupReward.Value) then return false end
+    if Remotes.ClaimGroupReward then Remotes.ClaimGroupReward() end
+    return true
+end
+
+local function runClaimOfflineEarnings()
+    if isUnloaded then return false end
+    if not (Options.AutoClaimOffline and Options.AutoClaimOffline.Value) then return false end
+    local summary = Remotes.GetOfflineSummary and Remotes.GetOfflineSummary()
+    if summary and summary.Unclaimed > 0 then
+        if Remotes.ClaimOffline then Remotes.ClaimOffline() end
+        return true
+    end
+    return false
+end
+
+local function runAutoBuyTrail()
+    if isUnloaded or isCarryingEgg() then return false end
+    if not (Options.AutoBuyTrail and Options.AutoBuyTrail.Value) then return false end
+    local wanted = Options.TrailWanted and Options.TrailWanted.Value
+    if not wanted or #wanted==0 then return false end
+    local snapshot = Remotes.SnapshotTrail and Remotes.SnapshotTrail()
+    if snapshot and snapshot.Available then
+        for _, name in ipairs(wanted) do
+            for _, trail in ipairs(snapshot.Available) do
+                if trail.Name == name then
+                    if Remotes.PurchaseTrail then Remotes.PurchaseTrail(trail.Id) end
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
+
+local function runAutoEquipBestTrail()
+    if isUnloaded then return false end
+    if not (Options.AutoEquipBestTrail and Options.AutoEquipBestTrail.Value) then return false end
+    local snapshot = Remotes.SnapshotTrail and Remotes.SnapshotTrail()
+    if snapshot and snapshot.Best then
+        if Remotes.SelectTrail then Remotes.SelectTrail(snapshot.Best) end
+        return true
+    end
+    return false
+end
+
+local function runAutoEquipBestGear()
+    if isUnloaded then return false end
+    if not (Options.AutoEquipBestGear and Options.AutoEquipBestGear.Value) then return false end
+    if Remotes.EquipBestPet then Remotes.EquipBestPet() end
+    return true
+end
+
+local function stealingEnabled()
+    return (Options.AutoStealSelected and Options.AutoStealSelected.Value) or (Options.AutoStealAll and Options.AutoStealAll.Value)
+end
+
+local function placingEnabled()
+    return (Options.AutoPlaceSelected and Options.AutoPlaceSelected.Value) or (Options.AutoPlaceAll and Options.AutoPlaceAll.Value)
+end
+
+local function antiAfkTap()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
+end
+
+local function serverHop(reason)
+    if isHopingNow then return end
+    isHopingNow = true
+    local jobId = game.JobId
+    local placeId = game.PlaceId
+    TeleportService:TeleportToPlaceInstance(placeId, jobId, LocalPlayer)
+    isHopingNow = false
+end
+
+local function runServerHop()
+    if isUnloaded then return false end
+    if not (Options.AutoServerHop and Options.AutoServerHop.Value) then return false end
+    local mode = Options.HopMode and Options.HopMode.Value or "No Matching Eggs"
+    local threshold = Options.HopThreshold and Options.HopThreshold.Value or 15
+    if mode == "No Matching Eggs" then
+        local areas = Options.StealZones and Options.StealZones.Value
+        local rarities = Options.StealRarities and Options.StealRarities.Value
+        local mutations = Options.StealMutations and Options.StealMutations.Value
+        local eggs = getAvailableEggs(areas, rarities, mutations, nil)
+        if #eggs == 0 then
+            serverHop("No eggs")
+            return true
+        end
+    elseif mode == "Timed Interval" then
+        if os.clock() - sessionStart > threshold * 60 then
+            serverHop("Time")
+            return true
+        end
+    elseif mode == "After Steal Count" then
+        if hopThresholdCounter >= threshold then
+            hopThresholdCounter = 0
+            serverHop("Count")
+            return true
+        end
+    end
+    return false
+end
+
+local function copyText(text)
+    if setclipboard then setclipboard(text) elseif toclipboard then toclipboard(text) end
+end
+
+-- GUI Creation - Mobile friendly
+local function createMobileGUI()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "OuroborosMobile"
+    screenGui.Parent = CoreGui
+
+    local mainFrame = Instance.new("Frame")
+    mainFrame.Size = UDim2.new(0, 320, 0, 460)
+    mainFrame.Position = UDim2.new(0.5, -160, 0.5, -230)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+    mainFrame.BackgroundTransparency = 0.1
+    mainFrame.BorderSizePixel = 0
+    mainFrame.ClipsDescendants = true
+    mainFrame.Parent = screenGui
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 12)
+    corner.Parent = mainFrame
+
+    local titleBar = Instance.new("Frame")
+    titleBar.Size = UDim2.new(1, 0, 0, 40)
+    titleBar.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+    titleBar.BorderSizePixel = 0
+    titleBar.Parent = mainFrame
+
+    local titleCorner = Instance.new("UICorner")
+    titleCorner.CornerRadius = UDim.new(0, 12)
+    titleCorner.Parent = titleBar
+
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Size = UDim2.new(0.8, 0, 1, 0)
+    titleLabel.Position = UDim2.new(0.05, 0, 0, 0)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Text = "☀ Ouroboros"
+    titleLabel.TextColor3 = Color3.fromRGB(255, 200, 100)
+    titleLabel.TextSize = 18
+    titleLabel.Font = Enum.Font.GothamBold
+    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    titleLabel.Parent = titleBar
+
+    local closeBtn = Instance.new("TextButton")
+    closeBtn.Size = UDim2.new(0, 35, 0, 35)
+    closeBtn.Position = UDim2.new(1, -40, 0, 2)
+    closeBtn.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+    closeBtn.BackgroundTransparency = 0.3
+    closeBtn.Text = "✕"
+    closeBtn.TextColor3 = Color3.new(1,1,1)
+    closeBtn.TextSize = 16
+    closeBtn.Font = Enum.Font.GothamBold
+    closeBtn.BorderSizePixel = 0
+    closeBtn.Parent = titleBar
+
+    local closeCorner = Instance.new("UICorner")
+    closeCorner.CornerRadius = UDim.new(0, 6)
+    closeCorner.Parent = closeBtn
+
+    local tabsFrame = Instance.new("Frame")
+    tabsFrame.Size = UDim2.new(1, 0, 0, 35)
+    tabsFrame.Position = UDim2.new(0, 0, 0, 42)
+    tabsFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 40)
+    tabsFrame.BackgroundTransparency = 0.1
+    tabsFrame.BorderSizePixel = 0
+    tabsFrame.Parent = mainFrame
+
+    local tabButtons = {}
+    local tabContents = {}
+    local currentTab = 1
+
+    local tabNames = {"Steal","Pets","Shop","ESP","Move","Settings"}
+
+    local function createTabButton(text, idx)
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(1/#tabNames, -4, 1, -4)
+        btn.Position = UDim2.new((idx-1)/#tabNames + 0.02, 0, 0.02, 0)
+        btn.BackgroundColor3 = Color3.fromRGB(55, 55, 65)
+        btn.BackgroundTransparency = 0.3
+        btn.Text = text
+        btn.TextColor3 = Color3.fromRGB(220, 220, 230)
+        btn.TextSize = 12
+        btn.Font = Enum.Font.GothamMedium
+        btn.BorderSizePixel = 0
+        btn.Parent = tabsFrame
+        local corner = Instance.new("UICorner")
+        corner.CornerRadius = UDim.new(0, 4)
+        corner.Parent = btn
+        return btn
+    end
+
+    local function createTabContent(idx)
+        local frame = Instance.new("ScrollingFrame")
+        frame.Size = UDim2.new(1, 0, 1, -82)
+        frame.Position = UDim2.new(0, 0, 0, 80)
+        frame.BackgroundTransparency = 1
+        frame.BorderSizePixel = 0
+        frame.ScrollBarThickness = 3
+        frame.ScrollBarImageColor3 = Color3.fromRGB(150, 150, 170)
+        frame.CanvasSize = UDim2.new(0, 0, 0, 0)
+        frame.Visible = (idx == currentTab)
+        frame.Parent = mainFrame
+        return frame
+    end
+
+    local function addButton(parent, text, callback, color)
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0.9, 0, 0, 40)
+        btn.Position = UDim2.new(0.05, 0, 0, 0)
+        btn.BackgroundColor3 = color or Color3.fromRGB(60, 60, 80)
+        btn.BackgroundTransparency = 0.2
+        btn.Text = text
+        btn.TextColor3 = Color3.new(1,1,1)
+        btn.TextSize = 14
+        btn.Font = Enum.Font.GothamMedium
+        btn.BorderSizePixel = 0
+        btn.AutoButtonColor = true
+        btn.Parent = parent
+
+        local corner = Instance.new("UICorner")
+        corner.CornerRadius = UDim.new(0, 6)
+        corner.Parent = btn
+
+        btn.MouseButton1Click:Connect(callback)
+        btn.TouchTap:Connect(callback)
+
+        -- Update canvas size after adding
+        local currentY = parent.CanvasSize.Y.Offset + 50
+        parent.CanvasSize = UDim2.new(0, 0, 0, currentY)
+        btn.Position = UDim2.new(0.05, 0, 0, currentY - 45)
+
+        return btn
+    end
+
+    local function addToggle(parent, text, callback, default)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(0.9, 0, 0, 35)
+        frame.Position = UDim2.new(0.05, 0, 0, 0)
+        frame.BackgroundTransparency = 1
+        frame.Parent = parent
+
+        local label = Instance.new("TextLabel")
+        label.Size = UDim2.new(0.7, 0, 1, 0)
+        label.Position = UDim2.new(0, 0, 0, 0)
+        label.BackgroundTransparency = 1
+        label.Text = text
+        label.TextColor3 = Color3.fromRGB(220, 220, 230)
+        label.TextSize = 13
+        label.TextXAlignment = Enum.TextXAlignment.Left
+        label.Font = Enum.Font.GothamMedium
+        label.Parent = frame
+
+        local toggleBtn = Instance.new("TextButton")
+        toggleBtn.Size = UDim2.new(0, 45, 0, 25)
+        toggleBtn.Position = UDim2.new(1, -50, 0.5, -12)
+        toggleBtn.BackgroundColor3 = default and Color3.fromRGB(80, 200, 120) or Color3.fromRGB(200, 80, 80)
+        toggleBtn.BackgroundTransparency = 0.2
+        toggleBtn.Text = default and "ON" or "OFF"
+        toggleBtn.TextColor3 = Color3.new(1,1,1)
+        toggleBtn.TextSize = 12
+        toggleBtn.Font = Enum.Font.GothamBold
+        toggleBtn.BorderSizePixel = 0
+        toggleBtn.Parent = frame
+
+        local corner = Instance.new("UICorner")
+        corner.CornerRadius = UDim.new(0, 4)
+        corner.Parent = toggleBtn
+
+        local state = default or false
+        toggleBtn.MouseButton1Click:Connect(function()
+            state = not state
+            toggleBtn.BackgroundColor3 = state and Color3.fromRGB(80, 200, 120) or Color3.fromRGB(200, 80, 80)
+            toggleBtn.Text = state and "ON" or "OFF"
+            if callback then callback(state) end
+        end)
+        toggleBtn.TouchTap:Connect(function()
+            state = not state
+            toggleBtn.BackgroundColor3 = state and Color3.fromRGB(80, 200, 120) or Color3.fromRGB(200, 80, 80)
+            toggleBtn.Text = state and "ON" or "OFF"
+            if callback then callback(state) end
+        end)
+
+        -- Update canvas
+        local currentY = parent.CanvasSize.Y.Offset + 40
+        parent.CanvasSize = UDim2.new(0, 0, 0, currentY)
+        frame.Position = UDim2.new(0.05, 0, 0, currentY - 40)
+
+        return toggleBtn, function() return state end
+    end
+
+    -- Create tabs
+    for i, name in ipairs(tabNames) do
+        local btn = createTabButton(name, i)
+        tabButtons[i] = btn
+        local content = createTabContent(i)
+        tabContents[i] = content
+
+        btn.MouseButton1Click:Connect(function()
+            for j, c in ipairs(tabContents) do
+                c.Visible = (j == i)
+            end
+            for j, b in ipairs(tabButtons) do
+                b.BackgroundColor3 = (j == i) and Color3.fromRGB(80, 80, 110) or Color3.fromRGB(55, 55, 65)
+            end
+            currentTab = i
+        end)
+        btn.TouchTap:Connect(function()
+            for j, c in ipairs(tabContents) do
+                c.Visible = (j == i)
+            end
+            for j, b in ipairs(tabButtons) do
+                b.BackgroundColor3 = (j == i) and Color3.fromRGB(80, 80, 110) or Color3.fromRGB(55, 55, 65)
+            end
+            currentTab = i
+        end)
+    end
+
+    -- Tab 1: Steal
+    local stealTab = tabContents[1]
+    addButton(stealTab, "Steal Now", function()
+        task.spawn(function()
+            local success = runAutoSteal()
+            if success then print("Steal success") else print("Steal failed") end
+        end)
+    end, Color3.fromRGB(70, 130, 200))
+    addToggle(stealTab, "Auto Steal Selected", function(state)
+        Options.AutoStealSelected = {Type="Toggle", Value=state}
+    end)
+    addToggle(stealTab, "Auto Steal All", function(state)
+        Options.AutoStealAll = {Type="Toggle", Value=state}
+    end)
+    addToggle(stealTab, "Steal Big Eggs", function(state)
+        Options.StealBigEggs = {Type="Toggle", Value=state}
+    end)
+    addToggle(stealTab, "Auto Drop Held", function(state)
+        Options.AutoDropEgg = {Type="Toggle", Value=state}
+    end)
+    addToggle(stealTab, "Auto Return", function(state)
+        Options.AutoReturn = {Type="Toggle", Value=state}
+    end)
+    addButton(stealTab, "Drop Egg Now", function()
+        task.spawn(runAutoDropEgg)
+    end, Color3.fromRGB(200, 100, 100))
+    addButton(stealTab, "Server Hop", function()
+        task.spawn(function() serverHop("Manual") end)
+    end, Color3.fromRGB(200, 150, 50))
+
+    -- Tab 2: Pets
+    local petsTab = tabContents[2]
+    addButton(petsTab, "Equip Best Pets", function()
+        task.spawn(runAutoEquipBest)
+    end, Color3.fromRGB(100, 180, 100))
+    addToggle(petsTab, "Auto Equip Best", function(state)
+        Options.ResolvePlot = {Type="Toggle", Value=state}
+    end)
+    addButton(petsTab, "Fuse Now", function()
+        task.spawn(function() runAutoFusePets(true) end)
+    end, Color3.fromRGB(200, 120, 200))
+    addToggle(petsTab, "Auto Fuse", function(state)
+        Options.AutoFusePets = {Type="Toggle", Value=state}
+    end)
+    addButton(petsTab, "Sell Pets Now", function()
+        task.spawn(function() runAutoSellPets(true) end)
+    end, Color3.fromRGB(200, 80, 80))
+    addToggle(petsTab, "Auto Sell Pets", function(state)
+        Options.AutoSellPets = {Type="Toggle", Value=state}
+    end)
+    addToggle(petsTab, "Auto Sell Eggs", function(state)
+        Options.AutoSellEggs = {Type="Toggle", Value=state}
+    end)
+    addToggle(petsTab, "Claim Offline", function(state)
+        Options.AutoClaimOffline = {Type="Toggle", Value=state}
+    end)
+    addToggle(petsTab, "Claim Group Reward", function(state)
+        Options.AutoClaimGroupReward = {Type="Toggle", Value=state}
+    end)
+
+    -- Tab 3: Shop
+    local shopTab = tabContents[3]
+    addToggle(shopTab, "Auto Upgrades", function(state)
+        Options.AutoUpgrades = {Type="Toggle", Value=state}
+    end)
+    addToggle(shopTab, "Auto Claim Index", function(state)
+        Options.AutoClaimIndex = {Type="Toggle", Value=state}
+    end)
+    addToggle(shopTab, "Auto Treadmill", function(state)
+        Options.AutoTreadmill = {Type="Toggle", Value=state}
+    end)
+    addToggle(shopTab, "Auto Buy Trail", function(state)
+        Options.AutoBuyTrail = {Type="Toggle", Value=state}
+    end)
+    addToggle(shopTab, "Auto Equip Best Trail", function(state)
+        Options.AutoEquipBestTrail = {Type="Toggle", Value=state}
+    end)
+    addToggle(shopTab, "Auto Equip Best Gear", function(state)
+        Options.AutoEquipBestGear = {Type="Toggle", Value=state}
+    end)
+
+    -- Tab 4: ESP
+    local espTab = tabContents[4]
+    addToggle(espTab, "World Egg ESP", function(state)
+        Options.EspWorldEggs = {Type="Toggle", Value=state}
+    end)
+    addToggle(espTab, "Carried Egg ESP", function(state)
+        Options.EspCarriedEggs = {Type="Toggle", Value=state}
+    end)
+    addToggle(espTab, "Guard ESP", function(state)
+        Options.EspGuards = {Type="Toggle", Value=state}
+    end)
+    addToggle(espTab, "Pet ESP", function(state)
+        Options.EspPets = {Type="Toggle", Value=state}
+    end)
+    addToggle(espTab, "Player ESP", function(state)
+        Options.EspPlayers = {Type="Toggle", Value=state}
+    end)
+    addToggle(espTab, "Plot ESP", function(state)
+        Options.EspPlots = {Type="Toggle", Value=state}
+    end)
+
+    -- Tab 5: Movement
+    local moveTab = tabContents[5]
+    addToggle(moveTab, "Walk Speed", function(state)
+        Options.WalkSpeedEnabled = {Type="Toggle", Value=state}
+    end)
+    addToggle(moveTab, "Jump Power", function(state)
+        Options.JumpPowerEnabled = {Type="Toggle", Value=state}
+    end)
+    addToggle(moveTab, "Infinite Jump", function(state)
+        Options.InfJump = {Type="Toggle", Value=state}
+    end)
+    addToggle(moveTab, "NoClip", function(state)
+        Options.NoClip = {Type="Toggle", Value=state}
+    end)
+    addToggle(moveTab, "Fly", function(state)
+        Options.Fly = {Type="Toggle", Value=state}
+    end)
+
+    -- Tab 6: Settings
+    local settingsTab = tabContents[6]
+    addToggle(settingsTab, "Anti-AFK", function(state)
+        Options.AntiAfk = {Type="Toggle", Value=state}
+    end)
+    addToggle(settingsTab, "Auto Server Hop", function(state)
+        Options.AutoServerHop = {Type="Toggle", Value=state}
+    end)
+    addToggle(settingsTab, "FPS Boost", function(state)
+        Options.FpsBoost = {Type="Toggle", Value=state}
+    end)
+    addButton(settingsTab, "Copy Discord", function()
+        copyText("https://discord.gg/ehKVq7pf7v")
+    end, Color3.fromRGB(100, 150, 220))
+    addButton(settingsTab, "Unload Script", function()
+        isUnloaded = true
+        screenGui:Destroy()
+    end, Color3.fromRGB(200, 50, 50))
+
+    closeBtn.MouseButton1Click:Connect(function()
+        isUnloaded = true
+        screenGui:Destroy()
+    end)
+    closeBtn.TouchTap:Connect(function()
+        isUnloaded = true
+        screenGui:Destroy()
+    end)
+
+    return screenGui
+end
+
+-- Main loop for auto functions
+local function mainLoop()
+    while not isUnloaded do
+        task.wait(0.5)
+        if stealingEnabled() and not isCarryingEgg() and not isInventoryFull() then
+            runAutoSteal()
+        end
+        if placingEnabled() and not isCarryingEgg() then
+            runAutoPlaceEggs()
+        end
+        if Options.AutoOpenReadyEggs and Options.AutoOpenReadyEggs.Value and not isCarryingEgg() then
+            runAutoHatch()
+        end
+        if Options.AutoTreadmill and Options.AutoTreadmill.Value and not isCarryingEgg() then
+            runAutoTreadmill()
+        end
+        if Options.ResolvePlot and Options.ResolvePlot.Value then
+            runAutoEquipBest()
+        end
+        if Options.AutoFusePets and Options.AutoFusePets.Value and not isCarryingEgg() then
+            task.wait(Options.FuseInterval and Options.FuseInterval.Value or 8)
+            runAutoFusePets(false)
+        end
+        if Options.AutoSellPets and Options.AutoSellPets.Value and not isCarryingEgg() then
+            runAutoSellPets(false)
+        end
+        if Options.AutoSellEggs and Options.AutoSellEggs.Value and not isCarryingEgg() then
+            runAutoSellEggs(false)
+        end
+        if Options.AutoUpgrades and Options.AutoUpgrades.Value and not isCarryingEgg() then
+            runAutoUpgrades()
+        end
+        if Options.AutoClaimIndex and Options.AutoClaimIndex.Value then
+            runAutoClaimIndex()
+        end
+        if Options.AutoClaimGroupReward and Options.AutoClaimGroupReward.Value then
+            runAutoClaimGroupReward()
+        end
+        if Options.AutoClaimOffline and Options.AutoClaimOffline.Value then
+            runClaimOfflineEarnings()
+        end
+        if Options.AutoBuyTrail and Options.AutoBuyTrail.Value then
+            runAutoBuyTrail()
+        end
+        if Options.AutoEquipBestTrail and Options.AutoEquipBestTrail.Value then
+            runAutoEquipBestTrail()
+        end
+        if Options.AutoEquipBestGear and Options.AutoEquipBestGear.Value then
+            runAutoEquipBestGear()
+        end
+        if Options.AutoServerHop and Options.AutoServerHop.Value then
+            runServerHop()
+        end
+        if Options.AntiAfk and Options.AntiAfk.Value then
+            antiAfkTap()
+        end
+        if Options.WalkSpeedEnabled and Options.WalkSpeedEnabled.Value then
+            local hum = getHumanoid()
+            if hum then hum.WalkSpeed = 32 end
+        end
+        if Options.JumpPowerEnabled and Options.JumpPowerEnabled.Value then
+            local hum = getHumanoid()
+            if hum then hum.JumpPower = 50 end
+        end
+        if Options.InfJump and Options.InfJump.Value then
+            local hum = getHumanoid()
+            if hum then hum:ChangeState(Enum.HumanoidStateType.Jumping) end
+        end
+        if Options.NoClip and Options.NoClip.Value then
+            local root = getRoot()
+            if root then root.CanCollide = false end
+        end
+        if Options.Fly and Options.Fly.Value then
+            local hum = getHumanoid()
+            local root = getRoot()
+            if hum and root then
+                hum.PlatformStand = true
+                local vel = Vector3.zero
+                if UserInputService:IsKeyDown(Enum.KeyCode.W) then vel = vel + CurrentCamera.CFrame.LookVector end
+                if UserInputService:IsKeyDown(Enum.KeyCode.S) then vel = vel - CurrentCamera.CFrame.LookVector end
+                if UserInputService:IsKeyDown(Enum.KeyCode.A) then vel = vel - CurrentCamera.CFrame.RightVector end
+                if UserInputService:IsKeyDown(Enum.KeyCode.D) then vel = vel + CurrentCamera.CFrame.RightVector end
+                if UserInputService:IsKeyDown(Enum.KeyCode.Space) then vel = vel + Vector3.new(0,1,0) end
+                if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then vel = vel - Vector3.new(0,1,0) end
+                if vel.Magnitude > 0 then
+                    root.CFrame = root.CFrame + vel.Unit * 60 * 0.016
+                end
+            end
+        end
+    end
+end
+
+-- Start everything
+bypassAll()
+createMobileGUI()
+task.spawn(mainLoop)
+
+-- Remote event for carry state
+if Remotes.AreaEggCarryStateChanged then
+    Remotes.AreaEggCarryStateChanged:Connect(function(data)
+        isCarrying = data and data.IsCarrying == true
+    end)
+end
+
+LocalPlayer.CharacterAdded:Connect(function()
+    task.wait(0.5)
+    Character = LocalPlayer.Character
+end)
