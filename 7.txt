@@ -1,0 +1,3583 @@
+-- Basic environment validation
+if not type or not pcall or not rawget then
+    return
+end
+
+-- Check for debug hooks that might detect this script
+local debug = rawget(_G, "debug")
+if debug then
+    local getinfo = debug.getinfo
+    if getinfo and type(getinfo) == "function" then
+        local success, err = pcall(getinfo)
+        if success and err ~= nil then
+            return
+        end
+    end
+end
+
+-- Verify game is loaded properly
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+if not LocalPlayer then return end
+
+-- Additional integrity checks
+local UserId = LocalPlayer.UserId
+local PlaceId = game.PlaceId
+if type(UserId) ~= "number" or UserId <= 0 then return end
+if type(PlaceId) ~= "number" or PlaceId <= 0 then return end
+
+-- Multiple decryption methods used throughout the script
+local function decrypt_1(encoded_string)
+    local key = ",82FJ]1xD;-Bc9Ep[wl7vI3Gf.n!oQ&eOSUr?Kib<y_+N$/*u6~hC>0k:`%ATHsMPYZg#aWjq=z4L"
+    local char_lookup = {}
+    for i = 1, #key do
+        char_lookup[key:sub(i, i)] = i
+    end
+    
+    local result = {}
+    local prev_char = 47
+    local index = 1
+    local pos = 1
+    
+    while pos <= #encoded_string - 3 do
+        local c1 = encoded_string:sub(pos, pos)
+        local c2 = encoded_string:sub(pos + 1, pos + 1)
+        local p1 = char_lookup[c1] or 1
+        local p2 = char_lookup[c2] or 1
+        local combined = (p1 - 1) * 77 + (p2 - 1)
+        local quotient = (combined - index * 47) % 256
+        local byte = (quotient * 131 - prev_char - 88) % 256
+        result[#result + 1] = string.char(byte)
+        prev_char = byte
+        index = index + 1
+        pos = pos + 4
+    end
+    
+    return table.concat(result)
+end
+
+-- (Similar functions decrypt_2, decrypt_3, decrypt_4 exist with different keys/parameters)
+local CoreGui = game:GetService("CoreGui")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local TeleportService = game:GetService("TeleportService")
+local Workspace = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+
+local LocalPlayer = Players.LocalPlayer
+local getgenv_env = getgenv() or _G
+
+-- Store original identity getters/setters
+getgenv_env["__ZeroinIdentityGetter"] = getgenv_env["getthreadidentity"] or getgenv_env["getidentity"] or getgenv_env["getthreadcontext"] or getgenv_env["get_thread_context"]
+getgenv_env["__ZeroinIdentitySetter"] = getgenv_env["setthreadidentity"] or getgenv_env["setidentity"] or getgenv_env["setthreadcontext"] or getgenv_env["set_thread_context"]
+
+-- Determine current UI capability identity
+local initial_identity = 8  -- default to highest
+if getgenv_env["__ZeroinIdentityGetter"] then
+    local success, current = pcall(getgenv_env["__ZeroinIdentityGetter"])
+    if success then
+        getgenv_env["__ZeroinUICapabilityIdentity"] = current
+    end
+end
+
+-- Wrap UI callbacks to ensure proper identity
+function __ZeroinRunUICallback(func, ...)
+    local original_identity = getgenv_env["__ZeroinIdentityGetter"] and pcall(getgenv_env["__ZeroinIdentityGetter"])
+    local ui_identity = getgenv_env["__ZeroinUICapabilityIdentity"]
+    
+    -- Switch to UI identity
+    if getgenv_env["__ZeroinIdentitySetter"] and ui_identity then
+        pcall(getgenv_env["__ZeroinIdentitySetter"], ui_identity)
+    end
+    
+    -- Execute function
+    local results = {pcall(func, ...)}
+    
+    -- Restore original identity
+    if getgenv_env["__ZeroinIdentitySetter"] and original_identity then
+        pcall(getgenv_env["__ZeroinIdentitySetter"], original_identity)
+    end
+    
+    if not results[1] then error(results[2]) end
+    return unpack(results, 2, results.n)
+end
+
+-- Find a secure UI host
+function __ZeroinResolveUIHost()
+    -- Try CoreGui, gethui, get_hidden_gui, etc.
+    local core_gui = game:GetService("CoreGui")
+    if typeof(core_gui) == "Instance" and core_gui.Parent then
+        return core_gui
+    end
+    
+    -- Fallback: search through known GUI locations
+    local candidates = {}
+    local functions = {"gethui", "get_hidden_gui", "gethiddengui"}
+    for _, func_name in ipairs(functions) do
+        local func = getgenv_env[func_name]
+        if type(func) == "function" then
+            local success, result = pcall(func)
+            if success then candidates[#candidates + 1] = result end
+        end
+    end
+    
+    -- Test each candidate
+    for _, candidate in ipairs(candidates) do
+        if typeof(candidate) == "Instance" then
+            local probe = Instance.new("Folder")
+            probe.Name = "__ZeroinCoreGuiProbe"
+            local success = pcall(function() probe.Parent = candidate end)
+            pcall(probe.Destroy, probe)
+            if success then
+                getgenv_env["__ZeroinUIHost"] = candidate
+                return candidate
+            end
+        end
+    end
+    
+    return nil
+end
+
+local MovementConfig = {
+    KEY = "__FyyStealAnEggMovementSpoof",
+    VERSION = 436,
+    INTEGRITY_KEY = "__FyyStealAnEggIntegritySpoof",
+    SIGNAL = "ClientCharacter: GetDebugSnapshot",
+    HEADROOM = 1.35,
+    CLAMP = 0.15,
+    PADDING = 24,
+    MULTIPLIER = 10,
+    MIN_INPUT = 1,
+    MAX_INPUT = 100,
+    DEF_INPUT = 40,
+    MIN_SPEED = 10,
+    MAX_SPEED = 1000,
+    DEF_SPEED = 400,
+    FIELDS = {
+        "LastObservedSample", "LastSample", "LastGoodSample",
+        "LastGameplayTrustedSample", "LastValidatedSample",
+        "LastValidatedGroundedSample", "LastConfirmedGroundSample",
+        "CandidateGroundedSample"
+    }
+}
+
+-- Shared configuration used by the movement, stealing, placement, and UI code.
+-- This must exist before any RunService callback can read config.IsStealing.
+local config = {
+    AutoSteal = false,
+    StealMode = "Tween",
+    StealAreas = {"None"},
+    StealRarities = {"None"},
+    StealNamesFilter = {"None"},
+    StealMinValue = 0,
+    AntiAFK = false,
+    AutoPlace = false,
+    PlaceRarities = {"None"},
+    AutoHatch = false,
+    SellAll = false,
+    AutoSell = false,
+    SellNames = {"None"},
+    SellRarities = {"None"},
+    AutoSellEgg = false,
+    SellEggRarities = {"None"},
+    WebhookEnabled = false,
+    WebhookURL = "",
+    AutoTreadmillIdle = false,
+    AntiGuardKnockback = true,
+    AntiTreadmillMount = true,
+    TweenSpeedMultiplier = MovementConfig.DEF_INPUT,
+    EggPredictUI = false,
+    EggESP = false,
+    IsStealing = false,
+    IsPlacing = false
+}
+
+-- Convert the UI's speed level (1-100) into studs per second.
+function get_speed_multiplier()
+    -- Keep this callback defensive: UI libraries may invoke it while they are
+    -- still constructing controls, so never assume the config table is filled.
+    local movement_config = MovementConfig or {
+        MULTIPLIER = 10,
+        DEF_INPUT = 40,
+        MIN_SPEED = 10,
+        MAX_SPEED = 1000
+    }
+    local level = tonumber(config and config.TweenSpeedMultiplier) or movement_config.DEF_INPUT
+    return math.clamp(
+        level * movement_config.MULTIPLIER,
+        movement_config.MIN_SPEED,
+        movement_config.MAX_SPEED
+    )
+end
+
+function setSpeedLevel(value)
+    local level = tonumber(value)
+    if not level then return false end
+    local movement_config = MovementConfig or {MIN_INPUT = 1, MAX_INPUT = 100}
+    config.TweenSpeedMultiplier = math.clamp(level, movement_config.MIN_INPUT, movement_config.MAX_INPUT)
+    return true
+end
+
+-- Parse values such as 250, 10k, 2.5m, or 1b from the UI.
+config.applyStealValueInput = function(self, value)
+    local text = tostring(value or ""):lower():gsub(",", ""):gsub("%s+", "")
+    local number_text, suffix = text:match("^([%d%.]+)([kmb]?)$")
+    local number = tonumber(number_text)
+    if not number then
+        self.StealMinValue = 0
+        return false
+    end
+
+    local multipliers = {k = 1000, m = 1000000, b = 1000000000}
+    self.StealMinValue = number * (multipliers[suffix] or 1)
+    return true
+end
+
+-- Runtime state used by the movement and automation callbacks.
+-- The earlier readable draft omitted this block, which made the UI callbacks
+-- fail before the rest of the tabs could be constructed.
+local movement_states = {}
+local area_tracking = {}
+local run_state = 0
+local state_generation = 1
+local ui_ready = false
+local discord_link = ""
+local cached_avatar_url = nil
+local EggState = nil
+local auto_sell_loop_running = false
+local SellNameDropdown = nil
+local SellRarityDropdown = nil
+
+pcall(function()
+    EggState = require(ReplicatedStorage.Client.EggState)
+end)
+
+-- The UI library returns either a scalar value or a list depending on the
+-- control. Normalize both forms so every dropdown callback can share it.
+function normalizeDropdown(value, dropdown)
+    if type(value) == "table" then
+        return value
+    end
+    if value == nil and dropdown and type(dropdown.GetValues) == "function" then
+        local ok, values = pcall(dropdown.GetValues, dropdown)
+        if ok and type(values) == "table" then return values end
+    end
+    return {value}
+end
+
+function getDropdownValues(dropdown)
+    if not dropdown then return {"None"} end
+    if type(dropdown.GetValues) == "function" then
+        local ok, values = pcall(dropdown.GetValues, dropdown)
+        if ok and type(values) == "table" and #values > 0 then return values end
+    end
+    if type(dropdown.Value) == "table" then return dropdown.Value end
+    if dropdown.Value ~= nil then return {dropdown.Value} end
+    return {"None"}
+end
+
+function matchesFilter(name, rarity, name_filter, rarity_filter)
+    local function accepts(values, candidate)
+        if type(values) ~= "table" or #values == 0 then return true end
+        if table.find(values, "None") or table.find(values, "All") then return true end
+        return table.find(values, candidate) ~= nil
+    end
+    return accepts(name_filter, name) and accepts(rarity_filter, rarity)
+end
+
+-- These helpers are intentionally conservative fallbacks for the readable
+-- build. The full source has the game's internal implementations, but the
+-- truncated readable build did not include them.
+function isNightPhase()
+    return false
+end
+
+function shouldSteal()
+    return not config.AutoSteal
+end
+
+function getEggValue(_, record)
+    if type(record) ~= "table" then return 0 end
+    return tonumber(record.Value or record.EggValue or record.RatePerSecond or record.Rate) or 0
+end
+
+function setStealPriority()
+    return true
+end
+
+function getSlotKey(uid, area_id, nest_id)
+    return table.concat({tostring(area_id or ""), tostring(nest_id or ""), tostring(uid or "")}, ":")
+end
+
+function prepareForSteal()
+    return true
+end
+
+function getTreadmillCFrame()
+    local character = LocalPlayer.Character
+    local root = character and character:FindFirstChild("HumanoidRootPart")
+    return root and root.CFrame or nil
+end
+
+function setCollisionGroups()
+end
+
+function setHumanoidStates()
+end
+
+function clear_last_teleport()
+end
+
+function mark_character_special()
+end
+
+function start_stealth_runtime()
+    __ZeroinTweenRuntimeGeneration = (__ZeroinTweenRuntimeGeneration or 0) + 1
+    state_generation = __ZeroinTweenRuntimeGeneration
+end
+
+function stop_stealth_runtime()
+    __ZeroinTweenRuntimeGeneration = (__ZeroinTweenRuntimeGeneration or 0) + 1
+    state_generation = __ZeroinTweenRuntimeGeneration
+    config.IsStealing = false
+end
+
+function configure_character(character, speed)
+    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+    if humanoid and type(speed) == "number" then
+        pcall(function() humanoid.WalkSpeed = speed end)
+    end
+end
+
+function configure_for_speed(humanoid, _, speed)
+    if humanoid and type(speed) == "number" then
+        pcall(function() humanoid.WalkSpeed = speed end)
+    end
+end
+
+function is_valid_state()
+    return false
+end
+
+function spoof_samples()
+end
+
+function spoof_velocity()
+end
+
+function spoof_zero_velocity()
+end
+
+function cleanup_hover()
+    cleanHoverPads()
+end
+
+function cleanup_steal()
+    config.IsStealing = false
+    for root_part, movement in pairs(movement_states) do
+        movement.cancelled = true
+        movement_states[root_part] = nil
+    end
+    cleanup_hover()
+end
+
+function cleanup_semi_teleport()
+    cleanup_steal()
+end
+
+function cleanupSemiTeleport()
+    cleanup_semi_teleport()
+end
+
+local HoverPad = nil
+local HoverPadName = "__FyyHoverPad"
+local HoverPadSize = 8
+local HoverPadHeight = 1
+
+-- Clean up all hover pads
+function cleanHoverPads()
+    for _, part in ipairs(Workspace:GetChildren()) do
+        if part:IsA("BasePart") and part.Name == HoverPadName and part ~= HoverPad then
+            pcall(part.Destroy, part)
+        end
+    end
+end
+
+-- Update hover pad position under character
+function updateHoverPad(target_position)
+    if not HoverPad or not HoverPad.Parent then return false end
+    
+    local character = LocalPlayer.Character
+    local root_part = character and character:FindFirstChild("HumanoidRootPart")
+    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+    
+    if not root_part or not humanoid then return false end
+    
+    local position = typeof(target_position) == "Vector3" and target_position or root_part.Position
+    local offset = humanoid.RigType == Enum.HumanoidRigType.R15 and 
+        (root_part.Size.Y * 0.5 + math.max(humanoid.HipHeight, 0.5)) or 
+        (root_part.Size.Y * 0.5 + 2)
+    
+    HoverPad.CFrame = CFrame.new(position.X, position.Y - offset - 0.5 - 0.05, position.Z)
+    return true
+end
+
+-- Create hover pad if needed
+function ensureHoverPad()
+    if HoverPad and HoverPad.Parent and 
+       HoverPad:GetAttribute("__FyyStealRuntimeOwner") == pad_owner_id then
+        updateHoverPad()
+        return
+    end
+    
+    cleanHoverPads()
+    if HoverPad and HoverPad.Parent then pcall(HoverPad.Destroy, HoverPad) end
+    
+    HoverPad = Instance.new("Part")
+    HoverPad.Name = HoverPadName
+    HoverPad:SetAttribute("__FyyStealRuntimeOwner", pad_owner_id)
+    HoverPad.Anchored = true
+    HoverPad.CanCollide = true
+    HoverPad.CanQuery = true
+    HoverPad.CanTouch = false
+    HoverPad.CastShadow = false
+    HoverPad.Transparency = 1
+    HoverPad.Material = Enum.Material.SmoothPlastic
+    HoverPad.Size = Vector3.new(HoverPadSize, HoverPadHeight, HoverPadSize)
+    HoverPad.Parent = Workspace
+    
+    updateHoverPad()
+    
+    -- Setup connections if not already
+    if not pre_simulation_connection then
+        pre_simulation_connection = RunService.PreSimulation:Connect(function()
+            if not updateHoverPad() then ensureHoverPad() end
+        end)
+    end
+end
+
+-- Main tween movement function
+local function tweenTo(root_part, humanoid, target_cframe, cancel_check, mark_reached, on_proximity, allow_jump)
+    if not root_part or not humanoid or typeof(target_cframe) ~= "CFrame" then return false end
+    if cancel_check and cancel_check() then return false end
+    
+    -- Cancel any existing movement
+    local movement_state = movement_states[root_part]
+    if movement_state then
+        movement_state.cancelled = true
+        movement_states[root_part] = nil
+    end
+    
+    local character = root_part.Parent
+    if not character then return false end
+    
+    -- Setup
+    clear_last_teleport()
+    mark_character_special(character)
+    start_stealth_runtime()
+    
+    -- Camera handling
+    local camera = Workspace.CurrentCamera
+    if camera and camera.CameraSubject ~= humanoid then
+        pcall(function() camera.CameraSubject = humanoid end)
+    end
+    
+    local original_auto_rotate = humanoid.AutoRotate
+    humanoid.AutoRotate = false
+    
+    -- Calculate target with optional minimum Y
+    local target_y = allow_jump and math.max(root_part.Position.Y, target_cframe.Position.Y + 5, 545 + 5) or nil
+    local final_target = target_y and CFrame.new(target_cframe.Position.X, target_y, target_cframe.Position.Z) * target_cframe.Rotation or target_cframe
+    
+    -- Set up speed and state
+    local speed = math.clamp(get_speed_multiplier(), MovementConfig.MIN_SPEED, MovementConfig.MAX_SPEED)
+    configure_character(character, speed * MovementConfig.HEADROOM)
+    
+    local movement = {cancelled = false}
+    movement_states[root_part] = movement
+    
+    ensure_hover_pad()
+    
+    -- Movement loop
+    local arrived_time = nil
+    local last_seen_distance = nil
+    local stuck_until = 0
+    local phase = target_y and (math.abs(root_part.Position.Y - target_y) > 0.35 and "takeoff" or "cruise") or nil
+    local target_distance = (final_target.Position - root_part.Position).Magnitude
+    local timeout = os.clock() + math.max(target_distance / speed, 0.08) * 2 + 8
+    
+    while not movement.cancelled do
+        if cancel_check and cancel_check() then break end
+        if not root_part.Parent then break end
+        if os.clock() >= timeout then break end
+        
+        local delta = RunService.Heartbeat:Wait()
+        local frame_time = math.max(math.min(delta, 0.15), 1/240)
+        
+        -- Update speed
+        speed = math.clamp(get_speed_multiplier(), MovementConfig.MIN_SPEED, MovementConfig.MAX_SPEED)
+        configure_character(character, speed * MovementConfig.HEADROOM)
+        
+        -- Get movement spoof state
+        local spoof_state = getgenv()[MovementConfig.INTEGRITY_KEY]
+        local spoof_table = type(spoof_state) == "table" and spoof_state.State or nil
+        
+        if not is_valid_state(spoof_table, humanoid, root_part) then
+            -- Reset if invalid
+            root_part.AssemblyLinearVelocity = Vector3.zero
+            root_part.AssemblyAngularVelocity = Vector3.zero
+            update_hover_pad(root_part.Position)
+            
+            if is_valid_state(spoof_table, humanoid, root_part) then
+                spoof_samples(spoof_table, speed * MovementConfig.HEADROOM, Vector3.zero)
+            else
+                configure_for_speed(humanoid, root_part, speed)
+            end
+        else
+            -- Valid state, continue movement
+            local current_pos = root_part.Position
+            local to_target = final_target.Position - current_pos
+            local flat_dist = Vector3.new(to_target.X, 0, to_target.Z).Magnitude
+            
+            -- Track stuck detection
+            if last_seen_distance and flat_dist > last_seen_distance + 2 then
+                stuck_until = os.clock() + 0.5
+            end
+            last_seen_distance = flat_dist
+            
+            -- Direction calculation
+            local move_speed = (os.clock() < stuck_until and math.max(MovementConfig.MIN_SPEED, speed * 0.45)) or speed
+            local move_dist = move_speed * frame_time
+            
+            -- Proximity callback
+            if on_proximity and not proximity_called and target_distance <= 60 then
+                proximity_called = true
+                task.spawn(on_proximity)
+            end
+            
+            -- Get direction
+            local forward = Vector3.new(root_part.CFrame.LookVector.X, 0, root_part.CFrame.LookVector.Z)
+            local direction = flat_dist > 0.001 and Vector3.new(to_target.X, 0, to_target.Z).Unit or 
+                (forward.Magnitude > 0.001 and forward.Unit or Vector3.new(0, 0, -1))
+            
+            local is_cruise = not target_y or phase == "cruise"
+            
+            if is_cruise and target_distance <= math.max(move_dist, 0.05) then
+                -- Arrived at target
+                if target_distance > 0.5 then arrived_time = nil end
+                
+                update_hover_pad(final_target.Position)
+                root_part.CFrame = CFrame.lookAt(final_target.Position, final_target.Position + direction)
+                root_part.AssemblyLinearVelocity = Vector3.zero
+                root_part.AssemblyAngularVelocity = Vector3.zero
+                update_hover_pad(final_target.Position)
+                
+                spoof_zero_velocity(humanoid, root_part, speed)
+                
+                arrived_time = arrived_time or os.clock()
+                if os.clock() - arrived_time >= 0.4 then
+                    success = true
+                    break
+                end
+            else
+                -- Still moving
+                arrived_time = nil
+                
+                if distance_to_go <= 0.001 then
+                    root_part.AssemblyLinearVelocity = Vector3.zero
+                    root_part.AssemblyAngularVelocity = Vector3.zero
+                    update_hover_pad(current_pos)
+                    continue
+                end
+                
+                -- Calculate movement
+                local step = math.min(move_dist, distance_to_go)
+                local new_pos = current_pos + to_target.Unit * step
+                local new_velocity = (new_pos - current_pos) / frame_time
+                
+                update_hover_pad(new_pos)
+                root_part.CFrame = CFrame.lookAt(new_pos, new_pos + direction)
+                root_part.AssemblyLinearVelocity = new_velocity
+                
+                update_hover_pad(new_pos)
+                
+                -- Spoof state
+                spoof_velocity(humanoid, root_part, speed, new_velocity)
+            end
+        end
+    end
+    
+    -- Cleanup
+    if humanoid.Parent and original_auto_rotate ~= nil then
+        humanoid.AutoRotate = original_auto_rotate
+    end
+    
+    root_part.AssemblyLinearVelocity = Vector3.zero
+    root_part.AssemblyAngularVelocity = Vector3.zero
+    
+    if success and mark_reached then
+        set_last_teleport(root_part, final_target)
+    else
+        cleanup_hover()
+    end
+    
+    return success and not movement.cancelled
+end
+
+-- Anti Knockback System
+local anti_knockback_config = {
+    enabled = true,
+    last_check = 0,
+    last_velocity_check = 0,
+    saved_velocities = {},
+    custom_states = {
+        [Enum.HumanoidStateType.Physics] = true,
+        [Enum.HumanoidStateType.FallingDown] = true,
+        [Enum.HumanoidStateType.Ragdoll] = true,
+        [Enum.HumanoidStateType.PlatformStanding] = true,
+        [Enum.HumanoidStateType.Seated] = true
+    }
+}
+
+-- FIXED: Changed UserInputService.Stepped to RunService.Stepped
+RunService.Stepped:Connect(function()
+    if not anti_knockback_config.enabled then return end
+    
+    local now = os.clock()
+    if now - anti_knockback_config.last_check < 0.05 then return end
+    anti_knockback_config.last_check = now
+    
+    local character = LocalPlayer.Character
+    if not character then return end
+    
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    
+    -- Clean up ragdoll constraints periodically
+    if now - anti_knockback_config.last_velocity_check >= 1 then
+        anti_knockback_config.last_velocity_check = now
+        for _, child in ipairs(character:GetChildren()) do
+            if child:IsA("BallSocketConstraint") or child:IsA("HingeConstraint") then
+                if child:GetAttribute("RagdollConstraint") or tostring(child.Name):find("Ragdoll") then
+                    pcall(function() child:Destroy() end)
+                end
+            elseif child:IsA("Attachment") then
+                if child:GetAttribute("RagdollAttachment") or tostring(child.Name):find("Ragdoll") then
+                    pcall(function() child:Destroy() end)
+                end
+            end
+        end
+    end
+    
+    -- Force humanoid out of bad states
+    if humanoid then
+        if humanoid.PlatformStand then humanoid.PlatformStand = false end
+        if humanoid.Sit then humanoid.Sit = false end
+        
+        if anti_knockback_config.custom_states[humanoid:GetState()] then
+            pcall(function()
+                humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
+            end)
+        end
+    end
+end)
+
+-- Heartbeat connection to detect and prevent knockback velocity spikes
+RunService.Heartbeat:Connect(function()
+    if not anti_knockback_config.enabled or config.IsStealing then return end
+    
+    local now = os.clock()
+    if now - anti_knockback_config.last_velocity_check < 0.05 then return end
+    anti_knockback_config.last_velocity_check = now
+    
+    local character = LocalPlayer.Character
+    local root_part = character and character:FindFirstChild("HumanoidRootPart")
+    if not root_part then return end
+    
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    local walk_speed = (humanoid and humanoid.WalkSpeed) or 16
+    local max_allowed = math.max(get_speed_multiplier() * 1.5, walk_speed * 1.5, 100)
+    
+    local current_velocity = root_part.AssemblyLinearVelocity
+    local previous_velocity = anti_knockback_config.saved_velocities[root_part] or current_velocity
+    local velocity_change = (current_velocity - previous_velocity).Magnitude
+    
+    -- If velocity is unreasonable or changed too fast, zero it out
+    if current_velocity.Magnitude > max_allowed and velocity_change > 40 then
+        root_part.AssemblyLinearVelocity = Vector3.zero
+        root_part.AssemblyAngularVelocity = Vector3.zero
+        current_velocity = Vector3.zero
+    end
+    
+    anti_knockback_config.saved_velocities[root_part] = current_velocity
+end)
+
+-- Detect and auto-dismount from treadmills
+local treadmill_config = {
+    current_treadmill = nil,
+    trying_to_mount = false,
+    cleanup_attempted = false
+}
+
+-- Check if currently on a treadmill
+function isOnTreadmill()
+    local success, result = pcall(function()
+        local remotes = require(ReplicatedStorage.Shared.Remotes)
+        local snapshot = remotes.Treadmill.AskRenderSnapshot:InvokeServer()
+        return table.find(snapshot, LocalPlayer.UserId) ~= nil
+    end)
+    
+    return success and result or false
+end
+
+-- Request to dismount
+function requestDismount()
+    local success, result = pcall(function()
+        local remotes = require(ReplicatedStorage.Shared.Remotes)
+        return remotes.Treadmill.AskDoff:InvokeServer()
+    end)
+    
+    if success and result == true then
+        return true, "Success"
+    end
+    return false, tostring(result)
+end
+
+-- Setup listener for treadmill mount events
+task.spawn(function()
+    local success, err = pcall(function()
+        local remotes = require(ReplicatedStorage.Shared.Remotes)
+        remotes.Treadmill.RenderStateShifted.OnClientEvent:Connect(function(state)
+            treadmill_config.current_treadmill = state
+            
+            -- If not trying to mount and anti-treadmill is on, dismount
+            if not treadmill_config.trying_to_mount and config.AntiTreadmillMount then
+                task.spawn(function()
+                    task.wait(0.05)
+                    if not config.AntiTreadmillMount then return end
+                    
+                    local ok, msg = requestDismount()
+                    if not ok then
+                        warn("[AntiTreadmill] Failed to dismount:", msg)
+                    end
+                end)
+            end
+        end)
+    end)
+    
+    if not success then warn("[AntiTreadmill] Setup failed:", err) end
+end)
+
+-- Periodic reconciliation
+task.spawn(function()
+    task.wait(3)
+    while true do
+        local on_treadmill = isOnTreadmill()
+        if on_treadmill then
+            treadmill_config.current_treadmill = treadmill_config.current_treadmill or "unknown"
+            if config.AntiTreadmillMount and not treadmill_config.trying_to_mount then
+                local ok, msg = requestDismount()
+                if not ok then warn("[AntiTreadmill] Reconcile failed:", msg) end
+            end
+        end
+        task.wait(30)
+    end
+end)
+
+local auto_steal_config = {
+    AutoSteal = false,
+    StealMode = "Tween",  -- "Tween" or "Semi Teleport"
+    StealAreas = {"None"},
+    StealRarities = {"None"},
+    StealNamesFilter = {"None"},
+    StealMinValue = 0,
+    PriorityUntil = 0
+}
+
+-- Rarity priority mapping
+local rarity_priority = {
+    Common = 1, Uncommon = 2, Rare = 3, Epic = 4,
+    Legendary = 5, Mythic = 6, Cosmic = 7, Secret = 8,
+    Eternal = 9, Divine = 10, Prismatic = 11, Transcendent = 12
+}
+
+-- Search for the anti-cheat state table in memory
+local function findAntiCheatState(player, humanoid, root_part)
+    local found_state = nil
+    
+    -- Method 1: Check signal upvalues
+    if type(getcallbackvalue) == "function" and type(debug) == "table" and type(debug.getupvalue) == "function" then
+        local signal_package = ReplicatedStorage:FindFirstChild("Packages") and ReplicatedStorage.Packages:FindFirstChild("Signal")
+        if signal_package then
+            local success, signal_module = pcall(require, signal_package)
+            if success and type(signal_module) == "table" and type(signal_module.Invoked) == "function" then
+                local invoke_success, signal_callback = pcall(signal_module.Invoked, "ClientCharacter: GetDebugSnapshot")
+                if invoke_success and signal_callback then
+                    local get_value_success, get_value = pcall(getcallbackvalue, signal_callback, "OnInvoke")
+                    if get_value_success and type(get_value) == "function" then
+                        -- Search upvalues for matching table
+                        local info_success, info = pcall(debug.getinfo, get_value)
+                        if info_success then
+                            local function searchTable(tbl, depth, visited)
+                                if found_state or type(tbl) ~= "table" or depth > 3 or visited[tbl] then return end
+                                visited[tbl] = true
+                                
+                                if rawget(tbl, "Player") == player and
+                                   rawget(tbl, "Character") == player.Character and
+                                   rawget(tbl, "Humanoid") == humanoid and
+                                   rawget(tbl, "RootPart") == root_part and
+                                   type(rawget(tbl, "SampleHistory")) == "table" and
+                                   type(rawget(tbl, "Evidence")) == "table" then
+                                    found_state = tbl
+                                    return
+                                end
+                                
+                                for _, value in pairs(tbl) do
+                                    if type(value) == "table" then
+                                        searchTable(value, depth + 1, visited)
+                                    end
+                                end
+                            end
+                            
+                            for i = 1, info.nups or 0 do
+                                local uv_success, upvalue = pcall(debug.getupvalue, get_value, i)
+                                if uv_success and type(upvalue) == "table" then
+                                    searchTable(upvalue, 0, {})
+                                    if found_state then break end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    
+    -- Method 2: GC scan
+    if not found_state and type(getgc) == "function" then
+        local gc_success, gc_table = pcall(getgc, true)
+        if gc_success and type(gc_table) == "table" then
+            for _, obj in ipairs(gc_table) do
+                if type(obj) == "table" and
+                   rawget(obj, "Player") == player and
+                   rawget(obj, "Character") == player.Character and
+                   rawget(obj, "Humanoid") == humanoid and
+                   rawget(obj, "RootPart") == root_part and
+                   type(rawget(obj, "SampleHistory")) == "table" and
+                   type(rawget(obj, "Evidence")) == "table" then
+                    found_state = obj
+                    break
+                end
+            end
+        end
+    end
+    
+    return found_state
+end
+
+-- Modify anti-cheat state to show normal values
+local function spoofAntiCheatState(state_table, walk_speed, velocity)
+    if type(state_table) ~= "table" then return false end
+    
+    local root_part = rawget(state_table, "RootPart")
+    local root_cframe = root_part and root_part.Parent and root_part.CFrame or nil
+    local root_position = root_cframe and root_cframe.Position or nil
+    
+    -- Helper to overwrite a sample table
+    local function fixSample(sample)
+        if type(sample) == "table" then
+            rawset(sample, "WalkSpeed", walk_speed)
+            if root_cframe then
+                rawset(sample, "CFrame", root_cframe)
+                rawset(sample, "Position", root_position)
+                rawset(sample, "LinearVelocity", velocity)
+                rawset(sample, "AngularVelocity", Vector3.zero)
+            end
+        end
+    end
+    
+    -- Fix all known sample fields
+    for _, field in ipairs(MovementConfig.FIELDS) do
+        fixSample(rawget(state_table, field))
+    end
+    
+    -- Fix sample history
+    for _, sample in pairs(rawget(state_table, "SampleHistory") or {}) do
+        fixSample(sample)
+    end
+    
+    -- Fix safe ground checkpoints
+    for _, sample in pairs(rawget(state_table, "SafeGroundCheckpoints") or {}) do
+        fixSample(sample)
+    end
+    
+    -- Reset evidence
+    local evidence = rawget(state_table, "Evidence")
+    if type(evidence) == "table" then
+        evidence.Speed = 0
+        evidence.Teleport = 0
+        evidence.Flight = 0
+    end
+    
+    -- Fix impulse context
+    local impulse = rawget(state_table, "ImpulseContext")
+    if type(impulse) == "table" then
+        local max_speed = math.max(tonumber(impulse.MaxHorizontalSpeed) or 0, walk_speed)
+        local duration = math.max(
+            (tonumber(impulse.ExpiresAt) or 0) - (tonumber(impulse.StartedAt) or 0),
+            MovementConfig.CLAMP
+        )
+        
+        impulse.MaxHorizontalSpeed = max_speed
+        if root_position then impulse.OriginPosition = root_position end
+        impulse.MaxHorizontalDistance = math.max(
+            tonumber(impulse.MaxHorizontalDistance) or 0,
+            max_speed * duration + MovementConfig.PADDING * 2
+        )
+        
+        fixSample(impulse.PreMovementSafeSample)
+    end
+    
+    -- Reset correction context if no correction needed
+    if rawget(state_table, "CorrectionContext") == nil then
+        rawset(state_table, "FirstSuspiciousAt", nil)
+        if rawget(state_table, "ThreatLevel") == "Observing" then
+            rawset(state_table, "ThreatLevel", "Trusted")
+        end
+    end
+    
+    return true
+end
+
+local function autoStealLoop(run_id)
+    -- Setup sync state
+    if not egg_sync_state then
+        egg_sync_state = {
+            CarryState = nil,
+            ClaimRevision = 0,
+            LastCarryState = nil,
+            LastClaim = nil,
+            LastSpawnAt = 0
+        }
+        
+        egg_sync_state.CarryConnection = RunService.AreaEggCarryStateChanged:Connect(function(state)
+            egg_sync_state.CarryState = state
+            if state.IsCarrying and state.Uid then
+                egg_sync_state.LastCarryState = state
+            end
+        end)
+        
+        egg_sync_state.ClaimConnection = RunService.AreaEggClaimed:Connect(function(state)
+            egg_sync_state.ClaimRevision = egg_sync_state.ClaimRevision + 1
+            egg_sync_state.LastClaim = state
+        end)
+    end
+    
+    -- Get asset directory
+    local asset_directory = require(ReplicatedStorage.Data.Assets)
+    
+    -- Helper to get rarity name
+    local function getRarityName(egg_record)
+        local asset = asset_directory.Directory[egg_record.AssetCategory]
+        local rarity = asset and asset.Rarity
+        return rarity and (rarity.DisplayName or rarity._id) or "Unknown"
+    end
+    
+    -- Track previously attempted eggs
+    local attempted_eggs = {}
+    local last_snapshot = nil
+    local last_scan_time = 0
+    local last_carry_scan = 0
+    local was_night = false
+    
+    -- Set priority
+    setStealPriority(5)
+    
+    -- Main loop
+    while __ZeroinTweenRuntimeGeneration == state_generation and 
+          config.AutoSteal and run_state == run_id do
+        
+        -- Check if night phase
+        if isNightPhase() then
+            config.IsStealing = false
+            cleanup_steal()
+            last_snapshot = nil
+            if not was_night then
+                was_night = true
+                task.wait(0.25)
+            end
+            continue
+        else
+            if was_night then was_night = false end
+        end
+        
+        -- Periodically check if we're carrying an egg
+        local character = LocalPlayer.Character
+        local root_part = character and character:FindFirstChild("HumanoidRootPart")
+        local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+        
+        -- Clean up stale attempts
+        local now = os.clock()
+        for uid, timestamp in pairs(attempted_eggs) do
+            if now - timestamp > 5 then attempted_eggs[uid] = nil end
+        end
+        
+        -- Refresh snapshot periodically
+        local current_snapshot = nil
+        if now >= last_scan_time or not last_snapshot then
+            last_scan_time = now + 0.2
+            current_snapshot = EggState.GetAreaEggSnapshot()
+            last_snapshot = current_snapshot
+        else
+            current_snapshot = last_snapshot
+        end
+        
+        -- Find target egg
+        local target_egg = nil
+        local target_rarity_value = -1
+        
+        if current_snapshot and current_snapshot.Records then
+            -- Check if we're carrying an egg
+            for _, record in pairs(current_snapshot.Records) do
+                if not attempted_eggs[record.Uid] and 
+                   record.State == "Carried" and 
+                   record.CarrierUserId == LocalPlayer.UserId then
+                    target_egg = record
+                    target_egg.Rarity = getRarityName(record)
+                    break
+                end
+            end
+            
+            -- If not carrying, find best egg to steal
+            if not target_egg then
+                for _, record in pairs(current_snapshot.Records) do
+                    local rarity_name = getRarityName(record)
+                    local rarity_value = rarity_priority[rarity_name] or 0
+                    local meets_value = not config.AutoSteal or 
+                        config.StealMinValue <= 0 or 
+                        getEggValue(config, record) > config.StealMinValue
+                    
+                    if config.AutoSteal then
+                        -- Check area filter
+                        local area_match = #config.StealAreas == 0 or 
+                            table.find(config.StealAreas, "None") ~= nil or
+                            table.find(config.StealAreas, record.AreaId) ~= nil
+                        
+                        -- Check rarity filter
+                        local rarity_match = #config.StealRarities == 0 or
+                            table.find(config.StealRarities, "None") ~= nil or
+                            table.find(config.StealRarities, rarity_name) ~= nil
+                        
+                        -- Check name filter
+                        local name_match = false
+                        local names_filter = config.StealNamesFilter
+                        if type(names_filter) ~= "table" or #names_filter == 0 or 
+                           table.find(names_filter, "None") then
+                            name_match = true
+                        else
+                            local category = record.AssetCategory
+                            local asset = asset_directory.Directory[category]
+                            local display_name = asset and asset.DisplayName
+                            name_match = (category and table.find(names_filter, category)) ~= nil or
+                                (display_name and table.find(names_filter, display_name)) ~= nil
+                        end
+                        
+                        -- Check if egg is available (Slot or Dropped)
+                        local is_available = record.State == "Slot" or record.State == "Dropped"
+                        
+                        if area_match and rarity_match and name_match and 
+                           meets_value and is_available and 
+                           rarity_value > target_rarity_value then
+                            target_egg = record
+                            target_rarity_value = rarity_value
+                        end
+                    end
+                end
+                
+                if target_egg then target_egg.Rarity = getRarityName(target_egg) end
+            end
+        end
+        
+        -- Execute steal if target found
+        if target_egg then
+            setStealPriority()
+            
+            -- Reset attempt tracking
+            local steal_attempting = false
+            local carry_attempts = 0
+            local steal_cancelled = true
+            
+            -- Function to check if steal should be cancelled
+            local function isCancelled()
+                return not steal_cancelled or not config.AutoSteal or
+                    __ZeroinTweenRuntimeGeneration ~= state_generation or
+                    run_state ~= run_id or isNightPhase()
+            end
+            
+            -- Setup the steal
+            config.IsStealing = true
+            
+            local steal_success, steal_error = pcall(function()
+                -- Get current record
+                local current_record = EggState.GetAreaEggRecord(target_egg.Uid)
+                local already_carrying = current_record and 
+                    current_record.State == "Carried" and 
+                    current_record.CarrierUserId == LocalPlayer.UserId
+                
+                if already_carrying then
+                    target_egg = current_record
+                    target_egg.Rarity = getRarityName(current_record)
+                else
+                    if not current_record or 
+                       (current_record.State ~= "Slot" and current_record.State ~= "Dropped") then
+                        attempted_eggs[target_egg.Uid] = os.clock()
+                        return
+                    end
+                    
+                    -- Unequip tools
+                    humanoid:UnequipTools()
+                    
+                    -- Prepare positions
+                    local safe_cframe = CFrame.new(Vector3.new(545, 71, -365))
+                    local egg_position = target_egg.BottomCFrame * CFrame.new(0, -3, 0)
+                    
+                    -- Store area for tracking
+                    if target_egg.AssetCategory and target_egg.AreaId then
+                        area_tracking[target_egg.AssetCategory] = target_egg.AreaId
+                    end
+                    
+                    -- Get slot key
+                    local slot_key = getSlotKey(target_egg.Uid, target_egg.AreaId, target_egg.NestId)
+                    
+                    -- Prepare (treadmill handling, decoy, etc.)
+                    if not isCancelled() then
+                        if not prepareForSteal(safe_cframe, isCancelled) then
+                            warn("[AutoSteal] Carry preparation failed; skipping trip")
+                            return
+                        end
+                        
+                        if isCancelled() or LocalPlayer.Character ~= character then return end
+                        task.wait(0.15)
+                    end
+                    
+                    -- Tween to egg position
+                    local carry_attempted = false
+                    
+                    -- Function to send carry request
+                    local function requestCarry(uid, first_area_slot_key)
+                        local request_data = {Uid = uid}
+                        if first_area_slot_key then request_data.FirstAreaSlotKey = first_area_slot_key end
+                        
+                        local success, result = EggState.CarryFieldEgg(uid, first_area_slot_key)
+                        if success ~= true then
+                            warn("[AutoSteal] Carry rejected:", uid, tostring(result))
+                        end
+                        return success == true
+                    end
+                    
+                    -- Setup carry watcher (spawns parallel task to try carrying)
+                    local carry_confirmed = false
+                    local carry_attempts = 0
+                    local carry_connection = nil
+                    
+                    task.spawn(function()
+                        local timeout = os.clock() + 4
+                        while not isCancelled() and not carry_confirmed and os.clock() < timeout do
+                            local carry_state = egg_sync_state.CarryState
+                            local record = EggState.GetAreaEggRecord(target_egg.Uid)
+                            
+                            if (carry_state and carry_state.IsCarrying and carry_state.Uid == target_egg.Uid) or
+                               (record and record.State == "Carried" and record.CarrierUserId == LocalPlayer.UserId) then
+                                carry_confirmed = true
+                                break
+                            end
+                            
+                            requestCarry(target_egg.Uid, slot_key)
+                            task.wait(0.25)
+                        end
+                    end)
+                    
+                    -- Tween to egg
+                    local tween_success = tweenTo(
+                        root_part, humanoid, egg_position,
+                        function() return isCancelled() or carry_confirmed end,
+                        true,
+                        function() end,
+                        true
+                    )
+                    
+                    -- Wait for carry confirmation
+                    local wait_start = os.clock()
+                    while not isCancelled() and not carry_confirmed and os.clock() - wait_start < 2 do
+                        local carry_state = egg_sync_state.CarryState
+                        local record = EggState.GetAreaEggRecord(target_egg.Uid)
+                        
+                        if (carry_state and carry_state.IsCarrying and carry_state.Uid == target_egg.Uid) or
+                           (record and record.State == "Carried" and record.CarrierUserId == LocalPlayer.UserId) then
+                            carry_confirmed = true
+                            break
+                        end
+                        
+                        requestCarry(target_egg.Uid, slot_key)
+                        task.wait(0.25)
+                    end
+                    
+                    if not carry_confirmed then return end
+                end
+                
+                -- We're now carrying the egg!
+                clear_last_teleport()
+                cleanup_hover()
+                
+                -- Tween back to safe zone
+                local carry_lost = false
+                local return_start = os.clock()
+                
+                -- Function to detect if carry was lost
+                local function isCarryLost()
+                    if isCancelled() then return true end
+                    if os.clock() - return_start < 0.35 then return false end
+                    
+                    local carry_state = egg_sync_state.CarryState
+                    if carry_state and carry_state.IsCarrying and carry_state.Uid == target_egg.Uid then return false end
+                    
+                    local record = EggState.GetAreaEggRecord(target_egg.Uid)
+                    if record and record.State == "Carried" and record.CarrierUserId == LocalPlayer.UserId then return false end
+                    if record and record.State == "Claimed" then return false end
+                    
+                    carry_lost = true
+                    return true
+                end
+                
+                -- Tween back to safe zone
+                while not isCancelled() do
+                    carry_lost = false
+                    
+                    local success = tweenTo(
+                        root_part, humanoid, safe_cframe,
+                        isCarryLost,
+                        false, nil, true
+                    )
+                    
+                    if isCancelled() then break end
+                    
+                    if carry_lost then
+                        -- Egg was dropped, try to recover it
+                        local recover_timeout = os.clock() + 10
+                        local recovered = false
+                        local recovering = true
+                        local last_request = 0
+                        
+                        -- Spawn recovery carry task
+                        task.spawn(function()
+                            while recovering and not isCancelled() and os.clock() < recover_timeout do
+                                if os.clock() >= last_request then
+                                    last_request = os.clock() + 0.25
+                                    local record = EggState.GetAreaEggRecord(target_egg.Uid)
+                                    if record and record.State == "Dropped" then
+                                        local key = getSlotKey(record.Uid, record.AreaId, record.NestId)
+                                        requestCarry(record.Uid, key)
+                                    end
+                                end
+                                task.wait(0.25)
+                            end
+                        end)
+                        
+                        -- Tween to dropped egg
+                        while not isCancelled() and os.clock() < recover_timeout do
+                            if LocalPlayer.Character ~= character or not root_part.Parent or humanoid.Health <= 0 then break end
+                            
+                            local record = EggState.GetAreaEggRecord(target_egg.Uid)
+                            if record and record.State == "Carried" then
+                                recovered = record.CarrierUserId == LocalPlayer.UserId
+                                break
+                            end
+                            if record and record.State == "Claimed" then break end
+                            if record and record.State == "Dropped" and record.BottomCFrame then
+                                -- Request carry again
+                                if os.clock() >= last_request then
+                                    last_request = os.clock() + 0.25
+                                    requestCarry(record.Uid, getSlotKey(record.Uid, record.AreaId, record.NestId))
+                                end
+                                
+                                -- Tween to dropped position
+                                local drop_cframe = record.BottomCFrame * CFrame.new(0, 3, 0)
+                                tweenTo(root_part, humanoid, drop_cframe, 
+                                    function() 
+                                        local current_record = EggState.GetAreaEggRecord(target_egg.Uid)
+                                        return isCancelled() or os.clock() >= recover_timeout or
+                                            LocalPlayer.Character ~= character or 
+                                            humanoid.Health <= 0 or 
+                                            (current_record and current_record.State == "Carried")
+                                    end, 
+                                    true)
+                                
+                                clear_last_teleport()
+                                
+                                if isCancelled() or os.clock() >= recover_timeout or
+                                   LocalPlayer.Character ~= character or humanoid.Health <= 0 then
+                                    break
+                                end
+                                
+                                requestCarry(record.Uid, getSlotKey(record.Uid, record.AreaId, record.NestId))
+                            end
+                            
+                            task.wait(0.2)
+                        end
+                        
+                        recovering = false
+                        
+                        if not recovered then
+                            warn("[AutoSteal] Dropped egg recovery not confirmed; ending attempt")
+                            break
+                        end
+                    else
+                        -- Successfully returned, wait for carry confirmation to clear
+                        local confirm_timeout = os.clock() + 5
+                        while not isCancelled() and os.clock() < confirm_timeout do
+                            local carry_state = egg_sync_state.CarryState
+                            if not carry_state or not carry_state.IsCarrying or carry_state.Uid ~= target_egg.Uid then
+                                attempted_eggs[target_egg.Uid] = os.clock()
+                                break
+                            end
+                            task.wait(0.08)
+                        end
+                        break
+                    end
+                end
+            end)
+            
+            -- Cleanup
+            steal_cancelled = false
+            cleanup_steal()
+            steal_attempting = false
+            config.IsStealing = false
+            setStealPriority()
+            
+            if not steal_success then
+                warn("[AutoSteal] Error during steal:", steal_error)
+            end
+            
+            -- Wait before next target
+            if config.AutoSteal and run_state == run_id then
+                task.wait(0.05)
+            end
+        else
+            -- No target found, request snapshot periodically
+            if os.clock() >= last_carry_scan then
+                last_carry_scan = os.clock() + 0.5
+                task.spawn(function()
+                    pcall(function() EggState.RequestAreaEggSnapshot() end)
+                end)
+            end
+            
+            -- Auto treadmill idle
+            if config.AutoTreadmillIdle then
+                if last_treadmill_check == 0 then
+                    last_treadmill_check = os.clock()
+                else
+                    if not on_treadmill and (os.clock() - last_treadmill_check) >= 10 and
+                       treadmill_config.current_treadmill == nil then
+                        -- Try to mount treadmill
+                        pcall(function()
+                            local plot_state = require(ReplicatedStorage.Client.PlotState)
+                            local target_cframe = getTreadmillCFrame()
+                            if target_cframe and root_part then
+                                treadmill_config.trying_to_mount = true
+                                tweenTo(root_part, humanoid, target_cframe, 
+                                    function() return not config.AutoTreadmillIdle or config.IsStealing end)
+                                task.wait(0.2)
+                                
+                                local on_treadmill = isOnTreadmill()
+                                if on_treadmill then
+                                    treadmill_config.current_treadmill = treadmill_config.current_treadmill or "idle"
+                                else
+                                    treadmill_config.trying_to_mount = false
+                                    last_treadmill_check = os.clock()
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end
+        
+        RunService.Heartbeat:Wait()
+    end
+end
+
+-- Start the existing Auto Steal worker from the UI. The previous readable
+-- draft referenced this function but never defined it.
+function start_auto_steal()
+    if not config.AutoSteal or type(autoStealLoop) ~= "function" then
+        return false
+    end
+
+    if run_state <= 0 then run_state = 1 end
+    start_stealth_runtime()
+    local current_run = run_state
+    state_generation = __ZeroinTweenRuntimeGeneration
+
+    task.spawn(function()
+        local ok, err = pcall(autoStealLoop, current_run)
+        if not ok then
+            config.IsStealing = false
+            warn("[AutoSteal] stopped:", err)
+        end
+    end)
+    return true
+end
+
+local EggPanel = {
+    Gui = nil,
+    Frame = nil,
+    LogsTabBtn = nil,
+    ResetLabel = nil,
+    SearchBox = nil,
+    ChipScroll = nil,
+    ListScroll = nil,
+    CountLabel = nil,
+    AccentColor = nil
+}
+
+local EggPanelState = {
+    ActiveTab = "Logs",
+    SearchText = "",
+    SelectedRarity = "Any",
+    EggList = nil,
+    ListCache = nil
+}
+
+-- Color scheme
+local PanelColors = {
+    Background = Color3.fromRGB(8, 28, 25),
+    Surface = Color3.fromRGB(10, 40, 29),
+    Input = Color3.fromRGB(8, 36, 25),
+    Border = Color3.fromRGB(34, 91, 100),
+    Accent = Color3.fromRGB(0, 205, 122),
+    AccentSoft = Color3.fromRGB(151, 220, 108),
+    Text = Color3.fromRGB(225, 238, 231),
+    TextSecondary = Color3.fromRGB(202, 190, 169),
+    TextMuted = Color3.fromRGB(121, 159, 136)
+}
+
+-- Build the GUI
+local function createEggPanelUI()
+    getgenv().__ZeroinEnterUICallback()
+    
+    local colors = PanelColors
+    local accent_color = colors.Accent
+    
+    -- Create ScreenGui
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "ZeroinEggPanelUI"
+    gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    gui.ResetOnSpawn = false
+    
+    -- Parent to secure location
+    if not getgenv().__ZeroinParentGui(gui) then
+        gui:Destroy()
+        return nil
+    end
+    
+    -- Drop shadow
+    local drop_shadow = Instance.new("ImageLabel")
+    drop_shadow.Name = "DropShadow"
+    drop_shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+    drop_shadow.BackgroundTransparency = 1
+    drop_shadow.BorderSizePixel = 0
+    drop_shadow.Image = "rbxassetid://6015897843"
+    drop_shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    drop_shadow.ImageTransparency = 0.55
+    drop_shadow.ScaleType = Enum.ScaleType.Slice
+    drop_shadow.SliceCenter = Rect.new(49, 49, 450, 450)
+    drop_shadow.ZIndex = 0
+    drop_shadow.Parent = gui
+    
+    -- Main frame
+    local main_frame = Instance.new("Frame")
+    main_frame.Name = "Main"
+    main_frame.Size = UDim2.new(0.72, 0, 0.62, 0)
+    main_frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    main_frame.AnchorPoint = Vector2.new(0.5, 0.5)
+    main_frame.BackgroundColor3 = colors.Background
+    main_frame.BackgroundTransparency = 0.01
+    main_frame.BorderSizePixel = 0
+    main_frame.ZIndex = 1
+    main_frame.Active = true
+    main_frame.ClipsDescendants = true
+    main_frame.Parent = gui
+    
+    -- Size constraint
+    local size_constraint = Instance.new("UISizeConstraint")
+    size_constraint.MinSize = Vector2.new(260, 340)
+    size_constraint.MaxSize = Vector2.new(320, 400)
+    size_constraint.Parent = main_frame
+    
+    -- Corner
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 8)
+    corner.Parent = main_frame
+    
+    -- Stroke
+    local stroke = Instance.new("UIStroke")
+    stroke.Name = "MainOutline"
+    stroke.Color = colors.Border
+    stroke.Thickness = 1.2
+    stroke.Transparency = 0.18
+    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    stroke.Parent = main_frame
+    
+    -- Update shadow position
+    local function updateShadow()
+        getgenv().__ZeroinEnterUICallback()
+        drop_shadow.Position = UDim2.fromOffset(
+            main_frame.AbsolutePosition.X + main_frame.AbsoluteSize.X * 0.5,
+            main_frame.AbsolutePosition.Y + main_frame.AbsoluteSize.Y * 0.5
+        )
+        drop_shadow.Size = UDim2.fromOffset(
+            main_frame.AbsoluteSize.X + 44,
+            main_frame.AbsoluteSize.Y + 44
+        )
+    end
+    
+    main_frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateShadow)
+    main_frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateShadow)
+    task.defer(updateShadow)
+    
+    -- Dragging
+    local user_input = game:GetService("UserInputService")
+    local dragging = false
+    local drag_start_pos = nil
+    local frame_start_pos = nil
+    local current_input = nil
+    
+    main_frame.InputBegan:Connect(function(input)
+        getgenv().__ZeroinEnterUICallback()
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+           input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            drag_start_pos = input.Position
+            frame_start_pos = main_frame.Position
+            
+            input.Changed:Connect(function()
+                getgenv().__ZeroinEnterUICallback()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+    
+    main_frame.InputChanged:Connect(function(input)
+        getgenv().__ZeroinEnterUICallback()
+        if input.UserInputType == Enum.UserInputType.MouseMovement or 
+           input.UserInputType == Enum.UserInputType.Touch then
+            current_input = input
+        end
+    end)
+    
+    user_input.InputChanged:Connect(function(input)
+        getgenv().__ZeroinEnterUICallback()
+        if input == current_input and dragging then
+            local delta = input.Position - drag_start_pos
+            main_frame.Position = UDim2.new(
+                frame_start_pos.X.Scale,
+                frame_start_pos.X.Offset + delta.X,
+                frame_start_pos.Y.Scale,
+                frame_start_pos.Y.Offset + delta.Y
+            )
+        end
+    end)
+    
+    -- Header
+    local header = Instance.new("Frame")
+    header.Size = UDim2.new(1, 0, 0, 36)
+    header.BackgroundColor3 = colors.Background
+    header.BackgroundTransparency = 0.01
+    header.BorderSizePixel = 0
+    header.Parent = main_frame
+    
+    local header_corner = Instance.new("UICorner")
+    header_corner.CornerRadius = UDim.new(0, 8)
+    header_corner.Parent = header
+    
+    local header_bottom = Instance.new("Frame")
+    header_bottom.Size = UDim2.new(1, 0, 0, 10)
+    header_bottom.Position = UDim2.new(0, 0, 1, -10)
+    header_bottom.BackgroundColor3 = colors.Background
+    header_bottom.BackgroundTransparency = 0.01
+    header_bottom.BorderSizePixel = 0
+    header_bottom.Parent = header
+    
+    local logo = Instance.new("ImageLabel")
+    logo.Size = UDim2.new(0, 20, 0, 20)
+    logo.Position = UDim2.new(0, 10, 0.5, -10)
+    logo.BackgroundTransparency = 1
+    logo.Image = "rbxassetid://124404129684886"
+    logo.Parent = header
+    
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, -66, 1, 0)
+    title.Position = UDim2.new(0, 36, 0, 0)
+    title.BackgroundTransparency = 1
+    title.Text = "ZEROIN | EGG PANEL"
+    title.TextColor3 = colors.Text
+    title.Font = Enum.Font.GothamBold
+    title.TextSize = 12
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Parent = header
+    
+    local close_btn = Instance.new("TextButton")
+    close_btn.Size = UDim2.new(0, 24, 0, 24)
+    close_btn.Position = UDim2.new(1, -30, 0.5, -12)
+    close_btn.BackgroundColor3 = colors.Surface
+    close_btn.BackgroundTransparency = 0
+    close_btn.Text = "×"
+    close_btn.TextColor3 = colors.Text
+    close_btn.Font = Enum.Font.GothamBold
+    close_btn.TextSize = 13
+    close_btn.Parent = header
+    
+    local close_corner = Instance.new("UICorner")
+    close_corner.CornerRadius = UDim.new(0, 6)
+    close_corner.Parent = close_btn
+    
+    local close_stroke = Instance.new("UIStroke")
+    close_stroke.Color = colors.Border
+    close_stroke.Transparency = 0.35
+    close_stroke.Thickness = 1
+    close_stroke.Parent = close_btn
+    
+    close_btn.MouseButton1Click:Connect(function()
+        getgenv().__ZeroinEnterUICallback()
+        gui.Enabled = false
+    end)
+    
+    -- Tab bar
+    local tab_bar = Instance.new("Frame")
+    tab_bar.Size = UDim2.new(1, -16, 0, 30)
+    tab_bar.Position = UDim2.new(0, 8, 0, 42)
+    tab_bar.BackgroundTransparency = 1
+    tab_bar.Parent = main_frame
+    
+    local tab_layout = Instance.new("UIListLayout")
+    tab_layout.FillDirection = Enum.FillDirection.Horizontal
+    tab_layout.Padding = UDim.new(0, 6)
+    tab_layout.Parent = tab_bar
+    
+    -- Function to create a tab button
+    local function createTabButton(text)
+        local button = Instance.new("TextButton")
+        button.Size = UDim2.new(0, 110, 1, 0)
+        button.BackgroundColor3 = colors.Surface
+        button.BackgroundTransparency = 0
+        button.Text = text
+        button.TextColor3 = colors.TextSecondary
+        button.Font = Enum.Font.GothamBold
+        button.TextSize = 12
+        button.Parent = tab_bar
+        
+        local button_corner = Instance.new("UICorner")
+        button_corner.CornerRadius = UDim.new(0, 6)
+        button_corner.Parent = button
+        
+        local button_stroke = Instance.new("UIStroke")
+        button_stroke.Color = colors.Border
+        button_stroke.Transparency = 0.35
+        button_stroke.Thickness = 1
+        button_stroke.Parent = button
+        
+        return button
+    end
+    
+    EggPanel.LogsTabBtn = createTabButton("Egg Logs")
+    
+    -- Reset label
+    local reset_label = Instance.new("TextLabel")
+    reset_label.Size = UDim2.new(1, -16, 0, 18)
+    reset_label.Position = UDim2.new(0, 8, 0, 76)
+    reset_label.BackgroundTransparency = 1
+    reset_label.TextXAlignment = Enum.TextXAlignment.Left
+    reset_label.Font = Enum.Font.GothamMedium
+    reset_label.TextSize = 11
+    reset_label.TextColor3 = colors.AccentSoft
+    reset_label.Text = "Next Reset: --"
+    reset_label.Parent = main_frame
+    
+    -- Search box
+    local search_box = Instance.new("TextBox")
+    search_box.Size = UDim2.new(1, -72, 0, 26)
+    search_box.Position = UDim2.new(0, 8, 0, 98)
+    search_box.BackgroundColor3 = colors.Input
+    search_box.BackgroundTransparency = 0
+    search_box.TextColor3 = colors.Text
+    search_box.Text = ""
+    search_box.PlaceholderText = "Cari nama pet/egg..."
+    search_box.PlaceholderColor3 = colors.TextMuted
+    search_box.Font = Enum.Font.Gotham
+    search_box.TextSize = 12
+    search_box.ClearTextOnFocus = false
+    search_box.TextXAlignment = Enum.TextXAlignment.Left
+    search_box.Parent = main_frame
+    
+    local search_corner = Instance.new("UICorner")
+    search_corner.CornerRadius = UDim.new(0, 4)
+    search_corner.Parent = search_box
+    
+    local search_stroke = Instance.new("UIStroke")
+    search_stroke.Color = colors.Border
+    search_stroke.Transparency = 0.45
+    search_stroke.Thickness = 1
+    search_stroke.Parent = search_box
+    
+    local search_padding = Instance.new("UIPadding")
+    search_padding.PaddingLeft = UDim.new(0, 8)
+    search_padding.Parent = search_box
+    
+    -- Clear button
+    local clear_btn = Instance.new("TextButton")
+    clear_btn.Size = UDim2.new(0, 58, 0, 26)
+    clear_btn.Position = UDim2.new(1, -66, 0, 98)
+    clear_btn.BackgroundColor3 = colors.Input
+    clear_btn.BackgroundTransparency = 0
+    clear_btn.Text = "Clear"
+    clear_btn.TextColor3 = colors.Text
+    clear_btn.Font = Enum.Font.GothamMedium
+    clear_btn.TextSize = 11
+    clear_btn.Parent = main_frame
+    
+    local clear_corner = Instance.new("UICorner")
+    clear_corner.CornerRadius = UDim.new(0, 6)
+    clear_corner.Parent = clear_btn
+    
+    local clear_stroke = Instance.new("UIStroke")
+    clear_stroke.Color = colors.Border
+    clear_stroke.Transparency = 0.45
+    clear_stroke.Thickness = 1
+    clear_stroke.Parent = clear_btn
+    
+    clear_btn.MouseButton1Click:Connect(function()
+        getgenv().__ZeroinEnterUICallback()
+        search_box.Text = ""
+    end)
+    
+    -- Chip scroll (rarity filters)
+    local chip_scroll = Instance.new("ScrollingFrame")
+    chip_scroll.Size = UDim2.new(1, -16, 0, 22)
+    chip_scroll.Position = UDim2.new(0, 8, 0, 130)
+    chip_scroll.BackgroundTransparency = 1
+    chip_scroll.BorderSizePixel = 0
+    chip_scroll.ScrollBarThickness = 0
+    chip_scroll.ScrollingDirection = Enum.ScrollingDirection.X
+    chip_scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+    chip_scroll.AutomaticCanvasSize = Enum.AutomaticSize.X
+    chip_scroll.Parent = main_frame
+    
+    local chip_layout = Instance.new("UIListLayout")
+    chip_layout.FillDirection = Enum.FillDirection.Horizontal
+    chip_layout.VerticalAlignment = Enum.VerticalAlignment.Center
+    chip_layout.Padding = UDim.new(0, 8)
+    chip_layout.Parent = chip_scroll
+    
+    -- Main list scroll
+    local list_scroll = Instance.new("ScrollingFrame")
+    list_scroll.Size = UDim2.new(1, -16, 1, -180)
+    list_scroll.Position = UDim2.new(0, 8, 0, 172)
+    list_scroll.BackgroundTransparency = 1
+    list_scroll.BorderSizePixel = 0
+    list_scroll.ScrollBarThickness = 3
+    list_scroll.ScrollBarImageColor3 = colors.Border
+    list_scroll.ScrollBarImageTransparency = 0.2
+    list_scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+    list_scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    list_scroll.Parent = main_frame
+    
+    local list_padding = Instance.new("UIPadding")
+    list_padding.PaddingTop = UDim.new(0, 4)
+    list_padding.Parent = list_scroll
+    
+    local list_layout = Instance.new("UIListLayout")
+    list_layout.Padding = UDim.new(0, 6)
+    list_layout.Parent = list_scroll
+    
+    -- Count label
+    local count_label = Instance.new("TextLabel")
+    count_label.Size = UDim2.new(1, 0, 0, 14)
+    count_label.LayoutOrder = -1
+    count_label.BackgroundTransparency = 1
+    count_label.TextXAlignment = Enum.TextXAlignment.Left
+    count_label.Font = Enum.Font.GothamMedium
+    count_label.TextSize = 10
+    count_label.TextColor3 = colors.TextSecondary
+    count_label.Text = ""
+    count_label.Parent = list_scroll
+    
+    return {
+        Gui = gui,
+        Frame = main_frame,
+        LogsTabBtn = EggPanel.LogsTabBtn,
+        ResetLabel = reset_label,
+        SearchBox = search_box,
+        ChipScroll = chip_scroll,
+        ListScroll = list_scroll,
+        CountLabel = count_label,
+        AccentColor = accent_color
+    }
+end
+
+-- Create a list item for an egg
+local function createEggListItem(order, data)
+    getgenv().__ZeroinEnterUICallback()
+    
+    local colors = PanelColors
+    
+    local item = Instance.new("Frame")
+    item.Size = UDim2.new(1, 0, 0, 56)
+    item.BackgroundColor3 = colors.Surface
+    item.BackgroundTransparency = 0.08
+    item.LayoutOrder = order
+    item.Parent = EggPanel.ListScroll
+    
+    local item_corner = Instance.new("UICorner")
+    item_corner.CornerRadius = UDim.new(0, 8)
+    item_corner.Parent = item
+    
+    local item_stroke = Instance.new("UIStroke")
+    item_stroke.Color = colors.Border
+    item_stroke.Thickness = 1
+    item_stroke.Transparency = 0.38
+    item_stroke.Parent = item
+    
+    -- Rarity color bar
+    local rarity_bar = Instance.new("Frame")
+    rarity_bar.Size = UDim2.new(0, 4, 1, -12)
+    rarity_bar.Position = UDim2.new(0, 0, 0, 6)
+    rarity_bar.BackgroundColor3 = data.rarityColor or Color3.fromRGB(255, 255, 0)
+    rarity_bar.BorderSizePixel = 0
+    rarity_bar.Parent = item
+    
+    local rarity_bar_corner = Instance.new("UICorner")
+    rarity_bar_corner.CornerRadius = UDim.new(1, 0)
+    rarity_bar_corner.Parent = rarity_bar
+    
+    -- Icon
+    local icon = Instance.new("ImageLabel")
+    icon.Size = UDim2.new(0, 40, 0, 40)
+    icon.Position = UDim2.new(0, 12, 0.5, -20)
+    icon.BackgroundColor3 = colors.Input
+    icon.BackgroundTransparency = 0
+    icon.Image = data.icon or ""
+    icon.Parent = item
+    
+    local icon_corner = Instance.new("UICorner")
+    icon_corner.CornerRadius = UDim.new(0, 7)
+    icon_corner.Parent = icon
+    
+    local icon_stroke = Instance.new("UIStroke")
+    icon_stroke.Color = colors.Border
+    icon_stroke.Transparency = 0.5
+    icon_stroke.Thickness = 1
+    icon_stroke.Parent = icon
+    
+    -- Egg name
+    local egg_name = Instance.new("TextLabel")
+    egg_name.Size = UDim2.new(1, -170, 0, 15)
+    egg_name.Position = UDim2.new(0, 60, 0, 4)
+    egg_name.BackgroundTransparency = 1
+    egg_name.TextXAlignment = Enum.TextXAlignment.Left
+    egg_name.Font = Enum.Font.GothamBold
+    egg_name.TextSize = 13
+    egg_name.TextColor3 = colors.Text
+    egg_name.TextTruncate = Enum.TextTruncate.AtEnd
+    egg_name.Text = data.title or ""
+    egg_name.Parent = item
+    
+    -- Pet name / subtitle
+    local pet_name = Instance.new("TextLabel")
+    pet_name.Size = UDim2.new(1, -170, 0, 13)
+    pet_name.Position = UDim2.new(0, 60, 0, 19)
+    pet_name.BackgroundTransparency = 1
+    pet_name.TextXAlignment = Enum.TextXAlignment.Left
+    pet_name.Font = Enum.Font.Gotham
+    pet_name.TextSize = 10
+    pet_name.TextColor3 = colors.TextSecondary
+    pet_name.TextTruncate = Enum.TextTruncate.AtEnd
+    pet_name.Text = data.subtitle or ""
+    pet_name.Parent = item
+    
+    -- Meta info (rarity + mutation)
+    local meta = Instance.new("TextLabel")
+    meta.Size = UDim2.new(1, -170, 0, 13)
+    meta.Position = UDim2.new(0, 60, 0, 33)
+    meta.BackgroundTransparency = 1
+    meta.TextXAlignment = Enum.TextXAlignment.Left
+    meta.Font = Enum.Font.Gotham
+    meta.TextSize = 10
+    meta.TextColor3 = data.metaColor or colors.TextSecondary
+    meta.TextTruncate = Enum.TextTruncate.AtEnd
+    meta.Text = data.meta or ""
+    meta.Parent = item
+    
+    -- Right top (area)
+    local area_text = Instance.new("TextLabel")
+    area_text.Size = UDim2.new(0, 100, 0, 12)
+    area_text.Position = UDim2.new(1, -108, 0, 8)
+    area_text.BackgroundTransparency = 1
+    area_text.TextXAlignment = Enum.TextXAlignment.Right
+    area_text.Font = Enum.Font.GothamBold
+    area_text.TextSize = 12
+    area_text.TextColor3 = data.rightTopColor or colors.Accent
+    area_text.Text = data.rightTop or ""
+    area_text.Parent = item
+    
+    -- Right bottom (weight)
+    local weight_text = Instance.new("TextLabel")
+    weight_text.Size = UDim2.new(0, 100, 0, 14)
+    weight_text.Position = UDim2.new(1, -108, 0, 26)
+    weight_text.BackgroundTransparency = 1
+    weight_text.TextXAlignment = Enum.TextXAlignment.Right
+    weight_text.Font = Enum.Font.Gotham
+    weight_text.TextSize = 10
+    weight_text.TextColor3 = colors.TextMuted
+    weight_text.Text = data.rightBottom or ""
+    weight_text.Parent = item
+    
+    return item
+end
+
+-- Start auto placing eggs
+function startAutoPlaceLoop()
+    task.spawn(function()
+        while config.AutoPlace do
+            task.wait(1.5)
+            
+            local success, err = pcall(function()
+                if config.IsStealing then return end
+                
+                local EggState = require(ReplicatedStorage.Client.EggState)
+                local AssetData = require(ReplicatedStorage.Data.Assets)
+                
+                -- Find player's plot
+                local plot = nil
+                local plots_folder = Workspace:FindFirstChild("Plots")
+                
+                if plots_folder then
+                    for _, plot_obj in ipairs(plots_folder:GetChildren()) do
+                        local plot_sign = plot_obj:FindFirstChild("PlotSign")
+                        if plot_sign then
+                            local player_sign = plot_sign:FindFirstChild("PlayerPlotSign")
+                            if player_sign and player_sign:FindFirstChild("Frame") and 
+                               player_sign.Frame:FindFirstChild("PlayerName") then
+                                local player_name = player_sign.Frame.PlayerName.Text
+                                -- Clean HTML tags
+                                player_name = tostring(player_name):gsub("<[^>]+>", "")
+                                
+                                if tostring(player_name):lower():find(tostring(LocalPlayer.Name):lower()) or
+                                   tostring(player_name):lower():find(tostring(LocalPlayer.DisplayName):lower()) then
+                                    plot = plot_obj
+                                    break
+                                end
+                            end
+                        end
+                    end
+                end
+                
+                if not plot then return end
+                
+                -- Find placement area
+                local pet_area = plot:FindFirstChild("ToUpdate") and 
+                    plot.ToUpdate:FindFirstChild("PetArea")
+                local center_point = plot:FindFirstChild("CenterPoint") or pet_area
+                if not pet_area then return end
+                
+                -- Get player's unplaced eggs
+                local owned_eggs = EggState.GetOwnerRuntimeRecords(LocalPlayer.UserId)
+                local placeable_eggs = {}
+                
+                if type(owned_eggs) == "table" then
+                    for uid, egg in pairs(owned_eggs) do
+                        if egg.Placement == nil then
+                            local category = egg.AssetCategory
+                            local asset = AssetData.Directory[category]
+                            local rarity_name = "Unknown"
+                            
+                            if asset and asset.Rarity then
+                                rarity_name = asset.Rarity.DisplayName or asset.Rarity._id or "Unknown"
+                            end
+                            
+                            local weight = tonumber(egg.Kg) or tonumber(egg.Weight) or 0
+                            if not weight and asset then
+                                weight = tonumber(asset.Kg) or 0
+                            end
+                            
+                            -- Check rarity filter
+                            local rarity_match = #config.PlaceRarities == 0 or
+                                table.find(config.PlaceRarities, "None") or
+                                table.find(config.PlaceRarities, "All") or
+                                table.find(config.PlaceRarities, rarity_name) ~= nil
+                            
+                            if rarity_match then
+                                table.insert(placeable_eggs, {
+                                    Uid = uid,
+                                    Rarity = rarity_name,
+                                    Kg = weight
+                                })
+                            end
+                        end
+                    end
+                end
+                
+                -- Sort by weight (heaviest first)
+                table.sort(placeable_eggs, function(a, b)
+                    return a.Kg > b.Kg
+                end)
+                
+                -- Get character
+                local character = LocalPlayer.Character
+                local root_part = character and character:FindFirstChild("HumanoidRootPart")
+                local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+                
+                -- Count placed eggs
+                local placed_count = 0
+                for _, egg in pairs(owned_eggs) do
+                    if egg.Placement ~= nil then placed_count = placed_count + 1 end
+                end
+                
+                if #placeable_eggs == 0 or placed_count >= 30 then return end
+                
+                -- Move to plot area if needed
+                if root_part and pet_area then
+                    local plot_cframe = pet_area.CFrame * CFrame.new(0, -3, 0)
+                    
+                    -- Check if line of sight is clear
+                    local can_see = checkLineOfSight(
+                        root_part.Position + Vector3.new(0, 2, 0),
+                        plot_cframe.Position + Vector3.new(0, -3, 0),
+                        character
+                    )
+                    
+                    if not can_see then
+                        -- Teleport to safe position first
+                        local safe_pos = CFrame.new(518.66, 70.57, -364.73) * CFrame.Angles(
+                            math.rad(120),
+                            math.rad(-89.82),
+                            math.rad(180)
+                        )
+                        
+                        local moved = tweenTo(root_part, humanoid, safe_pos, 
+                            function() return not config.AutoPlace or config.IsStealing end)
+                        if moved and (not config.AutoPlace or config.IsStealing) then return end
+                    end
+                    
+                    -- Tween to plot area
+                    local moved = tweenTo(root_part, humanoid, plot_cframe,
+                        function() return not config.AutoPlace or config.IsStealing end)
+                    if moved and (not config.AutoPlace or config.IsStealing) then return end
+                    
+                    -- Small delay
+                    task.wait(0.5)
+                    if config.IsStealing then return end
+                end
+                
+                -- Place eggs
+                local placed_positions = {}
+                local placed_count = 0
+                local place_attempts = 0
+                
+                -- Store existing placements to avoid overlap
+                for _, egg in pairs(owned_eggs) do
+                    if egg.Placement then
+                        local pos = nil
+                        if typeof(egg.Placement) == "CFrame" then
+                            pos = egg.Placement.Position
+                        elseif typeof(egg.Placement) == "Vector3" then
+                            pos = egg.Placement
+                        elseif egg.Placement.Position then
+                            pos = egg.Placement.Position
+                        end
+                        
+                        if pos then table.insert(placed_positions, pos) end
+                    end
+                end
+                
+                -- Place each eligible egg
+                for _, egg_info in ipairs(placeable_eggs) do
+                    if not config.AutoPlace or placing_stopped then break end
+                    if placed_count >= 30 then placing_stopped = true break end
+                    if config.IsStealing then return end
+                    
+                    local uid = egg_info.Uid
+                    local egg_record = EggState.GetOwnerRuntimeRecords(LocalPlayer.UserId)[uid]
+                    
+                    if not egg_record then continue end
+                    
+                    -- Equip egg tool
+                    local equip_success = EggState.RequestEquipTool(uid)
+                    
+                    if equip_success then
+                        if config.IsStealing then return end
+                        
+                        task.wait(0.15)
+                        
+                        -- Find placement position
+                        local place_found = false
+                        local place_cframe = nil
+                        
+                        if pet_area then
+                            while place_attempts < 30 do
+                                -- Calculate grid position
+                                local spacing_x = 10
+                                local spacing_z = 6
+                                local padding = 6
+                                local grid_width = pet_area.Size.X - padding * 2
+                                local grid_depth = pet_area.Size.Z - padding * 2
+                                local cols = math.floor(grid_width / spacing_x)
+                                local rows = math.floor(grid_depth / spacing_z)
+                                
+                                local col = math.floor(place_attempts / spacing_x)
+                                local row = place_attempts % spacing_x
+                                
+                                local offset_x = -grid_width / 2 + spacing_x / 2 + col * spacing_x
+                                local offset_z = -grid_depth / 2 + spacing_z / 2 + row * spacing_z
+                                
+                                local candidate = pet_area.CFrame * Vector3.new(offset_x, 0, offset_z)
+                                
+                                -- Convert to local space
+                                local local_pos = center_point.CFrame:PointToObjectSpace(candidate)
+                                local local_cframe = CFrame.new(local_pos.X, -0.5, local_pos.Z)
+                                
+                                -- Check for overlap
+                                local overlaps = false
+                                for _, pos in ipairs(placed_positions) do
+                                    if (pos - local_cframe.Position).Magnitude < 1 then
+                                        overlaps = true
+                                        break
+                                    end
+                                end
+                                
+                                if not overlaps then
+                                    place_cframe = local_cframe
+                                    place_found = true
+                                    break
+                                end
+                                
+                                place_attempts = place_attempts + 1
+                            end
+                        end
+                        
+                        if not place_cframe then placing_stopped = true break end
+                        if config.IsStealing then return end
+                        
+                        -- Place egg
+                        local place_success, place_error = EggState.RequestPlaceEgg(uid, place_cframe)
+                        
+                        if place_success then
+                            table.insert(placed_positions, place_cframe.Position)
+                            placed_count = placed_count + 1
+                            task.wait(0.15)
+                        else
+                            local error_lower = tostring(place_error or ""):lower()
+                            
+                            if error_lower:find("full") or error_lower:find("limit") or 
+                               error_lower:find("capacity") or error_lower:find("maximum") then
+                                config.AutoPlace = false
+                                placing_stopped = true
+                                break
+                            end
+                            
+                            table.insert(placed_positions, place_cframe.Position)
+                            place_attempts = place_attempts + 1
+                            task.wait(0.1)
+                        end
+                    end
+                end
+                
+                -- Return to original position
+                if original_position and root_part and not config.IsStealing then
+                    -- Check if can teleport directly
+                    local can_see = checkLineOfSight(
+                        root_part.Position + Vector3.new(0, 2, 0),
+                        original_position.Position + Vector3.new(0, -2, 0),
+                        character
+                    )
+                    
+                    if not can_see then
+                        -- Use safe teleport
+                        local safe_pos = CFrame.new(518.66, 70.57, -364.73) * CFrame.Angles(
+                            math.rad(120), math.rad(-89.82), math.rad(180)
+                        )
+                        tweenTo(root_part, humanoid, safe_pos, 
+                            function() return not config.AutoPlace or config.IsStealing end)
+                    end
+                    
+                    if not config.AutoPlace or config.IsStealing then return end
+                    tweenTo(root_part, humanoid, original_position,
+                        function() return not config.AutoPlace or config.IsStealing end)
+                    
+                    task.wait(0.2)
+                end
+            end)
+            
+            config.IsPlacing = false
+            if not success then warn("Auto Place Error:", err) end
+        end
+    end)
+end
+
+-- Start auto selling pets
+function startAutoSellLoop()
+    if auto_sell_loop_running then return end
+    auto_sell_loop_running = true
+    
+    task.spawn(function()
+        local ReplicatedStorage = game:GetService("ReplicatedStorage")
+        local AssetData = require(ReplicatedStorage.Data.Assets)
+        local SaveData = require(ReplicatedStorage.Shared.Save)
+        local AssetRoster = require(ReplicatedStorage.Client.AssetRoster)
+        local Remotes = require(ReplicatedStorage.Shared.Remotes)
+        
+        -- Function to get displayed pet UIDs
+        local function getDisplayedPetUids()
+            local success, result = pcall(function()
+                return AssetRoster.ReadOwnerPen(LocalPlayer.UserId)
+            end)
+            
+            if not success or type(result) ~= "table" then return nil end
+            
+            local displayed = {}
+            for uid, pet in pairs(result) do
+                if type(uid) == "string" then
+                    displayed[uid] = true
+                end
+                if type(pet) == "table" and pet.UID then
+                    displayed[pet.UID] = true
+                end
+            end
+            return displayed
+        end
+        
+        -- Function to check if pet can be sold
+        local function canSellPet(pet_info, displayed_pets)
+            if not config.AutoSell then return false, "Auto Sell Pet is OFF", "global" end
+            if not shouldSteal() then return false, "Auto Steal is in control", "global" end
+            
+            -- Get current filters
+            local name_filter = getDropdownValues(SellNameDropdown)
+            local rarity_filter = getDropdownValues(SellRarityDropdown)
+            
+            if not name_filter or not rarity_filter then
+                return false, "Filter dropdown could not be read", "global"
+            end
+            
+            -- Check if displayed
+            if displayed_pets[pet_info.uid] then
+                return false, "This pet is displayed on a plot", "pet"
+            end
+            
+            -- Check filters
+            if not matchesFilter(pet_info.petName, pet_info.rarity, name_filter, rarity_filter) then
+                return false, "Pet no longer matches current filters", "pet"
+            end
+            
+            -- Get inventory data
+            local save_data = SaveData.Get()
+            local inventory = save_data and save_data.Inventory and save_data.Inventory[pet_info.uid]
+            
+            if inventory == nil then
+                return false, "Pet no longer in inventory", "pet"
+            end
+            
+            if inventory.IsFavorite == true then
+                return false, "This pet is favorited", "pet"
+            end
+            
+            if inventory.InFuse == true then
+                return false, "This pet is being fused", "pet"
+            end
+            
+            -- Check if equipped
+            if table.find(save_data.EquippedAssets or {}, pet_info.uid) ~= nil then
+                return false, "This pet is equipped", "pet"
+            end
+            
+            return true
+        end
+        
+        while config.AutoSell do
+            local success, err = pcall(function()
+                if not shouldSteal() then return end
+                
+                -- Get filters
+                local name_filter = getDropdownValues(SellNameDropdown)
+                local rarity_filter = getDropdownValues(SellRarityDropdown)
+                
+                if not name_filter or not rarity_filter then
+                    warn("[AutoSell] Filter dropdown could not be read -- skipping this round")
+                    return
+                end
+                
+                -- Get inventory
+                local save_data = SaveData.Get()
+                local inventory = save_data and save_data.Inventory or {}
+                
+                -- Get displayed pets
+                local displayed_pets = getDisplayedPetUids()
+                if not displayed_pets then
+                    warn("[AutoSell] Could not verify displayed pet status -- skipping this round")
+                    return
+                end
+                
+                -- Find pets to sell
+                local pets_to_sell = {}
+                local pet_count = 0
+                
+                if type(inventory) == "table" then
+                    for uid, pet in pairs(inventory) do
+                        pet_count = pet_count + 1
+                        
+                        -- Yield periodically to avoid freezing
+                        if pet_count % 250 == 0 then
+                            RunService.Heartbeat:Wait()
+                            if not config.AutoSell then return end
+                        end
+                        
+                        if type(pet) == "table" then
+                            local is_displayed = displayed_pets[uid] == true
+                            local is_favorite = pet.IsFavorite == true or pet["Jadikan Favorit"] == true
+                            local is_equipped = table.find(save_data.EquippedAssets or {}, uid) ~= nil
+                            local is_fusing = pet.InFuse == true
+                            
+                            -- Get pet info
+                            local category = pet.Category or pet.id or pet.AssetCategory or pet.ItemId
+                            local asset = category and AssetData.Directory[category]
+                            local pet_name = asset and (asset.DisplayName or asset._id or asset.Name) or "Unknown"
+                            local rarity = asset and asset.Rarity
+                            local rarity_name = rarity and (rarity.DisplayName or rarity._id or rarity.Name) or "Unknown"
+                            
+                            -- Check if should sell
+                            local should_sell = matchesFilter(pet_name, rarity_name, name_filter, rarity_filter)
+                            
+                            if should_sell and not is_favorite and not is_displayed and not is_equipped and not is_fusing then
+                                table.insert(pets_to_sell, {
+                                    uid = uid,
+                                    petName = pet_name,
+                                    rarity = rarity_name
+                                })
+                            end
+                        end
+                    end
+                end
+                
+                -- Sell each pet
+                if #pets_to_sell > 0 then
+                    for _, pet_info in ipairs(pets_to_sell) do
+                        -- Re-check status
+                        local displayed = getDisplayedPetUids()
+                        local can_sell, reason, scope = canSellPet(pet_info, displayed)
+                        
+                        if not can_sell then
+                            warn("[AutoSell] Not selling " .. tostring(pet_info.petName) .. " -- " .. tostring(reason))
+                            if scope == "global" then break end
+                            continue
+                        end
+                        
+                        if not shouldSteal() then break end
+                        
+                        -- Find the tool
+                        local character = LocalPlayer.Character
+                        local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+                        local pet_tool = nil
+                        
+                        -- Search backpack and character
+                        for _, container in ipairs({LocalPlayer.Backpack, character}) do
+                            if container then
+                                for _, tool in ipairs(container:GetChildren()) do
+                                    if tool:IsA("Tool") and tool:GetAttribute("UID") == pet_info.uid then
+                                        pet_tool = tool
+                                        break
+                                    end
+                                end
+                            end
+                            if pet_tool then break end
+                        end
+                        
+                        if not pet_tool or not humanoid then continue end
+                        
+                        -- Equip the tool
+                        humanoid:EquipTool(pet_tool)
+                        task.wait(0.2)
+                        
+                        -- Re-check
+                        if not shouldSteal() then break end
+                        
+                        local displayed_again = getDisplayedPetUids()
+                        local can_sell_again, reason_again, scope_again = canSellPet(pet_info, displayed_again)
+                        
+                        if not can_sell_again then
+                            warn("[AutoSell] Cancelled at last moment, not selling " .. tostring(pet_info.petName) .. " -- " .. tostring(reason_again))
+                            if scope_again == "global" then break end
+                            continue
+                        end
+                        
+                        -- Sell the pet
+                        Remotes.PetSatchel.SellPet:FireServer({pet_info.uid})
+                        task.wait(0.05)
+                    end
+                end
+            end)
+            
+            if not success then warn("Auto Sell Error:", err) end
+            task.wait(1.5)
+        end
+        
+        auto_sell_loop_running = false
+    end)
+end
+
+local WebhookConfig = {
+    Enabled = false,
+    URL = "",
+    KnownOwnerEggs = {}
+}
+
+-- Send webhook request
+local function sendWebhook(url, payload)
+    local request_func = (syn and syn.request) or request or http_request or 
+        (http and http.request) or (fluxus and fluxus.request)
+    
+    if request_func then
+        local response = request_func({
+            Url = url,
+            Method = "POST",
+            Headers = {["Content-Type"] = "application/json"},
+            Body = payload
+        })
+        
+        local status = response and (response.StatusCode or response.status_code)
+        if status and (status < 200 or status >= 300) then
+            warn("[Webhook] Discord responded with status", status, "-", response.Body or response.body)
+        end
+        return
+    end
+    
+    -- Fallback
+    game:GetService("HttpService"):PostAsync(url, payload, Enum.HttpContentType.ApplicationJson)
+end
+
+-- GET request
+local function webhookGet(url)
+    local request_func = (syn and syn.request) or request or http_request or 
+        (http and http.request) or (fluxus and fluxus.request)
+    
+    if request_func then
+        local response = request_func({Url = url, Method = "GET"})
+        return response and (response.Body or response.body)
+    end
+    
+    return game:HttpGet(url)
+end
+
+-- Format money short
+local function formatMoneyShort(amount)
+    amount = math.floor(amount + 0.5)
+    if amount >= 1e9 then return string.format("%.2fB", amount / 1e9) end
+    if amount >= 1e6 then return string.format("%.2fM", amount / 1e6) end
+    if amount >= 1000 then return string.format("%.1fK", amount / 1000) end
+    return tostring(amount)
+end
+
+-- Get player avatar URL
+local function getAvatarUrl()
+    if cached_avatar_url then return cached_avatar_url end
+    
+    local success, result = pcall(function()
+        local http = game:GetService("HttpService")
+        local response = webhookGet("https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. 
+            LocalPlayer.UserId .. "&size=150x150&format=Png&isCircular=false")
+        local decoded = http:JSONDecode(response)
+        local data = decoded and decoded.data and decoded.data[1]
+        
+        if data and data.state == "Completed" and data.imageUrl then
+            return data.imageUrl
+        end
+        return nil
+    end)
+    
+    if success and result then cached_avatar_url = result end
+    return cached_avatar_url
+end
+
+-- Get egg details
+local function getEggDetails(egg_info)
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local EggState = require(ReplicatedStorage.Client.EggState)
+    local AssetData = require(ReplicatedStorage.Data.Assets)
+    
+    local success, result = pcall(function()
+        local owned_eggs = EggState.GetOwnerRuntimeRecords(LocalPlayer.UserId)
+        
+        if type(owned_eggs) ~= "table" then return nil end
+        
+        for uid, egg in pairs(owned_eggs) do
+            if egg.AssetCategory == egg_info.AssetCategory then
+                local details = {
+                    Category = egg.AssetCategory,
+                    Scale = egg.AssetScale,
+                    Mutations = egg.Mutations,
+                    BaseMutation = egg.BaseMutation,
+                    EyeColor = egg.AssetEyeColor,
+                    ColorSeed = egg.AssetColorSeed,
+                    ColorIndex = egg.AssetColorIndex,
+                    Gender = egg.Gender,
+                    Personality = egg.Personality or "Normal",
+                    HasBeenFirstPlaced = egg.HasBeenFirstPlaced == true
+                }
+                
+                -- Calculate weight
+                local weight_success, weight = pcall(function()
+                    return require(ReplicatedStorage.Shared.Util.AssetItems).WeightKg(details)
+                end)
+                
+                -- Calculate rate
+                local rate_success, rate = pcall(function()
+                    return require(ReplicatedStorage.Shared.Util.AssetEarnings).MutationOnlyRatePerSecond(details)
+                end)
+                
+                return {
+                    WeightKg = weight_success and weight or nil,
+                    Scale = egg.AssetScale,
+                    RatePerSec = rate_success and rate or nil,
+                    AreaId = area_tracking[egg_info.AssetCategory]
+                }
+            end
+        end
+        
+        return nil
+    end)
+    
+    return success and result or nil
+end
+
+-- Send egg claim notification
+local function sendEggClaimWebhook(egg_info)
+    if not WebhookConfig.Enabled then return end
+    if type(WebhookConfig.URL) ~= "string" or WebhookConfig.URL == "" then return end
+    if type(egg_info) ~= "table" then return end
+    
+    task.spawn(function()
+        local success, err = pcall(function()
+            local http = game:GetService("HttpService")
+            local ReplicatedStorage = game:GetService("ReplicatedStorage")
+            local AssetData = require(ReplicatedStorage.Data.Assets)
+            
+            -- Get egg info
+            local rarity_name = egg_info.Rarity or "Unknown"
+            local category = egg_info.AssetCategory
+            local display_name = egg_info.DisplayName or (tostring(category or "Egg") .. " Egg")
+            
+            -- Get icon
+            local icon_id = nil
+            local asset_success, asset = pcall(function()
+                return category and AssetData.Directory[category]
+            end)
+            
+            if asset_success and asset and asset.Egg and asset.Egg.Icon then
+                icon_id = tostring(asset.Egg.Icon):gsub("rbxassetid://", "")
+            end
+            
+            -- Get icon URL
+            local icon_url = nil
+            if icon_id then
+                local thumb_success, thumb = pcall(function()
+                    local response = webhookGet("https://thumbnails.roblox.com/v1/assets?assetIds=" .. 
+                        icon_id .. "&size=420x420&format=Png&isCircular=false")
+                    local decoded = http:JSONDecode(response)
+                    local data = decoded and decoded.data and decoded.data[1]
+                    
+                    if data and data.state == "Completed" and data.imageUrl then
+                        return data.imageUrl
+                    end
+                    return nil
+                end)
+                
+                if thumb_success and thumb then icon_url = thumb end
+            end
+            
+            -- Get color
+            local embed_color = 0
+            if typeof(egg_info.Color) == "Color3" then
+                embed_color = math.floor(egg_info.Color.R * 255) * 65536 +
+                    math.floor(egg_info.Color.G * 255) * 256 +
+                    math.floor(egg_info.Color.B * 255)
+            end
+            
+            -- Get details
+            local details = getEggDetails(egg_info) or {}
+            
+            -- Format fields
+            local weight = "Unknown"
+            if type(details.WeightKg) == "number" then
+                weight = string.format("%s Kg", tostring(math.floor(details.WeightKg * 100 + 0.5) / 100))
+            end
+            
+            local scale = "Unknown"
+            if type(details.Scale) == "number" then
+                scale = string.format("%.2fx", details.Scale)
+            end
+            
+            local value = "Unknown"
+            if type(details.RatePerSec) == "number" then
+                value = "$" .. formatMoneyShort(details.RatePerSec) .. "/s"
+            end
+            
+            local area = details.AreaId and tostring(details.AreaId) or "Unknown"
+            
+            -- Create embed
+            local embed = {
+                author = {
+                    name = LocalPlayer.Name,
+                    icon_url = getAvatarUrl()
+                },
+                description = "### " .. tostring(display_name),
+                color = embed_color,
+                fields = {
+                    {name = "Rarity", value = tostring(rarity_name), inline = true},
+                    {name = "Pet Species", value = tostring(category or "Unknown"), inline = true},
+                    {name = "Weight", value = weight, inline = true},
+                    {name = "Value", value = value, inline = true},
+                    {name = "Size", value = scale, inline = true},
+                    {name = "Area", value = area, inline = true}
+                },
+                footer = {text = "Zeroin - Steal An Egg"},
+                timestamp = DateTime.now():ToIsoDate()
+            }
+            
+            if icon_url then embed.thumbnail = {url = icon_url} end
+            
+            -- Send webhook
+            local payload = {
+                username = "Zeroin - Steal An Egg",
+                embeds = {embed}
+            }
+            
+            sendWebhook(WebhookConfig.URL, http:JSONEncode(payload))
+        end)
+        
+        if not success then warn("[Webhook] Failed to send webhook:", err) end
+    end)
+end
+
+-- Connect to egg claimed event
+pcall(function()
+    local EggState = require(ReplicatedStorage.Client.EggState)
+    EggState.AreaEggClaimed:Connect(function(egg_info)
+        sendEggClaimWebhook(egg_info)
+    end)
+end)
+
+-- Anti AFK system
+local anti_afk_generation = 0
+
+function setupAntiAfk()
+    getgenv().__ZeroinAntiAfkGeneration = (getgenv().__ZeroinAntiAfkGeneration or 0) + 1
+    anti_afk_generation = getgenv().__ZeroinAntiAfkGeneration
+    
+    getgenv().__ZeroinAntiAfkEnabled = config.AntiAFK
+    
+    -- Get connections
+    local get_connections = getconnections or get_signal_cons
+    local idle_connections = getgenv().__ZeroinAntiAfkIdledConnections or {}
+    getgenv().__ZeroinAntiAfkIdledConnections = idle_connections
+    
+    -- Function to toggle anti-AFK
+    getgenv().__ZeroinSetAntiAfkEnabled = function(enabled)
+        getgenv().__ZeroinAntiAfkEnabled = enabled
+        
+        -- Collect idle connections
+        if enabled and get_connections then
+            for _, connection in ipairs(get_connections(LocalPlayer.Idled)) do
+                if not table.find(idle_connections, connection) then
+                    table.insert(idle_connections, connection)
+                end
+            end
+        end
+        
+        -- Disable/Enable connections
+        for _, connection in ipairs(idle_connections) do
+            pcall(function()
+                if enabled then
+                    connection:Disable()
+                else
+                    connection:Enable()
+                end
+            end)
+        end
+    end
+    
+    -- Apply initial state
+    if get_connections then
+        getgenv().__ZeroinSetAntiAfkEnabled(config.AntiAFK)
+    end
+    
+    -- Monitor for disconnection messages
+    task.spawn(function()
+        local last_message = ""
+        while getgenv().__ZeroinAntiAfkGeneration == anti_afk_generation do
+            task.wait(1)
+            local error_message = game:GetService("GuiService"):GetErrorMessage()
+            
+            if error_message ~= "" and error_message ~= last_message then
+                last_message = error_message
+                logToFile("DISCONNECT: " .. error_message .. 
+                    " | JobId=" .. tostring(game.JobId) .. 
+                    " | PlaceVersion=" .. tostring(game.PlaceVersion))
+            end
+        end
+    end)
+end
+
+-- FPS Boost system
+local fps_boost_applied = false
+local fps_boost_applying = false
+
+local function applyFpsBoost()
+    if fps_boost_applied or fps_boost_applying then return end
+    fps_boost_applying = true
+    
+    local success, err = pcall(function()
+        -- Reduce quality settings
+        pcall(function() settings().Rendering.QualityLevel = Enum.QualityLevel.Level01 end)
+        pcall(function()
+            UserSettings():GetService("UserGameSettings").SavedQualityLevel = Enum.SavedQualitySetting.QualityLevel1
+        end)
+        
+        -- Disable lighting effects
+        pcall(function()
+            local lighting_controller = require(ReplicatedStorage.Client.LightingsController)
+            lighting_controller:SetModifier("FPSBoost", function(lighting)
+                local clone = table.clone(lighting)
+                clone.Bloom = nil
+                clone.ColorCorrection = nil
+                clone.SunRays = nil
+                clone.DepthOfField = nil
+                clone.Blur = nil
+                clone.Clouds = nil
+                clone.Atmosphere = nil
+                clone.ShadowSoftness = 1
+                return clone
+            end, -200, 0)
+        end)
+        
+        -- Disable global shadows
+        pcall(function()
+            game:GetService("Lighting").GlobalShadows = false
+        end)
+        
+        -- Hide other players' plots
+        pcall(function()
+            local plot_state = require(ReplicatedStorage.Client.PlotState)
+            local my_slot = plot_state.GetMySlot()
+            
+            if my_slot ~= nil then
+                local function isMyPlot(plot)
+                    local current_slot = plot_state.GetMySlot()
+                    return current_slot ~= nil and plot.Name == tostring(current_slot)
+                end
+                
+                local plots_folder = plot_state.GetPlotsFolder() or Workspace:WaitForChild("Plots", 10)
+                
+                if plots_folder then
+                    for _, plot in ipairs(plots_folder:GetChildren()) do
+                        if not isMyPlot(plot) then
+                            pcall(function() plot:Destroy() end)
+                        end
+                    end
+                    
+                    -- Connect to new plots
+                    plots_folder.ChildAdded:Connect(function(plot)
+                        task.defer(function()
+                            if plot.Parent and not isMyPlot(plot) then
+                                pcall(function() plot:Destroy() end)
+                            end
+                        end)
+                    end)
+                end
+            end
+        end)
+        
+        -- Hide other players' treadmills
+        pcall(function()
+            local plot_state = require(ReplicatedStorage.Client.PlotState)
+            local registry = require(ReplicatedStorage.Client.Modules.RuntimeInstanceRegistry)
+            
+            local function isMyTreadmill(treadmill)
+                local my_slot = plot_state.GetMySlot()
+                if my_slot then
+                    local registry_success, registered = pcall(registry.Get, "TreadmillPlotRender", tostring(my_slot))
+                    if registry_success and registered then
+                        return treadmill == registered
+                    end
+                end
+                
+                local position_success, position = pcall(function() return treadmill:GetPivot().Position end)
+                if not position_success then return true end
+                
+                local inside_success, inside = pcall(plot_state.IsWorldPositionWithinLocalPlotBounds, position)
+                return inside_success and inside
+            end
+            
+            local treadmill_folder = Workspace:FindFirstChild("__ClientTreadmillRenders") or 
+                Workspace:WaitForChild("__ClientTreadmillRenders", 10)
+            
+            if treadmill_folder then
+                for _, treadmill in ipairs(treadmill_folder:GetChildren()) do
+                    if treadmill:IsA("Model") and not isMyTreadmill(treadmill) then
+                        pcall(function() treadmill:Destroy() end)
+                    end
+                end
+                
+                treadmill_folder.ChildAdded:Connect(function(treadmill)
+                    task.defer(function()
+                        if treadmill.Parent and treadmill:IsA("Model") and not isMyTreadmill(treadmill) then
+                            pcall(function() treadmill:Destroy() end)
+                        end
+                    end)
+                end)
+            end
+        end)
+        
+        -- Simplify materials in workspace
+        pcall(function()
+            local accent_color = Color3.fromRGB(120, 120, 120)
+            
+            local function simplifyPart(part)
+                if not part or not part:IsA("BasePart") then return end
+                part.Material = Enum.Material.SmoothPlastic
+                part.Color = accent_color
+                part.CastShadow = false
+            end
+            
+            local function disableEffects(effect)
+                if effect:IsA("ParticleEmitter") then
+                    effect.Enabled = false
+                    effect.Rate = 0
+                    pcall(function() effect:Clear() end)
+                elseif effect:IsA("Trail") or effect:IsA("Beam") or 
+                       effect:IsA("Smoke") or effect:IsA("Fire") or 
+                       effect:IsA("Sparkles") or effect:IsA("PostEffect") or 
+                       effect:IsA("Light") or effect:IsA("Highlight") or 
+                       effect:IsA("Clouds") then
+                    effect.Enabled = false
+                elseif effect:IsA("Atmosphere") then
+                    effect.Density = 0
+                    effect.Haze = 0
+                    effect.Glare = 0
+                end
+            end
+            
+            -- Connect to new descendants
+            local connections = {}
+            local containers = {Workspace, game:GetService("Lighting")}
+            
+            for _, container in ipairs(containers) do
+                table.insert(connections, container.DescendantAdded:Connect(function(descendant)
+                    task.defer(function()
+                        simplifyPart(descendant)
+                        disableEffects(descendant)
+                    end)
+                end))
+            end
+            
+            -- Process existing
+            for _, container in ipairs(containers) do
+                local to_process = {}
+                for _, child in ipairs(container:GetChildren()) do
+                    table.insert(to_process, child)
+                end
+                
+                local processed = 0
+                while #to_process > 0 do
+                    local item = table.remove(to_process)
+                    simplifyPart(item)
+                    disableEffects(item)
+                    
+                    for _, child in ipairs(item:GetChildren()) do
+                        table.insert(to_process, child)
+                    end
+                    
+                    processed = processed + 1
+                    if processed >= 250 and #to_process > 0 then
+                        processed = 0
+                        RunService.Heartbeat:Wait()
+                    end
+                end
+            end
+        end)
+        
+        -- Hide other players' eggs
+        pcall(function()
+            local renderer = require(ReplicatedStorage.Shared.Eggs.PlacedEggRenderer)
+            local render_folder = renderer.GetRenderFolder()
+            
+            if render_folder then
+                local function hideEgg(egg_model)
+                    if not egg_model or not egg_model:IsA("Model") then return end
+                    
+                    local owner_id = tonumber(tostring(egg_model.Name):match("^(%d+)_"))
+                    if not owner_id or owner_id == LocalPlayer.UserId then return end
+                    
+                    for _, descendant in ipairs(egg_model:GetDescendants()) do
+                        if descendant:IsA("BasePart") then
+                            descendant.Transparency = 1
+                            descendant.CanCollide = false
+                        elseif descendant:IsA("Decal") or descendant:IsA("Texture") then
+                            descendant.Transparency = 1
+                        elseif descendant:IsA("ParticleEmitter") or descendant:IsA("Trail") or descendant:IsA("Beam") then
+                            descendant.Enabled = false
+                        elseif descendant:IsA("BillboardGui") or descendant:IsA("SurfaceGui") then
+                            descendant.Enabled = false
+                        end
+                    end
+                end
+                
+                for _, egg in ipairs(render_folder:GetChildren()) do
+                    hideEgg(egg)
+                end
+                
+                render_folder.ChildAdded:Connect(function(egg)
+                    task.defer(hideEgg, egg)
+                end)
+            end
+        end)
+        
+        -- Hide other players' pets
+        pcall(function()
+            local settings = require(ReplicatedStorage.Shared.SettingsCmds)
+            settings.Write("HideOtherPets", true)
+        end)
+    end)
+    
+    fps_boost_applying = nil
+    if not success then warn("[FPSBoost] Failed to apply FPS Boost:", err) end
+end
+
+-- Egg ESP system
+local esp_folder = nil
+local esp_connections = {}
+local esp_labels = {}
+local esp_generation = 0
+
+local function createEspLabel(uid, cframe, title, weight, value, mutations)
+    if esp_labels[uid] then
+        pcall(esp_labels[uid].Part.Destroy, esp_labels[uid].Part)
+        esp_labels[uid] = nil
+    end
+    
+    local part = Instance.new("Part")
+    part.Name = uid
+    part.Size = Vector3.new(0.1, 0.1, 0.1)
+    part.Transparency = 1
+    part.CanCollide = false
+    part.CanQuery = false
+    part.CanTouch = false
+    part.Anchored = true
+    part.Parent = esp_folder
+    
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "Label"
+    billboard.Size = UDim2.new(0, 170, 0, 64)
+    billboard.StudsOffset = Vector3.new(0, 2.5, 0)
+    billboard.AlwaysOnTop = true
+    billboard.MaxDistance = 400
+    billboard.Adornee = part
+    billboard.Parent = part
+    
+    local text = Instance.new("TextLabel")
+    text.Name = "Text"
+    text.Size = UDim2.new(1, 0, 1, 0)
+    text.BackgroundTransparency = 1
+    text.Font = Enum.Font.GothamBold
+    text.TextStrokeTransparency = 0
+    text.TextStrokeColor3 = Color3.new(0, 0, 0)
+    text.TextColor3 = Color3.fromRGB(255, 255, 0)
+    text.TextScaled = true
+    text.Parent = billboard
+    
+    esp_labels[uid] = {
+        Part = part,
+        Text = text
+    }
+    
+    return esp_labels[uid]
+end
+
+local function updateEspLabel(uid, egg_record)
+    if not egg_record or not egg_record.Placement then
+        if esp_labels[uid] then
+            pcall(esp_labels[uid].Part.Destroy, esp_labels[uid].Part)
+            esp_labels[uid] = nil
+        end
+        return
+    end
+    
+    local success, result = pcall(function()
+        local AssetData = require(ReplicatedStorage.Data.Assets).Directory
+        local AssetItems = require(ReplicatedStorage.Shared.Util.AssetItems)
+        local AssetEarnings = require(ReplicatedStorage.Shared.Util.AssetEarnings)
+        local PlotState = require(ReplicatedStorage.Client.PlotState)
+        
+        local plot_data = PlotState.GetPlotData(LocalPlayer)
+        if not plot_data or not plot_data.CenterPoint then return end
+        
+        local cframe = plot_data.CenterPoint.CFrame * egg_record.Placement.LocalCFrame * CFrame.new(0, 2, 0)
+        
+        local asset = AssetData[egg_record.AssetCategory]
+        if not asset then return end
+        
+        local display_name = asset.DisplayName or egg_record.AssetCategory
+        
+        local details = {
+            Category = egg_record.AssetCategory,
+            Scale = egg_record.AssetScale or 1,
+            Mutations = egg_record.Mutations or {},
+            BaseMutation = egg_record.BaseMutation,
+            EyeColor = egg_record.AssetEyeColor,
+            ColorSeed = egg_record.AssetColorSeed,
+            ColorIndex = egg_record.AssetColorIndex,
+            Gender = egg_record.Gender,
+            Personality = egg_record.Personality or "Normal",
+            HasBeenFirstPlaced = egg_record.HasBeenFirstPlaced == true
+        }
+        
+        local weight_success, weight = pcall(AssetItems.WeightKg, details)
+        if not weight_success then weight = nil end
+        
+        local rate_success, rate = pcall(function()
+            return AssetEarnings.MutationOnlyRatePerSecond(details)
+        end)
+        if not rate_success then rate = nil end
+        
+        local mutation_text = "None"
+        if type(egg_record.Mutations) == "table" and #egg_record.Mutations > 0 then
+            mutation_text = table.concat(egg_record.Mutations, ", ")
+        end
+        
+        local weight_str = weight and (string.format("%.1f", weight) .. "Kg") or "?Kg"
+        local value_str = rate and ("$" .. formatMoneyShort(rate) .. "/s") or "$?/s"
+        
+        createEspLabel(uid, cframe, display_name, weight_str, value_str, mutation_text)
+    end)
+    
+    if not success then
+        if esp_labels[uid] then
+            pcall(esp_labels[uid].Part.Destroy, esp_labels[uid].Part)
+            esp_labels[uid] = nil
+        end
+    end
+end
+
+local function refreshEsp()
+    pcall(function()
+        local EggState = require(ReplicatedStorage.Client.EggState)
+        
+        local owned_eggs = EggState.GetOwnerRuntimeRecords(LocalPlayer.UserId)
+        local valid_uids = {}
+        
+        if type(owned_eggs) == "table" then
+            for uid, egg in pairs(owned_eggs) do
+                if egg.Placement then
+                    valid_uids[uid] = true
+                    updateEspLabel(uid, egg)
+                end
+            end
+        end
+        
+        -- Remove labels for eggs that no longer exist
+        for uid in pairs(esp_labels) do
+            if not valid_uids[uid] then
+                pcall(esp_labels[uid].Part.Destroy, esp_labels[uid].Part)
+                esp_labels[uid] = nil
+            end
+        end
+    end)
+end
+
+local function startEsp()
+    if esp_folder then return end
+    
+    esp_generation = esp_generation + 1
+    
+    esp_folder = Instance.new("Folder")
+    esp_folder.Name = "ZeroinEggESP"
+    esp_folder.Parent = Workspace
+    
+    task.spawn(function()
+        local current_generation = esp_generation
+        local success, err = pcall(function()
+            local EggState = require(ReplicatedStorage.Client.EggState)
+            
+            -- Request initial snapshot
+            pcall(function() EggState.RequestRuntimeSnapshot() end)
+            task.wait(0.3)
+            
+            if current_generation ~= esp_generation or not config.EggESP then return end
+            
+            refreshEsp()
+            
+            -- Connect to updates
+            table.insert(esp_connections, EggState.RuntimeOwnerUpdated:Connect(function(player_id)
+                if current_generation == esp_generation and config.EggESP and player_id == LocalPlayer.UserId then
+                    refreshEsp()
+                end
+            end))
+            
+            table.insert(esp_connections, EggState.RuntimeOwnerCleared:Connect(function(player_id)
+                if current_generation == esp_generation and player_id == LocalPlayer.UserId then
+                    for uid in pairs(esp_labels) do
+                        pcall(esp_labels[uid].Part.Destroy, esp_labels[uid].Part)
+                        esp_labels[uid] = nil
+                    end
+                end
+            end))
+        end)
+        
+        if not success then warn("[EggESP] Failed to setup ESP:", err) end
+    end)
+end
+
+local function stopEsp()
+    esp_generation = esp_generation + 1
+    
+    for _, connection in ipairs(esp_connections) do
+        pcall(connection.Disconnect, connection)
+    end
+    esp_connections = {}
+    
+    for uid in pairs(esp_labels) do
+        pcall(esp_labels[uid].Part.Destroy, esp_labels[uid].Part)
+        esp_labels[uid] = nil
+    end
+    
+    if esp_folder then
+        pcall(esp_folder.Destroy, esp_folder)
+        esp_folder = nil
+    end
+end
+
+-- Load configuration from file
+pcall(function()
+    if type(isfile) ~= "function" or type(readfile) ~= "function" then return end
+    
+    local config_path = "Zeroin/Config/Zeroin_" .. tostring(game.GameId) .. ".json"
+    if not isfile(config_path) then return end
+    
+    local http = game:GetService("HttpService")
+    local saved_config = http:JSONDecode(readfile(config_path))
+    
+    if type(saved_config) ~= "table" then return end
+    
+    -- Load known settings
+    if type(saved_config["Toggle_Auto Steal"]) == "boolean" then
+        config.AutoSteal = saved_config["Toggle_Auto Steal"]
+    end
+end)
+
+-- Load UI Library
+local ui_library = loadstring(game:HttpGet("https://raw.githubusercontent.com/iSylvesterr/library/refs/heads/main/ZeroLib.lua"))()
+if not ui_library then
+    warn("Failed to load Zeroin UI Library!")
+    return
+end
+
+-- Create main window
+local window = ui_library:Window({
+    Title = "Zeroin",
+    Footer = "Steal An Egg",
+    Version = "3.0.0",
+    Discord = discord_link,
+    Color = Color3.fromRGB(0, 205, 122),
+    Color2 = Color3.fromRGB(1, 18, 11),
+    TabWidth = 130,
+    Image = "79481584966698",
+    WindowIMG = "124404129684886",
+    LogoHUB = "124404129684886",
+    NotificationIcon = "124404129684886"
+})
+
+local main_tab = window:AddTab({Name = "Main", Icon = "house"})
+local event_tab = window:AddTab({Name = "Event", Icon = "zap"})
+local auto_tab = window:AddTab({Name = "Auto", Icon = "repeat-2"})
+local webhook_tab = window:AddTab({Name = "Webhook", Icon = "webhook"})
+local misc_tab = window:AddTab({Name = "Misc", Icon = "settings"})
+local panel_tab = window:AddTab({Name = "Panel", Icon = "panels-top-left"})
+
+-- === MAIN TAB ===
+local main_section = main_tab:AddSection({
+    Title = "Auto Farm",
+    Layout = "Columns",
+    ColumnGap = 6,
+    ItemGap = 2
+})
+
+main_section:AddToggle({
+    Title = "Auto Steal",
+    Column = "Left",
+    Row = 1,
+    Default = false,
+    Callback = function(value)
+        config.AutoSteal = value
+        run_state = run_state + 1
+        cleanup_steal()
+        
+        if value and ui_ready then
+            start_stealth_runtime()
+            start_auto_steal()
+        else
+            if config.AutoSteal then
+                start_auto_steal()
+            else
+                config.IsStealing = false
+                cleanup_semi_teleport()
+                stop_stealth_runtime()
+            end
+        end
+    end
+})
+
+main_section:AddToggle({
+    Title = "Auto Treadmill",
+    Column = "Right",
+    Row = 1,
+    Default = false,
+    Callback = function(value)
+        config.AutoTreadmillIdle = value
+        if not value then
+            treadmill_config.trying_to_mount = false
+            if config.AntiTreadmillMount and treadmill_config.current_treadmill ~= nil then
+                task.spawn(requestDismount)
+            end
+        end
+    end
+})
+
+main_section:AddToggle({
+    Title = "Anti Knock Back",
+    Column = "Left",
+    Row = 2,
+    Default = true,
+    Callback = function(value)
+        config.AntiGuardKnockback = value
+        local character = LocalPlayer.Character
+        setCollisionGroups(character, value)
+        setHumanoidStates(character and character:FindFirstChildOfClass("Humanoid"), value)
+    end
+})
+
+main_section:AddToggle({
+    Title = "Anti Treadmill",
+    Column = "Right",
+    Row = 2,
+    Default = true,
+    Callback = function(value)
+        config.AntiTreadmillMount = value
+    end
+})
+
+local speed_input = main_section:AddInput({
+    Title = "Speed",
+    Content = "Speed level 1 - 100 (10 = 100 studs/s, 20 = 200, ... 100 = 1000)",
+    Column = "Left",
+    Row = 3,
+    Default = tostring(config.TweenSpeedMultiplier),
+    Callback = function(value)
+        local num = tonumber(value)
+        if not num then num = config.TweenSpeedMultiplier end
+        setSpeedLevel(num)
+    end
+})
+
+main_section:AddInput({
+    Title = "Steal By Value",
+    Content = "Minimum value; supports k, m, b",
+    Column = "Right",
+    Row = 3,
+    Default = "0",
+    Callback = function(value)
+        config.applyStealValueInput(config, value)
+    end
+})
+
+-- Speed setter function
+getgenv()["__zeroinSetSpeed"] = function(value)
+    if not tonumber(value) then return false end
+    if speed_input and speed_input.SetValue then
+        pcall(function() speed_input:SetValue(tostring(value)) end)
+    end
+    setSpeedLevel(tonumber(value))
+    return true
+end
+
+-- Steal Mode Dropdown
+local steal_mode = main_section:AddDropdown({
+    Title = "Steal Mode",
+    Content = "Tween or Semi Teleport using selected egg filters",
+    Column = "Full",
+    Row = 4,
+    Options = {"Tween", "Semi Teleport"},
+    Default = {"Tween"},
+    Multi = false,
+    Callback = function(value)
+        local values = normalizeDropdown(value, steal_mode)
+        local selected = type(values) == "table" and values[1] or value
+        local mode = selected == "Semi Teleport" and "Semi Teleport" or "Tween"
+        
+        if config.StealMode == mode then return end
+        config.StealMode = mode
+        
+        if mode ~= "Semi Teleport" then
+            cleanupSemiTeleport()
+        end
+        
+        run_state = run_state + 1
+        cleanup_steal()
+        
+        if ui_ready and config.AutoSteal then
+            start_auto_steal()
+        end
+    end
+})
+
+-- === EVENT TAB ===
+local event_section = event_tab:AddSection({
+    Title = "Event Notifications",
+    Layout = "Columns",
+    ColumnGap = 6,
+    ItemGap = 2
+})
+
+event_section:AddToggle({
+    Title = "Egg Claim Webhook",
+    Column = "Left",
+    Row = 1,
+    Default = WebhookConfig.Enabled,
+    Callback = function(value)
+        WebhookConfig.Enabled = value == true
+        config.WebhookEnabled = WebhookConfig.Enabled
+    end
+})
+
+event_section:AddInput({
+    Title = "Webhook URL",
+    Column = "Full",
+    Row = 2,
+    Default = WebhookConfig.URL,
+    Callback = function(value)
+        WebhookConfig.URL = tostring(value or "")
+        config.WebhookURL = WebhookConfig.URL
+    end
+})
+
+-- === AUTO TAB ===
+local auto_section = auto_tab:AddSection({
+    Title = "Automation",
+    Layout = "Columns",
+    ColumnGap = 6,
+    ItemGap = 2
+})
+
+local place_rarity_dropdown = auto_section:AddDropdown({
+    Title = "Place Egg Rarities",
+    Column = "Left",
+    Row = 1,
+    Options = {"None", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Mythic", "Secret"},
+    Default = {"None"},
+    Multi = true,
+    Callback = function(value)
+        config.PlaceRarities = normalizeDropdown(value, place_rarity_dropdown)
+    end
+})
+
+auto_section:AddToggle({
+    Title = "Auto Place Eggs",
+    Column = "Right",
+    Row = 1,
+    Default = false,
+    Callback = function(value)
+        config.AutoPlace = value == true
+        if config.AutoPlace then
+            task.spawn(startAutoPlaceLoop)
+        end
+    end
+})
+
+SellNameDropdown = auto_section:AddDropdown({
+    Title = "Pet Names",
+    Column = "Left",
+    Row = 2,
+    Options = {"None"},
+    Default = {"None"},
+    Multi = true,
+    Callback = function(value)
+        config.SellNames = normalizeDropdown(value, SellNameDropdown)
+    end
+})
+
+SellRarityDropdown = auto_section:AddDropdown({
+    Title = "Pet Rarities",
+    Column = "Right",
+    Row = 2,
+    Options = {"None", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Mythic", "Secret"},
+    Default = {"None"},
+    Multi = true,
+    Callback = function(value)
+        config.SellRarities = normalizeDropdown(value, SellRarityDropdown)
+    end
+})
+
+auto_section:AddToggle({
+    Title = "Auto Sell Pets",
+    Column = "Left",
+    Row = 3,
+    Default = false,
+    Callback = function(value)
+        config.AutoSell = value == true
+        if config.AutoSell then
+            task.spawn(startAutoSellLoop)
+        end
+    end
+})
+
+-- Add the missing steal filters to the Main tab so Auto Steal has usable
+-- criteria instead of silently running with an empty configuration.
+local filter_section = main_tab:AddSection({
+    Title = "Steal Filters",
+    Layout = "Columns",
+    ColumnGap = 6,
+    ItemGap = 2
+})
+
+local steal_area_dropdown = filter_section:AddDropdown({
+    Title = "Areas",
+    Column = "Left",
+    Row = 1,
+    Options = {"None", "All"},
+    Default = {"None"},
+    Multi = true,
+    Callback = function(value)
+        config.StealAreas = normalizeDropdown(value, steal_area_dropdown)
+    end
+})
+
+local steal_rarity_dropdown = filter_section:AddDropdown({
+    Title = "Rarities",
+    Column = "Right",
+    Row = 1,
+    Options = {"None", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Mythic", "Secret"},
+    Default = {"None"},
+    Multi = true,
+    Callback = function(value)
+        config.StealRarities = normalizeDropdown(value, steal_rarity_dropdown)
+    end
+})
+
+-- === WEBHOOK TAB ===
+local webhook_section = webhook_tab:AddSection({
+    Title = "Webhook",
+    Layout = "Columns",
+    ColumnGap = 6,
+    ItemGap = 2
+})
+
+webhook_section:AddToggle({
+    Title = "Enable Webhook",
+    Column = "Left",
+    Row = 1,
+    Default = WebhookConfig.Enabled,
+    Callback = function(value)
+        WebhookConfig.Enabled = value == true
+        config.WebhookEnabled = WebhookConfig.Enabled
+    end
+})
+
+webhook_section:AddInput({
+    Title = "Discord Webhook URL",
+    Column = "Full",
+    Row = 2,
+    Default = WebhookConfig.URL,
+    Callback = function(value)
+        WebhookConfig.URL = tostring(value or "")
+        config.WebhookURL = WebhookConfig.URL
+    end
+})
+
+-- === MISC TAB ===
+local misc_section = misc_tab:AddSection({
+    Title = "Miscellaneous",
+    Layout = "Columns",
+    ColumnGap = 6,
+    ItemGap = 2
+})
+
+misc_section:AddToggle({
+    Title = "Anti AFK",
+    Column = "Left",
+    Row = 1,
+    Default = false,
+    Callback = function(value)
+        config.AntiAFK = value == true
+        setupAntiAfk()
+    end
+})
+
+misc_section:AddToggle({
+    Title = "Egg ESP",
+    Column = "Right",
+    Row = 1,
+    Default = false,
+    Callback = function(value)
+        config.EggESP = value == true
+        if config.EggESP then startEsp() else stopEsp() end
+    end
+})
+
+misc_section:AddToggle({
+    Title = "FPS Boost",
+    Column = "Left",
+    Row = 2,
+    Default = false,
+    Callback = function(value)
+        if value then
+            applyFpsBoost()
+        end
+    end
+})
+
+-- === PANEL TAB ===
+local panel_section = panel_tab:AddSection({
+    Title = "Egg Prediction Panel",
+    Layout = "Columns",
+    ColumnGap = 6,
+    ItemGap = 2
+})
+
+panel_section:AddToggle({
+    Title = "Show Egg Panel",
+    Column = "Left",
+    Row = 1,
+    Default = false,
+    Callback = function(value)
+        config.EggPredictUI = value == true
+        if config.EggPredictUI then
+            pcall(createEggPanelUI)
+        elseif EggPanel and EggPanel.Gui then
+            pcall(EggPanel.Gui.Destroy, EggPanel.Gui)
+            EggPanel.Gui = nil
+        end
+    end
+})
+
+-- All tabs and their controls have now been created. Toggle callbacks can
+-- safely start their workers from this point onward.
+ui_ready = true
