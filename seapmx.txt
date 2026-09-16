@@ -1,0 +1,2906 @@
+--[[
+====================================================================
+    PhantomX | Steal An Egg
+    Version 4.0.0 - Complete Rebuild
+====================================================================
+--]]
+
+print("[PhantomX] Loading v4.0.0...")
+
+-- ============================================================
+-- LOAD WINDUI
+-- ============================================================
+local windUIOk, WindUI = pcall(function()
+    return loadstring(game:HttpGet(
+        "https://github.com/Footagesus/WindUI/releases/latest/download/main.lua", true))()
+end)
+if not windUIOk or not WindUI then
+    warn("[PhantomX] Failed to load WindUI")
+    return
+end
+
+_G.PhantomX_Lang = _G.PhantomX_Lang or "Arabic"
+
+-- ============================================================
+-- TRANSLATIONS
+-- ============================================================
+local Tr = {
+    Arabic = {
+        -- Popups
+        warnTitle = "تنبيه هام",
+        warnBody = "استخدام هذا السكربت يكون على مسؤوليتك الشخصية الكاملة.\nنحن غير مسؤولين عن أي ضرر قد يحدث.",
+        discordTitle = "سيرفر الديسكورد",
+        discordBody = "انضم للسيرفر الرسمي للحصول على آخر التحديثات والدعم الفني.\n\nالرابط: https://discord.gg/uRtbxxxrau",
+        discordCopy = "نسخ الرابط",
+        discordCopied = "تم النسخ",
+        discordCopiedBody = "تم نسخ رابط الديسكورد",
+
+        -- Sections
+        secMain = "الميزات الرئيسية",
+        secSettings = "الإعدادات",
+
+        -- Tabs
+        tabInfo = "معلومات",
+        tabMain = "الرئيسية",
+        tabAutomation = "الأتمتة",
+        tabCombat = "القتال",
+        tabCharacter = "الشخصية",
+        tabEvent = "الأحداث",
+        tabPlaceHatch = "الوضع والتفقيس",
+        tabMisc = "متفرقات",
+        tabConfig = "الإعدادات",
+        tabCredits = "المطور",
+
+        -- Info Tab
+        infoName = "اسم اللاعب",
+        infoUser = "اسم المستخدم",
+        infoId = "معرف المستخدم",
+        infoAge = "عمر الحساب",
+        infoExec = "المنفذ",
+        infoPlayers = "اللاعبين",
+        infoFps = "الإطارات",
+        infoPing = "البينغ",
+        infoRejoin = "إعادة دخول نفس السيرفر",
+        infoRejoinDesc = "يخرجك ويدخلك نفس السيرفر",
+        infoFind = "البحث عن سيرفر سريع",
+        infoFindDesc = "يبحث عن سيرفر بأقل لاعبين",
+        infoDay = "يوم",
+
+        -- Main Tab
+        mainTitle = "السرقة التلقائية",
+        mainDesc = "اختر بيضة وشغّل السرقة التلقائية",
+        mainTarget = "البيضة المستهدفة",
+        mainTargetDesc = "اختر البيضة (فيه خيار بدون تحديد)",
+        mainNone = "بدون تحديد",
+        mainRefresh = "تحديث قائمة البيض",
+        mainRefreshDesc = "يعيد قراءة البيض الموجود",
+        mainAutoSteal = "تشغيل السرقة (Warp)",
+        mainAutoStealDesc = "يبدأ السرقة بنمط Warp السريع",
+        mainAutoTween = "تشغيل السرقة (Tween)",
+        mainAutoTweenDesc = "يبدأ السرقة بنمط Tween السلس",
+        mainAutoReturn = "العودة التلقائية",
+        mainAutoReturnDesc = "يرجع للقاعدة بعد كل سرقة",
+        mainAutoTread = "المشاية التلقائية",
+        mainAutoTreadDesc = "يشتغل على المشاية عند عدم وجود بيض",
+        mainFlightSpeed = "سرعة الطيران",
+        mainFlightSpeedDesc = "سرعة الحركة أثناء السرقة",
+        mainEsp = "عرض البيض (ESP)",
+        mainEspDesc = "يعرض السعر والصورة والاسم",
+        mainEspRange = "مدى العرض",
+        mainEspRangeDesc = "أقصى مسافة بالمتر",
+        mainEquipBest = "تفعيل أفضل الحيوانات",
+        mainEquipBestDesc = "يفعّل أفضل حيوانات في حسابك",
+        mainOffTread = "ابقى بعيد عن المشاية",
+        mainOffTreadDesc = "ينزلك من المشاية إذا كنت عليها",
+
+        -- Automation Tab
+        autoSection = "الأتمتة",
+        autoPlace = "وضع البيض تلقائياً",
+        autoPlaceDesc = "يضع البيض في القاعدة",
+        autoHatch = "تفقيس تلقائي",
+        autoHatchDesc = "يفقّس البيض الجاهز",
+        autoClaim = "استلام المكافآت",
+        autoClaimDesc = "يستلم كل المكافآت المتاحة",
+        autoEnterAbyss = "ادخل عالم الهاوية",
+        autoEnterAbyssDesc = "يدخل عالم الهاوية الآن",
+        autoAutoAbyss = "دخول تلقائي للهاوية",
+        autoAutoAbyssDesc = "يدخل عند فتح الهاوية",
+        autoUpBase = "ترقية القاعدة",
+        autoUpBaseDesc = "يرقّي القاعدة عند المال",
+        autoUpTread = "ترقية المشاية",
+        autoUpTreadDesc = "يرقّي المشاية عند المال",
+        autoBuyTrail = "شراء المسارات",
+        autoBuyTrailDesc = "يشتري المسارات المتاحة",
+
+        -- Combat Tab
+        combatSection = "القتال",
+        combatAura = "هالة الضرب",
+        combatAuraDesc = "يضرب اللاعبين القريبين",
+        combatRadius = "مدى الهالة",
+        combatRadiusDesc = "المسافة",
+        combatDelay = "تأخير الضرب",
+        combatDelayDesc = "الوقت بين الضربات",
+        combatSwing = "ضرب مرة",
+        combatSwingDesc = "ضربة واحدة فوراً",
+        combatAntiTrap = "مضاد الفخاخ",
+        combatAntiTrapDesc = "يعطّل فخاخ الخصوم",
+
+        -- Character Tab
+        charSpeedSection = "السرعة",
+        charSpeed = "قيمة السرعة",
+        charSpeedDesc = "500 افتراضي",
+        charBypass = "طريقة التجاوز",
+        charBypassDesc = "اختر الطريقة",
+        charEnableSpeed = "تشغيل السرعة",
+        charEnableSpeedDesc = "يرجع لطبيعي عند الإطفاء",
+        charFlySection = "الطيران",
+        charFlySpeed = "سرعة الطيران",
+        charFlySpeedDesc = "قيمة السرعة",
+        charEnableFly = "تشغيل الطيران",
+        charEnableFlyDesc = "يطير بالشخصية",
+        charProtSection = "الحماية",
+        charAntiKb = "مضاد الطيران العشوائي",
+        charAntiKbDesc = "يمنع انطلاقك",
+        charAntiRag = "مضاد الراجدول",
+        charAntiRagDesc = "يمنع السقوط",
+        charSmooth = "الحركة السلسة",
+        charSmoothDesc = "سرعة قصوى فوراً",
+        charAntiRejoin = "مضاد الطرد",
+        charAntiRejoinDesc = "يمنع طردك",
+        charR6 = "تحويل R6",
+        charR6Desc = "يحوّل شكل شخصيتك",
+
+        -- Event Tab
+        eventBossSection = "حدث الزعيم",
+        eventBossInfo = "حالة الزعيم",
+        eventReading = "جاري القراءة...",
+        eventOpen = "مفتوح",
+        eventClosed = "مغلق",
+        eventEnterBoss = "ادخل عالم الزعيم",
+        eventEnterBossDesc = "يدخل إذا مفتوح",
+        eventAutoBoss = "دخول تلقائي",
+        eventAutoBossDesc = "يدخل عند الفتح",
+        eventAutoFight = "قتال تلقائي",
+        eventAutoFightDesc = "يقاتل الكريستالات",
+        eventClaimBoss = "استلام مكافآت الزعيم",
+        eventClaimBossDesc = "يستلم المكافآت",
+        eventRiftSection = "الشق (Rift)",
+        eventRiftInfo = "حالة الشق",
+        eventRiftRefresh = "تحديث الشق",
+        eventRiftRefreshDesc = "يعيد القراءة",
+        eventRiftAuto = "سرقة حيوانات الشق",
+        eventRiftAutoDesc = "يركز على الشق",
+        eventRiftTrade = "التبديل التلقائي",
+        eventRiftTradeDesc = "3 حيوانات مقابل بيضة",
+
+        -- Place & Hatch
+        phSection = "الوضع والتفقيس",
+        phPlace = "ضع البيض الآن",
+        phPlaceDesc = "يرجع للقاعدة ويضع البيض",
+        phAutoPlace5 = "الوضع كل 5",
+        phAutoPlace5Desc = "يرجع كل 5 سرقات",
+        phAutoHatch = "التفقيس التلقائي",
+        phAutoHatchDesc = "يفقّس من أي مكان",
+        phHatchNow = "فقّس الآن",
+        phHatchNowDesc = "يفقّس البيض الموجود",
+
+        -- Misc
+        miscStats = "شاشة الإحصائيات",
+        miscStatsToggle = "عرض الإحصائيات",
+        miscStatsToggleDesc = "الوقت + الفريمات + البينغ",
+        miscServerSection = "السيرفر",
+        miscCopyJob = "نسخ معرف السيرفر",
+        miscCopyJobDesc = "ينسخ Job ID",
+        miscJoinJob = "دخول لسيرفر معين",
+        miscJoinJobDesc = "الصق Job ID",
+        miscHop = "تنقل بين السيرفرات",
+        miscHopDesc = "يبحث عن سيرفر جديد",
+        miscVisualSection = "المؤثرات",
+        miscLight = "إضاءة احترافية",
+        miscLightDesc = "يحسن الإضاءة",
+        miscAntiLag = "مانع اللاق",
+        miscAntiLagDesc = "يحذف المؤثرات الثقيلة",
+
+        -- Config
+        cfgTitle = "إعدادات السكربت",
+        cfgDesc = "خصص السكربت",
+        cfgTheme = "اختر السمة",
+        cfgThemeDesc = "لون الواجهة",
+        cfgToggleUI = "إظهار / إخفاء الواجهة",
+        cfgToggleUIDesc = "بالزر أو المفتاح",
+        cfgToggleBtn = "إظهار / إخفاء",
+        cfgKeybind = "مفتاح الواجهة",
+        cfgKeybindDesc = "K افتراضي",
+        cfgKeybindSet = "تم التعيين",
+        cfgKeybindErr = "غير مدعوم",
+        cfgLang = "تغيير اللغة",
+        cfgLangDesc = "يحول للإنجليزية",
+        cfgClose = "إغلاق السكربت",
+        cfgCloseDesc = "يوقف كل شيء",
+
+        -- Credits
+        crName = "Cypher",
+        crDesc = "مطور سكربتات Roblox",
+        crDiscord = "سيرفر PhantomX الرسمي",
+        crDiscordDesc = "أعضاء: {members}\nمتصلين: {online}",
+        crCopyLink = "نسخ الرابط",
+        crJoin = "انضم للسيرفر",
+        crVersion = "الإصدار 4.0.0",
+        crContact = "تواصل مع المطور",
+        crCopied = "تم النسخ",
+        crContactCopied = "تم نسخ يوزر المطور",
+
+        -- Notifications
+        nOn = "تم التفعيل",
+        nOff = "تم الإيقاف",
+        nLoading = "جاري...",
+        nDone = "تم",
+        nNoEggs = "ما فيه بيض",
+        nEggsFound = "بيضة متاحة",
+        nTargetSet = "تم تحديد البيضة",
+        nTargetCleared = "تم إلغاء الاختيار",
+        nEquipped = "تم التفعيل",
+        nPlaced = "تم وضع البيض",
+        nHatched = "تم التفقيس",
+        nClaimed = "تم الاستلام",
+        nCopied = "تم النسخ",
+        nWelcome = "أهلاً بك في PhantomX",
+        nWelcomeBody = "استمتع بالمميزات! 🚀",
+        nSpeedOn = "السرعة مفعلة",
+        nSpeedOff = "السرعة رجعت طبيعية",
+    },
+    English = {
+        warnTitle = "Warning",
+        warnBody = "Use at your own risk. We're not responsible for any damage.",
+        discordTitle = "Discord Server",
+        discordBody = "Join for updates and support.\n\nLink: https://discord.gg/uRtbxxxrau",
+        discordCopy = "Copy Link",
+        discordCopied = "Copied",
+        discordCopiedBody = "Discord link copied",
+        secMain = "Main Features",
+        secSettings = "Settings",
+        tabInfo = "Info",
+        tabMain = "Main",
+        tabAutomation = "Automation",
+        tabCombat = "Combat",
+        tabCharacter = "Character",
+        tabEvent = "Event",
+        tabPlaceHatch = "Place & Hatch",
+        tabMisc = "Misc",
+        tabConfig = "Config",
+        tabCredits = "Credits",
+        infoName = "Player Name",
+        infoUser = "Username",
+        infoId = "User ID",
+        infoAge = "Account Age",
+        infoExec = "Executor",
+        infoPlayers = "Players",
+        infoFps = "FPS",
+        infoPing = "Ping",
+        infoRejoin = "Rejoin Same Server",
+        infoRejoinDesc = "Rejoins current server",
+        infoFind = "Find Fast Server",
+        infoFindDesc = "Finds fewest players",
+        infoDay = "days",
+        mainTitle = "Auto Steal",
+        mainDesc = "Pick an egg and enable auto steal",
+        mainTarget = "Target Egg",
+        mainTargetDesc = "Choose egg (has None option)",
+        mainNone = "None",
+        mainRefresh = "Refresh Egg List",
+        mainRefreshDesc = "Re-reads available eggs",
+        mainAutoSteal = "Auto Steal (Warp)",
+        mainAutoStealDesc = "Starts stealing in Warp mode",
+        mainAutoTween = "Auto Steal (Tween)",
+        mainAutoTweenDesc = "Starts stealing in Tween mode",
+        mainAutoReturn = "Auto Return",
+        mainAutoReturnDesc = "Returns to base after steal",
+        mainAutoTread = "Auto Treadmill",
+        mainAutoTreadDesc = "Runs when idle",
+        mainFlightSpeed = "Flight Speed",
+        mainFlightSpeedDesc = "Movement speed",
+        mainEsp = "Egg ESP",
+        mainEspDesc = "Shows price, icon, name",
+        mainEspRange = "ESP Range",
+        mainEspRangeDesc = "Max distance",
+        mainEquipBest = "Equip Best Pets",
+        mainEquipBestDesc = "Equips strongest",
+        mainOffTread = "Stay Off Treadmill",
+        mainOffTreadDesc = "Removes you from treadmill",
+        autoSection = "Automation",
+        autoPlace = "Auto Place Eggs",
+        autoPlaceDesc = "Places eggs at base",
+        autoHatch = "Auto Hatch",
+        autoHatchDesc = "Hatches ready eggs",
+        autoClaim = "Auto Claim",
+        autoClaimDesc = "Claims all available",
+        autoEnterAbyss = "Enter Abyss World",
+        autoEnterAbyssDesc = "Enters now",
+        autoAutoAbyss = "Auto Enter Abyss",
+        autoAutoAbyssDesc = "Enters when opens",
+        autoUpBase = "Auto Upgrade Base",
+        autoUpBaseDesc = "Upgrades when affordable",
+        autoUpTread = "Auto Upgrade Treadmill",
+        autoUpTreadDesc = "Upgrades when affordable",
+        autoBuyTrail = "Auto Buy Trails",
+        autoBuyTrailDesc = "Buys available trails",
+        combatSection = "Combat",
+        combatAura = "Bat Aura",
+        combatAuraDesc = "Hits nearby players",
+        combatRadius = "Aura Radius",
+        combatRadiusDesc = "Range",
+        combatDelay = "Swing Delay",
+        combatDelayDesc = "Between swings",
+        combatSwing = "Swing Once",
+        combatSwingDesc = "One swing now",
+        combatAntiTrap = "Anti-Trap",
+        combatAntiTrapDesc = "Disables enemy traps",
+        charSpeedSection = "Speed",
+        charSpeed = "Walk Speed",
+        charSpeedDesc = "500 default",
+        charBypass = "Bypass Method",
+        charBypassDesc = "Choose method",
+        charEnableSpeed = "Enable Speed",
+        charEnableSpeedDesc = "Restores normal on disable",
+        charFlySection = "Flight",
+        charFlySpeed = "Fly Speed",
+        charFlySpeedDesc = "Speed value",
+        charEnableFly = "Enable Fly",
+        charEnableFlyDesc = "Flies the character",
+        charProtSection = "Protection",
+        charAntiKb = "Anti Knockback",
+        charAntiKbDesc = "Prevents fling",
+        charAntiRag = "Anti Ragdoll",
+        charAntiRagDesc = "Prevents fall",
+        charSmooth = "Smooth Movement",
+        charSmoothDesc = "Instant max speed",
+        charAntiRejoin = "Anti Rejoin / Kick",
+        charAntiRejoinDesc = "Blocks kicks",
+        charR6 = "Convert to R6",
+        charR6Desc = "Converts avatar",
+        eventBossSection = "Boss Event",
+        eventBossInfo = "Boss Info",
+        eventReading = "Reading...",
+        eventOpen = "Open",
+        eventClosed = "Closed",
+        eventEnterBoss = "Enter Boss World",
+        eventEnterBossDesc = "Enters if open",
+        eventAutoBoss = "Auto Enter",
+        eventAutoBossDesc = "Enters when opens",
+        eventAutoFight = "Auto Fight",
+        eventAutoFightDesc = "Fights crystals",
+        eventClaimBoss = "Claim Boss Milestones",
+        eventClaimBossDesc = "Claims milestones",
+        eventRiftSection = "Rift",
+        eventRiftInfo = "Rift Info",
+        eventRiftRefresh = "Refresh Rift",
+        eventRiftRefreshDesc = "Re-reads",
+        eventRiftAuto = "Auto Steal Rift Pets",
+        eventRiftAutoDesc = "Focuses rift",
+        eventRiftTrade = "Auto Trade-in",
+        eventRiftTradeDesc = "3 pets for egg",
+        phSection = "Place & Hatch",
+        phPlace = "Place Eggs Now",
+        phPlaceDesc = "Returns and places eggs",
+        phAutoPlace5 = "Auto Place (Every 5)",
+        phAutoPlace5Desc = "Every 5 steals",
+        phAutoHatch = "Auto Hatch",
+        phAutoHatchDesc = "Works from anywhere",
+        phHatchNow = "Hatch Now",
+        phHatchNowDesc = "Hatches at base",
+        miscStats = "Stats Overlay",
+        miscStatsToggle = "Show Stats",
+        miscStatsToggleDesc = "Time + FPS + Ping",
+        miscServerSection = "Server",
+        miscCopyJob = "Copy Job ID",
+        miscCopyJobDesc = "Copies Job ID",
+        miscJoinJob = "Join Job ID",
+        miscJoinJobDesc = "Paste to join",
+        miscHop = "Server Hop",
+        miscHopDesc = "Finds new server",
+        miscVisualSection = "Visuals",
+        miscLight = "Pro Lighting",
+        miscLightDesc = "Improves lighting",
+        miscAntiLag = "Ultra Anti-Lag",
+        miscAntiLagDesc = "Removes heavy effects",
+        cfgTitle = "Script Settings",
+        cfgDesc = "Customize the script",
+        cfgTheme = "Theme",
+        cfgThemeDesc = "UI theme color",
+        cfgToggleUI = "Toggle UI",
+        cfgToggleUIDesc = "Button or keybind",
+        cfgToggleBtn = "Toggle UI",
+        cfgKeybind = "Toggle UI Key",
+        cfgKeybindDesc = "K default",
+        cfgKeybindSet = "Keybind Set",
+        cfgKeybindErr = "Unsupported key",
+        cfgLang = "Change Language",
+        cfgLangDesc = "Switch to Arabic",
+        cfgClose = "Close Script",
+        cfgCloseDesc = "Stops everything",
+        crName = "Cypher",
+        crDesc = "Roblox Script Developer",
+        crDiscord = "Official PhantomX Server",
+        crDiscordDesc = "Members: {members}\nOnline: {online}",
+        crCopyLink = "Copy Link",
+        crJoin = "Join Server",
+        crVersion = "Version 4.0.0",
+        crContact = "Contact Developer",
+        crCopied = "Copied",
+        crContactCopied = "Developer username copied",
+        nOn = "Enabled",
+        nOff = "Disabled",
+        nLoading = "Loading...",
+        nDone = "Done",
+        nNoEggs = "No eggs",
+        nEggsFound = "eggs available",
+        nTargetSet = "Target set",
+        nTargetCleared = "Target cleared",
+        nEquipped = "Equipped",
+        nPlaced = "Placed",
+        nHatched = "Hatched",
+        nClaimed = "Claimed",
+        nCopied = "Copied",
+        nWelcome = "Welcome to PhantomX",
+        nWelcomeBody = "Enjoy the features! 🚀",
+        nSpeedOn = "Speed enabled",
+        nSpeedOff = "Speed restored",
+    }
+}
+
+local function T(k)
+    local lang = _G.PhantomX_Lang or "Arabic"
+    return (Tr[lang] or Tr.Arabic)[k] or k
+end
+
+local function CleanupAll()
+    if _G.PhantomX_Cleanup then pcall(_G.PhantomX_Cleanup) end
+    for _, g in pairs(game.CoreGui:GetChildren()) do
+        if g:IsA("ScreenGui") and (g.Name:find("Wind") or g.Name:find("PhantomX") or g.Name:find("PX_")) then
+            g:Destroy()
+        end
+    end
+end
+
+-- ============================================================
+-- LANGUAGE POPUP
+-- ============================================================
+WindUI:Popup({
+    Title = "Language / اللغة", Icon = "globe",
+    Content = "Choose your preferred language:\n\nاختر لغتك المفضلة:",
+    Buttons = {
+        { Title = "English 🇬🇧", Icon = "flag", Variant = "Primary",
+          Callback = function()
+              _G.PhantomX_Lang = "English"
+              WindUI:Notify({Title="Language", Content="Restart to apply.", Duration=3})
+          end },
+        { Title = "🇸🇦 العربية", Icon = "flag", Variant = "Secondary",
+          Callback = function()
+              _G.PhantomX_Lang = "Arabic"
+              WindUI:Notify({Title="اللغة", Content="أعد التشغيل للتطبيق.", Duration=3})
+          end },
+    },
+})
+
+task.wait(1.5)
+
+-- ============================================================
+-- WARNING + DISCORD
+-- ============================================================
+WindUI:Popup({
+    Title = "PhantomX | SAE", Icon = "crown",
+    Content = T("warnBody"),
+    Buttons = {{ Title = "OK", Icon = "arrow-right", Variant = "Primary", Callback = function() end }},
+})
+
+task.wait(1.5)
+
+WindUI:Popup({
+    Title = T("discordTitle"), Icon = "message-circle",
+    Content = T("discordBody"),
+    Buttons = {{ Title = T("discordCopy"), Icon = "copy", Variant = "Primary",
+        Callback = function()
+            setclipboard("https://discord.gg/uRtbxxxrau")
+            WindUI:Notify({Title=T("discordCopied"), Content=T("discordCopiedBody"), Duration=3})
+        end }},
+})
+
+task.wait(0.5)
+
+-- ============================================================
+-- SERVICES
+-- ============================================================
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local StatsService = game:GetService("Stats")
+local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+local UIS = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RS = game:GetService("ReplicatedStorage")
+local WS = game:GetService("Workspace")
+local Lighting = game:GetService("Lighting")
+local LP = Players.LocalPlayer
+
+-- ============================================================
+-- CLEANUP SYSTEM
+-- ============================================================
+if _G.PhantomX_Cleanup then pcall(_G.PhantomX_Cleanup) end
+local Conns = {}
+local function track(c) table.insert(Conns, c); return c end
+_G.PhantomX_Cleanup = function()
+    for _, c in ipairs(Conns) do pcall(function() c:Disconnect() end) end
+    Conns = {}
+end
+
+-- ============================================================
+-- HELPERS
+-- ============================================================
+local function getHRP()
+    local c = LP.Character
+    return c and (c:FindFirstChild("HumanoidRootPart") or c.PrimaryPart)
+end
+local function getHum()
+    local c = LP.Character
+    return c and c:FindFirstChildOfClass("Humanoid")
+end
+local function isAlive()
+    local h = getHum()
+    return h and h.Health > 0
+end
+local function FNum(n)
+    n = tonumber(n) or 0
+    local u = {{1e12,"T"},{1e9,"B"},{1e6,"M"},{1e3,"K"}}
+    for _, x in ipairs(u) do
+        if n >= x[1] then
+            local v = n/x[1]
+            return (v < 10 and string.format("%.2f",v) or string.format("%.1f",v)):gsub("%.?0+$","")..x[2]
+        end
+    end
+    return tostring(math.floor(n))
+end
+
+local Packages = RS:WaitForChild("Packages", 10)
+local Networking = Packages and Packages:WaitForChild("Networking", 10)
+local function GetRemote(name)
+    if not Networking then return nil end
+    return Networking:FindFirstChild(name) or Networking:FindFirstChild(name, true)
+end
+
+local EggStateModule, PlotStateModule, AssetsDirectory
+pcall(function() EggStateModule = require(RS.Client.EggState) end)
+pcall(function() PlotStateModule = require(RS.Client.PlotState) end)
+pcall(function()
+    local m = require(RS.Data.Assets)
+    AssetsDirectory = m and m.Directory
+end)
+
+print("[PhantomX] Backends loading...")
+
+-- ============================================================
+-- PROTECTION LAYERS (from File 1 + File 6 + File 20)
+-- ============================================================
+pcall(function()
+    if typeof(filtergc) ~= "function" or typeof(debug) ~= "table" then return end
+    local ok, fn = pcall(function()
+        return filtergc("function", {Constants={"gmatch","GetFullName"}}, true)
+    end)
+    if not ok or type(fn) ~= "function" then return end
+    local setM = (typeof(setrawmetatable)=="function" and setrawmetatable) or setmetatable
+    if not setM then return end
+    local okU, ups = pcall(debug.getupvalues, fn)
+    if not okU or type(ups) ~= "table" then return end
+    for _, t in pairs(ups) do
+        if typeof(t) == "table" then pcall(setM, t, {__newindex=function() end}) end
+    end
+end)
+
+pcall(function()
+    local g = getgc or (debug and debug.getgc)
+    local s = setrawmetatable or setmetatable
+    local gm = getrawmetatable or getmetatable
+    if not (g and s) then return end
+    for _, o in ipairs(g(true)) do
+        if typeof(o) == "table" and not (gm and gm(o)) then
+            local main = false
+            for _, v in pairs(o) do if v == o then main = true; break end end
+            if main then
+                for _, v in pairs(o) do
+                    if typeof(v) == "number" and v >= 1 and v <= 3 and o[v] == nil then
+                        pcall(s, o, {__newindex=function() end})
+                        break
+                    end
+                end
+            end
+        end
+    end
+end)
+
+pcall(function()
+    local g = getgc or (debug and debug.getgc)
+    local gc = getconstants or (debug and debug.getconstants)
+    local sc = setconstant or (debug and debug.setconstant)
+    if not (g and gc and sc) then return end
+    for _, fn in ipairs(g(true)) do
+        if typeof(fn) == "function" then
+            local okI, src = pcall(debug.info, fn, "s")
+            if okI and type(src) == "string"
+                and src:find("ReplicatedFirst", 1, true)
+                and src:find("UGI", 1, true) then
+                local okC, cs = pcall(gc, fn)
+                if okC and type(cs) == "table" then
+                    for i, c in next, cs do
+                        if type(c) == "string" and c == "Humanoid" then pcall(sc, fn, i, "") end
+                    end
+                end
+            end
+        end
+    end
+end)
+
+pcall(function()
+    if typeof(hookmetamethod) ~= "function" then return end
+    if _G.PhantomX_AntiRag then return end
+    _G.PhantomX_AntiRag = true
+    local cc = typeof(checkcaller)=="function" and checkcaller or function() return false end
+    local nc = typeof(newcclosure)=="function" and newcclosure or function(f) return f end
+    local old
+    old = hookmetamethod(game, "__newindex", nc(function(self, k, v)
+        if not cc() and typeof(self) == "Instance" then
+            if self:IsA("Motor6D") and k == "Enabled" and v == false then return nil end
+            if self:IsA("Humanoid") then
+                if k == "PlatformStand" and v == true then return nil end
+                if k == "Sit" and v == true and _G.PhantomX_Stealing then return nil end
+            end
+        end
+        return old(self, k, v)
+    end))
+end)
+
+print("[PhantomX] Protection layers installed")
+
+-- ============================================================
+-- SAE BACKEND (Complete from File 1 - Vortex X)
+-- ============================================================
+local SAE = {State = {
+    Enabled = false,
+    Mode = "NONE",  -- NONE, WARP, TWEEN
+    SelectedUid = nil,
+    FlightSpeed = 600,
+    AutoReturn = true,
+    AutoTreadmill = true,
+    AutoHatch = true,
+    AutoPlace5 = false,
+    EspEnabled = false,
+    EspRange = 1400,
+    Session = 0,
+    Cache = nil,
+    CacheAt = 0,
+    Unreachable = {},
+    BatchCount = 0,
+    Placing = false,
+    Hatching = false,
+    Ragdolled = false,
+    Carrying = false,
+    StatusText = "Ready",
+}}
+
+pcall(function()
+    local R = require(RS.Shared.Remotes)
+    if R and R.RigSync and R.RigSync.Refresh then
+        track(R.RigSync.Refresh.OnClientEvent:Connect(function(raw)
+            local t = tostring(raw)
+            if t:find("BeginRagdoll") or t:find("BeginImpulse") then
+                SAE.State.Ragdolled = true
+            elseif t:find("EndRagdoll") then
+                SAE.State.Ragdolled = false
+            end
+        end))
+    end
+end)
+
+pcall(function()
+    if EggStateModule and EggStateModule.CarryChanged then
+        track(EggStateModule.CarryChanged:Connect(function(info)
+            if type(info) == "table" then
+                SAE.State.Carrying = info.IsCarrying == true
+            end
+        end))
+    end
+end)
+
+local function SAE_ReadField()
+    if not EggStateModule or not EggStateModule.ReadFieldEggs then return nil end
+    local ok, d = pcall(EggStateModule.ReadFieldEggs)
+    if not ok or type(d) ~= "table" then return nil end
+    return d.Records or d
+end
+
+local function SAE_GetValue(rec)
+    local d = AssetsDirectory and AssetsDirectory[rec.AssetCategory]
+    if not d then return 0 end
+    return math.max(1, math.floor((tonumber(d.EarningRate) or 0) * (tonumber(rec.AssetScale) or 1)))
+end
+local function SAE_GetName(rec)
+    local d = AssetsDirectory and AssetsDirectory[rec.AssetCategory]
+    if d and d.DisplayName ~= "" then return d.DisplayName end
+    return tostring(rec.AssetCategory or "Egg")
+end
+local function SAE_GetRarity(rec)
+    local d = AssetsDirectory and AssetsDirectory[rec.AssetCategory]
+    if d and d.Rarity then return d.Rarity.DisplayName or d.Rarity._id or "?" end
+    return "?"
+end
+local function SAE_GetRarityColor(rec)
+    local d = AssetsDirectory and AssetsDirectory[rec.AssetCategory]
+    if d and d.Rarity and typeof(d.Rarity.Color) == "Color3" then
+        return d.Rarity.Color
+    end
+    return Color3.fromRGB(200, 200, 220)
+end
+local function SAE_GetIcon(rec)
+    local d = AssetsDirectory and AssetsDirectory[rec.AssetCategory]
+    return (d and tostring(d.Icon or "")) or ""
+end
+
+function SAE.Evaluate()
+    local s = SAE.State
+    local now = os.clock()
+    if s.Cache and (now - s.CacheAt) < 3 then return s.Cache end
+    local recs = SAE_ReadField()
+    if not recs then return s.Cache or {} end
+    local hrp = getHRP()
+    local mp = hrp and hrp.Position or Vector3.new()
+    local out = {}
+    for _, r in ipairs(recs) do
+        if type(r) == "table" and r.Uid and typeof(r.BoundsCFrame) == "CFrame"
+            and (r.State == "Slot" or r.State == "Dropped") then
+            local p = r.BoundsCFrame.Position
+            table.insert(out, {
+                Uid = r.Uid,
+                Name = SAE_GetName(r),
+                Value = SAE_GetValue(r),
+                Rarity = SAE_GetRarity(r),
+                RarityColor = SAE_GetRarityColor(r),
+                Icon = SAE_GetIcon(r),
+                Position = p,
+                Distance = (p - mp).Magnitude,
+                Area = r.AreaId,
+                Record = r,
+            })
+        end
+    end
+    table.sort(out, function(a, b) return a.Value > b.Value end)
+    s.Cache, s.CacheAt = out, now
+    return out
+end
+
+function SAE.Carry(uid)
+    if not EggStateModule then return false end
+    for _ = 1, 15 do
+        local ok, res = pcall(function() return EggStateModule.CarryFieldEgg(uid, nil) end)
+        if ok and res then return true end
+        task.wait(0.12)
+    end
+    local slots = WS:FindFirstChild("AreaEggSlotsClient")
+    local m = slots and slots:FindFirstChild(uid)
+    if m then
+        for _, d in ipairs(m:GetDescendants()) do
+            if d:IsA("ProximityPrompt") and d.Enabled then
+                pcall(function()
+                    d.HoldDuration = 0
+                    if typeof(fireproximityprompt) == "function" then
+                        fireproximityprompt(d, 0)
+                        fireproximityprompt(d)
+                    end
+                end)
+            end
+        end
+    end
+    task.wait(0.25)
+    local ok, res = pcall(function() return EggStateModule.CarryFieldEgg(uid, nil) end)
+    return ok and res
+end
+
+function SAE.IsCarrying()
+    if SAE.State.Carrying then return true end
+    local c = LP.Character
+    if c then
+        for _, t in ipairs(c:GetChildren()) do
+            if t:IsA("Tool") and (t:GetAttribute("ItemType") == "AssetEgg" or t:GetAttribute("UID")) then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+function SAE.GetBase()
+    local p
+    pcall(function()
+        if PlotStateModule and PlotStateModule.ResolvePlot then
+            local pl = PlotStateModule.ResolvePlot()
+            if type(pl) == "table" and pl.RespawnPointCFrame then
+                p = pl.RespawnPointCFrame.Position
+            end
+        end
+    end)
+    if not p then
+        local s = WS:FindFirstChildOfClass("SpawnLocation")
+        p = s and s.Position or Vector3.new(516, 70, -364)
+    end
+    return p
+end
+
+function SAE.TweenTo(target, speed, sid)
+    local hrp = getHRP()
+    if not hrp then return false end
+    speed = math.clamp(speed or SAE.State.FlightSpeed, 100, 1000)
+    local d = (target - hrp.Position).Magnitude
+    if d < 3 then return true end
+    local dir = (target - hrp.Position).Unit
+    local goal = CFrame.lookAt(target, target + dir)
+    local tw = TweenService:Create(hrp, TweenInfo.new(d/speed, Enum.EasingStyle.Linear), {CFrame = goal})
+    local hb
+    hb = RunService.Heartbeat:Connect(function()
+        if sid and sid ~= SAE.State.Session then
+            pcall(function() tw:Cancel() end)
+            if hb then hb:Disconnect() end
+            return
+        end
+        hrp.AssemblyLinearVelocity = Vector3.zero
+        hrp.AssemblyAngularVelocity = Vector3.zero
+    end)
+    tw:Play()
+    tw.Completed:Wait()
+    if hb then hb:Disconnect() end
+    return true
+end
+
+function SAE.GetInventory()
+    local out = {}
+    local c = LP.Character
+    local bp = LP:FindFirstChild("Backpack")
+    for _, cont in ipairs({c, bp}) do
+        if cont then
+            for _, t in ipairs(cont:GetChildren()) do
+                if t:IsA("Tool") and (t:GetAttribute("ItemType") == "AssetEgg"
+                    or t:GetAttribute("UID") ~= nil or t.Name:lower():find("egg")) then
+                    table.insert(out, t)
+                end
+            end
+        end
+    end
+    return out
+end
+
+function SAE.PlaceAll()
+    local s = SAE.State
+    if s.Placing then return 0 end
+    s.Placing = true
+    local r = GetRemote("RF/EggWorld/AskPlaceEgg")
+    local n = 0
+    if r then
+        for _, t in ipairs(SAE.GetInventory()) do
+            local uid = t:GetAttribute("UID") or t:GetAttribute("EggUid") or t.Name
+            local cf = CFrame.new(math.random(-6,6), 0, math.random(-6,6))
+            pcall(function() r:InvokeServer({Uid = uid, LocalCFrame = cf}) end)
+            n = n + 1
+            task.wait(0.05)
+        end
+    end
+    s.Placing = false
+    return n
+end
+
+function SAE.HatchAll()
+    local s = SAE.State
+    if s.Hatching then return 0 end
+    s.Hatching = true
+    local hr = GetRemote("RF/EggWorld/AskHatch")
+    local fr = GetRemote("RF/EggWorld/AskFinishHatch")
+    local n = 0
+    if hr and fr then
+        for _, t in ipairs(SAE.GetInventory()) do
+            local uid = t:GetAttribute("UID") or t.Name
+            pcall(function() hr:InvokeServer(uid) end)
+            task.wait(0.9)
+            pcall(function() fr:InvokeServer(uid) end)
+            n = n + 1
+            task.wait(0.05)
+        end
+    end
+    s.Hatching = false
+    return n
+end
+
+-- ============================================================
+-- MAIN STEAL LOOP (based on File 1 - complete with Guard Strike)
+-- ============================================================
+local stealTask
+local function StealLoop()
+    local s = SAE.State
+    while s.Enabled do
+        local sid = s.Session
+        task.wait(0.15)
+        if not s.Enabled or sid ~= s.Session then break end
+        if s.Ragdolled then task.wait(0.3); continue end
+
+        local eggs = SAE.Evaluate()
+        local target
+        if s.SelectedUid then
+            for _, e in ipairs(eggs) do
+                if e.Uid == s.SelectedUid then target = e; break end
+            end
+        end
+        if not target then
+            for _, e in ipairs(eggs) do
+                if not s.Unreachable[e.Uid] then target = e; break end
+            end
+        end
+        if not target then task.wait(2); continue end
+
+        local hrp = getHRP()
+        if not hrp then task.wait(1); continue end
+
+        -- Off treadmill
+        if s.Treadmilling then
+            local d = GetRemote("RF/Treadmill/AskDoff")
+            if d then pcall(function() d:InvokeServer() end) end
+            s.Treadmilling = false
+            task.wait(0.3)
+        end
+
+        -- Move to egg
+        SAE.TweenTo(target.Position + Vector3.new(0, 1.5, 0), s.FlightSpeed, sid)
+        if sid ~= s.Session or not s.Enabled then break end
+
+        -- Try carry
+        local ok = SAE.Carry(target.Uid)
+        if not ok then
+            s.Unreachable[target.Uid] = os.clock()
+            task.wait(0.5)
+            continue
+        end
+
+        -- Wait for guard strike window (like File 1 does)
+        task.wait(2.5)
+        if sid ~= s.Session or not s.Enabled then break end
+
+        -- Retry carry after guard
+        for _ = 1, 6 do
+            if sid ~= s.Session then break end
+            if SAE.IsCarrying() then break end
+            SAE.Carry(target.Uid)
+            task.wait(0.25)
+        end
+
+        -- Return home
+        if s.AutoReturn then
+            SAE.TweenTo(SAE.GetBase(), s.FlightSpeed, sid)
+            task.wait(0.6)
+        end
+
+        -- Auto place every 5
+        if s.AutoPlace5 then
+            s.BatchCount = s.BatchCount + 1
+            if s.BatchCount >= 5 then
+                s.BatchCount = 0
+                task.spawn(function()
+                    SAE.PlaceAll()
+                    if s.AutoHatch then SAE.HatchAll() end
+                end)
+            end
+        end
+
+        task.wait(0.4)
+    end
+end
+
+function SAE.Start(mode)
+    local s = SAE.State
+    if s.Enabled then
+        -- switch mode
+        if s.Mode ~= mode then
+            s.Mode = mode
+            s.Session = s.Session + 1
+            task.wait(0.1)
+        else
+            return
+        end
+    end
+    s.Enabled = true
+    s.Mode = mode
+    _G.PhantomX_Stealing = true
+    s.Session = s.Session + 1
+    stealTask = task.spawn(StealLoop)
+end
+
+function SAE.Stop()
+    local s = SAE.State
+    s.Enabled = false
+    s.Mode = "NONE"
+    _G.PhantomX_Stealing = false
+    s.Session = s.Session + 1
+    if stealTask then pcall(task.cancel, stealTask) end
+end
+
+-- Auto hatch loop
+task.spawn(function()
+    while true do
+        task.wait(6)
+        if SAE.State.AutoHatch and not SAE.State.Placing then
+            pcall(SAE.HatchAll)
+        end
+    end
+end)
+
+-- Auto treadmill idle loop
+task.spawn(function()
+    while true do
+        task.wait(2)
+        if SAE.State.Enabled and SAE.State.AutoTreadmill and not SAE.IsCarrying() then
+            local eggs = SAE.Evaluate()
+            if #eggs == 0 then
+                local d = GetRemote("RF/Treadmill/AskDoff")
+                if d then pcall(function() d:InvokeServer() end) end
+                SAE.State.Treadmilling = true
+            end
+        end
+    end
+end)
+
+print("[PhantomX] SAE backend loaded")
+
+-- ============================================================
+-- ESP BACKEND (Custom Design - 160x40)
+-- ============================================================
+local ESP = {Pool = {}, Max = 60, Folder = nil, LastHash = ""}
+
+local function GetESPFolder()
+    if ESP.Folder and ESP.Folder.Parent then return ESP.Folder end
+    ESP.Folder = Instance.new("Folder")
+    ESP.Folder.Name = "PhantomX_ESP"
+    ESP.Folder.Parent = WS
+    return ESP.Folder
+end
+
+local function MakeCard()
+    local anchor = Instance.new("Part")
+    anchor.Name = "ESP_Anchor"
+    anchor.Anchored = true
+    anchor.CanCollide = false
+    anchor.CanQuery = false
+    anchor.CanTouch = false
+    anchor.CastShadow = false
+    anchor.Transparency = 1
+    anchor.Size = Vector3.new(0.1, 0.1, 0.1)
+    anchor.Parent = GetESPFolder()
+
+    local bb = Instance.new("BillboardGui")
+    bb.AlwaysOnTop = true
+    bb.LightInfluence = 0
+    bb.MaxDistance = 1e6
+    bb.Size = UDim2.fromOffset(160, 40)
+    bb.StudsOffset = Vector3.new(0, 2.8, 0)
+    bb.Adornee = anchor
+    bb.Parent = anchor
+
+    -- Card frame (sleek dark pill)
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.fromOffset(160, 40)
+    frame.BackgroundColor3 = Color3.fromRGB(14, 14, 20)
+    frame.BackgroundTransparency = 0.15
+    frame.BorderSizePixel = 0
+    frame.ClipsDescendants = true
+    frame.Parent = bb
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 10)
+    corner.Parent = frame
+
+    -- Gradient overlay
+    local grad = Instance.new("UIGradient")
+    grad.Color = ColorSequence.new(Color3.fromRGB(22,22,30), Color3.fromRGB(8,8,14))
+    grad.Rotation = 90
+    grad.Parent = frame
+
+    -- Left rarity strip (vertical bar)
+    local strip = Instance.new("Frame")
+    strip.Size = UDim2.new(0, 3, 1, -10)
+    strip.Position = UDim2.fromOffset(4, 5)
+    strip.BorderSizePixel = 0
+    strip.BackgroundColor3 = Color3.fromRGB(150, 150, 180)
+    strip.Parent = frame
+    local stripCorner = Instance.new("UICorner")
+    stripCorner.CornerRadius = UDim.new(1, 0)
+    stripCorner.Parent = strip
+
+    -- Icon circle (left)
+    local iconBox = Instance.new("Frame")
+    iconBox.Size = UDim2.fromOffset(28, 28)
+    iconBox.Position = UDim2.fromOffset(10, 6)
+    iconBox.BackgroundColor3 = Color3.fromRGB(30, 30, 42)
+    iconBox.BackgroundTransparency = 0.3
+    iconBox.BorderSizePixel = 0
+    iconBox.Parent = frame
+    local ibc = Instance.new("UICorner")
+    ibc.CornerRadius = UDim.new(1, 0)
+    ibc.Parent = iconBox
+
+    local iconStroke = Instance.new("UIStroke")
+    iconStroke.Thickness = 1
+    iconStroke.Transparency = 0.6
+    iconStroke.Color = Color3.fromRGB(200,200,220)
+    iconStroke.Parent = iconBox
+
+    local iconImg = Instance.new("ImageLabel")
+    iconImg.Size = UDim2.fromScale(1, 1)
+    iconImg.BackgroundTransparency = 1
+    iconImg.ScaleType = Enum.ScaleType.Fit
+    iconImg.Image = ""
+    iconImg.Parent = iconBox
+
+    -- Name (top right of icon)
+    local nameLbl = Instance.new("TextLabel")
+    nameLbl.BackgroundTransparency = 1
+    nameLbl.Position = UDim2.fromOffset(44, 4)
+    nameLbl.Size = UDim2.new(1, -52, 0, 14)
+    nameLbl.Font = Enum.Font.GothamBold
+    nameLbl.TextSize = 11
+    nameLbl.Text = "Egg"
+    nameLbl.TextColor3 = Color3.fromRGB(245,245,250)
+    nameLbl.TextXAlignment = Enum.TextXAlignment.Left
+    nameLbl.TextTruncate = Enum.TextTruncate.AtEnd
+    nameLbl.Parent = frame
+
+    -- Price (bottom right of icon)
+    local priceLbl = Instance.new("TextLabel")
+    priceLbl.BackgroundTransparency = 1
+    priceLbl.Position = UDim2.fromOffset(44, 19)
+    priceLbl.Size = UDim2.new(1, -52, 0, 14)
+    priceLbl.Font = Enum.Font.GothamBold
+    priceLbl.TextSize = 11
+    priceLbl.Text = "$0/s"
+    priceLbl.TextColor3 = Color3.fromRGB(120, 240, 140)
+    priceLbl.TextXAlignment = Enum.TextXAlignment.Left
+    priceLbl.TextTruncate = Enum.TextTruncate.AtEnd
+    priceLbl.Parent = frame
+
+    -- Distance (top-right corner)
+    local distLbl = Instance.new("TextLabel")
+    distLbl.BackgroundTransparency = 1
+    distLbl.Position = UDim2.new(1, -8, 0, 10)
+    distLbl.AnchorPoint = Vector2.new(1, 0)
+    distLbl.Size = UDim2.fromOffset(40, 12)
+    distLbl.Font = Enum.Font.Gotham
+    distLbl.TextSize = 9
+    distLbl.Text = ""
+    distLbl.TextColor3 = Color3.fromRGB(130,130,150)
+    distLbl.TextXAlignment = Enum.TextXAlignment.Right
+    distLbl.Parent = frame
+
+    return {
+        Anchor = anchor, Billboard = bb, Frame = frame,
+        Strip = strip, Icon = iconImg, Name = nameLbl,
+        Price = priceLbl, Dist = distLbl,
+        LastKey = nil,
+    }
+end
+
+function ESP.Update(eggs)
+    if type(eggs) ~= "table" then return end
+    local n = math.min(#eggs, ESP.Max)
+    for i = 1, n do
+        local e = eggs[i]
+        local c = ESP.Pool[i]
+        if not c or not c.Anchor.Parent then
+            c = MakeCard()
+            ESP.Pool[i] = c
+        end
+        c.Anchor.CFrame = CFrame.new(e.Position)
+        local key = table.concat({
+            e.Uid or "",
+            tostring(e.Value or 0),
+            tostring(e.Rarity or ""),
+            tostring(e.Icon or ""),
+        }, "|")
+        if c.LastKey ~= key then
+            c.LastKey = key
+            c.Name.Text = tostring(e.Name or "Egg")
+            c.Price.Text = "$" .. FNum(e.Value or 0) .. "/s"
+            local rc = e.RarityColor or Color3.fromRGB(150,150,180)
+            c.Strip.BackgroundColor3 = rc
+            c.Icon.Image = (e.Icon and e.Icon ~= "") and e.Icon or ""
+        end
+        c.Dist.Text = math.floor(e.Distance or 0) .. "m"
+        if not c.Billboard.Enabled then c.Billboard.Enabled = true end
+    end
+    for i = n + 1, #ESP.Pool do
+        if ESP.Pool[i] and ESP.Pool[i].Billboard then
+            ESP.Pool[i].Billboard.Enabled = false
+        end
+    end
+end
+
+function ESP.Clear()
+    for _, c in ipairs(ESP.Pool) do
+        pcall(function() c.Anchor:Destroy() end)
+    end
+    ESP.Pool = {}
+    ESP.LastHash = ""
+end
+
+task.spawn(function()
+    while true do
+        task.wait(1.5)
+        if SAE.State.EspEnabled then
+            local eggs = SAE.Evaluate()
+            local hash = #eggs .. ":"
+            for i = 1, math.min(#eggs, 20) do
+                hash = hash .. (eggs[i].Uid or "") .. ","
+            end
+            if hash ~= ESP.LastHash or #ESP.Pool == 0 then
+                ESP.LastHash = hash
+                ESP.Update(eggs)
+            end
+        else
+            if #ESP.Pool > 0 then ESP.Clear() end
+        end
+    end
+end)
+
+print("[PhantomX] ESP backend loaded")
+
+-- ============================================================
+-- COMBAT BACKEND (from File 20 - Oxygen)
+-- ============================================================
+local Combat = {
+    AuraOn = false,
+    Radius = 20,
+    Delay = 0.2,
+    AntiTrap = true,
+}
+
+local auraTask
+local function StartAura()
+    if auraTask then return end
+    auraTask = task.spawn(function()
+        while Combat.AuraOn do
+            task.wait(Combat.Delay)
+            local hrp = getHRP()
+            if not hrp then continue end
+            local best, bd = nil, math.huge
+            for _, p in ipairs(Players:GetPlayers()) do
+                if p ~= LP and p.Character then
+                    local t = p.Character:FindFirstChild("HumanoidRootPart")
+                    if t then
+                        local d = (t.Position - hrp.Position).Magnitude
+                        if d < bd and d <= Combat.Radius then bd = d; best = t end
+                    end
+                end
+            end
+            if best then
+                pcall(function()
+                    hrp.CFrame = CFrame.lookAt(hrp.Position, Vector3.new(
+                        best.Position.X, hrp.Position.Y, best.Position.Z))
+                end)
+                local r = GetRemote("RE/BatSwing/Trigger")
+                if r then pcall(function() r:FireServer() end) end
+            end
+        end
+        auraTask = nil
+    end)
+end
+
+local function StopAura()
+    Combat.AuraOn = false
+    if auraTask then pcall(task.cancel, auraTask) auraTask = nil end
+end
+
+-- Anti-trap loop
+task.spawn(function()
+    while true do
+        task.wait(2)
+        if Combat.AntiTrap then
+            pcall(function()
+                local db = WS:FindFirstChild("__DEBRIS")
+                if not db then return end
+                for _, trap in ipairs(db:GetChildren()) do
+                    if trap.Name == "PlayerTrap"
+                        and trap:GetAttribute("Owner") ~= LP.Name then
+                        for _, p in ipairs(trap:GetDescendants()) do
+                            if p:IsA("BasePart") then
+                                p.CanTouch = false
+                                p.CanQuery = false
+                                if p.Name == "Hitbox" then
+                                    p.CFrame = CFrame.new(0, -999, 0)
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+print("[PhantomX] Combat backend loaded")
+
+-- ============================================================
+-- CHARACTER BACKEND (from File 6 - CRZHub) with Speed fix
+-- ============================================================
+local Char = {
+    SpeedOn = false,
+    Desired = 500,
+    Bypass = "Humanoid Clone",
+    FlyOn = false,
+    FlySpeed = 50,
+    AntiKB = false,
+    AntiRag = false,
+    Smooth = false,
+    AntiRejoin = false,
+    OriginalSpeed = 16,   -- stored for restore
+    SpeedStored = false,
+}
+
+local speedConns = {}
+local charConn
+local kickOrig
+local flyBV, flyBG, flyConn
+
+local function ForceWS(h)
+    if speedConns[h] then pcall(function() speedConns[h]:Disconnect() end) end
+    speedConns[h] = RunService.Heartbeat:Connect(function()
+        if h and h.Parent then
+            if h.WalkSpeed ~= Char.Desired then h.WalkSpeed = Char.Desired end
+        else
+            if speedConns[h] then speedConns[h]:Disconnect(); speedConns[h] = nil end
+        end
+    end)
+end
+
+local function ApplyClone(ch)
+    local h = ch:FindFirstChildOfClass("Humanoid")
+    if not h then return end
+    local cam = WS.CurrentCamera
+    local an = ch:FindFirstChild("Animate")
+    local jp, jh, hp, mhp = h.JumpPower, h.JumpHeight, h.Health, h.MaxHealth
+    if an and an:IsA("LocalScript") then an.Disabled = true end
+    local anim = h:FindFirstChildOfClass("Animator")
+    if anim then for _, t in ipairs(anim:GetPlayingAnimationTracks()) do t:Stop(0) end end
+    h.Archivable = true
+    local nh = h:Clone()
+    for _, c in ipairs(nh:GetChildren()) do
+        if c:IsA("Animator") then c:Destroy() end
+    end
+    h.Name = "_Old"
+    nh.Name = "Humanoid"
+    nh.Parent = ch
+    local na = Instance.new("Animator")
+    na.Parent = nh
+    nh.WalkSpeed = Char.Desired
+    nh.JumpPower = jp
+    nh.JumpHeight = jh
+    nh.MaxHealth = mhp
+    nh.Health = math.min(hp, mhp)
+    if cam then cam.CameraSubject = nh end
+    h:Destroy()
+    if an and an:IsA("LocalScript") then
+        task.wait()
+        an.Disabled = false
+        task.defer(function()
+            if an.Parent then
+                an.Disabled = true
+                task.wait()
+                an.Disabled = false
+            end
+        end)
+    end
+    task.defer(function()
+        if nh.Parent then nh:ChangeState(Enum.HumanoidStateType.Running) end
+    end)
+    ForceWS(nh)
+end
+
+local function StartClone()
+    if charConn then pcall(function() charConn:Disconnect() end) end
+    charConn = LP.CharacterAdded:Connect(function(c)
+        if Char.SpeedOn then
+            task.spawn(function()
+                c:WaitForChild("Humanoid", 5)
+                task.wait(0.1)
+                ApplyClone(c)
+            end)
+        end
+    end)
+    if LP.Character then
+        task.spawn(function()
+            LP.Character:WaitForChild("Humanoid", 5)
+            task.wait(0.1)
+            ApplyClone(LP.Character)
+        end)
+    end
+end
+
+local function StopClone()
+    for h, c in pairs(speedConns) do pcall(function() c:Disconnect() end) end
+    speedConns = {}
+    if charConn then pcall(function() charConn:Disconnect() end) charConn = nil end
+end
+
+local gcConn
+local function StartGC()
+    if gcConn then return end
+    gcConn = RunService.Heartbeat:Connect(function()
+        local h = getHum()
+        if h then h.WalkSpeed = Char.Desired end
+    end)
+end
+local function StopGC()
+    if gcConn then pcall(function() gcConn:Disconnect() end) gcConn = nil end
+end
+
+local function StartBypass()
+    if Char.Bypass == "GC Hook Bypass" then StartGC() else StartClone() end
+end
+
+-- CRITICAL: restore original WalkSpeed
+local function StopBypass()
+    if Char.Bypass == "GC Hook Bypass" then StopGC() else StopClone() end
+    local h = getHum()
+    if h then
+        pcall(function() h.WalkSpeed = Char.OriginalSpeed end)
+    end
+    Char.SpeedStored = false
+end
+
+local function StartFly()
+    if flyConn then flyConn:Disconnect() end
+    if flyBV then flyBV:Destroy() end
+    if flyBG then flyBG:Destroy() end
+    local hrp = getHRP()
+    if not hrp then return end
+    flyBG = Instance.new("BodyGyro")
+    flyBG.MaxTorque = Vector3.new(9e9,9e9,9e9)
+    flyBG.CFrame = hrp.CFrame
+    flyBG.P = 9e4
+    flyBG.Parent = hrp
+    flyBV = Instance.new("BodyVelocity")
+    flyBV.MaxForce = Vector3.new(9e9,9e9,9e9)
+    flyBV.Velocity = Vector3.zero
+    flyBV.Parent = hrp
+    flyConn = RunService.RenderStepped:Connect(function()
+        if not Char.FlyOn then return end
+        local h = getHRP()
+        if not h then return end
+        local cam = WS.CurrentCamera
+        local dir = Vector3.zero
+        if UIS:IsKeyDown(Enum.KeyCode.W) then dir = dir + cam.CFrame.LookVector end
+        if UIS:IsKeyDown(Enum.KeyCode.S) then dir = dir - cam.CFrame.LookVector end
+        if UIS:IsKeyDown(Enum.KeyCode.A) then dir = dir - cam.CFrame.RightVector end
+        if UIS:IsKeyDown(Enum.KeyCode.D) then dir = dir + cam.CFrame.RightVector end
+        if UIS:IsKeyDown(Enum.KeyCode.Space) then dir = dir + Vector3.new(0,1,0) end
+        if UIS:IsKeyDown(Enum.KeyCode.LeftShift) then dir = dir - Vector3.new(0,1,0) end
+        if dir.Magnitude > 0 then dir = dir.Unit * Char.FlySpeed end
+        if flyBG and flyBG.Parent then flyBG.CFrame = cam.CFrame end
+        if flyBV and flyBV.Parent then flyBV.Velocity = dir end
+    end)
+end
+
+local function StopFly()
+    if flyConn then flyConn:Disconnect() flyConn = nil end
+    if flyBV then flyBV:Destroy() flyBV = nil end
+    if flyBG then flyBG:Destroy() flyBG = nil end
+end
+
+local joints = {}
+local araConn
+local function StoreJoints(ch)
+    joints = {}
+    for _, j in ipairs(ch:GetDescendants()) do
+        if j:IsA("Motor6D") then
+            joints[j.Name] = {P0=j.Part0, P1=j.Part1, C0=j.C0, C1=j.C1}
+        end
+    end
+end
+local function RestoreJoints()
+    for n, d in pairs(joints) do
+        if d.P0 and d.P1 and not d.P0:FindFirstChild(n) then
+            local j = Instance.new("Motor6D")
+            j.Name = n
+            j.Part0 = d.P0
+            j.Part1 = d.P1
+            j.C0 = d.C0
+            j.C1 = d.C1
+            j.Parent = d.P0
+        end
+    end
+end
+local function StartAntiRag(ch)
+    local h = ch:WaitForChild("Humanoid", 5)
+    if not h then return end
+    StoreJoints(ch)
+    if araConn then araConn:Disconnect() end
+    araConn = RunService.RenderStepped:Connect(function()
+        if not Char.AntiRag then return end
+        if not ch.Parent then return end
+        local st = h:GetState()
+        if st == Enum.HumanoidStateType.Physics
+            or st == Enum.HumanoidStateType.Freefall
+            or st == Enum.HumanoidStateType.Seated then
+            pcall(function()
+                h:ChangeState(Enum.HumanoidStateType.Running)
+                RestoreJoints()
+            end)
+        end
+    end)
+end
+
+local function EnableAntiRejoin()
+    if kickOrig then return end
+    if typeof(hookmetamethod) ~= "function" then return end
+    if typeof(getnamecallmethod) ~= "function" then return end
+    local cc = typeof(checkcaller) == "function" and checkcaller or function() return false end
+    local old
+    old = hookmetamethod(game, "__namecall", function(self, ...)
+        if Char.AntiRejoin and not cc() then
+            local m = getnamecallmethod()
+            if m == "Kick" and self == LP then return nil end
+            if (m == "Teleport" or m == "TeleportAsync" or m == "TeleportToPlaceInstance") and self == TeleportService then return nil end
+        end
+        return old(self, ...)
+    end)
+    kickOrig = old
+end
+
+local function OnChar(ch)
+    local h = ch:FindFirstChildOfClass("Humanoid")
+    if h and Char.SpeedOn then h.WalkSpeed = Char.Desired end
+    StartAntiRag(ch)
+    if Char.FlyOn then task.wait(0.5); StartFly() end
+end
+if LP.Character then OnChar(LP.Character) end
+track(LP.CharacterAdded:Connect(OnChar))
+
+track(RunService.Heartbeat:Connect(function()
+    if Char.SpeedOn then
+        local h = getHum()
+        if h then pcall(function() h.WalkSpeed = Char.Desired end) end
+        if Char.Smooth then
+            local hrp = getHRP()
+            if hrp and h then
+                pcall(function()
+                    local md = h.MoveDirection
+                    if md.Magnitude > 0 then
+                        local tv = md.Unit * Char.Desired
+                        hrp.AssemblyLinearVelocity = Vector3.new(tv.X, hrp.AssemblyLinearVelocity.Y, tv.Z)
+                    end
+                end)
+            end
+        end
+    end
+    if Char.AntiKB then
+        local hrp = getHRP()
+        local h = getHum()
+        if hrp and h and h.MoveDirection.Magnitude == 0 then
+            hrp.Velocity = Vector3.new(0, hrp.Velocity.Y, 0)
+            hrp.RotVelocity = Vector3.zero
+        end
+    end
+end))
+
+print("[PhantomX] Character backend loaded")
+
+-- ============================================================
+-- AUTOMATION BACKEND (from File 6)
+-- ============================================================
+local Auto = {
+    PlaceAll = false,
+    Hatch = false,
+    Claim = false,
+    UpBase = false,
+    UpTread = false,
+    BuyTrail = false,
+    Abyss = false,
+}
+
+local function GetSave()
+    local Save
+    pcall(function() Save = require(RS.Shared.Save) end)
+    if Save and Save.Get then
+        local ok, d = pcall(Save.Get, LP)
+        return ok and d or nil
+    end
+    return nil
+end
+
+local function DoPlaceAll()
+    local save = GetSave()
+    if not save or type(save.EggInventory) ~= "table" then return 0 end
+    if not EggStateModule or not EggStateModule.PlantEgg then return 0 end
+    local n = 0
+    for uid, egg in pairs(save.EggInventory) do
+        if type(egg) == "table" and egg.Placement == nil then
+            pcall(function()
+                EggStateModule.PlantEgg(uid, CFrame.new(math.random(-5,5), 0, math.random(-5,5)))
+            end)
+            n = n + 1
+            task.wait(0.15)
+        end
+    end
+    return n
+end
+
+local function DoHatch()
+    local save = GetSave()
+    if not save or type(save.EggInventory) ~= "table" then return 0 end
+    if not EggStateModule then return 0 end
+    local n = 0
+    for uid, egg in pairs(save.EggInventory) do
+        if type(egg) == "table" then
+            local ready = true
+            if EggStateModule.IsReadyToHatch then
+                local ok, r = pcall(EggStateModule.IsReadyToHatch, uid)
+                ready = ok and r == true
+            end
+            if ready and EggStateModule.BeginHatch then
+                pcall(function()
+                    EggStateModule.BeginHatch(uid)
+                    if EggStateModule.FinishHatch then EggStateModule.FinishHatch(uid) end
+                end)
+                n = n + 1
+                task.wait(0.2)
+            end
+        end
+    end
+    return n
+end
+
+local function DoClaim()
+    if not Networking then return 0 end
+    local n = 0
+    for _, name in ipairs({"RF/Codex/AskRedeemAll","RF/Codex/AskRedeemLimitedEgg","RF/GroupPerk/RedeemPerk"}) do
+        local r = Networking:FindFirstChild(name)
+        if r then
+            local ok, res = pcall(function() return r:InvokeServer() end)
+            if ok and res == true then n = n + 1 end
+        end
+    end
+    local c = Networking:FindFirstChild("RF/AwayEarnings/AskCollect")
+    if c then pcall(function() c:InvokeServer() end) n = n + 1 end
+    return n
+end
+
+local function DoUpBase()
+    local r = GetRemote("RF/Homestead/AskBaseTierRaise")
+    if r then return pcall(function() r:FireServer() end) end
+    return false
+end
+local function DoUpTread()
+    local r = GetRemote("RF/Treadmill/AskTierRaise")
+    if r then return pcall(function() r:InvokeServer() end) end
+    return false
+end
+local function DoEnterAbyss()
+    local r = GetRemote("RF/BossEvent/AskEnter")
+    if not r then return false, "No remote" end
+    local ok, acc = pcall(function() return r:InvokeServer() end)
+    if not ok then return false, tostring(acc) end
+    return acc == true
+end
+
+task.spawn(function()
+    while true do
+        task.wait(3)
+        if Auto.PlaceAll then pcall(DoPlaceAll) end
+        task.wait(2)
+        if Auto.Hatch then pcall(DoHatch) end
+        task.wait(5)
+        if Auto.Claim then pcall(DoClaim) end
+        task.wait(5)
+        if Auto.UpBase then pcall(DoUpBase) end
+        task.wait(5)
+        if Auto.UpTread then pcall(DoUpTread) end
+        task.wait(5)
+        if Auto.Abyss then
+            local snapR = GetRemote("RF/BossEvent/AskSnapshot")
+            if snapR then
+                local ok, snap = pcall(function() return snapR:InvokeServer() end)
+                if ok and snap and snap.Open == true then pcall(DoEnterAbyss) end
+            end
+        end
+    end
+end)
+
+print("[PhantomX] Automation backend loaded")
+
+-- ============================================================
+-- EVENT BACKEND (from File 4 - BlyxoHub)
+-- ============================================================
+local Event = {
+    AutoBoss = false,
+    AutoFight = false,
+    AutoRift = false,
+    AutoTrade = false,
+}
+
+task.spawn(function()
+    while true do
+        task.wait(6)
+        if Event.AutoBoss then
+            local snapR = GetRemote("RF/BossEvent/AskSnapshot")
+            if snapR then
+                local ok, snap = pcall(function() return snapR:InvokeServer() end)
+                if ok and snap and snap.Open == true
+                    and LP:GetAttribute("InBossArena") ~= true then
+                    local e = GetRemote("RF/BossEvent/AskEnter")
+                    if e then pcall(function() e:InvokeServer() end) end
+                end
+            end
+        end
+    end
+end)
+
+task.spawn(function()
+    while true do
+        task.wait(0.6)
+        if Event.AutoFight and LP:GetAttribute("InBossArena") == true then
+            local c = LP.Character
+            local bat
+            if c then
+                for _, t in ipairs(c:GetChildren()) do
+                    if t:IsA("Tool") and (t:GetAttribute("IsBat") or t.Name:find("Bat")) then bat = t; break end
+                end
+            end
+            local bp = LP:FindFirstChild("Backpack")
+            if not bat and bp then
+                for _, t in ipairs(bp:GetChildren()) do
+                    if t:IsA("Tool") and (t:GetAttribute("IsBat") or t.Name:find("Bat")) then
+                        local h = getHum()
+                        if h then pcall(function() h:EquipTool(t) end) end
+                        bat = t; break
+                    end
+                end
+            end
+            local r = GetRemote("RE/BatSwing/Trigger")
+            if r then pcall(function() r:FireServer() end) end
+        end
+    end
+end)
+
+print("[PhantomX] Event backend loaded")
+
+-- ============================================================
+-- WINDOW
+-- ============================================================
+local Window = WindUI:CreateWindow({
+    Title = "PhantomX | SAE",
+    Icon = "rbxassetid://112352744088491",
+    Author = "By Cypher",
+    Folder = "PhantomXPro",
+    Size = UDim2.fromOffset(920, 640),
+    Theme = "Indigo",
+    Background = "rbxassetid://5859552536",
+    BackgroundImageTransparency = 0.6,
+    Transparent = true,
+    User = { Enabled = true, Anonymous = false,
+        Callback = function()
+            WindUI:Notify({Title=T("tabInfo"), Content=LP.Name, Duration=3})
+        end },
+    SideBarWidth = 220,
+    ScrollBarEnabled = true,
+})
+
+local MainSection = Window:Section({Title = T("secMain"), Opened = true})
+local SettingsSection = Window:Section({Title = T("secSettings"), Opened = true})
+
+local InfoTab = MainSection:Tab({Title = T("tabInfo"), Icon = "info", IconColor = Color3.fromHex("#5AD1FF")})
+local MainTab = MainSection:Tab({Title = T("tabMain"), Icon = "home", IconColor = Color3.fromHex("#7C9CFF")})
+local AutomationTab = MainSection:Tab({Title = T("tabAutomation"), Icon = "bot", IconColor = Color3.fromHex("#5AFFB3")})
+local CombatTab = MainSection:Tab({Title = T("tabCombat"), Icon = "sword", IconColor = Color3.fromHex("#FF5A7A")})
+local CharacterTab = MainSection:Tab({Title = T("tabCharacter"), Icon = "user", IconColor = Color3.fromHex("#8C7CFF")})
+local EventTab = MainSection:Tab({Title = T("tabEvent"), Icon = "calendar", IconColor = Color3.fromHex("#FFD65A")})
+local PlaceHatchTab = MainSection:Tab({Title = T("tabPlaceHatch"), Icon = "package", IconColor = Color3.fromHex("#10D782")})
+local MiscTab = MainSection:Tab({Title = T("tabMisc"), Icon = "wrench", IconColor = Color3.fromHex("#88CCFF")})
+local ConfigTab = SettingsSection:Tab({Title = T("tabConfig"), Icon = "settings", IconColor = Color3.fromHex("#5AFFB3")})
+local CreditsTab = SettingsSection:Tab({Title = T("tabCredits"), Icon = "user", IconColor = Color3.fromHex("#FFD65A")})
+
+print("[PhantomX] Window + 10 tabs ready")
+
+-- ============================================================
+-- INFO TAB
+-- ============================================================
+do
+    InfoTab:Button({Title = T("infoName")..": "..LP.DisplayName, Icon = "user", Callback = function() end})
+    InfoTab:Divider()
+    InfoTab:Button({Title = T("infoUser")..": "..LP.Name, Icon = "at-sign", Callback = function() end})
+    InfoTab:Divider()
+    InfoTab:Button({Title = T("infoId")..": "..LP.UserId, Icon = "hash", Callback = function() end})
+    InfoTab:Divider()
+    InfoTab:Button({Title = T("infoAge")..": "..LP.AccountAge.." "..T("infoDay"), Icon = "calendar", Callback = function() end})
+    InfoTab:Divider()
+    InfoTab:Button({Title = T("infoExec")..": "..(identifyexecutor and identifyexecutor() or "?"), Icon = "terminal", Callback = function() end})
+    InfoTab:Divider()
+
+    local pBtn = InfoTab:Button({Title = T("infoPlayers")..": "..#Players:GetPlayers(), Icon = "users", Callback = function() end})
+    InfoTab:Divider()
+    local fBtn = InfoTab:Button({Title = T("infoFps")..": ...", Icon = "activity", Callback = function() end})
+    InfoTab:Divider()
+    local gBtn = InfoTab:Button({Title = T("infoPing")..": ...", Icon = "wifi", Callback = function() end})
+    InfoTab:Divider()
+
+    InfoTab:Button({
+        Title = T("infoRejoin"), Desc = T("infoRejoinDesc"), Icon = "refresh-cw",
+        Callback = function()
+            task.wait(0.5)
+            pcall(function()
+                TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, LP)
+            end)
+        end,
+    })
+    InfoTab:Divider()
+    InfoTab:Button({
+        Title = T("infoFind"), Desc = T("infoFindDesc"), Icon = "search",
+        Callback = function()
+            local url = "https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100"
+            local ok, res = pcall(function() return HttpService:JSONDecode(game:HttpGet(url)) end)
+            if ok and res and res.data and #res.data > 0 then
+                local best, low = nil, math.huge
+                for _, s in pairs(res.data) do
+                    if s.id and s.playing and s.maxPlayers
+                        and s.playing < s.maxPlayers and s.playing < low then
+                        low = s.playing; best = s
+                    end
+                end
+                if best then
+                    TeleportService:TeleportToPlaceInstance(game.PlaceId, best.id, LP)
+                    return
+                end
+            end
+            pcall(function() TeleportService:Teleport(game.PlaceId, LP) end)
+        end,
+    })
+
+    task.spawn(function()
+        while true do
+            task.wait(5)
+            pcall(function()
+                pBtn:SetTitle(T("infoPlayers")..": "..#Players:GetPlayers())
+                local ping = StatsService.Network.ServerStatsItem["Data Ping"]:GetValue()
+                gBtn:SetTitle(T("infoPing")..": "..math.floor(ping).." ms")
+            end)
+        end
+    end)
+    local fc, lt = 0, tick()
+    track(RunService.RenderStepped:Connect(function()
+        fc = fc + 1
+        local n = tick()
+        if n - lt >= 1 then
+            fBtn:SetTitle(T("infoFps")..": "..math.floor(fc/(n-lt)))
+            fc, lt = 0, n
+        end
+    end))
+end
+
+-- ============================================================
+-- MAIN TAB
+-- ============================================================
+do
+    MainTab:Paragraph({
+        Title = T("mainTitle"),
+        Desc = T("mainDesc"),
+        Image = "home", ImageSize = 24,
+    })
+    MainTab:Section({Title = T("mainTarget")})
+
+    -- suppress flag to avoid callback spam on refresh
+    local suppress = false
+
+    local function BuildOpts()
+        local opts = {T("mainNone")}
+        local eggs = SAE.Evaluate()
+        for i = 1, math.min(#eggs, 60) do
+            local e = eggs[i]
+            opts[#opts + 1] = string.format("%s | %s/s | %s", e.Name, FNum(e.Value), e.Rarity)
+        end
+        return opts
+    end
+
+    local function CurrentLabel()
+        if not SAE.State.SelectedUid then return T("mainNone") end
+        for _, e in ipairs(SAE.Evaluate()) do
+            if e.Uid == SAE.State.SelectedUid then
+                return string.format("%s | %s/s | %s", e.Name, FNum(e.Value), e.Rarity)
+            end
+        end
+        return T("mainNone")
+    end
+
+    local targetDrop
+    targetDrop = MainTab:Dropdown({
+        Flag = "Main_TargetDrop",
+        Title = T("mainTarget"),
+        Desc = T("mainTargetDesc"),
+        Values = BuildOpts(),
+        Value = CurrentLabel(),
+        Size = "xlarge",
+        Callback = function(sel)
+            if suppress then return end
+            if typeof(sel) == "table" then sel = sel[1] end
+            if sel == T("mainNone") then
+                SAE.State.SelectedUid = nil
+                WindUI:Notify({Title=T("nDone"), Content=T("nTargetCleared"), Duration=2})
+                return
+            end
+            for _, e in ipairs(SAE.Evaluate()) do
+                local l = string.format("%s | %s/s | %s", e.Name, FNum(e.Value), e.Rarity)
+                if l == sel then
+                    if SAE.State.SelectedUid ~= e.Uid then
+                        SAE.State.SelectedUid = e.Uid
+                        WindUI:Notify({Title=T("nTargetSet"), Content=e.Name, Duration=2})
+                    end
+                    return
+                end
+            end
+        end,
+    })
+
+    MainTab:Divider()
+
+    MainTab:Button({
+        Title = T("mainRefresh"), Desc = T("mainRefreshDesc"),
+        Icon = "refresh-cw", Size = "xlarge",
+        Callback = function()
+            SAE.State.Cache = nil
+            suppress = true
+            pcall(function() targetDrop:Refresh(BuildOpts()) end)
+            pcall(function() targetDrop:Set(CurrentLabel(), true) end)
+            task.wait(0.1)
+            suppress = false
+            local eggs = SAE.Evaluate()
+            WindUI:Notify({Title=T("nDone"), Content=#eggs.." "..T("nEggsFound"), Duration=2})
+        end,
+    })
+
+    MainTab:Divider()
+    MainTab:Section({Title = "Auto Steal"})
+
+    MainTab:Toggle({
+        Flag = "Main_AutoStealWarp",
+        Title = T("mainAutoSteal"), Desc = T("mainAutoStealDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            if v then
+                SAE.Start("WARP")
+                WindUI:Notify({Title=T("nOn"), Content=T("mainAutoSteal"), Duration=2})
+            else
+                SAE.Stop()
+                WindUI:Notify({Title=T("nOff"), Content=T("mainAutoSteal"), Duration=2})
+            end
+        end,
+    })
+
+    MainTab:Divider()
+
+    MainTab:Toggle({
+        Flag = "Main_AutoStealTween",
+        Title = T("mainAutoTween"), Desc = T("mainAutoTweenDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            if v then
+                SAE.Start("TWEEN")
+                WindUI:Notify({Title=T("nOn"), Content=T("mainAutoTween"), Duration=2})
+            else
+                SAE.Stop()
+                WindUI:Notify({Title=T("nOff"), Content=T("mainAutoTween"), Duration=2})
+            end
+        end,
+    })
+
+    MainTab:Divider()
+
+    MainTab:Slider({
+        Flag = "Main_FlightSpeed",
+        Title = T("mainFlightSpeed"), Desc = T("mainFlightSpeedDesc"),
+        Step = 25,
+        Value = {Min = 100, Max = 1000, Default = 600},
+        Size = "xlarge",
+        Callback = function(v) SAE.State.FlightSpeed = tonumber(v) or 600 end,
+    })
+
+    MainTab:Divider()
+
+    MainTab:Toggle({
+        Flag = "Main_AutoReturn",
+        Title = T("mainAutoReturn"), Desc = T("mainAutoReturnDesc"),
+        Value = true, Size = "xlarge",
+        Callback = function(v) SAE.State.AutoReturn = v end,
+    })
+
+    MainTab:Divider()
+
+    MainTab:Toggle({
+        Flag = "Main_AutoTread",
+        Title = T("mainAutoTread"), Desc = T("mainAutoTreadDesc"),
+        Value = true, Size = "xlarge",
+        Callback = function(v) SAE.State.AutoTreadmill = v end,
+    })
+
+    MainTab:Divider()
+    MainTab:Section({Title = T("mainEsp")})
+
+    MainTab:Toggle({
+        Flag = "Main_EspToggle",
+        Title = T("mainEsp"), Desc = T("mainEspDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            SAE.State.EspEnabled = v
+            if not v then ESP.Clear() end
+        end,
+    })
+
+    MainTab:Divider()
+
+    MainTab:Slider({
+        Flag = "Main_EspRange",
+        Title = T("mainEspRange"), Desc = T("mainEspRangeDesc"),
+        Step = 50,
+        Value = {Min = 100, Max = 3000, Default = 1400},
+        Size = "xlarge",
+        Callback = function(v) SAE.State.EspRange = tonumber(v) or 1400 end,
+    })
+
+    MainTab:Divider()
+
+    MainTab:Button({
+        Title = T("mainEquipBest"), Desc = T("mainEquipBestDesc"),
+        Icon = "user-check", Size = "xlarge",
+        Callback = function()
+            local w = GetRemote("RF/Haul/WearBest")
+            if w then
+                pcall(function() w:InvokeServer() end)
+                WindUI:Notify({Title=T("nDone"), Content=T("nEquipped"), Duration=2})
+            end
+        end,
+    })
+
+    MainTab:Divider()
+
+    MainTab:Toggle({
+        Flag = "Main_OffTread",
+        Title = T("mainOffTread"), Desc = T("mainOffTreadDesc"),
+        Value = true, Size = "xlarge",
+        Callback = function(v)
+            if not v then
+                local d = GetRemote("RF/Treadmill/AskDoff")
+                if d then pcall(function() d:InvokeServer() end) end
+            end
+        end,
+    })
+end
+
+print("[PhantomX] Main tab built")
+
+-- ============================================================
+-- AUTOMATION TAB
+-- ============================================================
+do
+    AutomationTab:Section({Title = T("autoSection")})
+
+    AutomationTab:Toggle({
+        Flag = "Auto_PlaceAll",
+        Title = T("autoPlace"), Desc = T("autoPlaceDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Auto.PlaceAll = v end,
+    })
+    AutomationTab:Divider()
+
+    AutomationTab:Toggle({
+        Flag = "Auto_Hatch",
+        Title = T("autoHatch"), Desc = T("autoHatchDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Auto.Hatch = v end,
+    })
+    AutomationTab:Divider()
+
+    AutomationTab:Button({
+        Title = T("autoEnterAbyss"), Desc = T("autoEnterAbyssDesc"),
+        Icon = "door-open", Size = "xlarge",
+        Callback = function()
+            local ok, msg = DoEnterAbyss()
+            WindUI:Notify({Title=T("nDone"), Content=tostring(msg), Duration=3})
+        end,
+    })
+    AutomationTab:Divider()
+
+    AutomationTab:Toggle({
+        Flag = "Auto_Abyss",
+        Title = T("autoAutoAbyss"), Desc = T("autoAutoAbyssDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Auto.Abyss = v end,
+    })
+    AutomationTab:Divider()
+
+    AutomationTab:Button({
+        Title = T("autoClaim"), Desc = T("autoClaimDesc"),
+        Icon = "gift", Size = "xlarge",
+        Callback = function()
+            local n = DoClaim()
+            WindUI:Notify({Title=T("nClaimed"), Content=tostring(n), Duration=2})
+        end,
+    })
+    AutomationTab:Divider()
+
+    AutomationTab:Toggle({
+        Flag = "Auto_Claim",
+        Title = T("autoClaim").." (Auto)", Desc = T("autoClaimDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Auto.Claim = v end,
+    })
+    AutomationTab:Divider()
+
+    AutomationTab:Toggle({
+        Flag = "Auto_UpBase",
+        Title = T("autoUpBase"), Desc = T("autoUpBaseDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Auto.UpBase = v end,
+    })
+    AutomationTab:Divider()
+
+    AutomationTab:Toggle({
+        Flag = "Auto_UpTread",
+        Title = T("autoUpTread"), Desc = T("autoUpTreadDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Auto.UpTread = v end,
+    })
+    AutomationTab:Divider()
+
+    AutomationTab:Toggle({
+        Flag = "Auto_BuyTrail",
+        Title = T("autoBuyTrail"), Desc = T("autoBuyTrailDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Auto.BuyTrail = v end,
+    })
+end
+
+print("[PhantomX] Automation tab built")
+
+-- ============================================================
+-- COMBAT TAB
+-- ============================================================
+do
+    CombatTab:Section({Title = T("combatSection")})
+
+    CombatTab:Toggle({
+        Flag = "Combat_Aura",
+        Title = T("combatAura"), Desc = T("combatAuraDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            Combat.AuraOn = v
+            if v then StartAura() else StopAura() end
+            WindUI:Notify({Title = v and T("nOn") or T("nOff"), Content = T("combatAura"), Duration = 2})
+        end,
+    })
+    CombatTab:Divider()
+
+    CombatTab:Slider({
+        Flag = "Combat_Radius",
+        Title = T("combatRadius"), Desc = T("combatRadiusDesc"),
+        Step = 1,
+        Value = {Min = 5, Max = 50, Default = 20},
+        Size = "xlarge",
+        Callback = function(v) Combat.Radius = tonumber(v) or 20 end,
+    })
+    CombatTab:Divider()
+
+    CombatTab:Slider({
+        Flag = "Combat_Delay",
+        Title = T("combatDelay"), Desc = T("combatDelayDesc"),
+        Step = 0.05,
+        Value = {Min = 0.05, Max = 1.0, Default = 0.2},
+        Size = "xlarge",
+        Callback = function(v) Combat.Delay = tonumber(v) or 0.2 end,
+    })
+    CombatTab:Divider()
+
+    CombatTab:Button({
+        Title = T("combatSwing"), Desc = T("combatSwingDesc"),
+        Icon = "sword", Size = "xlarge",
+        Callback = function()
+            local r = GetRemote("RE/BatSwing/Trigger")
+            if r then
+                pcall(function() r:FireServer() end)
+                WindUI:Notify({Title=T("nDone"), Content=T("combatSwing"), Duration=2})
+            end
+        end,
+    })
+    CombatTab:Divider()
+
+    CombatTab:Toggle({
+        Flag = "Combat_AntiTrap",
+        Title = T("combatAntiTrap"), Desc = T("combatAntiTrapDesc"),
+        Value = true, Size = "xlarge",
+        Callback = function(v) Combat.AntiTrap = v end,
+    })
+end
+
+print("[PhantomX] Combat tab built")
+
+-- ============================================================
+-- CHARACTER TAB (with speed fix)
+-- ============================================================
+do
+    CharacterTab:Section({Title = T("charSpeedSection")})
+
+    CharacterTab:Input({
+        Flag = "Char_SpeedInput",
+        Title = T("charSpeed"), Desc = T("charSpeedDesc"),
+        Value = "500", Size = "xlarge",
+        Callback = function(v)
+            local n = tonumber(v)
+            if n then
+                Char.Desired = n
+                if Char.SpeedOn then
+                    local h = getHum()
+                    if h then pcall(function() h.WalkSpeed = n end) end
+                end
+            end
+        end,
+    })
+    CharacterTab:Divider()
+
+    CharacterTab:Dropdown({
+        Flag = "Char_Bypass",
+        Title = T("charBypass"), Desc = T("charBypassDesc"),
+        Values = {"Humanoid Clone", "GC Hook Bypass"},
+        Value = "Humanoid Clone", Size = "xlarge",
+        Callback = function(v)
+            Char.Bypass = v
+            if Char.SpeedOn then
+                StopBypass()
+                task.wait(0.1)
+                StartBypass()
+            end
+        end,
+    })
+    CharacterTab:Divider()
+
+    CharacterTab:Toggle({
+        Flag = "Char_SpeedToggle",
+        Title = T("charEnableSpeed"), Desc = T("charEnableSpeedDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            Char.SpeedOn = v
+            if v then
+                -- Store original speed
+                local h = getHum()
+                if h and not Char.SpeedStored then
+                    Char.OriginalSpeed = h.WalkSpeed
+                    Char.SpeedStored = true
+                end
+                StartBypass()
+                WindUI:Notify({Title=T("nOn"), Content=T("nSpeedOn"), Duration=2})
+            else
+                StopBypass()
+                WindUI:Notify({Title=T("nOff"), Content=T("nSpeedOff"), Duration=2})
+            end
+        end,
+    })
+
+    CharacterTab:Divider()
+    CharacterTab:Section({Title = T("charFlySection")})
+
+    CharacterTab:Input({
+        Flag = "Char_FlyInput",
+        Title = T("charFlySpeed"), Desc = T("charFlySpeedDesc"),
+        Value = "50", Size = "xlarge",
+        Callback = function(v)
+            local n = tonumber(v)
+            if n then Char.FlySpeed = n end
+        end,
+    })
+    CharacterTab:Divider()
+
+    CharacterTab:Toggle({
+        Flag = "Char_FlyToggle",
+        Title = T("charEnableFly"), Desc = T("charEnableFlyDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            Char.FlyOn = v
+            if v then StartFly() else StopFly() end
+        end,
+    })
+
+    CharacterTab:Divider()
+    CharacterTab:Section({Title = T("charProtSection")})
+
+    CharacterTab:Toggle({
+        Flag = "Char_AntiKb",
+        Title = T("charAntiKb"), Desc = T("charAntiKbDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Char.AntiKB = v end,
+    })
+    CharacterTab:Divider()
+
+    CharacterTab:Toggle({
+        Flag = "Char_AntiRag",
+        Title = T("charAntiRag"), Desc = T("charAntiRagDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Char.AntiRag = v end,
+    })
+    CharacterTab:Divider()
+
+    CharacterTab:Toggle({
+        Flag = "Char_Smooth",
+        Title = T("charSmooth"), Desc = T("charSmoothDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Char.Smooth = v end,
+    })
+    CharacterTab:Divider()
+
+    CharacterTab:Toggle({
+        Flag = "Char_AntiRejoin",
+        Title = T("charAntiRejoin"), Desc = T("charAntiRejoinDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            Char.AntiRejoin = v
+            if v then EnableAntiRejoin() end
+        end,
+    })
+    CharacterTab:Divider()
+
+    CharacterTab:Button({
+        Title = T("charR6"), Desc = T("charR6Desc"),
+        Icon = "user", Size = "xlarge",
+        Callback = function()
+            pcall(function()
+                loadstring(game:HttpGet(
+                    "https://raw.githubusercontent.com/Methions/Thingsomething/refs/heads/main/R6"))()
+            end)
+        end,
+    })
+end
+
+print("[PhantomX] Character tab built")
+
+-- ============================================================
+-- EVENT TAB
+-- ============================================================
+do
+    EventTab:Section({Title = T("eventBossSection")})
+
+    local bossInfo = EventTab:Paragraph({
+        Title = T("eventBossInfo"),
+        Desc = T("eventReading"),
+        Image = "crown", ImageSize = 24,
+    })
+
+    task.spawn(function()
+        while true do
+            task.wait(4)
+            local snapR = GetRemote("RF/BossEvent/AskSnapshot")
+            if snapR then
+                local ok, snap = pcall(function() return snapR:InvokeServer() end)
+                local txt
+                if ok and type(snap) == "table" then
+                    local now = WS:GetServerTimeNow()
+                    if snap.Open == true then
+                        txt = T("eventOpen").." - "..math.max(0, math.floor((snap.ClosesAt or now) - now)).."s"
+                    else
+                        txt = T("eventClosed").." - "..math.max(0, math.floor((snap.OpensAt or now) - now)).."s"
+                    end
+                else
+                    txt = T("eventReading")
+                end
+                pcall(function() bossInfo:SetDesc(txt) end)
+            end
+        end
+    end)
+
+    EventTab:Button({
+        Title = T("eventEnterBoss"), Desc = T("eventEnterBossDesc"),
+        Icon = "door-open", Size = "xlarge",
+        Callback = function()
+            local r = GetRemote("RF/BossEvent/AskEnter")
+            if r then
+                local ok, acc, msg = pcall(function() return r:InvokeServer() end)
+                WindUI:Notify({Title=T("nDone"),
+                    Content = acc == true and T("nOn") or tostring(msg or "Refused"),
+                    Duration = 3})
+            end
+        end,
+    })
+    EventTab:Divider()
+
+    EventTab:Toggle({
+        Flag = "Event_AutoBoss",
+        Title = T("eventAutoBoss"), Desc = T("eventAutoBossDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Event.AutoBoss = v end,
+    })
+    EventTab:Divider()
+
+    EventTab:Toggle({
+        Flag = "Event_AutoFight",
+        Title = T("eventAutoFight"), Desc = T("eventAutoFightDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Event.AutoFight = v end,
+    })
+    EventTab:Divider()
+
+    EventTab:Button({
+        Title = T("eventClaimBoss"), Desc = T("eventClaimBossDesc"),
+        Icon = "award", Size = "xlarge",
+        Callback = function()
+            local ok, BM = pcall(require, RS.Data.BossMastery)
+            if not ok or type(BM) ~= "table" then return end
+            local claimR = GetRemote("RF/BossMastery/AskClaimMilestone")
+            if not claimR then return end
+            local n = 0
+            for _, m in pairs(BM.Milestones or {}) do
+                if type(m) == "table" and m.Id then
+                    pcall(function() claimR:InvokeServer(tostring(m.Id)) end)
+                    n = n + 1
+                    task.wait(0.15)
+                end
+            end
+            WindUI:Notify({Title=T("nClaimed"), Content=tostring(n), Duration=2})
+        end,
+    })
+
+    EventTab:Divider()
+    EventTab:Section({Title = T("eventRiftSection")})
+
+    local riftInfo = EventTab:Paragraph({
+        Title = T("eventRiftInfo"),
+        Desc = T("eventReading"),
+        Image = "circle-dot", ImageSize = 24,
+    })
+
+    task.spawn(function()
+        while true do
+            task.wait(4)
+            local r = GetRemote("RF/Rift/AskState")
+            if r then
+                local ok, st = pcall(function() return r:InvokeServer() end)
+                local txt = T("eventReading")
+                if ok and type(st) == "table" then
+                    txt = tostring(st.BannerDisplayName or st.BannerId or "?")
+                        .." | "..#(st.Requirements or {})
+                end
+                pcall(function() riftInfo:SetDesc(txt) end)
+            end
+        end
+    end)
+
+    EventTab:Button({
+        Title = T("eventRiftRefresh"), Desc = T("eventRiftRefreshDesc"),
+        Icon = "refresh-cw", Size = "xlarge",
+        Callback = function()
+            local r = GetRemote("RF/Rift/AskState")
+            if r then pcall(function() r:InvokeServer() end) end
+            WindUI:Notify({Title=T("nDone"), Content=T("eventRiftInfo"), Duration=2})
+        end,
+    })
+    EventTab:Divider()
+
+    EventTab:Toggle({
+        Flag = "Event_RiftAuto",
+        Title = T("eventRiftAuto"), Desc = T("eventRiftAutoDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Event.AutoRift = v end,
+    })
+    EventTab:Divider()
+
+    EventTab:Toggle({
+        Flag = "Event_RiftTrade",
+        Title = T("eventRiftTrade"), Desc = T("eventRiftTradeDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) Event.AutoTrade = v end,
+    })
+end
+
+print("[PhantomX] Event tab built")
+
+-- ============================================================
+-- PLACE & HATCH TAB
+-- ============================================================
+do
+    PlaceHatchTab:Section({Title = T("phSection")})
+
+    PlaceHatchTab:Button({
+        Title = T("phPlace"), Desc = T("phPlaceDesc"),
+        Icon = "package-plus", Size = "xlarge",
+        Callback = function()
+            task.spawn(function()
+                SAE.TweenTo(SAE.GetBase(), 750, SAE.State.Session)
+                task.wait(0.3)
+                local n = SAE.PlaceAll()
+                WindUI:Notify({Title=T("nPlaced"), Content=tostring(n), Duration=2})
+                task.wait(0.5)
+                SAE.HatchAll()
+            end)
+        end,
+    })
+    PlaceHatchTab:Divider()
+
+    PlaceHatchTab:Toggle({
+        Flag = "PH_AutoPlace5",
+        Title = T("phAutoPlace5"), Desc = T("phAutoPlace5Desc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) SAE.State.AutoPlace5 = v end,
+    })
+    PlaceHatchTab:Divider()
+
+    PlaceHatchTab:Toggle({
+        Flag = "PH_AutoHatch",
+        Title = T("phAutoHatch"), Desc = T("phAutoHatchDesc"),
+        Value = true, Size = "xlarge",
+        Callback = function(v) SAE.State.AutoHatch = v end,
+    })
+    PlaceHatchTab:Divider()
+
+    PlaceHatchTab:Button({
+        Title = T("phHatchNow"), Desc = T("phHatchNowDesc"),
+        Icon = "egg", Size = "xlarge",
+        Callback = function()
+            local n = SAE.HatchAll()
+            WindUI:Notify({Title=T("nHatched"), Content=tostring(n), Duration=2})
+        end,
+    })
+end
+
+print("[PhantomX] Place & Hatch tab built")
+
+-- ============================================================
+-- MISC TAB
+-- ============================================================
+do
+    MiscTab:Section({Title = T("miscStats")})
+
+    local parent = (gethui and gethui()) or game:GetService("CoreGui")
+    local old = parent:FindFirstChild("PX_Stats")
+    if old then old:Destroy() end
+
+    local sg = Instance.new("ScreenGui")
+    sg.Name = "PX_Stats"
+    sg.ResetOnSpawn = false
+    sg.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    sg.Parent = parent
+
+    local pill = Instance.new("Frame")
+    pill.AnchorPoint = Vector2.new(0.5, 0)
+    pill.Position = UDim2.fromScale(0.5, 0.01)
+    pill.Size = UDim2.fromOffset(320, 28)
+    pill.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+    pill.BackgroundTransparency = 0.1
+    pill.BorderSizePixel = 0
+    pill.Parent = sg
+    Instance.new("UICorner", pill).CornerRadius = UDim.new(1, 0)
+
+    local sl = Instance.new("TextLabel")
+    sl.BackgroundTransparency = 1
+    sl.Size = UDim2.fromScale(1, 1)
+    sl.Font = Enum.Font.GothamMedium
+    sl.TextSize = 12
+    sl.TextColor3 = Color3.fromRGB(220, 220, 235)
+    sl.Text = T("nLoading")
+    sl.Parent = pill
+
+    local start0 = os.clock()
+    local fc, lt = 0, tick()
+    track(RunService.RenderStepped:Connect(function() fc = fc + 1 end))
+    task.spawn(function()
+        while true do
+            task.wait(1)
+            local now = tick()
+            local fps = fc / math.max(now - lt, 0.001)
+            fc, lt = 0, now
+            local ping = 0
+            pcall(function() ping = StatsService.Network.ServerStatsItem["Data Ping"]:GetValue() end)
+            local secs = math.floor(os.clock() - start0)
+            local h = math.floor(secs/3600)
+            local m = math.floor(secs/60) % 60
+            local s = secs % 60
+            local ts = h > 0 and string.format("%d:%02d:%02d", h, m, s)
+                or string.format("%02d:%02d", m, s)
+            sl.Text = string.format("Time: %s  |  %.0f FPS  |  %.0f ms", ts, fps, ping)
+        end
+    end)
+
+    MiscTab:Toggle({
+        Flag = "Misc_Stats",
+        Title = T("miscStatsToggle"), Desc = T("miscStatsToggleDesc"),
+        Value = true, Size = "xlarge",
+        Callback = function(v) sg.Enabled = v end,
+    })
+
+    MiscTab:Divider()
+    MiscTab:Section({Title = T("miscServerSection")})
+
+    MiscTab:Button({
+        Title = T("miscCopyJob"), Desc = T("miscCopyJobDesc"),
+        Icon = "copy", Size = "xlarge",
+        Callback = function()
+            setclipboard(tostring(game.JobId))
+            WindUI:Notify({Title=T("nCopied"), Content=tostring(game.JobId), Duration=2})
+        end,
+    })
+    MiscTab:Divider()
+
+    MiscTab:Input({
+        Flag = "Misc_JoinJob",
+        Title = T("miscJoinJob"), Desc = T("miscJoinJobDesc"),
+        Value = "", Size = "xlarge",
+        Callback = function(v)
+            v = tostring(v):gsub("%s", "")
+            if v ~= "" and v:match("^%x+%-%x+%-%x+%-%x+%-%x+$") then
+                pcall(function()
+                    TeleportService:TeleportToPlaceInstance(game.PlaceId, v, LP)
+                end)
+            end
+        end,
+    })
+    MiscTab:Divider()
+
+    MiscTab:Button({
+        Title = T("miscHop"), Desc = T("miscHopDesc"),
+        Icon = "shuffle", Size = "xlarge",
+        Callback = function()
+            task.spawn(function()
+                local url = "https://games.roblox.com/v1/games/"..game.PlaceId
+                    .."/servers/Public?sortOrder=Asc&excludeFullGames=true&limit=100"
+                local ok, res = pcall(function() return HttpService:JSONDecode(game:HttpGet(url)) end)
+                if ok and res and res.data then
+                    for _, s in ipairs(res.data) do
+                        if s.id and s.id ~= game.JobId then
+                            pcall(function()
+                                TeleportService:TeleportToPlaceInstance(game.PlaceId, s.id, LP)
+                            end)
+                            return
+                        end
+                    end
+                end
+                pcall(function() TeleportService:Teleport(game.PlaceId, LP) end)
+            end)
+        end,
+    })
+
+    MiscTab:Divider()
+    MiscTab:Section({Title = T("miscVisualSection")})
+
+    local origL = {
+        Brightness = Lighting.Brightness,
+        ClockTime = Lighting.ClockTime,
+        ColorShift_Bottom = Lighting.ColorShift_Bottom,
+        ColorShift_Top = Lighting.ColorShift_Top,
+        OutdoorAmbient = Lighting.OutdoorAmbient,
+        GeographicLatitude = Lighting.GeographicLatitude,
+    }
+    local fx = {}
+    MiscTab:Toggle({
+        Flag = "Misc_Light",
+        Title = T("miscLight"), Desc = T("miscLightDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            if v then
+                Lighting.Brightness = 2
+                Lighting.ClockTime = 14
+                Lighting.ColorShift_Top = Color3.fromRGB(255, 245, 230)
+                Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+                for _, f in pairs(fx) do pcall(function() f:Destroy() end) end
+                fx = {}
+                local b = Instance.new("BloomEffect", Lighting)
+                b.Intensity = 0.5; b.Size = 24; b.Threshold = 0.9
+                table.insert(fx, b)
+                local c = Instance.new("ColorCorrectionEffect", Lighting)
+                c.Saturation = 0.15
+                table.insert(fx, c)
+                local s = Instance.new("SunRaysEffect", Lighting)
+                s.Intensity = 0.1
+                table.insert(fx, s)
+            else
+                for k, val in pairs(origL) do Lighting[k] = val end
+                for _, f in pairs(fx) do pcall(function() f:Destroy() end) end
+                fx = {}
+            end
+        end,
+    })
+    MiscTab:Divider()
+
+    MiscTab:Toggle({
+        Flag = "Misc_AntiLag",
+        Title = T("miscAntiLag"), Desc = T("miscAntiLagDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            if v then
+                pcall(function() setfpscap(999999999) end)
+                for _, d in ipairs(WS:GetDescendants()) do
+                    pcall(function()
+                        if d:IsA("ParticleEmitter") or d:IsA("Trail") or d:IsA("Beam") then
+                            d.Enabled = false
+                        end
+                        if d:IsA("BasePart") and not d:IsA("MeshPart") then
+                            d.Material = Enum.Material.Plastic
+                            d.CastShadow = false
+                        end
+                    end)
+                end
+            end
+        end,
+    })
+end
+
+print("[PhantomX] Misc tab built")
+
+-- ============================================================
+-- CONFIG TAB
+-- ============================================================
+do
+    ConfigTab:Paragraph({
+        Title = T("cfgTitle"), Desc = T("cfgDesc"),
+        Image = "settings", ImageSize = 28,
+    })
+
+    ConfigTab:Dropdown({
+        Flag = "Cfg_Theme",
+        Title = T("cfgTheme"), Desc = T("cfgThemeDesc"),
+        Values = {"داكن 🌙","فاتح ☀️","وردي 🌸","نباتي 🌿","أحمر 🔴","نيلي 🔵",
+            "سماء ☁️","بنفسجي 🟣","زمردي 💚","منتصف الليل 🌙","قرمزي 🩸"},
+        Value = "داكن 🌙", Size = "xlarge",
+        Callback = function(v)
+            local m = {["داكن 🌙"]="Dark",["فاتح ☀️"]="Light",["وردي 🌸"]="Rose",
+                ["نباتي 🌿"]="Plant",["أحمر 🔴"]="Red",["نيلي 🔵"]="Indigo",
+                ["سماء ☁️"]="Sky",["بنفسجي 🟣"]="Violet",["زمردي 💚"]="Emerald",
+                ["منتصف الليل 🌙"]="Midnight",["قرمزي 🩸"]="Crimson"}
+            WindUI:SetTheme(m[v] or "Dark")
+        end,
+    })
+
+    ConfigTab:Divider()
+    ConfigTab:Paragraph({
+        Title = T("cfgToggleUI"), Desc = T("cfgToggleUIDesc"),
+        Image = "eye", ImageSize = 28,
+    })
+
+    ConfigTab:Button({
+        Flag = "Cfg_ToggleBtn",
+        Title = T("cfgToggleBtn"),
+        Icon = "eye", Size = "xlarge",
+        Callback = function() Window:Toggle() end,
+    })
+    ConfigTab:Divider()
+
+    ConfigTab:Keybind({
+        Flag = "Cfg_Key",
+        Title = T("cfgKeybind"), Desc = T("cfgKeybindDesc"),
+        Value = "K", Size = "xlarge",
+        Callback = function(k)
+            local ok = pcall(function() Window:SetToggleKey(Enum.KeyCode[k]) end)
+            if ok then
+                WindUI:Notify({Title=T("cfgKeybindSet"), Content=k, Duration=3})
+            else
+                WindUI:Notify({Title=T("cfgKeybindErr"), Content=k, Duration=3})
+            end
+        end,
+    })
+    ConfigTab:Divider()
+
+    ConfigTab:Button({
+        Flag = "Cfg_Lang",
+        Title = T("cfgLang"), Desc = T("cfgLangDesc"),
+        Icon = "languages", Size = "xlarge",
+        Callback = function()
+            _G.PhantomX_Lang = (_G.PhantomX_Lang == "Arabic") and "English" or "Arabic"
+            WindUI:Notify({Title="Language", Content="Restart to apply.", Duration=4})
+        end,
+    })
+    ConfigTab:Divider()
+
+    ConfigTab:Button({
+        Flag = "Cfg_Close",
+        Title = T("cfgClose"), Desc = T("cfgCloseDesc"),
+        Icon = "power", Size = "xlarge",
+        Callback = function()
+            if _G.PhantomX_Cleanup then pcall(_G.PhantomX_Cleanup) end
+            pcall(SAE.Stop)
+            pcall(ESP.Clear)
+            pcall(function() sg:Destroy() end)
+            Window:Destroy()
+            CleanupAll()
+        end,
+    })
+end
+
+print("[PhantomX] Config tab built")
+
+-- ============================================================
+-- CREDITS TAB
+-- ============================================================
+do
+    CreditsTab:Paragraph({
+        Title = T("crName"), Desc = T("crDesc"),
+        Image = "user", ImageSize = 80, Color = Color3.fromHex("#FF6B35"),
+    })
+
+    local function stats()
+        local ok, res = pcall(function()
+            return game:HttpGet(
+                "https://discord.com/api/v10/invites/uRtbxxxrau?with_counts=true")
+        end)
+        if ok then
+            local d = HttpService:JSONDecode(res)
+            return d.approximate_member_count or "?", d.approximate_presence_count or "?"
+        end
+        return "?", "?"
+    end
+    local mc, oc = stats()
+    local dDesc = T("crDiscordDesc"):gsub("{members}", tostring(mc)):gsub("{online}", tostring(oc))
+
+    CreditsTab:Paragraph({
+        Title = T("crDiscord"), Desc = dDesc,
+        Image = "rbxassetid://12892030103", ImageSize = 100,
+        Buttons = {{
+            Title = T("crCopyLink"), Icon = "copy",
+            Callback = function()
+                setclipboard("https://discord.gg/uRtbxxxrau")
+                WindUI:Notify({Title=T("crCopied"), Content="Discord link copied", Duration=2})
+            end,
+        }},
+    })
+    CreditsTab:Divider()
+
+    CreditsTab:Button({
+        Flag = "Cr_Join",
+        Title = T("crJoin"),
+        Icon = "message-circle", Size = "xlarge",
+        Callback = function()
+            setclipboard("https://discord.gg/uRtbxxxrau")
+            WindUI:Notify({Title=T("crCopied"), Content="Discord link copied", Duration=2})
+        end,
+    })
+    CreditsTab:Divider()
+
+    CreditsTab:Button({
+        Flag = "Cr_V",
+        Title = T("crVersion"),
+        Icon = "tag", Size = "xlarge",
+        Callback = function() end,
+    })
+    CreditsTab:Divider()
+
+    CreditsTab:Button({
+        Flag = "Cr_Contact",
+        Title = T("crContact"),
+        Icon = "mail", Size = "xlarge",
+        Callback = function()
+            setclipboard("swightx2")
+            WindUI:Notify({Title=T("crCopied"), Content=T("crContactCopied"), Duration=2})
+        end,
+    })
+end
+
+print("[PhantomX] Credits tab built")
+
+-- ============================================================
+-- WINDOW CLEANUP
+-- ============================================================
+Window:OnDestroy(function()
+    if _G.PhantomX_Cleanup then pcall(_G.PhantomX_Cleanup) end
+    pcall(SAE.Stop)
+    pcall(ESP.Clear)
+    pcall(StopAura)
+    pcall(StopBypass)
+    pcall(StopFly)
+end)
+
+task.wait(2)
+WindUI:Notify({
+    Title = T("nWelcome"),
+    Content = T("nWelcomeBody"),
+    Duration = 5,
+})
+
+print("[PhantomX] Complete build loaded - 10 tabs")
+print("[PhantomX] Done")
