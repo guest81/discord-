@@ -1,15 +1,7 @@
---[[
-====================================================================
-    PhantomX | Steal An Egg
-    Version 5.0.0 - Ken Hub + CRZHub Merge
-====================================================================
---]]
-
 print("[PhantomX] Loading v5.0.0...")
 
 local windUIOk, WindUI = pcall(function()
-    return loadstring(game:HttpGet(
-        "https://github.com/Footagesus/WindUI/releases/latest/download/main.lua", true))()
+    return loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 end)
 if not windUIOk or not WindUI then
     warn("[PhantomX] WindUI load failed")
