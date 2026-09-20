@@ -257,6 +257,20 @@ local Tr = {
         autoClaimNowDesc = "يستلم كل المكافآت المتاحة فوراً",
         autoClaimAuto = "استلام تلقائي للمكافآت",
         autoClaimAutoDesc = "يستلم المكافآت كل 30 ثانية",
+        mainProxSteal = "سرقة تلقائية بالقرب",
+        mainProxStealDesc = "يسرق البيض القريب تلقائياً عبر نظام الـ Proximity",
+        mainProxRange = "نطاق السرقة القريبة",
+        mainProxRangeDesc = "المسافة القصوى للسرقة بالقرب",
+        mainPlotEsp = "ESP بيض قاعدتك",
+        mainPlotEspDesc = "يعرض بيضك الموجود في القاعدة مع وقت التفقيس",
+        autoPlaceNow = "ضع البيض الآن",
+        autoPlaceNowDesc = "يرجع للمنطقة الآمنة ويضع البيض",
+        autoHatchNow = "فقّس الآن",
+        autoHatchNowDesc = "يفقّس البيض الموجود في القاعدة",
+        autoAutoHatch = "تفقيس تلقائي",
+        autoAutoHatchDesc = "يفقّس البيض تلقائياً بعد كل وضع",
+        autoAutoPlace5 = "الوضع كل 5 سرقات",
+        autoAutoPlace5Desc = "يرجع ويضع البيض كل 5 سرقات",
     },
     English = {
         warnTitle = "Warning",
@@ -474,6 +488,20 @@ local Tr = {
         autoClaimNowDesc = "Claims all available rewards immediately",
         autoClaimAuto = "Auto Claim (Toggle)",
         autoClaimAutoDesc = "Claims rewards every 30 seconds",
+        mainProxSteal = "Proximity Auto Steal",
+        mainProxStealDesc = "Auto-fires nearby egg carry prompts via fireproximityprompt",
+        mainProxRange = "Proximity Range",
+        mainProxRangeDesc = "Max distance for proximity steal to trigger",
+        mainPlotEsp = "Plot Eggs ESP",
+        mainPlotEspDesc = "Shows your base eggs with hatch timers",
+        autoPlaceNow = "Place Eggs Now",
+        autoPlaceNowDesc = "Returns to safe zone and places all eggs",
+        autoHatchNow = "Hatch Now",
+        autoHatchNowDesc = "Hatches all eggs at base",
+        autoAutoHatch = "Auto Hatch",
+        autoAutoHatchDesc = "Auto hatches eggs after each placement",
+        autoAutoPlace5 = "Auto Place (Every 5)",
+        autoAutoPlace5Desc = "Returns to base every 5 steals",
     }
 }
 
@@ -683,6 +711,50 @@ pcall(function()
 end)
 
 print("[PhantomX] Protection layers installed")
+
+pcall(function()
+    local PPS = game:GetService("ProximityPromptService")
+    PPS.PromptButtonHoldBegan:Connect(function(prompt)
+        if not _G.PhantomX_ProximityAuto then return end
+        pcall(function()
+            if typeof(fireproximityprompt) == "function" then
+                fireproximityprompt(prompt, 0)
+                fireproximityprompt(prompt)
+            end
+        end)
+    end)
+end)
+
+local proxConn
+local ProxState = {Enabled = false, Range = 30, LoopDelay = 0.15}
+
+local function proximityStealLoop()
+    if proxConn then proxConn:Disconnect(); proxConn = nil end
+    proxConn = RunService.Heartbeat:Connect(function()
+        if not ProxState.Enabled then return end
+        if not (typeof(fireproximityprompt) == "function") then return end
+        local hrp = getHRP()
+        if not hrp then return end
+        for _, obj in ipairs(WS:GetDescendants()) do
+            if obj:IsA("ProximityPrompt") and obj.Enabled then
+                local txt = string.lower((obj.ActionText or "").." "..(obj.ObjectText or "").." "..obj.Name)
+                if txt:find("steal") or txt:find("carry") or txt:find("grab") then
+                    local parent = obj.Parent
+                    local pos = parent and (parent:IsA("BasePart") and parent.Position
+                        or (parent:IsA("Model") and parent:GetPivot().Position))
+                    if pos and (hrp.Position - pos).Magnitude <= ProxState.Range then
+                        pcall(function()
+                            obj.HoldDuration = 0
+                            obj.RequiresLineOfSight = false
+                            fireproximityprompt(obj, 0)
+                            fireproximityprompt(obj)
+                        end)
+                    end
+                end
+            end
+        end
+    end)
+end
 
 -- ============================================================
 -- SAE BACKEND (Safe Zone = FIXED POSITION)
@@ -2032,24 +2104,45 @@ local function RefreshTrailData()
 end
 
 local function DoBuyTrail()
-    if not Networking then return 0 end
-    local buyRemote = Networking:FindFirstChild("RF/Trailwear/AskPurchase")
-        or Networking:FindFirstChild("RF/Trailwear/AskPurchase", true)
-    if not buyRemote then return 0 end
+    local trailRemote
+    local net = RS:FindFirstChild("Packages") and RS.Packages:FindFirstChild("Networking")
+    if net then
+        trailRemote = net:FindFirstChild("RF/Trailwear/AskPurchase")
+            or net:FindFirstChild("RF/Trailwear/AskPurchase", true)
+    end
+    if not trailRemote then
+        trailRemote = GetRemote("RF/Trailwear/AskPurchase")
+            or GetRemote("Trailwear: RequestPurchase")
+            or GetRemote("AskPurchase")
+    end
+    if not trailRemote then return 0 end
+
     local save = GetSave()
     if not save then return 0 end
+    local money = tonumber(save.Money) or 0
     local inventory = save.TrailInventory or {}
     local bought = 0
+
     for _, name in ipairs(TrailValues) do
         if TrailSelection[name] then
             local id = TrailIdMap[name]
             local price = TrailPriceMap[name] or 0
-            if id and not inventory[id] and (tonumber(save.Money) or 0) >= price then
-                local ok = pcall(function() buyRemote:InvokeServer(id) end)
-                if ok then bought = bought + 1 end
+            if id and not inventory[tostring(id)] and money >= price then
+                local ok = pcall(function()
+                    if trailRemote:IsA("RemoteFunction") then
+                        trailRemote:InvokeServer(id)
+                    else
+                        trailRemote:FireServer(id)
+                    end
+                end)
+                if ok then
+                    bought = bought + 1
+                    money = money - price
+                end
                 task.wait(0.3)
                 save = GetSave() or save
                 inventory = save.TrailInventory or inventory
+                money = tonumber(save.Money) or money
             end
         end
     end
@@ -2061,6 +2154,16 @@ task.spawn(function()
     pcall(RefreshTrailData)
 end)
 
+task.spawn(function()
+    while true do
+        if Auto.BuyTrail then
+            pcall(DoBuyTrail)
+            task.wait(8)
+        else
+            task.wait(1)
+        end
+    end
+end)
 task.spawn(function()
     while true do
         local count = 0
@@ -2197,7 +2300,6 @@ local AutomationTab = MainSection:Tab({Title = T("tabAutomation"), Icon = "bot",
 local CombatTab = MainSection:Tab({Title = T("tabCombat"), Icon = "sword", IconColor = Color3.fromHex("#FF5A7A")})
 local CharacterTab = MainSection:Tab({Title = T("tabCharacter"), Icon = "user", IconColor = Color3.fromHex("#8C7CFF")})
 local EventTab = MainSection:Tab({Title = T("tabEvent"), Icon = "calendar", IconColor = Color3.fromHex("#FFD65A")})
-local PlaceHatchTab = MainSection:Tab({Title = T("tabPlaceHatch"), Icon = "package", IconColor = Color3.fromHex("#10D782")})
 local MiscTab = MainSection:Tab({Title = T("tabMisc"), Icon = "wrench", IconColor = Color3.fromHex("#88CCFF")})
 local ConfigTab = SettingsSection:Tab({Title = T("tabConfig"), Icon = "settings", IconColor = Color3.fromHex("#5AFFB3")})
 local CreditsTab = SettingsSection:Tab({Title = T("tabCredits"), Icon = "user", IconColor = Color3.fromHex("#FFD65A")})
@@ -2448,6 +2550,46 @@ do
         Callback = function(v) SAE.State.EspRange = tonumber(v) or 1400 end,
     })
 
+    MainTab:Toggle({
+        Flag = "Main_PlotEsp",
+        Title = T("mainPlotEsp"), Desc = T("mainPlotEspDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            PlotESP.Enabled = v
+            if not v then pcall(ClearPlotESP) end
+            WindUI:Notify({Title = v and T("nOn") or T("nOff"),
+                Content = T("mainPlotEsp"), Duration = 2})
+        end,
+    })
+
+    MainTab:Section({Title = T("mainProxSteal")})
+
+    MainTab:Slider({
+        Flag = "Main_ProxRange",
+        Title = T("mainProxRange"), Desc = T("mainProxRangeDesc"),
+        Step = 5,
+        Value = {Min = 10, Max = 100, Default = 30},
+        Size = "xlarge",
+        Callback = function(v) ProxState.Range = tonumber(v) or 30 end,
+    })
+
+    MainTab:Toggle({
+        Flag = "Main_ProxSteal",
+        Title = T("mainProxSteal"), Desc = T("mainProxStealDesc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v)
+            ProxState.Enabled = v
+            _G.PhantomX_ProximityAuto = v
+            if v then
+                proximityStealLoop()
+                WindUI:Notify({Title=T("nOn"), Content=T("mainProxSteal"), Duration=2})
+            else
+                if proxConn then proxConn:Disconnect(); proxConn = nil end
+                WindUI:Notify({Title=T("nOff"), Content=T("mainProxSteal"), Duration=2})
+            end
+        end,
+    })
+
     MainTab:Section({Title = "Utilities"})
 
     MainTab:Button({
@@ -2479,7 +2621,47 @@ end
 -- AUTOMATION TAB
 -- ============================================================
 do
-    AutomationTab:Section({Title = "Placement"})
+    AutomationTab:Section({Title = "Placement & Hatching"})
+
+    AutomationTab:Button({
+        Title = T("autoPlaceNow"), Desc = T("autoPlaceNowDesc"),
+        Icon = "package-plus", Size = "xlarge",
+        Callback = function()
+            task.spawn(function()
+                SAE.TweenTo(SAFE_ZONE_POS, 750, SAE.State.Session)
+                task.wait(0.3)
+                local n = SAE.PlaceAll()
+                WindUI:Notify({Title=T("nPlaced"), Content=tostring(n), Duration=2})
+                task.wait(0.5)
+                SAE.HatchAll()
+            end)
+        end,
+    })
+
+    AutomationTab:Button({
+        Title = T("autoHatchNow"), Desc = T("autoHatchNowDesc"),
+        Icon = "egg", Size = "xlarge",
+        Callback = function()
+            local n = SAE.HatchAll()
+            WindUI:Notify({Title=T("nHatched"), Content=tostring(n), Duration=2})
+        end,
+    })
+
+    AutomationTab:Toggle({
+        Flag = "Auto_AutoHatch",
+        Title = T("autoAutoHatch"), Desc = T("autoAutoHatchDesc"),
+        Value = true, Size = "xlarge",
+        Callback = function(v) SAE.State.AutoHatch = v end,
+    })
+
+    AutomationTab:Toggle({
+        Flag = "Auto_AutoPlace5",
+        Title = T("autoAutoPlace5"), Desc = T("autoAutoPlace5Desc"),
+        Value = false, Size = "xlarge",
+        Callback = function(v) SAE.State.AutoPlace5 = v end,
+    })
+
+    AutomationTab:Section({Title = "Farming Loops"})
 
     AutomationTab:Toggle({
         Flag = "Auto_PlaceAll",
@@ -2946,44 +3128,6 @@ do
 end
 
 -- ============================================================
--- PLACE & HATCH TAB
--- ============================================================
-do
-    PlaceHatchTab:Section({Title = T("phSection")})
-
-    PlaceHatchTab:Button({
-        Title = T("phPlace"), Desc = T("phPlaceDesc"),
-        Icon = "package-plus", Size = "xlarge",
-        Callback = function()
-            task.spawn(function()
-                SAE.TweenTo(SAFE_ZONE_POS, 750, SAE.State.Session)
-                task.wait(0.3)
-                local n = SAE.PlaceAll()
-                WindUI:Notify({Title=T("nPlaced"), Content=tostring(n), Duration=2})
-                task.wait(0.5)
-                SAE.HatchAll()
-            end)
-        end,
-    })
-
-    PlaceHatchTab:Toggle({
-        Flag = "PH_AutoPlace5",
-        Title = T("phAutoPlace5"), Desc = T("phAutoPlace5Desc"),
-        Value = false, Size = "xlarge",
-        Callback = function(v) SAE.State.AutoPlace5 = v end,
-    })
-
-    PlaceHatchTab:Button({
-        Title = T("phHatchNow"), Desc = T("phHatchNowDesc"),
-        Icon = "egg", Size = "xlarge",
-        Callback = function()
-            local n = SAE.HatchAll()
-            WindUI:Notify({Title=T("nHatched"), Content=tostring(n), Duration=2})
-        end,
-    })
-end
-
--- ============================================================
 -- MISC TAB (Stats + Plot ESP + Server + Visuals)
 -- ============================================================
 do
@@ -3044,23 +3188,6 @@ do
         Title = T("miscStatsToggle"), Desc = T("miscStatsToggleDesc"),
         Value = true, Size = "xlarge",
         Callback = function(v) sg.Enabled = v end,
-    })
-    MiscTab:Section({Title = T("miscPlotEspSection")})
-
-    MiscTab:Toggle({
-        Flag = "Misc_PlotESP",
-        Title = T("miscPlotEsp"), Desc = T("miscPlotEspDesc"),
-        Value = false, Size = "xlarge",
-        Callback = function(v)
-            PlotESP.Enabled = v
-            if v then
-                PlotESP.LastRead = 0
-                WindUI:Notify({Title=T("nOn"), Content=T("nPlotEspOn"), Duration=2})
-            else
-                ClearPlotESP()
-                WindUI:Notify({Title=T("nOff"), Content=T("nPlotEspOff"), Duration=2})
-            end
-        end,
     })
     MiscTab:Section({Title = T("miscServerSection")})
 
@@ -3321,6 +3448,9 @@ Window:OnDestroy(function()
     pcall(StopBypass)
     pcall(StopFly)
     pcall(DisableGodmode)
+    if proxConn then pcall(function() proxConn:Disconnect() end) end
+    _G.PhantomX_ProximityAuto = false
+    ProxState.Enabled = false
 end)
 
 task.wait(2)
