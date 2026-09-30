@@ -1,0 +1,1743 @@
+print("PhantomX On Top Forever")
+
+-- ══════════════════════════════════════════════════════════════════════
+-- GUARD / CLEANUP (re-execution safe)
+-- ══════════════════════════════════════════════════════════════════════
+do
+    local prev = _G.PhantomXHub
+    if prev and type(prev.Unload) == "function" then pcall(prev.Unload) end
+end
+
+local HUB = { conns = {}, drawings = {}, highlights = {}, dead = false }
+_G.PhantomXHub = HUB
+
+local function track(conn) table.insert(HUB.conns, conn); return conn end
+local function trackDraw(d) if d then table.insert(HUB.drawings, d) end; return d end
+
+-- ══════════════════════════════════════════════════════════════════════
+-- WIND UI LOAD
+-- ══════════════════════════════════════════════════════════════════════
+local success, result = pcall(function()
+    local source = game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua", true)
+    if source then
+        local loaded = loadstring(source)
+        if loaded then return loaded() end
+    end
+    return nil
+end)
+
+if success and result then
+    local WindUI = result
+    _G.SelectedLanguage = _G.SelectedLanguage or "Arabic"
+
+    -- ══════════════════════════════════════════════════════════════════
+    -- TRANSLATIONS
+    -- ══════════════════════════════════════════════════════════════════
+    local Translations = {
+        Arabic = {
+            -- ── الموجودة ──
+            welcome = "أهلاً وسهلاً في PhantomXPro",
+            warning = "تنبيه هام:\nتشغيل السكربت يكون على مسؤوليتك الشخصية والكاملة، ونحن غير مسؤولين عن أي ضرر. مع أننا نعمل على تقديم سكربت بأعلى معايير الأمان الممكنة، هذا تحذير احتراطي في حال حدوث أي مشكلة غير متوقعة. نتمني لكم تجربة ممتعة",
+            discord = "انضم لسيرفر الديسكورد",
+            discordContent = "انضم للسيرڤر الرسمي للسكربت!\n• آخر التحديثات\n• مساعدة فنية\n• إقتراحات وتحسينات\n• تحديثات أمان\n\nالرابط: https://discord.gg/CgUa36sPNs",
+            copyLink = "نسخ الرابط وتفعيل السكربت",
+            linkCopied = "تم نسخ الرابط",
+            linkCopiedContent = "تم تفعيل السكربت!\nرابط الديسكورد في الحافظة",
+            changeLanguage = "تغيير اللغة إلى الإنجليزية",
+            languageChanged = "جاري إعادة التشغيل...",
+            scriptClosed = "تم إغلاق السكربت",
+            notification = "إشعار",
+            mainFeatures = "الميزات الرئيسية",
+            info = "معلومات",
+            settings = "إعدادات",
+            developer = "المطور",
+            config = "الإعدادات",
+            yourName = "👤 اسمك: ",
+            yourUsername = "🎫 يوزرك: ",
+            yourId = "🆔 الآي دي: ",
+            accountAge = "📅 عمر الحساب: ",
+            hack = "⚡ الهاك: ",
+            players = "👥 اللاعبين: ",
+            fps = "📊 فريماتك: ",
+            ping = "📡 البينق: ",
+            rejoin = "ادخل نفس سيرفرك الحالي: Rejoin",
+            findServer = "🚀 ابحث عن سيرفر سريع",
+            reconnecting = "جاري إعادة الدخول",
+            searchingServer = "جاري البحث",
+            serverFound = "وجدنا سيرفر!",
+            serverNotFound = "ما لقينا",
+            scriptSettings = "إعدادات السكربت",
+            scriptDesc = "خصص السكربت على كيفك",
+            configManagerTitle = "مدير الإعدادات",
+            configManagerDesc = "احفظ كل إعداداتك الحالية باسم مخصص، أو حمّل/احذف كونفيج سابق.",
+            toggleUITitle = "إظهار / إخفاء الواجهة",
+            toggleUIDesc = "اضغط على الزر تحت أو اضغط المفتاح المحدد لإظهار/إخفاء الواجهة.",
+            toggleUIButton = "إظهار / إخفاء الواجهة",
+            toggleUIKeyTitle = "مفتاح إظهار/إخفاء الواجهة",
+            toggleUIKeyDesc = "المفتاح الافتراضي لإظهار/إخفاء الواجهة",
+            keybindSetTitle = "تم تعيين المفتاح",
+            keybindSetDesc = "زر إظهار/إخفاء الواجهة صار:",
+            keybindErrorTitle = "خطأ بالمفتاح",
+            keybindErrorDesc = "المفتاح غير مدعوم، جرب مفتاح ثاني",
+            selectTheme = "اختر السمة",
+            closeScript = "أقفل السكربت",
+            developerName = "Cypher",
+            developerDesc = "مطور سكربتات Roblox",
+            joinDiscord = "انضم لسيرفر الديسكورد",
+            version = "الإصدار 2.6.0",
+            contactDev = "تواصل مع المطور",
+            discordServerTitle = "سيرفر ديسكورد PhantomX الرسمي",
+            discordServerDesc = "• Members: {members}\n• Online: {online}\n\n━━━━━━━━━━━━━━━━━━━━\nUpdates • Support • Events",
+            copyInvite = "نسخ الرابط",
+            inviteCopied = "تم نسخ رابط الديسكورد!",
+            totalMembers = "عدد الأعضاء",
+            onlineNow = "متصل الآن",
+            -- ── أسماء الأقسام والتبويبات الجديدة ──
+            playerWorldSec = "اللاعب والبيئة",
+            combatHvHSec   = "القتال",
+            miscSec        = "متفرقات",
+            playerTab      = "اللاعب",
+            teleportTab    = "تيليبورت",
+            visualsTab     = "بصريات",
+            combatTab2     = "قتال",
+            hvhTab         = "HvH",
+            serverTabLabel = "سيرفر",
+            luaOSTabLabel  = "LuaOS",
+            -- ── تبويب اللاعب ──
+            movementSec    = "الحركة",
+            wsToggleLabel  = "سرعة المشي",
+            wsValueLabel   = "قيمة السرعة",
+            jpToggleLabel  = "قوة القفز",
+            jpValueLabel   = "قيمة القفز",
+            infJumpLabel   = "قفز لا نهائي",
+            gravitySec     = "الجاذبية",
+            customGravLabel= "جاذبية مخصصة",
+            gravValueLabel = "قيمة الجاذبية",
+            flySec         = "الطيران",
+            flyLabel       = "طيران (W/A/S/D + Space + Shift)",
+            flySpeedLabel  = "سرعة الطيران",
+            noclipLabel    = "نوكليب (عبور الجدران)",
+            charSec        = "الشخصية",
+            respawnLabel   = "إعادة تحميل الشخصية",
+            resetStatsLabel= "ريست كامل للستاتس",
+            antiAFKLabel   = "ضد AFK",
+            avatarSec2     = "الأفاتار",
+            customHipLabel = "ارتفاع الهيب المخصص",
+            hipValueLabel  = "قيمة الارتفاع",
+            -- ── تبويب التيليبورت ──
+            tpPlayersSec     = "تيليبورت للاعبين",
+            selectPlayerLabel= "اختر لاعب",
+            refreshPlayers2  = "تحديث القائمة",
+            tpToPlayerLabel  = "انتقل للاعب",
+            followPlayerLabel= "تتبع اللاعب",
+            waypointsSec     = "النقاط المحفوظة",
+            wpNameLabel      = "اسم النقطة",
+            savePositionLabel= "احفظ الموقع الحالي",
+            savedWpLabel     = "النقاط المحفوظة",
+            tpToWpLabel      = "انتقل للنقطة",
+            deleteWpLabel    = "احذف النقطة",
+            tpMiscSec        = "تيليبورت متنوع",
+            clickTPLabel     = "تيليبورت بالضغط",
+            clickTPKeyLabel  = "مفتاح التيليبورت",
+            tpSpawnLabel     = "الانتقال للسبون",
+            -- ── تبويب البصريات ──
+            espSec           = "ESP",
+            masterEnableLabel= "تفعيل رئيسي",
+            espPlayersLabel  = "اللاعبين",
+            espNPCsLabel     = "NPCs",
+            boxesSec         = "الصناديق",
+            box2DLabel       = "صندوق 2D",
+            boxStyleLabel    = "شكل الصندوق",
+            boxThickLabel    = "سماكة الصندوق",
+            boxFillLabel     = "تعبئة الصندوق",
+            boxFillOpLabel   = "شفافية التعبئة",
+            chamsSec2        = "Chams (تلوين)",
+            chamsLabel       = "تفعيل Chams",
+            chamsDepthLabel  = "عمق التلوين",
+            chamsFillLabel   = "تعبئة %",
+            chamsOutLabel    = "حواف %",
+            textBarsSec      = "النصوص والأشرطة",
+            nameLabel2       = "الاسم",
+            distLabel2       = "المسافة",
+            toolLabel2       = "الأداة المحمولة",
+            hpBarLabel       = "شريط الصحة",
+            hpNumLabel       = "رقم الصحة",
+            hpPctLabel       = "صحة كنسبة مئوية",
+            txtSizeLabel     = "حجم النص",
+            txtFontLabel     = "الخط",
+            extrasSec        = "إضافات",
+            haloLabel2       = "هالة فوق الرأس",
+            headCircleLabel2 = "دائرة الرأس",
+            groundRingLabel2 = "حلقة أرضية 3D",
+            skeletonLabel2   = "هيكل عظمي",
+            hatLabel2        = "قبعة (مخروط)",
+            lookDirLabel2    = "اتجاه النظر",
+            tracerLabel2     = "خطوط التتبع",
+            arrowLabel2      = "أسهم خارج الشاشة",
+            tracerOriginLabel2= "منبع الخطوط",
+            behaviorSec      = "السلوك",
+            teamCheckLabel2  = "تجاهل الفريق",
+            friendColorLabel2= "لون الأصدقاء",
+            visCheckLabel2   = "فحص الرؤية",
+            smoothLabel2     = "تنعيم الصندوق",
+            fadeLabel2       = "تلاشي بالمسافة",
+            rainbowLabel2    = "راينبو",
+            maxDistLabel2    = "أقصى مسافة",
+            colorsSec2       = "الألوان",
+            mainColorLabel2  = "اللون الرئيسي",
+            visColorLabel2   = "لون الظاهر",
+            hidColorLabel2   = "لون المخفي",
+            friendColorPickLabel = "لون الصديق",
+            npcColorLabel2   = "لون الـ NPC",
+            worldSec         = "البيئة",
+            fullbrightLabel2 = "إضاءة كاملة",
+            fovLabel2        = "زاوية الرؤية FOV",
+            -- ── تبويب القتال ──
+            aimbotSec        = "أيم بوت (كاميرا)",
+            aimbotEnabledLabel= "تفعيل",
+            smoothnessLabel2 = "نعومة",
+            fovPxLabel2      = "نطاق FOV",
+            predLabel2       = "توقع الحركة",
+            targetPartLabel2 = "الجزء المستهدف",
+            filtersSec2      = "الفلاتر",
+            teamCheckAimLabel= "تجاهل الفريق",
+            wallCheckLabel2  = "فحص الجدار",
+            aliveCheckLabel2 = "فحص الحياة",
+            activationSec    = "التفعيل",
+            holdRMBLabel2    = "اضغط الكليك الأيمن",
+            toggleModeLabel2 = "وضع التثبيت",
+            altKeyLabel2     = "مفتاح بديل",
+            fovCircleSec     = "دائرة FOV",
+            showFOVLabel2    = "إظهار دائرة FOV",
+            fovCircleColorLabel2 = "لون الدائرة",
+            sentinelSec      = "سنتينل (للشوتر)",
+            sentinelEnabledLabel = "تفعيل السنتينل",
+            lookAtLabel2     = "تتبع بالنظر",
+            autoAirLabel2    = "تلقائي في الهواء",
+            resolverLabel2   = "ريزولفر",
+            hitPartSec2      = "الجزء المستهدف",
+            nearestPartLabel2= "أقرب جزء تلقائياً",
+            bodyPartLabel2   = "اختر الجزء",
+            predSec2         = "البريدكشن",
+            autoPredLabel2   = "بريدكشن تلقائي",
+            lockTypeLabel2   = "نوع اللوك",
+            horizPredLabel2  = "بريدكشن أفقي",
+            cameraSec2       = "الكاميرا",
+            cameraEnabledLabel2 = "تفعيل الكاميرا",
+            cameraSmoothLabel2 = "نعومة الكاميرا",
+            easingStyleLabel2= "نمط التحريك",
+            easingDirLabel2  = "اتجاه التحريك",
+            hitFXSec         = "تأثيرات الضرب",
+            hitEffectLabel2  = "تأثير بصري عند الضرب",
+            hitSoundLabel2   = "صوت الضرب",
+            hitNotifyLabel2  = "إشعار عند الضرب",
+            effectTypeLabel2 = "نوع التأثير",
+            soundTypeLabel2  = "نوع الصوت",
+            hlFillLabel2     = "تعبئة الهايلايت",
+            hlOutlineLabel2  = "حواف الهايلايت",
+            hitFXColorLabel2 = "لون التأثير",
+            hitChamsSec2     = "تشامز عند الضرب",
+            hitChamsEnabledLabel2 = "تفعيل",
+            hitChamsColorLabel2   = "اللون",
+            hitChamsDurLabel2     = "المدة (ثانية)",
+            hitChamsMaterialLabel2= "المادة",
+            -- ── تبويب HvH ──
+            csyncSec         = "C-Sync",
+            csyncEnabledLabel2= "تفعيل",
+            csyncTypeLabel2  = "النوع",
+            csyncDistLabel2  = "المسافة",
+            csyncHeightLabel2= "الارتفاع",
+            csyncSpeedLabel2 = "السرعة",
+            csyncRandomLabel2= "عشوائية",
+            tpActionsSec     = "تيليبورتات متخصصة",
+            grenadeTpLabel2  = "تيليبورت القنبلة",
+            rocketTpLabel2   = "تيليبورت الصاروخ",
+            bulletTpSec      = "Bullet TP",
+            bulletGyattLabel2= "تفعيل Bullet TP",
+            anchorLabel2     = "تثبيت",
+            offsetXLabel2    = "إزاحة X",
+            offsetYLabel2    = "إزاحة Y",
+            offsetZLabel2    = "إزاحة Z",
+            predBreakerSec   = "كسر البريدكشن",
+            jumpPredLabel2   = "قفز تنبؤي",
+            antiLockLabel2   = "ضد اللوك",
+            antiLockTypeLabel2= "نوع ضد اللوك",
+            cfSpeedSec       = "CFrame Speed",
+            cfSpeedEnabledLabel2 = "تفعيل",
+            cfSpeedValueLabel2   = "السرعة",
+            macroSec         = "ماكرو",
+            loadMacroLabel2  = "تحميل الماكرو",
+            macroToggleLabel = "تفعيل / إيقاف الماكرو",
+            macroSpeedLabel2 = "سرعة الماكرو",
+            networkSec       = "الشبكة",
+            networkAntiLabel2= "Network Anti",
+            -- ── تبويب السيرفر ──
+            serverSec2       = "إجراءات السيرفر",
+            rejoinLabel2     = "إعادة الدخول للسيرفر",
+            serverHopLabel2  = "الانتقال لسيرفر آخر",
+            copyJobIDLabel2  = "نسخ الـ Job ID",
+            sessionInfoLabel2= "معلومات الجلسة",
+            -- ── تبويب LuaOS ──
+            luaOSSec2        = "LuaOS",
+            luaOSDescLabel   = "نظام تشغيل متكامل داخل روبلوكس — Terminal • Notepad • Browser • Calculator • Files • Monitor",
+            launchLuaOSLabel = "🖥️ تشغيل LuaOS",
+            luaOSNote        = "ملاحظة: LuaOS يفتح واجهته المستقلة داخل اللعبة.",
+        },
+        English = {
+            -- ── Existing ──
+            welcome = "Welcome to PhantomXPro",
+            warning = "Important Warning:\nUsing this script is entirely at your own risk and responsibility. We are not responsible for any damage. Although we work to provide a script with the highest possible security standards, this is a precautionary warning in case any unexpected problem occurs. We hope you have an enjoyable experience",
+            discord = "Join Discord Server",
+            discordContent = "Join the official script server!\n• Latest updates\n• Technical support\n• Suggestions and improvements\n• Security updates\n\nLink: https://discord.gg/CgUa36sPNs",
+            copyLink = "Copy Link & Activate Script",
+            linkCopied = "Link Copied",
+            linkCopiedContent = "Script activated!\nDiscord link in clipboard",
+            changeLanguage = "Change Language to Arabic",
+            languageChanged = "Restarting...",
+            scriptClosed = "Script closed",
+            notification = "Notification",
+            mainFeatures = "Main Features",
+            info = "Info",
+            settings = "Settings",
+            developer = "Developer",
+            config = "Config",
+            yourName = "👤 Your Name: ",
+            yourUsername = "🎫 Username: ",
+            yourId = "ID: ",
+            accountAge = "📅 Account Age: ",
+            hack = "⚡ Hack: ",
+            players = "👥 Players: ",
+            fps = "📊 FPS: ",
+            ping = "📡 Ping: ",
+            rejoin = "Rejoin Current Server",
+            findServer = "🚀 Find Fast Server",
+            reconnecting = "Reconnecting...",
+            searchingServer = "Searching for server...",
+            serverFound = "Server found!",
+            serverNotFound = "Not found",
+            scriptSettings = "Script Settings",
+            scriptDesc = "Customize the script to your liking",
+            configManagerTitle = "Config Manager",
+            configManagerDesc = "Save all your current settings under a custom name, or load/delete a previous config.",
+            toggleUITitle = "Toggle UI",
+            toggleUIDesc = "Click the button below or press the set key to show/hide the UI.",
+            toggleUIButton = "Toggle UI (Show / Hide)",
+            toggleUIKeyTitle = "Toggle UI Key",
+            toggleUIKeyDesc = "Default key to show/hide the UI",
+            keybindSetTitle = "Keybind Set",
+            keybindSetDesc = "Toggle UI key set to:",
+            keybindErrorTitle = "Keybind Error",
+            keybindErrorDesc = "Unsupported key, try another one",
+            selectTheme = "Select Theme",
+            closeScript = "Close Script",
+            developerName = "Cypher",
+            developerDesc = "Roblox Script Developer",
+            joinDiscord = "Join Discord Server",
+            version = "Version 2.6.0",
+            contactDev = "Contact Developer",
+            discordServerTitle = "Official PhantomX Discord Server",
+            discordServerDesc = "• Members: {members}\n• Online: {online}\n\n━━━━━━━━━━━━━━━━━━━━\nUpdates • Support • Events",
+            copyInvite = "Copy Invite",
+            inviteCopied = "Discord invite copied!",
+            totalMembers = "Total Members",
+            onlineNow = "Online Now",
+            -- ── New Section / Tab names ──
+            playerWorldSec = "Player & World",
+            combatHvHSec   = "Combat",
+            miscSec        = "Misc",
+            playerTab      = "Player",
+            teleportTab    = "Teleport",
+            visualsTab     = "Visuals",
+            combatTab2     = "Combat",
+            hvhTab         = "HvH",
+            serverTabLabel = "Server",
+            luaOSTabLabel  = "LuaOS",
+            -- ── Player Tab ──
+            movementSec    = "Movement",
+            wsToggleLabel  = "WalkSpeed",
+            wsValueLabel   = "Speed Value",
+            jpToggleLabel  = "JumpPower",
+            jpValueLabel   = "Jump Value",
+            infJumpLabel   = "Infinite Jump",
+            gravitySec     = "Gravity",
+            customGravLabel= "Custom Gravity",
+            gravValueLabel = "Gravity Value",
+            flySec         = "Fly",
+            flyLabel       = "Fly (W/A/S/D + Space + Shift)",
+            flySpeedLabel  = "Fly Speed",
+            noclipLabel    = "Noclip",
+            charSec        = "Character",
+            respawnLabel   = "Respawn",
+            resetStatsLabel= "Reset Stats",
+            antiAFKLabel   = "Anti-AFK",
+            avatarSec2     = "Avatar",
+            customHipLabel = "Custom Hip Height",
+            hipValueLabel  = "Hip Height Value",
+            -- ── Teleport Tab ──
+            tpPlayersSec     = "Teleport to Players",
+            selectPlayerLabel= "Select Player",
+            refreshPlayers2  = "Refresh List",
+            tpToPlayerLabel  = "Teleport to Player",
+            followPlayerLabel= "Follow Player",
+            waypointsSec     = "Waypoints",
+            wpNameLabel      = "Waypoint Name",
+            savePositionLabel= "Save Current Position",
+            savedWpLabel     = "Saved Waypoints",
+            tpToWpLabel      = "Teleport to Waypoint",
+            deleteWpLabel    = "Delete Waypoint",
+            tpMiscSec        = "Misc Teleport",
+            clickTPLabel     = "Click Teleport",
+            clickTPKeyLabel  = "Click TP Key",
+            tpSpawnLabel     = "Teleport to Spawn",
+            -- ── Visuals Tab ──
+            espSec           = "ESP",
+            masterEnableLabel= "Master Enable",
+            espPlayersLabel  = "Players",
+            espNPCsLabel     = "NPCs",
+            boxesSec         = "Boxes",
+            box2DLabel       = "2D Box",
+            boxStyleLabel    = "Box Style",
+            boxThickLabel    = "Thickness",
+            boxFillLabel     = "Box Fill",
+            boxFillOpLabel   = "Fill Opacity",
+            chamsSec2        = "Chams",
+            chamsLabel       = "Chams (Highlight)",
+            chamsDepthLabel  = "Depth Mode",
+            chamsFillLabel   = "Fill %",
+            chamsOutLabel    = "Outline %",
+            textBarsSec      = "Text & Bars",
+            nameLabel2       = "Name",
+            distLabel2       = "Distance",
+            toolLabel2       = "Held Tool",
+            hpBarLabel       = "Health Bar",
+            hpNumLabel       = "Health Number",
+            hpPctLabel       = "Health as %",
+            txtSizeLabel     = "Text Size",
+            txtFontLabel     = "Font",
+            extrasSec        = "Extras",
+            haloLabel2       = "Halo (head ring)",
+            headCircleLabel2 = "Head Circle",
+            groundRingLabel2 = "Ground Ring (3D)",
+            skeletonLabel2   = "Skeleton",
+            hatLabel2        = "Chinese Hat (cone)",
+            lookDirLabel2    = "Look Direction",
+            tracerLabel2     = "Tracers",
+            arrowLabel2      = "Off-Screen Arrows",
+            tracerOriginLabel2= "Tracer Origin",
+            behaviorSec      = "Behavior",
+            teamCheckLabel2  = "Team Check (hide allies)",
+            friendColorLabel2= "Friend Color",
+            visCheckLabel2   = "Visibility Check",
+            smoothLabel2     = "Box Smoothing",
+            fadeLabel2       = "Distance Fade",
+            rainbowLabel2    = "Rainbow",
+            maxDistLabel2    = "Max Distance",
+            colorsSec2       = "Colors",
+            mainColorLabel2  = "Main Color",
+            visColorLabel2   = "Visible Color",
+            hidColorLabel2   = "Hidden Color",
+            friendColorPickLabel = "Friend Color",
+            npcColorLabel2   = "NPC Color",
+            worldSec         = "World",
+            fullbrightLabel2 = "Fullbright",
+            fovLabel2        = "Field of View",
+            -- ── Combat Tab ──
+            aimbotSec        = "Aimbot (Camera)",
+            aimbotEnabledLabel= "Enabled",
+            smoothnessLabel2 = "Smoothness",
+            fovPxLabel2      = "FOV Radius (px)",
+            predLabel2       = "Prediction",
+            targetPartLabel2 = "Target Part",
+            filtersSec2      = "Filters",
+            teamCheckAimLabel= "Team Check",
+            wallCheckLabel2  = "Wall Check (visible only)",
+            aliveCheckLabel2 = "Alive Check",
+            activationSec    = "Activation",
+            holdRMBLabel2    = "Hold Right-Click",
+            toggleModeLabel2 = "Toggle Mode",
+            altKeyLabel2     = "Alt Aim Key",
+            fovCircleSec     = "FOV Circle",
+            showFOVLabel2    = "Show FOV Circle",
+            fovCircleColorLabel2 = "Circle Color",
+            sentinelSec      = "Sentinel (Shooter)",
+            sentinelEnabledLabel = "Enable Sentinel",
+            lookAtLabel2     = "Look At Target",
+            autoAirLabel2    = "Auto Air",
+            resolverLabel2   = "Resolver",
+            hitPartSec2      = "Hit Part",
+            nearestPartLabel2= "Nearest Part (auto)",
+            bodyPartLabel2   = "Body Part",
+            predSec2         = "Prediction",
+            autoPredLabel2   = "Auto Prediction",
+            lockTypeLabel2   = "Lock Type",
+            horizPredLabel2  = "Horizontal Prediction",
+            cameraSec2       = "Camera",
+            cameraEnabledLabel2 = "Enable Camera Lock",
+            cameraSmoothLabel2 = "Smoothness",
+            easingStyleLabel2= "Easing Style",
+            easingDirLabel2  = "Easing Direction",
+            hitFXSec         = "Hit Effects",
+            hitEffectLabel2  = "Hit Effect (visual)",
+            hitSoundLabel2   = "Hit Sound",
+            hitNotifyLabel2  = "Hit Notify",
+            effectTypeLabel2 = "Effect Type",
+            soundTypeLabel2  = "Sound Type",
+            hlFillLabel2     = "Highlight Fill",
+            hlOutlineLabel2  = "Highlight Outline",
+            hitFXColorLabel2 = "Effect Color",
+            hitChamsSec2     = "Hit Chams",
+            hitChamsEnabledLabel2 = "Enabled",
+            hitChamsColorLabel2   = "Color",
+            hitChamsDurLabel2     = "Duration (sec)",
+            hitChamsMaterialLabel2= "Material",
+            -- ── HvH Tab ──
+            csyncSec         = "C-Sync",
+            csyncEnabledLabel2= "Enabled",
+            csyncTypeLabel2  = "Type",
+            csyncDistLabel2  = "Distance",
+            csyncHeightLabel2= "Height",
+            csyncSpeedLabel2 = "Speed",
+            csyncRandomLabel2= "Random Amount",
+            tpActionsSec     = "Specialized Teleports",
+            grenadeTpLabel2  = "Grenade TP",
+            rocketTpLabel2   = "Rocket TP",
+            bulletTpSec      = "Bullet TP",
+            bulletGyattLabel2= "Enable Bullet TP",
+            anchorLabel2     = "Anchor",
+            offsetXLabel2    = "Offset X",
+            offsetYLabel2    = "Offset Y",
+            offsetZLabel2    = "Offset Z",
+            predBreakerSec   = "Prediction Breaker",
+            jumpPredLabel2   = "Jump Prediction",
+            antiLockLabel2   = "Anti-Lock",
+            antiLockTypeLabel2= "Anti-Lock Type",
+            cfSpeedSec       = "CFrame Speed",
+            cfSpeedEnabledLabel2 = "Enabled",
+            cfSpeedValueLabel2   = "Speed",
+            macroSec         = "Macro",
+            loadMacroLabel2  = "Load Macro",
+            macroToggleLabel = "Toggle Macro ON/OFF",
+            macroSpeedLabel2 = "Macro Speed",
+            networkSec       = "Network",
+            networkAntiLabel2= "Network Anti",
+            -- ── Server Tab ──
+            serverSec2       = "Server Actions",
+            rejoinLabel2     = "Rejoin Server",
+            serverHopLabel2  = "Server Hop",
+            copyJobIDLabel2  = "Copy Job ID",
+            sessionInfoLabel2= "Session Info",
+            -- ── LuaOS Tab ──
+            luaOSSec2        = "LuaOS",
+            luaOSDescLabel   = "Full OS simulation inside Roblox — Terminal • Notepad • Browser • Calculator • Files • Monitor",
+            launchLuaOSLabel = "🖥️ Launch LuaOS",
+            luaOSNote        = "Note: LuaOS opens its own independent GUI inside the game.",
+        }
+    }
+
+    local function T(key)
+        return Translations[_G.SelectedLanguage][key] or key
+    end
+
+    local function cleanupGUI()
+        for _, v in pairs(game.CoreGui:GetChildren()) do
+            if v:IsA("ScreenGui") and (v.Name:find("Wind") or v.Name:find("Phantom") or v.Name:find("LuaOS")) then
+                v:Destroy()
+            end
+        end
+    end
+
+    WindUI:Popup({
+        Title = "Select Language / اختر اللغة",
+        Icon = "globe",
+        Content = "Choose your preferred language:\n\nاختر لغتك المفضلة:",
+        Buttons = {
+            {
+                Title = "English 🇬🇧",
+                Icon = "flag",
+                Variant = "Primary",
+                Callback = function()
+                    _G.SelectedLanguage = "English"
+                    WindUI:Notify({ Title = "Language Selected", Content = "English selected", Duration = 2 })
+                    task.wait(1); createMainScript()
+                end
+            },
+            {
+                Title = "🇸🇦 العربية",
+                Icon = "flag",
+                Variant = "Secondary",
+                Callback = function()
+                    _G.SelectedLanguage = "Arabic"
+                    WindUI:Notify({ Title = "تم الاختيار", Content = "تم اختيار اللغة العربية", Duration = 2 })
+                    task.wait(1); createMainScript()
+                end
+            }
+        }
+    })
+
+    function createMainScript()
+        cleanupGUI()
+
+        local ok2, newWindUI = pcall(function()
+            local source = game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua", true)
+            return loadstring(source)()
+        end)
+        if not ok2 then
+            WindUI:Notify({ Title = "Error", Content = "Failed to reload UI", Duration = 3 }); return
+        end
+        WindUI = newWindUI
+        WindUI.TransparencyValue = 0.1
+        WindUI:SetTheme("Indigo")
+
+        -- ── SERVICES ────────────────────────────────────────────────────
+        local Players         = game:GetService("Players")
+        local RunService      = game:GetService("RunService")
+        local UIS             = game:GetService("UserInputService")
+        local Workspace       = game:GetService("Workspace")
+        local Lighting        = game:GetService("Lighting")
+        local TeleportService = game:GetService("TeleportService")
+        local HttpService     = game:GetService("HttpService")
+        local VirtualUser     = game:GetService("VirtualUser")
+        local StatsService    = game:GetService("Stats")
+        local ReplicatedStorage = game:GetService("ReplicatedStorage")
+        local SoundService    = game:GetService("SoundService")
+        local TweenService    = game:GetService("TweenService")
+        local Camera          = Workspace.CurrentCamera
+        local player          = Players.LocalPlayer
+
+        -- ── CHARACTER HELPERS ────────────────────────────────────────────
+        local function GetChar()    return player.Character end
+        local function GetHum()     local c=GetChar(); return c and c:FindFirstChildOfClass("Humanoid") end
+        local function GetHRP()     local c=GetChar(); return c and c:FindFirstChild("HumanoidRootPart") end
+        local function GetRootCF()  local h=GetHRP(); return h and h.CFrame end
+        local hasDrawing = pcall(function() return Drawing.new end)
+
+        -- ── POPUPS (existing) ────────────────────────────────────────────
+        WindUI:Popup({
+            Title = "PhantomXPro | SAE", Icon = "crown", Content = T("warning"),
+            Buttons = {{ Title = _G.SelectedLanguage=="Arabic" and "موافق" or "OK", Icon="arrow-right", Variant="Primary", Callback=function()end }}
+        })
+        task.wait(5)
+        WindUI:Popup({
+            Title = T("discord"), Icon = "message-circle", Content = T("discordContent"),
+            Buttons = {{
+                Title = T("copyLink"), Icon="copy", Variant="Primary",
+                Callback = function()
+                    setclipboard("https://discord.gg/uRtbxxxrau")
+                    WindUI:Notify({ Title=T("linkCopied"), Content=T("linkCopiedContent"), Duration=4 })
+                end
+            }}
+        })
+
+        -- ── WINDOW ──────────────────────────────────────────────────────
+        local Window = WindUI:CreateWindow({
+            Title = "PhantomX | SAE",
+            Icon = "rbxassetid://112352744088491",
+            Author = "By_Cypher",
+            Folder = "PhantomXPro",
+            Size = UDim2.fromOffset(880, 620),
+            Theme = "Indigo",
+            Background = "rbxassetid://5859552536",
+            BackgroundImageTransparency = 0.6,
+            Transparent = true,
+            User = {
+                Enabled = true, Anonymous = false,
+                Callback = function()
+                    WindUI:Notify({ Title=T("info"), Content=(_G.SelectedLanguage=="Arabic" and "اسمك: " or "Name: ")..player.Name, Duration=3 })
+                end
+            },
+            SideBarWidth = 220,
+            ScrollBarEnabled = true
+        })
+
+        -- ── SECTIONS ────────────────────────────────────────────────────
+        local Secs = {
+            Main       = Window:Section({ Title = T("mainFeatures"),   Opened = true }),
+            PlayerWorld= Window:Section({ Title = T("playerWorldSec"), Opened = true }),
+            CombatSec  = Window:Section({ Title = T("combatHvHSec"),  Opened = true }),
+            MiscSec    = Window:Section({ Title = T("miscSec"),        Opened = true }),
+            SettingsSec= Window:Section({ Title = T("settings"),       Opened = true }),
+        }
+
+        local CfgEls = {}
+        local Tabs = {
+            Info     = Secs.Main:Tab({ Title=T("info"),          Icon="info",       IconColor=Color3.fromHex("#5AD1FF") }),
+            Player   = Secs.PlayerWorld:Tab({ Title=T("playerTab"),   Icon="user",       IconColor=Color3.fromHex("#50FA7B") }),
+            Teleport = Secs.PlayerWorld:Tab({ Title=T("teleportTab"), Icon="map-pin",   IconColor=Color3.fromHex("#FF79C6") }),
+            Visuals  = Secs.PlayerWorld:Tab({ Title=T("visualsTab"),  Icon="eye",       IconColor=Color3.fromHex("#BD93F9") }),
+            Combat   = Secs.CombatSec:Tab({ Title=T("combatTab2"),    Icon="crosshair", IconColor=Color3.fromHex("#FF5555") }),
+            HvH      = Secs.CombatSec:Tab({ Title=T("hvhTab"),        Icon="shield",    IconColor=Color3.fromHex("#FFB86C") }),
+            Server   = Secs.MiscSec:Tab({ Title=T("serverTabLabel"),   Icon="globe",    IconColor=Color3.fromHex("#8BE9FD") }),
+            LuaOS    = Secs.MiscSec:Tab({ Title=T("luaOSTabLabel"),    Icon="monitor",  IconColor=Color3.fromHex("#F1FA8C") }),
+            Config   = Secs.SettingsSec:Tab({ Title=T("config"),   Icon="settings",   IconColor=Color3.fromHex("#5AFFB3") }),
+            Credits  = Secs.SettingsSec:Tab({ Title=T("developer"),Icon="user",       IconColor=Color3.fromHex("#FFD65A") }),
+        }
+
+        -- ════════════════════════════════════════════════════════════════
+        -- INFO TAB  (unchanged from original)
+        -- ════════════════════════════════════════════════════════════════
+        do
+            Tabs.Info:Button({ Title=T("yourName")..player.DisplayName, Callback=function()end })
+            Tabs.Info:Button({ Title=T("yourUsername")..player.Name,    Callback=function()end })
+            Tabs.Info:Button({ Title=T("yourId")..player.UserId,        Callback=function()end })
+            Tabs.Info:Button({ Title=T("accountAge")..player.AccountAge..(_G.SelectedLanguage=="Arabic" and " يوم" or " day"), Callback=function()end })
+            Tabs.Info:Button({ Title=T("hack")..(identifyexecutor and identifyexecutor() or (_G.SelectedLanguage=="Arabic" and "ساينابس" or "Synapse")), Callback=function()end })
+            Tabs.Info:Divider({ Title="" })
+            local playersBtn = Tabs.Info:Button({ Title=T("players")..#Players:GetPlayers(), Callback=function()end })
+            local fpsBtn     = Tabs.Info:Button({ Title=T("fps")..(_G.SelectedLanguage=="Arabic" and "يحسب..." or "calculating..."), Callback=function()end })
+            local pingBtn    = Tabs.Info:Button({ Title=T("ping")..(_G.SelectedLanguage=="Arabic" and "يحسب..." or "calculating..."), Callback=function()end })
+            Tabs.Info:Divider({ Title="" })
+            Tabs.Info:Button({ Title=T("rejoin"),
+                Callback=function()
+                    WindUI:Notify({ Title=T("reconnecting"), Content=_G.SelectedLanguage=="Arabic" and "بيخرجك ويدخلك نفس السيرفر..." or "Rejoining same server...", Duration=3 })
+                    wait(1); pcall(function() TeleportService:TeleportToPlaceInstance(game.PlaceId,game.JobId,player) end)
+                end
+            })
+            Tabs.Info:Button({ Title=T("findServer"),
+                Callback=function()
+                    WindUI:Notify({ Title=T("searchingServer"), Content="...", Duration=5 })
+                    task.spawn(function()
+                        local url="https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100"
+                        local ok3,res3=pcall(function() return HttpService:JSONDecode(game:HttpGet(url)) end)
+                        if ok3 and res3 and res3.data and #res3.data>0 then
+                            local best,low=nil,math.huge
+                            for _,s in pairs(res3.data) do
+                                if s.id and s.playing and s.maxPlayers and s.playing<s.maxPlayers and s.playing<low then low=s.playing;best=s end
+                            end
+                            if best then
+                                WindUI:Notify({ Title=T("serverFound"), Content="Teleporting...", Duration=3 })
+                                wait(1); TeleportService:TeleportToPlaceInstance(game.PlaceId,best.id,player); return
+                            end
+                        end
+                        WindUI:Notify({ Title=T("serverNotFound"), Content="Random teleport...", Duration=3 })
+                        wait(2); pcall(function() TeleportService:Teleport(game.PlaceId,player) end)
+                    end)
+                end
+            })
+            spawn(function()
+                while true do
+                    wait(3); if HUB.dead then break end
+                    playersBtn:SetTitle(T("players")..#Players:GetPlayers())
+                    pcall(function()
+                        local ping=StatsService.Network.ServerStatsItem["Data Ping"]:GetValue()
+                        pingBtn:SetTitle(T("ping")..math.floor(ping).." ms")
+                    end)
+                end
+            end)
+            local fc2,lt=0,tick()
+            track(RunService.RenderStepped:Connect(function()
+                if HUB.dead then return end
+                fc2+=1; local ct=tick()
+                if ct-lt>=1 then fpsBtn:SetTitle(T("fps")..math.floor(fc2/(ct-lt))); fc2=0; lt=ct end
+            end))
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- PLAYER TAB
+        -- ════════════════════════════════════════════════════════════════
+        do
+            local wsEn,wsVal  = false, 16
+            local jpEn,jpVal  = false, 50
+            local infJump     = false
+            local gravEn,gravVal = false, 196.2
+            local defGrav     = Workspace.Gravity
+            local flying,flySpd = false, 50
+            local noclip      = false
+            local noclipParts = {}
+            local antiAFK     = true
+            local hipEn,hipVal= false, 2
+            local flyConn, noclipConn
+
+            local function startFly()
+                local hum=GetHum(); local hrp=GetHRP(); if not hum or not hrp then return end
+                hum.PlatformStand=true
+                if flyConn then flyConn:Disconnect() end
+                flyConn=RunService.RenderStepped:Connect(function()
+                    if HUB.dead or not flying then return end
+                    local h=GetHum(); local r=GetHRP(); if not h or not r then return end
+                    h.PlatformStand=true
+                    local d=Vector3.zero; local cf=Camera.CFrame
+                    if UIS:IsKeyDown(Enum.KeyCode.W) then d+=cf.LookVector end
+                    if UIS:IsKeyDown(Enum.KeyCode.S) then d-=cf.LookVector end
+                    if UIS:IsKeyDown(Enum.KeyCode.A) then d-=cf.RightVector end
+                    if UIS:IsKeyDown(Enum.KeyCode.D) then d+=cf.RightVector end
+                    if UIS:IsKeyDown(Enum.KeyCode.Space) then d+=Vector3.new(0,1,0) end
+                    if UIS:IsKeyDown(Enum.KeyCode.LeftShift) then d-=Vector3.new(0,1,0) end
+                    d=d.Magnitude>0 and d.Unit*flySpd or Vector3.zero
+                    r.AssemblyLinearVelocity=d; r.AssemblyAngularVelocity=Vector3.zero
+                end)
+            end
+            local function stopFly()
+                if flyConn then flyConn:Disconnect(); flyConn=nil end
+                local h=GetHum(); if h then h.PlatformStand=false end
+                local r=GetHRP(); if r then r.AssemblyLinearVelocity=Vector3.zero end
+            end
+            local function startNoclip()
+                if noclipConn then noclipConn:Disconnect() end
+                noclipConn=RunService.Stepped:Connect(function()
+                    if HUB.dead or not noclip then return end
+                    local c=GetChar(); if not c then return end
+                    for _,p in ipairs(c:GetDescendants()) do
+                        if p:IsA("BasePart") and p.CanCollide then noclipParts[p]=true; p.CanCollide=false end
+                    end
+                end)
+            end
+            local function stopNoclip()
+                if noclipConn then noclipConn:Disconnect(); noclipConn=nil end
+                for p in pairs(noclipParts) do if p and p.Parent then pcall(function() p.CanCollide=true end) end end
+                table.clear(noclipParts)
+            end
+
+            track(player.CharacterAdded:Connect(function(char)
+                local hum=char:WaitForChild("Humanoid",10); if not hum then return end
+                task.wait(0.2); if HUB.dead then return end
+                if wsEn then hum.WalkSpeed=wsVal end
+                if jpEn then hum.UseJumpPower=true; hum.JumpPower=jpVal end
+                if hipEn then task.wait(0.2); local h=GetHum(); if h then h.HipHeight=hipVal end end
+            end))
+            track(UIS.JumpRequest:Connect(function()
+                if HUB.dead or not infJump then return end
+                local hum=GetHum(); if hum then hum:ChangeState(Enum.HumanoidStateType.Jumping) end
+            end))
+            if not _G.PhantomXAntiAFK then
+                _G.PhantomXAntiAFK=true
+                player.Idled:Connect(function()
+                    if antiAFK then pcall(function()
+                        VirtualUser:Button2Down(Vector2.new(0,0),Camera.CFrame)
+                        task.wait(1)
+                        VirtualUser:Button2Up(Vector2.new(0,0),Camera.CFrame)
+                    end) end
+                end)
+            end
+
+            -- Movement UI
+            Tabs.Player:Paragraph({ Title=T("movementSec"), Desc="" })
+            Tabs.Player:Toggle({ Flag="ws_en",    Title=T("wsToggleLabel"), Default=false, Callback=function(v) wsEn=v; local h=GetHum(); if h then h.WalkSpeed=v and wsVal or 16 end end })
+            Tabs.Player:Slider({ Flag="ws_val",   Title=T("wsValueLabel"),  Min=16, Max=500, Default=16, Suffix="", Callback=function(v) wsVal=v; if wsEn then local h=GetHum(); if h then h.WalkSpeed=v end end end })
+            Tabs.Player:Toggle({ Flag="jp_en",    Title=T("jpToggleLabel"), Default=false, Callback=function(v) jpEn=v; local h=GetHum(); if h then h.UseJumpPower=true; h.JumpPower=v and jpVal or 50 end end })
+            Tabs.Player:Slider({ Flag="jp_val",   Title=T("jpValueLabel"),  Min=50, Max=500, Default=50, Suffix="", Callback=function(v) jpVal=v; if jpEn then local h=GetHum(); if h then h.UseJumpPower=true; h.JumpPower=v end end end })
+            Tabs.Player:Toggle({ Flag="inf_jump", Title=T("infJumpLabel"),  Default=false, Callback=function(v) infJump=v end })
+            Tabs.Player:Divider({ Title="" })
+            Tabs.Player:Paragraph({ Title=T("gravitySec"), Desc="" })
+            Tabs.Player:Toggle({ Flag="grav_en",  Title=T("customGravLabel"), Default=false, Callback=function(v) gravEn=v; Workspace.Gravity=v and gravVal or defGrav end })
+            Tabs.Player:Slider({ Flag="grav_val", Title=T("gravValueLabel"),  Min=0, Max=400, Default=196, Suffix="", Callback=function(v) gravVal=v; if gravEn then Workspace.Gravity=v end end })
+            Tabs.Player:Divider({ Title="" })
+            Tabs.Player:Paragraph({ Title=T("flySec"), Desc="" })
+            Tabs.Player:Toggle({ Flag="fly_en",   Title=T("flyLabel"),    Default=false, Callback=function(v) flying=v; if v then startFly() else stopFly() end; WindUI:Notify({ Title=T("flyLabel"), Content=v and "ON" or "OFF", Duration=2 }) end })
+            Tabs.Player:Slider({ Flag="fly_spd",  Title=T("flySpeedLabel"), Min=10, Max=500, Default=50, Suffix="", Callback=function(v) flySpd=v end })
+            Tabs.Player:Toggle({ Flag="noclip_en",Title=T("noclipLabel"), Default=false, Callback=function(v) noclip=v; if v then startNoclip() else stopNoclip() end; WindUI:Notify({ Title=T("noclipLabel"), Content=v and "ON" or "OFF", Duration=2 }) end })
+            Tabs.Player:Divider({ Title="" })
+            Tabs.Player:Paragraph({ Title=T("charSec"), Desc="" })
+            Tabs.Player:Button({ Title=T("respawnLabel"),   Callback=function() local h=GetHum(); if h then h.Health=0 end end })
+            Tabs.Player:Button({ Title=T("resetStatsLabel"),Callback=function() local h=GetHum(); if h then h.WalkSpeed=16; h.JumpPower=50; h.UseJumpPower=true end; Workspace.Gravity=defGrav end })
+            Tabs.Player:Toggle({ Flag="anti_afk", Title=T("antiAFKLabel"), Default=true, Callback=function(v) antiAFK=v end })
+            Tabs.Player:Divider({ Title="" })
+            Tabs.Player:Paragraph({ Title=T("avatarSec2"), Desc="" })
+            Tabs.Player:Toggle({ Flag="hip_en",   Title=T("customHipLabel"), Default=false, Callback=function(v) hipEn=v; local h=GetHum(); if h then h.HipHeight=v and hipVal or 2 end end })
+            Tabs.Player:Slider({ Flag="hip_val",  Title=T("hipValueLabel"),  Min=0, Max=20, Default=2, Suffix="", Callback=function(v) hipVal=v; if hipEn then local h=GetHum(); if h then h.HipHeight=v end end end })
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- TELEPORT TAB
+        -- ════════════════════════════════════════════════════════════════
+        do
+            local selPlayer=nil; local following=false
+            local waypoints={}; local pendingName="Spot 1"; local selWaypoint=nil
+            local clickTP=false
+
+            local function GetPNames()
+                local n={}; for _,p in ipairs(Players:GetPlayers()) do if p~=player then table.insert(n,p.Name) end end
+                table.sort(n); if #n==0 then n={"(no others)"} end; return n
+            end
+            local function ResolvePl(name)
+                for _,p in ipairs(Players:GetPlayers()) do if p.Name==name then return p end end
+            end
+            local function WpNames()
+                local n={}; for name in pairs(waypoints) do table.insert(n,name) end
+                table.sort(n); if #n==0 then n={"(none)"} end; return n
+            end
+
+            Tabs.Teleport:Paragraph({ Title=T("tpPlayersSec"), Desc="" })
+            local pDrop=Tabs.Teleport:Dropdown({ Flag="tp_player", Title=T("selectPlayerLabel"), Values=GetPNames(), Value=nil, Callback=function(v) selPlayer=v end })
+            Tabs.Teleport:Button({ Title=T("refreshPlayers2"), Callback=function() pDrop:SetOptions(GetPNames()); WindUI:Notify({ Title=T("teleportTab"), Content=T("refreshPlayers2"), Duration=2 }) end })
+            Tabs.Teleport:Button({ Title=T("tpToPlayerLabel"),
+                Callback=function()
+                    local tgt=ResolvePl(selPlayer); local myHRP=GetHRP()
+                    local tHRP=tgt and tgt.Character and tgt.Character:FindFirstChild("HumanoidRootPart")
+                    if myHRP and tHRP then myHRP.CFrame=tHRP.CFrame*CFrame.new(0,0,3); WindUI:Notify({ Title=T("teleportTab"), Content=tgt.Name, Duration=2 })
+                    else WindUI:Notify({ Title=T("teleportTab"), Content="Unavailable", Duration=2 }) end
+                end
+            })
+            Tabs.Teleport:Toggle({ Flag="tp_follow", Title=T("followPlayerLabel"), Default=false, Callback=function(v) following=v end })
+            task.spawn(function()
+                while true do
+                    if HUB.dead then break end
+                    if following then
+                        local tgt=ResolvePl(selPlayer); local myHRP=GetHRP()
+                        local tHRP=tgt and tgt.Character and tgt.Character:FindFirstChild("HumanoidRootPart")
+                        if myHRP and tHRP then myHRP.CFrame=tHRP.CFrame*CFrame.new(0,0,4) end
+                    end
+                    task.wait(0.4)
+                end
+            end)
+            Tabs.Teleport:Divider({ Title="" })
+            Tabs.Teleport:Paragraph({ Title=T("waypointsSec"), Desc="" })
+            Tabs.Teleport:Input({ Flag="wp_name", Title=T("wpNameLabel"), Default="Spot 1", Placeholder="Spot 1", Callback=function(v) pendingName=(v~="" and v) or "Spot 1" end })
+            local wpDrop
+            Tabs.Teleport:Button({ Title=T("savePositionLabel"),
+                Callback=function()
+                    local cf=GetRootCF(); if not cf then WindUI:Notify({ Title=T("waypointsSec"), Content="No character", Duration=2 }); return end
+                    waypoints[pendingName]=cf; if wpDrop then wpDrop:SetOptions(WpNames()) end
+                    WindUI:Notify({ Title=T("waypointsSec"), Content=pendingName, Duration=2 })
+                end
+            })
+            wpDrop=Tabs.Teleport:Dropdown({ Flag="wp_sel", Title=T("savedWpLabel"), Values=WpNames(), Value=nil, Callback=function(v) selWaypoint=v end })
+            Tabs.Teleport:Button({ Title=T("tpToWpLabel"),
+                Callback=function()
+                    local cf=selWaypoint and waypoints[selWaypoint]; local hrp=GetHRP()
+                    if cf and hrp then hrp.CFrame=cf; WindUI:Notify({ Title=T("waypointsSec"), Content=selWaypoint, Duration=2 })
+                    else WindUI:Notify({ Title=T("waypointsSec"), Content="Unavailable", Duration=2 }) end
+                end
+            })
+            Tabs.Teleport:Button({ Title=T("deleteWpLabel"),
+                Callback=function()
+                    if selWaypoint and waypoints[selWaypoint] then
+                        local r=selWaypoint; waypoints[selWaypoint]=nil; wpDrop:SetOptions(WpNames())
+                        WindUI:Notify({ Title=T("waypointsSec"), Content="Deleted: "..r, Duration=2 })
+                    end
+                end
+            })
+            Tabs.Teleport:Divider({ Title="" })
+            Tabs.Teleport:Paragraph({ Title=T("tpMiscSec"), Desc="" })
+            Tabs.Teleport:Toggle({ Flag="click_tp", Title=T("clickTPLabel"), Default=false,
+                Callback=function(v) clickTP=v; WindUI:Notify({ Title=T("clickTPLabel"), Content=v and "ON" or "OFF", Duration=2 }) end
+            })
+            CfgEls.clickTPKey=Tabs.Teleport:Keybind({ Flag="click_tp_key", Title=T("clickTPKeyLabel"), Value="T", Callback=function()end })
+            track(UIS.InputBegan:Connect(function(inp,gp)
+                if gp or not clickTP then return end
+                local keyVal=CfgEls.clickTPKey and CfgEls.clickTPKey:Get() or "T"
+                if pcall(function() return inp.KeyCode==Enum.KeyCode[keyVal] end) and inp.KeyCode==Enum.KeyCode[keyVal] then
+                    local hrp=GetHRP(); if not hrp then return end
+                    local ml=UIS:GetMouseLocation(); local ray=Camera:ViewportPointToRay(ml.X,ml.Y)
+                    local p2=RaycastParams.new(); p2.FilterType=Enum.RaycastFilterType.Exclude; p2.FilterDescendantsInstances={GetChar()}
+                    local res=Workspace:Raycast(ray.Origin,ray.Direction*5000,p2)
+                    if res then hrp.CFrame=CFrame.new(res.Position+Vector3.new(0,3,0)) end
+                end
+            end))
+            Tabs.Teleport:Button({ Title=T("tpSpawnLabel"),
+                Callback=function()
+                    local hrp=GetHRP(); local sp=Workspace:FindFirstChildWhichIsA("SpawnLocation",true)
+                    if hrp and sp then hrp.CFrame=sp.CFrame*CFrame.new(0,3,0); WindUI:Notify({ Title=T("tpMiscSec"), Content=T("tpSpawnLabel"), Duration=2 })
+                    else WindUI:Notify({ Title=T("tpMiscSec"), Content="No spawn found", Duration=2 }) end
+                end
+            })
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- VISUALS TAB  (ESP full system + World)
+        -- ════════════════════════════════════════════════════════════════
+        do
+            local esp={
+                enabled=true, players=true, npcs=false,
+                chams=false, chamsFillT=0.55, chamsOutlineT=0, chamsDepth="AlwaysOnTop",
+                box=false, boxStyle="Corner", boxFill=false, boxFillT=0.8, boxThickness=1,
+                name=false, distance=false, health=false, healthText=false, healthPercent=false,
+                tool=false, tracer=false, tracerOrigin="Bottom",
+                skeleton=false, hat=false, arrow=false, look=false,
+                halo=false, headCircle=false, ring=false,
+                teamCheck=false, friendCheck=false, visibleCheck=false, rainbow=false, smooth=true,
+                distanceFade=false, maxDistance=1000, textSize=14, font=2,
+                color=Color3.fromRGB(30,90,220), visibleColor=Color3.fromRGB(95,220,120),
+                hiddenColor=Color3.fromRGB(235,75,75), friendColor=Color3.fromRGB(95,150,255),
+                npcColor=Color3.fromRGB(235,200,70),
+            }
+            local espObjs={} local npcObjs={}
+            local FONT_MAP={UI=0,System=1,Plain=2,Monospace=3}
+            local R15={"Head","UpperTorso"},{"UpperTorso","LowerTorso"},{"UpperTorso","LeftUpperArm"},{"LeftUpperArm","LeftLowerArm"},{"LeftLowerArm","LeftHand"},{"UpperTorso","RightUpperArm"},{"RightUpperArm","RightLowerArm"},{"RightLowerArm","RightHand"},{"LowerTorso","LeftUpperLeg"},{"LeftUpperLeg","LeftLowerLeg"},{"LeftLowerLeg","LeftFoot"},{"LowerTorso","RightUpperLeg"},{"RightUpperLeg","RightLowerLeg"},{"RightLowerLeg","RightFoot"}
+            local R6={"Head","Torso"},{"Torso","Left Arm"},{"Torso","Right Arm"},{"Torso","Left Leg"},{"Torso","Right Leg"}
+            local R15_BONES={{unpack(R15)}};R15_BONES={{{"Head","UpperTorso"},{"UpperTorso","LowerTorso"},{"UpperTorso","LeftUpperArm"},{"LeftUpperArm","LeftLowerArm"},{"LeftLowerArm","LeftHand"},{"UpperTorso","RightUpperArm"},{"RightUpperArm","RightLowerArm"},{"RightLowerArm","RightHand"},{"LowerTorso","LeftUpperLeg"},{"LeftUpperLeg","LeftLowerLeg"},{"LeftLowerLeg","LeftFoot"},{"LowerTorso","RightUpperLeg"},{"RightUpperLeg","RightLowerLeg"},{"RightLowerLeg","RightFoot"}}}
+            R15_BONES=R15_BONES[1]
+            local R6_BONES={{"Head","Torso"},{"Torso","Left Arm"},{"Torso","Right Arm"},{"Torso","Left Leg"},{"Torso","Right Leg"}}
+            local MAXBONES=#R15_BONES; local RING_SEGS=16
+            local DKEYS={"boxFill","boxOutline","box","hpOutline","hp","hpText","name","dist","tool","tracer","look","hat","arrow","halo","headCircle"}
+
+            if hasDrawing then
+                local espN=0
+                local function espParent()
+                    local ok3,p=pcall(function() return (gethui and gethui()) or game:GetService("CoreGui") end)
+                    return (ok3 and p) or player:WaitForChild("PlayerGui")
+                end
+                local function nd(cls,props)
+                    local ok3,d=pcall(function() return Drawing.new(cls) end)
+                    if not ok3 or not d then return nil end
+                    for k,v in pairs(props or {}) do pcall(function() d[k]=v end) end
+                    return trackDraw(d)
+                end
+                local function mkObj()
+                    local o={skeleton={},corners={},ring={}}; espN+=1
+                    local hl=Instance.new("Highlight"); hl.Name="PXESP_"..espN
+                    hl.FillTransparency=esp.chamsFillT; hl.OutlineTransparency=esp.chamsOutlineT
+                    hl.DepthMode=Enum.HighlightDepthMode.AlwaysOnTop; hl.Enabled=false
+                    pcall(function() hl.Parent=espParent() end); o.highlight=hl
+                    table.insert(HUB.highlights,hl)
+                    local col=esp.color
+                    o.boxFill=nd("Square",{Filled=true,Transparency=0.2,Color=col,ZIndex=0,Visible=false})
+                    o.boxOutline=nd("Square",{Thickness=3,Filled=false,Color=Color3.new(0,0,0),ZIndex=1,Visible=false})
+                    o.box=nd("Square",{Thickness=1,Filled=false,Color=col,ZIndex=2,Visible=false})
+                    for i=1,8 do o.corners[i]=nd("Line",{Thickness=1.5,Color=col,ZIndex=2,Visible=false}) end
+                    o.hpOutline=nd("Line",{Thickness=3,Color=Color3.new(0,0,0),ZIndex=1,Visible=false})
+                    o.hp=nd("Line",{Thickness=1,Color=Color3.fromRGB(0,255,0),ZIndex=2,Visible=false})
+                    o.hpText=nd("Text",{Size=11,Center=false,Outline=true,Font=2,Color=Color3.new(1,1,1),ZIndex=3,Visible=false})
+                    o.name=nd("Text",{Size=14,Center=true,Outline=true,Font=2,Color=col,ZIndex=3,Visible=false})
+                    o.dist=nd("Text",{Size=13,Center=true,Outline=true,Font=2,Color=Color3.new(1,1,1),ZIndex=3,Visible=false})
+                    o.tool=nd("Text",{Size=12,Center=true,Outline=true,Font=2,Color=col,ZIndex=3,Visible=false})
+                    o.tracer=nd("Line",{Thickness=1.5,Color=col,ZIndex=2,Visible=false})
+                    o.look=nd("Line",{Thickness=1.5,Color=Color3.new(1,1,1),ZIndex=2,Visible=false})
+                    o.hat=nd("Triangle",{Thickness=1,Filled=true,Color=col,ZIndex=2,Visible=false})
+                    o.arrow=nd("Triangle",{Thickness=1,Filled=true,Color=col,ZIndex=2,Visible=false})
+                    o.halo=nd("Circle",{Thickness=2,Filled=false,Color=col,ZIndex=2,Visible=false})
+                    o.headCircle=nd("Circle",{Thickness=1.5,Filled=false,Color=col,ZIndex=2,Visible=false})
+                    for i=1,RING_SEGS do o.ring[i]=nd("Line",{Thickness=1.5,Color=col,ZIndex=2,Visible=false}) end
+                    for i=1,MAXBONES do o.skeleton[i]=nd("Line",{Thickness=1,Color=col,ZIndex=2,Visible=false}) end
+                    return o
+                end
+                local function rmObj(o)
+                    if not o then return end
+                    if o.highlight then o.highlight:Destroy() end
+                    for _,k in ipairs(DKEYS) do if o[k] then pcall(function() o[k]:Remove() end) end end
+                    for _,l in ipairs(o.corners) do pcall(function() l:Remove() end) end
+                    for _,l in ipairs(o.ring) do pcall(function() l:Remove() end) end
+                    for _,l in ipairs(o.skeleton) do pcall(function() l:Remove() end) end
+                end
+                local function mkEsp(p) if espObjs[p] then return end; local o=mkObj(); o.isFriend=false; task.spawn(function() local ok3,r=pcall(function() return player:IsFriendsWith(p.UserId) end); if ok3 then o.isFriend=r==true end end); espObjs[p]=o end
+                local function rmEsp(p) local o=espObjs[p]; if not o then return end; rmObj(o); espObjs[p]=nil end
+                local function hideO(o)
+                    for _,k in ipairs(DKEYS) do if o[k] then o[k].Visible=false end end
+                    for _,l in ipairs(o.corners) do l.Visible=false end
+                    for _,l in ipairs(o.ring) do l.Visible=false end
+                    for _,l in ipairs(o.skeleton) do l.Visible=false end
+                    if o.highlight then o.highlight.Enabled=false end
+                end
+                local function baseCol() return esp.rainbow and Color3.fromHSV((tick()*0.4)%1,1,1) or esp.color end
+                local function hpCol(f) return Color3.fromRGB(math.floor(255*(1-f)),math.floor(255*f),0) end
+                local function isVisESP(char,part)
+                    local p2=RaycastParams.new(); p2.FilterType=Enum.RaycastFilterType.Exclude; p2.FilterDescendantsInstances={GetChar(),Camera}
+                    local r=Workspace:Raycast(Camera.CFrame.Position,part.Position-Camera.CFrame.Position,p2)
+                    return not r or r.Instance:IsDescendantOf(char)
+                end
+                local function box2D(char)
+                    local cf,sz=char:GetBoundingBox(); local mnX,mnY,mxX,mxY=math.huge,math.huge,-math.huge,-math.huge; local anyOn=false
+                    for x=-1,1,2 do for y=-1,1,2 do for z=-1,1,2 do
+                        local sp,on=Camera:WorldToViewportPoint((cf*CFrame.new(sz.X/2*x,sz.Y/2*y,sz.Z/2*z)).Position)
+                        if sp.Z>0 then anyOn=anyOn or on; mnX=math.min(mnX,sp.X); mnY=math.min(mnY,sp.Y); mxX=math.max(mxX,sp.X); mxY=math.max(mxY,sp.Y) end
+                    end end end
+                    if mnX==math.huge then return nil end; return mnX,mnY,mxX,mxY,anyOn
+                end
+                local function cornerBox(o,l,t,r,b,col,th)
+                    local L=math.clamp((r-l)*0.28,4,16)
+                    local sg={{Vector2.new(l,t),Vector2.new(l+L,t)},{Vector2.new(l,t),Vector2.new(l,t+L)},{Vector2.new(r,t),Vector2.new(r-L,t)},{Vector2.new(r,t),Vector2.new(r,t+L)},{Vector2.new(l,b),Vector2.new(l+L,b)},{Vector2.new(l,b),Vector2.new(l,b-L)},{Vector2.new(r,b),Vector2.new(r-L,b)},{Vector2.new(r,b),Vector2.new(r,b-L)}}
+                    for i,s in ipairs(sg) do local ln=o.corners[i]; ln.From,ln.To,ln.Color,ln.Thickness,ln.Visible=s[1],s[2],col,th+0.5,true end
+                end
+                local F={}
+                local function renderEnt(o,char,dname,isPlr,plr)
+                    local hrp=char and (char:FindFirstChild("HumanoidRootPart") or char.PrimaryPart or char:FindFirstChildWhichIsA("BasePart"))
+                    local hum=char and char:FindFirstChildOfClass("Humanoid")
+                    local dist=(hrp and F.myHRP) and (hrp.Position-F.myHRP.Position).Magnitude or 0
+                    local gate=isPlr and esp.players or (not isPlr and esp.npcs)
+                    local allowed=gate and char and hrp and (esp.maxDistance<=0 or dist<=esp.maxDistance) and (not hum or hum.Health>0)
+                    if isPlr and allowed and esp.teamCheck and plr then
+                        if plr.Team~=nil and player.Team~=nil and plr.Team==player.Team then allowed=false end
+                    end
+                    local col=isPlr and F.baseCol or esp.npcColor
+                    if allowed and isPlr and esp.friendCheck and o.isFriend then col=esp.friendColor end
+                    if allowed and esp.visibleCheck then
+                        col=isVisESP(char,char:FindFirstChild("Head") or hrp) and esp.visibleColor or esp.hiddenColor
+                    end
+                    if o.highlight then
+                        o.highlight.Enabled=allowed and esp.chams
+                        if allowed and esp.chams then
+                            o.highlight.Adornee=char; o.highlight.FillColor=col; o.highlight.OutlineColor=col
+                            o.highlight.FillTransparency=esp.chamsFillT; o.highlight.OutlineTransparency=esp.chamsOutlineT
+                            o.highlight.DepthMode=esp.chamsDepth=="Occluded" and Enum.HighlightDepthMode.Occluded or Enum.HighlightDepthMode.AlwaysOnTop
+                        end
+                    end
+                    local anyDraw=esp.box or esp.name or esp.distance or esp.health or esp.healthText or esp.tool or esp.tracer or esp.skeleton or esp.hat or esp.arrow or esp.look or esp.halo or esp.headCircle or esp.ring
+                    if not allowed or not anyDraw then hideO(o); return end
+                    local l,t,r,b,bOn=box2D(char); local haveBox=l~=nil and bOn
+                    local rs,rOn=Camera:WorldToViewportPoint(hrp.Position); local onScreen=rs.Z>0 and rOn
+                    if haveBox and esp.smooth then
+                        local pv=o._rect
+                        if pv then local a=0.45; l=pv[1]+(l-pv[1])*a; t=pv[2]+(t-pv[2])*a; r=pv[3]+(r-pv[3])*a; b=pv[4]+(b-pv[4])*a end
+                        o._rect={l,t,r,b}
+                    end
+                    local showF=esp.box and haveBox and esp.boxStyle=="Full"; local showC=esp.box and haveBox and esp.boxStyle=="Corner"
+                    o.box.Visible=showF; o.boxOutline.Visible=showF
+                    if showF then
+                        local ps=Vector2.new(l,t); local sz=Vector2.new(r-l,b-t)
+                        o.boxOutline.Position=ps-Vector2.new(1,1); o.boxOutline.Size=sz+Vector2.new(2,2); o.boxOutline.Thickness=esp.boxThickness+2
+                        o.box.Position=ps; o.box.Size=sz; o.box.Color=col; o.box.Thickness=esp.boxThickness
+                    end
+                    if showC then cornerBox(o,l,t,r,b,col,esp.boxThickness) else for _,ln in ipairs(o.corners) do ln.Visible=false end end
+                    if esp.box and esp.boxFill and haveBox then o.boxFill.Position=Vector2.new(l,t); o.boxFill.Size=Vector2.new(r-l,b-t); o.boxFill.Color=col; o.boxFill.Transparency=esp.boxFillT; o.boxFill.Visible=true else o.boxFill.Visible=false end
+                    local frac=hum and math.clamp(hum.Health/math.max(hum.MaxHealth,1),0,1) or 1
+                    if esp.health and haveBox and hum then local bx=l-5; o.hpOutline.From=Vector2.new(bx,t-1); o.hpOutline.To=Vector2.new(bx,b+1); o.hpOutline.Visible=true; o.hp.From=Vector2.new(bx,b); o.hp.To=Vector2.new(bx,b-(b-t)*frac); o.hp.Color=hpCol(frac); o.hp.Visible=true else o.hp.Visible=false; o.hpOutline.Visible=false end
+                    if esp.healthText and haveBox and hum then o.hpText.Text=esp.healthPercent and (math.floor(frac*100).."%") or tostring(math.floor(hum.Health)); o.hpText.Font=esp.font; o.hpText.Position=Vector2.new(l-24,(t+b)/2-6); o.hpText.Color=hpCol(frac); o.hpText.Visible=true else o.hpText.Visible=false end
+                    if esp.name and haveBox then o.name.Text=dname; o.name.Size=esp.textSize; o.name.Font=esp.font; o.name.Position=Vector2.new((l+r)/2,t-esp.textSize-2); o.name.Color=col; o.name.Visible=true else o.name.Visible=false end
+                    if esp.distance and haveBox then o.dist.Text=math.floor(dist).."m"; o.dist.Size=esp.textSize-1; o.dist.Font=esp.font; o.dist.Position=Vector2.new((l+r)/2,b+2); o.dist.Visible=true else o.dist.Visible=false end
+                    if esp.tool and haveBox then local ti=char:FindFirstChildOfClass("Tool"); if ti then o.tool.Text=ti.Name; o.tool.Size=esp.textSize-2; o.tool.Font=esp.font; o.tool.Position=Vector2.new((l+r)/2,b+2+(esp.distance and esp.textSize or 0)); o.tool.Color=col; o.tool.Visible=true else o.tool.Visible=false end else o.tool.Visible=false end
+                    if esp.tracer and onScreen then o.tracer.From=F.tracerFrom; o.tracer.To=Vector2.new(rs.X,rs.Y); o.tracer.Color=col; o.tracer.Visible=true else o.tracer.Visible=false end
+                    if esp.halo and char:FindFirstChild("Head") then local hd=char.Head; local tp=hd.Position+Vector3.new(0,hd.Size.Y*0.5+1.4,0); local sp2,on2=Camera:WorldToViewportPoint(tp); if sp2.Z>0 and on2 then o.halo.Position=Vector2.new(sp2.X,sp2.Y); o.halo.Radius=math.clamp(haveBox and (r-l)*0.35 or 10,6,34); o.halo.Color=col; o.halo.Visible=true else o.halo.Visible=false end else o.halo.Visible=false end
+                    if esp.headCircle and char:FindFirstChild("Head") then local hd=char.Head; local sp2,on2=Camera:WorldToViewportPoint(hd.Position); local eg=Camera:WorldToViewportPoint(hd.Position+Camera.CFrame.UpVector*(hd.Size.Y*0.6)); if sp2.Z>0 and on2 then o.headCircle.Position=Vector2.new(sp2.X,sp2.Y); o.headCircle.Radius=math.clamp((Vector2.new(sp2.X,sp2.Y)-Vector2.new(eg.X,eg.Y)).Magnitude,4,40); o.headCircle.Color=col; o.headCircle.Visible=true else o.headCircle.Visible=false end else o.headCircle.Visible=false end
+                    if esp.ring then
+                        local cf2,sz2=char:GetBoundingBox(); local fy=cf2.Position.Y-sz2.Y*0.5; local cw=Vector3.new(hrp.Position.X,fy,hrp.Position.Z); local wr=math.max(sz2.X,sz2.Z)*0.55+1; local pts={}
+                        for i=1,RING_SEGS do local a2=(i-1)/RING_SEGS*math.pi*2; local wp=cw+Vector3.new(math.cos(a2)*wr,0,math.sin(a2)*wr); local s=Camera:WorldToViewportPoint(wp); pts[i]={Vector2.new(s.X,s.Y),s.Z>0} end
+                        for i=1,RING_SEGS do local a2,b2=pts[i],pts[i%RING_SEGS+1]; local ln=o.ring[i]; if a2[2] and b2[2] then ln.From,ln.To,ln.Color,ln.Visible=a2[1],b2[1],col,true else ln.Visible=false end end
+                    else for _,ln in ipairs(o.ring) do ln.Visible=false end end
+                    if esp.skeleton then
+                        local bones=char:FindFirstChild("UpperTorso") and R15_BONES or R6_BONES; local i=0
+                        for _,pair in ipairs(bones) do local a2=char:FindFirstChild(pair[1]); local b2=char:FindFirstChild(pair[2]); if a2 and b2 then local sa=Camera:WorldToViewportPoint(a2.Position); local sb=Camera:WorldToViewportPoint(b2.Position); if sa.Z>0 and sb.Z>0 then i+=1; local ln=o.skeleton[i]; if ln then ln.From=Vector2.new(sa.X,sa.Y); ln.To=Vector2.new(sb.X,sb.Y); ln.Color=col; ln.Visible=true end end end end
+                        for j=i+1,MAXBONES do o.skeleton[j].Visible=false end
+                    else for _,ln in ipairs(o.skeleton) do ln.Visible=false end end
+                    if esp.hat and char:FindFirstChild("Head") then local hd=char.Head; local tp=hd.Position+Vector3.new(0,hd.Size.Y*0.5+0.6,0); local sp2,on2=Camera:WorldToViewportPoint(tp); if sp2.Z>0 and on2 then local ap=Vector2.new(sp2.X,sp2.Y); local w=math.clamp(haveBox and (r-l)*0.45 or 9,6,26); o.hat.PointA=ap; o.hat.PointB=ap+Vector2.new(-w,-w*1.1); o.hat.PointC=ap+Vector2.new(w,-w*1.1); o.hat.Color=col; o.hat.Visible=true else o.hat.Visible=false end else o.hat.Visible=false end
+                    if esp.look and char:FindFirstChild("Head") then local hd=char.Head; local fp=Camera:WorldToViewportPoint(hd.Position); local tp=Camera:WorldToViewportPoint(hd.Position+hd.CFrame.LookVector*4); if fp.Z>0 and tp.Z>0 then o.look.From=Vector2.new(fp.X,fp.Y); o.look.To=Vector2.new(tp.X,tp.Y); o.look.Color=col; o.look.Visible=true else o.look.Visible=false end else o.look.Visible=false end
+                    if esp.arrow and not onScreen then local d2=Vector2.new(rs.X,rs.Y)-F.center; if rs.Z<0 then d2=-d2 end; if d2.Magnitude>0 then d2=d2.Unit; local ap=F.center+d2*math.min(F.vp.X,F.vp.Y)*0.32; local ag=math.atan2(d2.Y,d2.X); o.arrow.PointA=ap+Vector2.new(math.cos(ag),math.sin(ag))*16; o.arrow.PointB=ap+Vector2.new(math.cos(ag+2.6),math.sin(ag+2.6))*16; o.arrow.PointC=ap+Vector2.new(math.cos(ag-2.6),math.sin(ag-2.6))*16; o.arrow.Color=col; o.arrow.Visible=true else o.arrow.Visible=false end else o.arrow.Visible=false end
+                end
+                track(RunService.RenderStepped:Connect(function()
+                    if HUB.dead then return end
+                    F.myHRP=GetHRP(); F.baseCol=baseCol(); F.vp=Camera.ViewportSize; F.center=Vector2.new(F.vp.X/2,F.vp.Y/2); F.tracerFrom=F.center
+                    if esp.tracerOrigin=="Bottom" then F.tracerFrom=Vector2.new(F.vp.X/2,F.vp.Y) elseif esp.tracerOrigin=="Top" then F.tracerFrom=Vector2.new(F.vp.X/2,0) elseif esp.tracerOrigin=="Mouse" then local m=UIS:GetMouseLocation(); F.tracerFrom=Vector2.new(m.X,m.Y) end
+                    if esp.enabled then
+                        for p2,o in pairs(espObjs) do renderEnt(o,p2.Character,p2.DisplayName,true,p2) end
+                        for m2,o in pairs(npcObjs) do if m2.Parent then renderEnt(o,m2,m2.Name,false,nil) else hideO(o) end end
+                    else
+                        for _,o in pairs(espObjs) do hideO(o) end
+                        for _,o in pairs(npcObjs) do hideO(o) end
+                    end
+                end))
+                local function isPlrChar(m) for _,p2 in ipairs(Players:GetPlayers()) do if p2.Character==m then return true end end return false end
+                local function refreshNPCs()
+                    if not esp.npcs then for m,o in pairs(npcObjs) do rmObj(o); npcObjs[m]=nil end; return end
+                    for _,d in ipairs(Workspace:GetDescendants()) do
+                        if d:IsA("Humanoid") then local m=d.Parent; if m and m:IsA("Model") and not npcObjs[m] and not isPlrChar(m) then local pt=m:FindFirstChild("HumanoidRootPart") or m.PrimaryPart or m:FindFirstChildWhichIsA("BasePart"); if pt then npcObjs[m]=mkObj() end end end
+                    end
+                    for m,o in pairs(npcObjs) do if not m.Parent or not m:FindFirstChildOfClass("Humanoid") or isPlrChar(m) then rmObj(o); npcObjs[m]=nil end end
+                end
+                task.spawn(function() while not HUB.dead do pcall(refreshNPCs); task.wait(2) end end)
+                for _,p2 in ipairs(Players:GetPlayers()) do if p2~=player then mkEsp(p2) end end
+                track(Players.PlayerAdded:Connect(function(p2) if p2~=player then mkEsp(p2) end end))
+                track(Players.PlayerRemoving:Connect(rmEsp))
+            end
+
+            -- ESP UI
+            Tabs.Visuals:Paragraph({ Title=T("espSec"), Desc="" })
+            Tabs.Visuals:Toggle({ Flag="esp_en",        Title=T("masterEnableLabel"), Default=true, Callback=function(v) esp.enabled=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_players",   Title=T("espPlayersLabel"),  Default=true, Callback=function(v) esp.players=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_npcs",      Title=T("espNPCsLabel"),     Default=false,Callback=function(v) esp.npcs=v end })
+            Tabs.Visuals:Divider({ Title="" })
+            Tabs.Visuals:Paragraph({ Title=T("boxesSec"), Desc="" })
+            Tabs.Visuals:Toggle({ Flag="esp_box",       Title=T("box2DLabel"),       Default=false,Callback=function(v) esp.box=v end })
+            CfgEls.BoxStyle=Tabs.Visuals:Dropdown({ Flag="esp_boxstyle", Title=T("boxStyleLabel"), Values={"Corner","Full"}, Value="Corner", Callback=function(v) esp.boxStyle=v end })
+            Tabs.Visuals:Slider({ Flag="esp_boxthick",  Title=T("boxThickLabel"),    Min=1,Max=5,  Default=1, Suffix="", Callback=function(v) esp.boxThickness=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_boxfill",   Title=T("boxFillLabel"),     Default=false,Callback=function(v) esp.boxFill=v end })
+            Tabs.Visuals:Slider({ Flag="esp_boxfillop", Title=T("boxFillOpLabel"),   Min=0,Max=100,Default=80,Suffix="%",Callback=function(v) esp.boxFillT=v/100 end })
+            Tabs.Visuals:Divider({ Title="" })
+            Tabs.Visuals:Paragraph({ Title=T("chamsSec2"), Desc="" })
+            Tabs.Visuals:Toggle({ Flag="esp_chams",     Title=T("chamsLabel"),       Default=false,Callback=function(v) esp.chams=v end })
+            CfgEls.ChamsDepth=Tabs.Visuals:Dropdown({ Flag="esp_chamsdepth", Title=T("chamsDepthLabel"), Values={"AlwaysOnTop","Occluded"}, Value="AlwaysOnTop", Callback=function(v) esp.chamsDepth=v end })
+            Tabs.Visuals:Slider({ Flag="esp_chamsfill", Title=T("chamsFillLabel"),   Min=0,Max=100,Default=45,Suffix="%",Callback=function(v) esp.chamsFillT=1-v/100 end })
+            Tabs.Visuals:Slider({ Flag="esp_chamsout",  Title=T("chamsOutLabel"),    Min=0,Max=100,Default=100,Suffix="%",Callback=function(v) esp.chamsOutlineT=1-v/100 end })
+            Tabs.Visuals:Divider({ Title="" })
+            Tabs.Visuals:Paragraph({ Title=T("textBarsSec"), Desc="" })
+            Tabs.Visuals:Toggle({ Flag="esp_name",      Title=T("nameLabel2"),       Default=false,Callback=function(v) esp.name=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_dist",      Title=T("distLabel2"),       Default=false,Callback=function(v) esp.distance=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_tool",      Title=T("toolLabel2"),       Default=false,Callback=function(v) esp.tool=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_hp",        Title=T("hpBarLabel"),       Default=false,Callback=function(v) esp.health=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_hpnum",     Title=T("hpNumLabel"),       Default=false,Callback=function(v) esp.healthText=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_hppct",     Title=T("hpPctLabel"),       Default=false,Callback=function(v) esp.healthPercent=v end })
+            Tabs.Visuals:Slider({ Flag="esp_txtsize",   Title=T("txtSizeLabel"),     Min=10,Max=22,Default=14,Suffix="",Callback=function(v) esp.textSize=v end })
+            CfgEls.ESPFont=Tabs.Visuals:Dropdown({ Flag="esp_font", Title=T("txtFontLabel"), Values={"UI","System","Plain","Monospace"}, Value="Plain", Callback=function(v) esp.font=FONT_MAP[v] or 2 end })
+            Tabs.Visuals:Divider({ Title="" })
+            Tabs.Visuals:Paragraph({ Title=T("extrasSec"), Desc="" })
+            Tabs.Visuals:Toggle({ Flag="esp_halo",      Title=T("haloLabel2"),       Default=false,Callback=function(v) esp.halo=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_headcirc",  Title=T("headCircleLabel2"), Default=false,Callback=function(v) esp.headCircle=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_ring",      Title=T("groundRingLabel2"), Default=false,Callback=function(v) esp.ring=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_skel",      Title=T("skeletonLabel2"),   Default=false,Callback=function(v) esp.skeleton=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_hat",       Title=T("hatLabel2"),        Default=false,Callback=function(v) esp.hat=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_look",      Title=T("lookDirLabel2"),    Default=false,Callback=function(v) esp.look=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_tracer",    Title=T("tracerLabel2"),     Default=false,Callback=function(v) esp.tracer=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_arrow",     Title=T("arrowLabel2"),      Default=false,Callback=function(v) esp.arrow=v end })
+            CfgEls.TracerOrigin=Tabs.Visuals:Dropdown({ Flag="esp_tracerorig", Title=T("tracerOriginLabel2"), Values={"Bottom","Center","Top","Mouse"}, Value="Bottom", Callback=function(v) esp.tracerOrigin=v end })
+            Tabs.Visuals:Divider({ Title="" })
+            Tabs.Visuals:Paragraph({ Title=T("behaviorSec"), Desc="" })
+            Tabs.Visuals:Toggle({ Flag="esp_team",      Title=T("teamCheckLabel2"),  Default=false,Callback=function(v) esp.teamCheck=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_friend",    Title=T("friendColorLabel2"),Default=false,Callback=function(v) esp.friendCheck=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_vis",       Title=T("visCheckLabel2"),   Default=false,Callback=function(v) esp.visibleCheck=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_smooth",    Title=T("smoothLabel2"),     Default=true, Callback=function(v) esp.smooth=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_fade",      Title=T("fadeLabel2"),       Default=false,Callback=function(v) esp.distanceFade=v end })
+            Tabs.Visuals:Toggle({ Flag="esp_rainbow",   Title=T("rainbowLabel2"),    Default=false,Callback=function(v) esp.rainbow=v end })
+            Tabs.Visuals:Slider({ Flag="esp_maxdist",   Title=T("maxDistLabel2"),    Min=0,Max=5000,Default=1000,Suffix="m",Callback=function(v) esp.maxDistance=v end })
+            Tabs.Visuals:Divider({ Title="" })
+            Tabs.Visuals:Paragraph({ Title=T("colorsSec2"), Desc="" })
+            Tabs.Visuals:ColorPicker({ Flag="esp_col",   Title=T("mainColorLabel2"),     Default=Color3.fromRGB(30,90,220),  Callback=function(c) esp.color=c end })
+            Tabs.Visuals:ColorPicker({ Flag="esp_viscol",Title=T("visColorLabel2"),      Default=Color3.fromRGB(95,220,120), Callback=function(c) esp.visibleColor=c end })
+            Tabs.Visuals:ColorPicker({ Flag="esp_hidcol",Title=T("hidColorLabel2"),      Default=Color3.fromRGB(235,75,75),  Callback=function(c) esp.hiddenColor=c end })
+            Tabs.Visuals:ColorPicker({ Flag="esp_frcol", Title=T("friendColorPickLabel"),Default=Color3.fromRGB(95,150,255), Callback=function(c) esp.friendColor=c end })
+            Tabs.Visuals:ColorPicker({ Flag="esp_npccol",Title=T("npcColorLabel2"),      Default=Color3.fromRGB(235,200,70), Callback=function(c) esp.npcColor=c end })
+            Tabs.Visuals:Divider({ Title="" })
+            -- World
+            local defFOV=Camera.FieldOfView
+            local savedLt={Brightness=Lighting.Brightness,ClockTime=Lighting.ClockTime,FogEnd=Lighting.FogEnd,GlobalShadows=Lighting.GlobalShadows,Ambient=Lighting.Ambient}
+            Tabs.Visuals:Paragraph({ Title=T("worldSec"), Desc="" })
+            Tabs.Visuals:Toggle({ Flag="fullbright", Title=T("fullbrightLabel2"), Default=false,
+                Callback=function(v)
+                    if v then Lighting.Brightness=2; Lighting.ClockTime=14; Lighting.FogEnd=1e9; Lighting.GlobalShadows=false; Lighting.Ambient=Color3.fromRGB(180,180,180)
+                    else Lighting.Brightness=savedLt.Brightness; Lighting.ClockTime=savedLt.ClockTime; Lighting.FogEnd=savedLt.FogEnd; Lighting.GlobalShadows=savedLt.GlobalShadows; Lighting.Ambient=savedLt.Ambient end
+                end
+            })
+            Tabs.Visuals:Slider({ Flag="fov_sl", Title=T("fovLabel2"), Min=30, Max=120, Default=math.floor(defFOV), Suffix="°", Callback=function(v) Camera.FieldOfView=v end })
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- COMBAT TAB
+        -- ════════════════════════════════════════════════════════════════
+        do
+            -- Camera aimbot state
+            local aim={enabled=false,smoothness=12,fov=150,prediction=0,part="Head",teamCheck=false,visibleCheck=false,aliveCheck=true,useRMB=true,altKey=nil,toggleMode=false,showFov=true,fovColor=Color3.fromRGB(30,90,220)}
+            local mb2=false; local altDown=false; local toggleLocked=false
+            local function aimWanted() return aim.toggleMode and toggleLocked or (aim.useRMB and mb2) or (aim.altKey and altDown) end
+            track(UIS.InputBegan:Connect(function(i,gp)
+                if HUB.dead then return end
+                if i.UserInputType==Enum.UserInputType.MouseButton2 then mb2=true end
+                if aim.altKey and i.KeyCode==aim.altKey then altDown=true; if aim.toggleMode then toggleLocked=not toggleLocked end end
+                if i.UserInputType==Enum.UserInputType.MouseButton2 and aim.toggleMode and aim.useRMB then toggleLocked=not toggleLocked end
+            end))
+            track(UIS.InputEnded:Connect(function(i)
+                if i.UserInputType==Enum.UserInputType.MouseButton2 then mb2=false end
+                if aim.altKey and i.KeyCode==aim.altKey then altDown=false end
+            end))
+            local fovCircle=nil
+            if hasDrawing then pcall(function()
+                fovCircle=Drawing.new("Circle"); fovCircle.Thickness=1.5; fovCircle.Filled=false; fovCircle.Visible=false
+                table.insert(HUB.drawings,fovCircle)
+            end) end
+            local function getAimPart(char) if not char then return nil end; return char:FindFirstChild(aim.part) or char:FindFirstChild("Head") or char:FindFirstChild("HumanoidRootPart") end
+            local function isAlive2(char) if not aim.aliveCheck then return true end; local h=char and char:FindFirstChildOfClass("Humanoid"); return h and h.Health>0 end
+            local function isVisAim(char,part)
+                if not aim.visibleCheck then return true end
+                local p2=RaycastParams.new(); p2.FilterType=Enum.RaycastFilterType.Exclude; p2.FilterDescendantsInstances={GetChar()}
+                local r=Workspace:Raycast(Camera.CFrame.Position,part.Position-Camera.CFrame.Position,p2)
+                return not r or r.Instance:IsDescendantOf(char)
+            end
+            local function getClosest()
+                local best,bDist; local m=UIS:GetMouseLocation(); local ctr=Vector2.new(m.X,m.Y)
+                for _,p2 in ipairs(Players:GetPlayers()) do
+                    if p2~=player then
+                        local isTeam=aim.teamCheck and p2.Team~=nil and player.Team~=nil and p2.Team==player.Team
+                        if not isTeam then
+                            local ch=p2.Character; local pt=getAimPart(ch)
+                            if pt and isAlive2(ch) then
+                                local sp,on=Camera:WorldToViewportPoint(pt.Position)
+                                if on then local d=(Vector2.new(sp.X,sp.Y)-ctr).Magnitude; if d<=aim.fov and (not bDist or d<bDist) and isVisAim(ch,pt) then best=pt; bDist=d end end
+                            end
+                        end
+                    end
+                end; return best
+            end
+            track(RunService.RenderStepped:Connect(function()
+                if HUB.dead then return end
+                if fovCircle then
+                    fovCircle.Visible=aim.enabled and aim.showFov
+                    if fovCircle.Visible then local m=UIS:GetMouseLocation(); fovCircle.Position=Vector2.new(m.X,m.Y); fovCircle.Radius=aim.fov; fovCircle.Color=aim.fovColor end
+                end
+                if not aim.enabled or not aimWanted() then return end
+                local tgt=getClosest(); if not tgt then return end
+                local ap=tgt.Position+(aim.prediction>0 and tgt.AssemblyLinearVelocity*aim.prediction or Vector3.zero)
+                Camera.CFrame=Camera.CFrame:Lerp(CFrame.new(Camera.CFrame.Position,ap),math.clamp(1/math.max(aim.smoothness,1),0,1))
+            end))
+
+            -- Sentinel state
+            getgenv().Sentinel=getgenv().Sentinel or {Enabled=false,HorizontalPrediction=0.045,VerticalPrediction=0.1,jumpoffset2=-1,jumpoffset=0,ResolverEnabled=false,SelectedPart="HumanoidRootPart",AutoPrediction=true,AutoPredMode="PingBased",ShootDelay=0.22,AutoAir=true,LookAt=false,smoothness=0.9,NearestPart=false,speedvalue=1,MacroSpeed=0.1,Camera=false,easingStyle="Sine",easingDirection="Out",JumpBreak=false,network=false,LockType="Namecall",cframespeedtoggle=false}
+            getgenv().Desync=getgenv().Desync or false; getgenv().AntiLockType=getgenv().AntiLockType or "Behind"
+
+            local TargPlr=nil; local TargBind=false; local Hitnotify=false; local targHP=nil
+            _G.PhantomTargetFn=function() return TargPlr end
+
+            local TgtAim={Enabled=false,HitEffect=true,HitEffectType="Coom",HitEffectColor=Color3.fromRGB(255,255,255),HitSounds=false,HitSound="Bameware",HitChams=false,HitChamsMaterial=Enum.Material.Neon,HitChamsDuration=1,HitChamsColor=Color3.fromRGB(173,216,230),HighlightColor1=Color3.fromRGB(255,255,255),HighlightColor2=Color3.fromRGB(255,255,255)}
+            local hsounds={"RIFK7","rbxassetid://9102080552","Bubble","rbxassetid://9102092728","Minecraft","rbxassetid://5869422451","Cod","rbxassetid://160432334","Bameware","rbxassetid://6565367558","Neverlose","rbxassetid://6565370984","Gamesense","rbxassetid://4817809188","Rust","rbxassetid://6565371338"}
+            local hitsoundsMap={}; for i=1,#hsounds,2 do hitsoundsMap[hsounds[i]]=hsounds[i+1] end
+
+            local TgtHL=Instance.new("Highlight"); TgtHL.Parent=game:GetService("CoreGui"); TgtHL.FillTransparency=0.5; TgtHL.OutlineTransparency=0; TgtHL.Enabled=false; table.insert(HUB.highlights,TgtHL)
+
+            local HitFXModule={Locals={Type={}}}
+            pcall(function()
+                local function mkFXPart(name)
+                    local pt=Instance.new("Part"); pt.Parent=Workspace; local att=Instance.new("Attachment"); att.Name="Attachment"; att.Parent=pt; HitFXModule.Locals.Type[name]=att; return att
+                end
+                local function simpleGlow(att,col)
+                    local e=Instance.new("ParticleEmitter"); e.Lifetime=NumberRange.new(0.3,0.5); e.SpreadAngle=Vector2.new(-360,360); e.LightEmission=1; e.Color=ColorSequence.new(col); e.Speed=NumberRange.new(0.08); e.Brightness=20; e.Size=NumberSequence.new({{NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(0.4,8.8,2.3),NumberSequenceKeypoint.new(1,11.5,1.9)}}); e.Enabled=false; e.Rate=50; e.Texture="rbxassetid://12509373457"; e.RotSpeed=NumberRange.new(800,1000); e.Rotation=NumberRange.new(-360,360); e.Orientation=Enum.ParticleOrientation.VelocityPerpendicular; e.Parent=att
+                end
+                simpleGlow(mkFXPart("Crescent Slash"), Color3.fromRGB(92,161,252))
+                simpleGlow(mkFXPart("Atomic Slash"),  Color3.fromRGB(160,96,255))
+                simpleGlow(mkFXPart("Slash"),          Color3.fromRGB(154,82,255))
+                local coomAtt=mkFXPart("Coom"); local foam=Instance.new("ParticleEmitter"); foam.LightInfluence=0.5; foam.Lifetime=NumberRange.new(1); foam.SpreadAngle=Vector2.new(360,-360); foam.VelocitySpread=360; foam.Squash=NumberSequence.new(1); foam.Speed=NumberRange.new(20); foam.Brightness=2.5; foam.Size=NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(0.1,0.65,0.65),NumberSequenceKeypoint.new(0.65,1.42,0.41),NumberSequenceKeypoint.new(1,0)}); foam.Enabled=false; foam.Acceleration=Vector3.new(0,-66,0); foam.Rate=100; foam.Texture="rbxassetid://8297030850"; foam.Rotation=NumberRange.new(-90,-90); foam.Orientation=Enum.ParticleOrientation.VelocityParallel; foam.Parent=coomAtt
+                local novaAtt=mkFXPart("Nova Impact"); local novaE=Instance.new("ParticleEmitter"); novaE.Color=ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(0,0,0)),ColorSequenceKeypoint.new(0.5,Color3.new(1,1,1)),ColorSequenceKeypoint.new(1,Color3.new(0,0,0))}); novaE.Lifetime=NumberRange.new(0.5); novaE.LightEmission=1; novaE.LockedToPart=true; novaE.Rate=1; novaE.Rotation=NumberRange.new(0,360); novaE.Size=NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(1,10)}); novaE.Speed=NumberRange.new(0); novaE.Texture="rbxassetid://1084991215"; novaE.Transparency=NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(0.5,0.25),NumberSequenceKeypoint.new(1,0.5)}); novaE.ZOffset=1; novaE.Enabled=false; novaE.Parent=novaAtt
+            end)
+            HitFXModule.Functions={}
+            HitFXModule.Functions.Effect=function(char)
+                if not char then return end; local hrp=char:FindFirstChild("HumanoidRootPart"); if not hrp then return end
+                local typAtt=HitFXModule.Locals.Type[TgtAim.HitEffectType]; if not typAtt then return end
+                local cloned=typAtt:Clone(); cloned.Parent=hrp
+                for _,e in pairs(cloned:GetChildren()) do
+                    if e:IsA("ParticleEmitter") then
+                        if TgtAim.HitEffect then e:Emit(10) end
+                    end
+                end
+                task.delay(2,function() if cloned and cloned.Parent then cloned:Destroy() end end)
+            end
+
+            local function PlayHitSound()
+                if TgtAim.HitSounds and hitsoundsMap[TgtAim.HitSound] then
+                    local s=Instance.new("Sound"); s.SoundId=hitsoundsMap[TgtAim.HitSound]; s.Parent=SoundService; s:Play()
+                    s.Ended:Connect(function() s:Destroy() end)
+                end
+            end
+            local function HitChams(P)
+                if not TgtAim.HitChams or not P or not P.Character then return end
+                P.Character.Archivable=true; local cl=P.Character:Clone()
+                for _,pt in ipairs(cl:GetChildren()) do
+                    if pt:IsA("BasePart") then pt.CanCollide=false; pt.Anchored=true; pt.Color=TgtAim.HitChamsColor; pt.Material=TgtAim.HitChamsMaterial
+                    elseif pt:IsA("Accessory") or pt:IsA("Shirt") or pt:IsA("Pants") then pt:Destroy() end
+                end
+                if cl:FindFirstChild("Humanoid") then cl.Humanoid:Destroy() end
+                cl.Parent=Workspace; task.delay(TgtAim.HitChamsDuration,function() if cl and cl.Parent then cl:Destroy() end end)
+            end
+
+            track(RunService.RenderStepped:Connect(function()
+                if HUB.dead then return end
+                if TgtAim.Enabled and TargBind and TargPlr and TargPlr.Character then
+                    TgtHL.FillColor=TgtAim.HighlightColor1; TgtHL.OutlineColor=TgtAim.HighlightColor2; TgtHL.Adornee=TargPlr.Character; TgtHL.Enabled=true
+                else TgtHL.Adornee=nil; TgtHL.Enabled=false end
+            end))
+
+            local function updateTargHP()
+                if TargBind and TargPlr and TargPlr.Character then
+                    local hum=TargPlr.Character:FindFirstChild("Humanoid"); if not hum then return end
+                    local cur=hum.Health
+                    if targHP and cur<targHP then
+                        if Hitnotify then WindUI:Notify({ Title=T("hitFXSec"), Content="+1 Hit | "..getgenv().Sentinel.SelectedPart.." | "..TargPlr.DisplayName, Duration=1.5 }) end
+                        PlayHitSound(); HitFXModule.Functions.Effect(TargPlr.Character); HitChams(TargPlr)
+                    end; targHP=cur
+                end
+            end
+            local function NearestPt(P)
+                if not P or not P.Character or not getgenv().Sentinel.NearestPart then return end
+                local myHRP=GetHRP(); if not myHRP then return end
+                local bps={"Head","UpperTorso","LowerTorso","LeftUpperArm","LeftLowerArm","LeftHand","RightUpperArm","RightLowerArm","RightHand","LeftUpperLeg","LeftLowerLeg","LeftFoot","RightUpperLeg","RightLowerLeg","RightFoot"}
+                local md,np=math.huge,nil
+                for _,n in ipairs(bps) do local pt=P.Character:FindFirstChild(n); if pt then local d=(pt.Position-myHRP.Position).Magnitude; if d<md then md=d; np=pt end end end
+                if np then getgenv().Sentinel.SelectedPart=np.Name end
+            end
+            local function inAirFn()
+                if TargPlr and TargPlr.Character and TargPlr.Character:FindFirstChild("Humanoid") then
+                    getgenv().Sentinel.jumpoffset=TargPlr.Character.Humanoid:GetState()==Enum.HumanoidStateType.Freefall and getgenv().Sentinel.jumpoffset2 or 0
+                end
+            end
+            local function autoPredFn()
+                if not getgenv().Sentinel.AutoPrediction then return end
+                pcall(function()
+                    local pv=StatsService.Network.ServerStatsItem["Data Ping"]:GetValueString()
+                    local ping=tonumber(pv:match("([%d%.]+)"))
+                    if ping then
+                        local tbl={{20,0.089},{50,0.135},{80,0.139},{100,0.142},{150,0.155},{200,0.168},{300,0.195}}
+                        local best,bval=math.huge,0.134
+                        for _,p2 in ipairs(tbl) do if math.abs(ping-p2[1])<best then best=math.abs(ping-p2[1]); bval=p2[2] end end
+                        getgenv().Sentinel.HorizontalPrediction=bval
+                    end
+                end)
+            end
+            track(RunService.Stepped:Connect(function()
+                if HUB.dead then return end
+                autoPredFn(); updateTargHP(); NearestPt(TargPlr); inAirFn()
+            end))
+            track(RunService.Heartbeat:Connect(function()
+                if HUB.dead then return end
+                if getgenv().Sentinel.cframespeedtoggle and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame=player.Character.HumanoidRootPart.CFrame+player.Character.Humanoid.MoveDirection*getgenv().Sentinel.speedvalue/0.5
+                end
+                if getgenv().Sentinel.Camera and TargPlr and TargPlr.Character then
+                    local sp=getgenv().Sentinel.SelectedPart; local tp=TargPlr.Character[sp]; if not tp then return end
+                    local vel=tp.Velocity; local hp=getgenv().Sentinel.HorizontalPrediction; local jo=getgenv().Sentinel.jumpoffset or 0
+                    local tpos=Vector3.new(tp.Position.X+vel.X*hp,tp.Position.Y+vel.Y*hp+jo,tp.Position.Z+vel.Z*hp)
+                    Camera.CFrame=Camera.CFrame:Lerp(CFrame.new(Camera.CFrame.Position,tpos),getgenv().Sentinel.smoothness)
+                end
+                pcall(function()
+                    if getgenv().Sentinel and getgenv().Sentinel.network and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                        sethiddenproperty(player.Character.HumanoidRootPart,"NetworkIsSleeping",true); task.wait()
+                        sethiddenproperty(player.Character.HumanoidRootPart,"NetworkIsSleeping",false)
+                    end
+                end)
+            end))
+            pcall(function()
+                player.Character:WaitForChild("Humanoid").StateChanged:Connect(function(_,new)
+                    if getgenv().Sentinel.JumpBreak and new==Enum.HumanoidStateType.Freefall then
+                        wait(0.27); if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.Velocity=Vector3.new(0,-15,0) end
+                    end
+                end)
+            end)
+            pcall(function()
+                hookmetamethod(game,"__namecall",newcclosure(function(self,...)
+                    local args,method={...},tostring(getnamecallmethod())
+                    if not checkcaller() and method=="FireServer" then
+                        for i,arg in pairs(args) do
+                            if typeof(arg)=="Vector3" then
+                                if TargPlr and getgenv().Sentinel.Enabled and getgenv().Sentinel.LockType=="Namecall" then
+                                    local tp=TargPlr.Character and TargPlr.Character[getgenv().Sentinel.SelectedPart]
+                                    if tp then local hp=getgenv().Sentinel.HorizontalPrediction; args[i]=tp.Position+(tp.Velocity*hp) end
+                                end
+                                return getrawmetatable(game).__namecall(self,unpack(args))
+                            end
+                        end
+                    end
+                    return getrawmetatable(game).__namecall(self,...)
+                end))
+            end)
+
+            -- ── COMBAT UI ────────────────────────────────────────────
+            Tabs.Combat:Paragraph({ Title=T("aimbotSec"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="aim_en",    Title=T("aimbotEnabledLabel"), Default=false, Callback=function(v) aim.enabled=v; if not v then toggleLocked=false end; WindUI:Notify({ Title=T("aimbotSec"), Content=v and "ON" or "OFF", Duration=2 }) end })
+            Tabs.Combat:Slider({ Flag="aim_sm",    Title=T("smoothnessLabel2"),  Min=1,Max=40, Default=12,Suffix="", Callback=function(v) aim.smoothness=v end })
+            Tabs.Combat:Slider({ Flag="aim_fov",   Title=T("fovPxLabel2"),       Min=30,Max=600,Default=150,Suffix="",Callback=function(v) aim.fov=v end })
+            Tabs.Combat:Slider({ Flag="aim_pred",  Title=T("predLabel2"),        Min=0,Max=100,Default=0,Suffix="",  Callback=function(v) aim.prediction=v/1000 end })
+            CfgEls.AimPart=Tabs.Combat:Dropdown({ Flag="aim_part", Title=T("targetPartLabel2"), Values={"Head","UpperTorso","Torso","HumanoidRootPart"}, Value="Head", Callback=function(v) aim.part=v end })
+            Tabs.Combat:Divider({ Title="" })
+            Tabs.Combat:Paragraph({ Title=T("filtersSec2"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="aim_team",  Title=T("teamCheckAimLabel"), Default=false,Callback=function(v) aim.teamCheck=v end })
+            Tabs.Combat:Toggle({ Flag="aim_wall",  Title=T("wallCheckLabel2"),   Default=false,Callback=function(v) aim.visibleCheck=v end })
+            Tabs.Combat:Toggle({ Flag="aim_alive", Title=T("aliveCheckLabel2"),  Default=true, Callback=function(v) aim.aliveCheck=v end })
+            Tabs.Combat:Divider({ Title="" })
+            Tabs.Combat:Paragraph({ Title=T("activationSec"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="aim_rmb",   Title=T("holdRMBLabel2"),    Default=true, Callback=function(v) aim.useRMB=v end })
+            Tabs.Combat:Toggle({ Flag="aim_tog",   Title=T("toggleModeLabel2"), Default=false,Callback=function(v) aim.toggleMode=v; toggleLocked=false end })
+            CfgEls.AimAltKey=Tabs.Combat:Keybind({ Flag="aim_altkey", Title=T("altKeyLabel2"), Value="", Callback=function(k) pcall(function() aim.altKey=Enum.KeyCode[k] end) end })
+            Tabs.Combat:Divider({ Title="" })
+            Tabs.Combat:Paragraph({ Title=T("fovCircleSec"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="aim_showfov",  Title=T("showFOVLabel2"),    Default=true, Callback=function(v) aim.showFov=v and hasDrawing end })
+            Tabs.Combat:ColorPicker({ Flag="aim_fovcol", Title=T("fovCircleColorLabel2"), Default=Color3.fromRGB(30,90,220), Callback=function(c) aim.fovColor=c end })
+            Tabs.Combat:Divider({ Title="" })
+            Tabs.Combat:Paragraph({ Title=T("sentinelSec"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="snt_en",    Title=T("sentinelEnabledLabel"),Default=false,Callback=function(v) TgtAim.Enabled=v; getgenv().Sentinel.Enabled=v; WindUI:Notify({ Title=T("sentinelSec"), Content=v and "ON" or "OFF", Duration=2 }) end })
+            Tabs.Combat:Toggle({ Flag="snt_lookat",Title=T("lookAtLabel2"),        Default=false,Callback=function(v) getgenv().Sentinel.LookAt=v end })
+            Tabs.Combat:Toggle({ Flag="snt_air",   Title=T("autoAirLabel2"),       Default=true, Callback=function(v) getgenv().Sentinel.AutoAir=v end })
+            Tabs.Combat:Toggle({ Flag="snt_res",   Title=T("resolverLabel2"),      Default=false,Callback=function(v) getgenv().Sentinel.ResolverEnabled=v end })
+            Tabs.Combat:Divider({ Title="" })
+            Tabs.Combat:Paragraph({ Title=T("hitPartSec2"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="near_pt",   Title=T("nearestPartLabel2"),   Default=false,Callback=function(v) getgenv().Sentinel.NearestPart=v end })
+            CfgEls.BodyPart=Tabs.Combat:Dropdown({ Flag="body_pt", Title=T("bodyPartLabel2"), Values={"Head","UpperTorso","LowerTorso","HumanoidRootPart","LeftUpperArm","LeftLowerArm","LeftHand","RightUpperArm","RightLowerArm","RightHand","LeftUpperLeg","LeftLowerLeg","LeftFoot","RightUpperLeg","RightLowerLeg","RightFoot"}, Value="HumanoidRootPart", Callback=function(v) getgenv().Sentinel.SelectedPart=v end })
+            Tabs.Combat:Divider({ Title="" })
+            Tabs.Combat:Paragraph({ Title=T("predSec2"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="auto_pred", Title=T("autoPredLabel2"),     Default=true, Callback=function(v) getgenv().Sentinel.AutoPrediction=v end })
+            CfgEls.LockType=Tabs.Combat:Dropdown({ Flag="lock_type", Title=T("lockTypeLabel2"), Values={"Namecall","Index"}, Value="Namecall", Callback=function(v) getgenv().Sentinel.LockType=v end })
+            Tabs.Combat:Slider({ Flag="horiz_pred",Title=T("horizPredLabel2"),    Min=0,Max=500,Default=45,Suffix="",Callback=function(v) getgenv().Sentinel.HorizontalPrediction=v/1000 end })
+            Tabs.Combat:Divider({ Title="" })
+            Tabs.Combat:Paragraph({ Title=T("cameraSec2"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="cam_en",    Title=T("cameraEnabledLabel2"), Default=false,Callback=function(v) getgenv().Sentinel.Camera=v end })
+            Tabs.Combat:Slider({ Flag="cam_sm",    Title=T("cameraSmoothLabel2"),  Min=1,Max=100,Default=90,Suffix="%",Callback=function(v) getgenv().Sentinel.smoothness=v/100 end })
+            CfgEls.EasingStyle=Tabs.Combat:Dropdown({ Flag="eas_style", Title=T("easingStyleLabel2"), Values={"Linear","Quad","Cubic","Sine","Exponential","Circular","Back","Bounce","Elastic"}, Value="Sine", Callback=function(v) getgenv().Sentinel.easingStyle=v end })
+            CfgEls.EasingDir=Tabs.Combat:Dropdown({ Flag="eas_dir", Title=T("easingDirLabel2"), Values={"In","Out","InOut"}, Value="Out", Callback=function(v) getgenv().Sentinel.easingDirection=v end })
+            Tabs.Combat:Divider({ Title="" })
+            Tabs.Combat:Paragraph({ Title=T("hitFXSec"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="hit_fx",    Title=T("hitEffectLabel2"),    Default=true, Callback=function(v) TgtAim.HitEffect=v end })
+            Tabs.Combat:Toggle({ Flag="hit_snd",   Title=T("hitSoundLabel2"),     Default=false,Callback=function(v) TgtAim.HitSounds=v end })
+            Tabs.Combat:Toggle({ Flag="hit_ntf",   Title=T("hitNotifyLabel2"),    Default=false,Callback=function(v) Hitnotify=v end })
+            CfgEls.EffType=Tabs.Combat:Dropdown({ Flag="eff_type", Title=T("effectTypeLabel2"), Values={"Coom","Crescent Slash","Atomic Slash","Slash","Nova Impact"}, Value="Coom", Callback=function(v) TgtAim.HitEffectType=v end })
+            CfgEls.SndType=Tabs.Combat:Dropdown({ Flag="snd_type", Title=T("soundTypeLabel2"), Values={"RIFK7","Bubble","Minecraft","Cod","Bameware","Neverlose","Gamesense","Rust"}, Value="Bameware", Callback=function(v) TgtAim.HitSound=v end })
+            Tabs.Combat:ColorPicker({ Flag="hl_fill",  Title=T("hlFillLabel2"),     Default=Color3.fromRGB(255,255,255),  Callback=function(c) TgtAim.HighlightColor1=c end })
+            Tabs.Combat:ColorPicker({ Flag="hl_out",   Title=T("hlOutlineLabel2"),  Default=Color3.fromRGB(255,255,255),  Callback=function(c) TgtAim.HighlightColor2=c end })
+            Tabs.Combat:ColorPicker({ Flag="hit_col",  Title=T("hitFXColorLabel2"), Default=Color3.fromRGB(255,255,255),  Callback=function(c) TgtAim.HitEffectColor=c end })
+            Tabs.Combat:Divider({ Title="" })
+            Tabs.Combat:Paragraph({ Title=T("hitChamsSec2"), Desc="" })
+            Tabs.Combat:Toggle({ Flag="hc_en",     Title=T("hitChamsEnabledLabel2"), Default=false,Callback=function(v) TgtAim.HitChams=v end })
+            Tabs.Combat:ColorPicker({ Flag="hc_col",  Title=T("hitChamsColorLabel2"),  Default=Color3.fromRGB(173,216,230),Callback=function(c) TgtAim.HitChamsColor=c end })
+            Tabs.Combat:Slider({ Flag="hc_dur",    Title=T("hitChamsDurLabel2"),     Min=0,Max=5,Default=1,Suffix="s",   Callback=function(v) TgtAim.HitChamsDuration=v end })
+            CfgEls.HCMat=Tabs.Combat:Dropdown({ Flag="hc_mat", Title=T("hitChamsMaterialLabel2"), Values={"Neon","SmoothPlastic","ForceField","Glass"}, Value="Neon", Callback=function(v) pcall(function() TgtAim.HitChamsMaterial=Enum.Material[v] end) end })
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- HVH TAB
+        -- ════════════════════════════════════════════════════════════════
+        do
+            local gunTP={Enabled=false,Anchor=false,Offset={0,-1,0}}
+            local grenTP={Enabled=false}; local rktTP={Enabled=false}
+            local csync={Enabled=false,Type="Orbit",Distance=10,Height=2,Speed=10,RandomAmount=10,Color=Color3.fromRGB(255,255,255)}
+
+            track(RunService.Heartbeat:Connect(function()
+                if HUB.dead then return end
+                if csync.Enabled and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    local tgt=_G.PhantomTargetFn and _G.PhantomTargetFn()
+                    if tgt and tgt.Character and tgt.Character:FindFirstChild("HumanoidRootPart") then
+                        pcall(function()
+                            local saved=player.Character.HumanoidRootPart.CFrame; local fake
+                            if csync.Type=="Random" then
+                                fake=CFrame.new(tgt.Character.HumanoidRootPart.Position+Vector3.new(math.random(-csync.RandomAmount,csync.RandomAmount),0,math.random(-csync.RandomAmount,csync.RandomAmount)))
+                            else
+                                local ct=tick(); fake=CFrame.new(tgt.Character.HumanoidRootPart.Position)*CFrame.Angles(0,2*math.pi*ct*csync.Speed%(2*math.pi),0)*CFrame.new(0,csync.Height,csync.Distance)
+                            end
+                            player.Character.HumanoidRootPart.CFrame=fake; RunService.RenderStepped:Wait(); player.Character.HumanoidRootPart.CFrame=saved
+                        end)
+                    end
+                end
+                pcall(function()
+                    if getgenv().Desync and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                        local abc=player.Character.HumanoidRootPart.Velocity
+                        local dm={Behind=Vector3.new(0,0,-1),Down=Vector3.new(0,-1,0),ForWard=Vector3.new(0,0,1),Left=Vector3.new(-1,0,0),One=Vector3.new(1,1,1),Right=Vector3.new(1,0,0),Up=Vector3.new(0,1,0),Zero=Vector3.new(0,0,0)}
+                        local d=dm[getgenv().AntiLockType] or Vector3.new(0,0,-1)
+                        player.Character.HumanoidRootPart.Velocity=d*(2^16); RunService.RenderStepped:Wait(); player.Character.HumanoidRootPart.Velocity=abc
+                    end
+                end)
+            end))
+
+            Tabs.HvH:Paragraph({ Title=T("csyncSec"), Desc="" })
+            Tabs.HvH:Toggle({ Flag="cs_en",    Title=T("csyncEnabledLabel2"), Default=false, Callback=function(v) csync.Enabled=v end })
+            CfgEls.CsyncType=Tabs.HvH:Dropdown({ Flag="cs_type", Title=T("csyncTypeLabel2"), Values={"Orbit","Random"}, Value="Orbit", Callback=function(v) csync.Type=v end })
+            Tabs.HvH:Slider({ Flag="cs_dist",  Title=T("csyncDistLabel2"),   Min=0,Max=20, Default=10,Suffix="",Callback=function(v) csync.Distance=v end })
+            Tabs.HvH:Slider({ Flag="cs_h",     Title=T("csyncHeightLabel2"), Min=0,Max=10, Default=2, Suffix="",Callback=function(v) csync.Height=v end })
+            Tabs.HvH:Slider({ Flag="cs_spd",   Title=T("csyncSpeedLabel2"),  Min=0,Max=20, Default=10,Suffix="",Callback=function(v) csync.Speed=v end })
+            Tabs.HvH:Slider({ Flag="cs_rand",  Title=T("csyncRandomLabel2"), Min=0,Max=20, Default=10,Suffix="",Callback=function(v) csync.RandomAmount=v end })
+            Tabs.HvH:Divider({ Title="" })
+            Tabs.HvH:Paragraph({ Title=T("tpActionsSec"), Desc="" })
+            Tabs.HvH:Toggle({ Flag="grn_tp",   Title=T("grenadeTpLabel2"),  Default=false,Callback=function(v) grenTP.Enabled=v end })
+            Tabs.HvH:Toggle({ Flag="rkt_tp",   Title=T("rocketTpLabel2"),   Default=false,Callback=function(v) rktTP.Enabled=v end })
+            Tabs.HvH:Divider({ Title="" })
+            Tabs.HvH:Paragraph({ Title=T("bulletTpSec"), Desc="" })
+            Tabs.HvH:Toggle({ Flag="blt_en",   Title=T("bulletGyattLabel2"), Default=false,Callback=function(v) gunTP.Enabled=v end })
+            Tabs.HvH:Toggle({ Flag="blt_anch", Title=T("anchorLabel2"),      Default=false,Callback=function(v) gunTP.Anchor=v end })
+            Tabs.HvH:Slider({ Flag="blt_x",    Title=T("offsetXLabel2"),     Min=-5,Max=5,Default=0, Suffix="",Callback=function(v) gunTP.Offset[1]=v end })
+            Tabs.HvH:Slider({ Flag="blt_y",    Title=T("offsetYLabel2"),     Min=-5,Max=5,Default=-1,Suffix="",Callback=function(v) gunTP.Offset[2]=v end })
+            Tabs.HvH:Slider({ Flag="blt_z",    Title=T("offsetZLabel2"),     Min=-5,Max=5,Default=0, Suffix="",Callback=function(v) gunTP.Offset[3]=v end })
+            Tabs.HvH:Divider({ Title="" })
+            Tabs.HvH:Paragraph({ Title=T("predBreakerSec"), Desc="" })
+            Tabs.HvH:Toggle({ Flag="jmp_pred", Title=T("jumpPredLabel2"),     Default=false,Callback=function(v) getgenv().Sentinel.JumpBreak=v end })
+            Tabs.HvH:Toggle({ Flag="anti_lk",  Title=T("antiLockLabel2"),     Default=false,Callback=function(v) getgenv().Desync=v end })
+            CfgEls.ALType=Tabs.HvH:Dropdown({ Flag="al_type", Title=T("antiLockTypeLabel2"), Values={"Behind","Down","ForWard","Left","One","Right","Up","Zero"}, Value="Behind", Callback=function(v) getgenv().AntiLockType=v end })
+            Tabs.HvH:Divider({ Title="" })
+            Tabs.HvH:Paragraph({ Title=T("cfSpeedSec"), Desc="" })
+            Tabs.HvH:Toggle({ Flag="cf_en",    Title=T("cfSpeedEnabledLabel2"), Default=false,Callback=function(v) getgenv().Sentinel.cframespeedtoggle=v end })
+            Tabs.HvH:Slider({ Flag="cf_val",   Title=T("cfSpeedValueLabel2"),   Min=0,Max=10,Default=3,Suffix="",Callback=function(v) getgenv().Sentinel.speedvalue=v end })
+            Tabs.HvH:Divider({ Title="" })
+            Tabs.HvH:Paragraph({ Title=T("macroSec"), Desc="" })
+            Tabs.HvH:Button({ Title=T("loadMacroLabel2"),
+                Callback=function()
+                    if _G.PhantomMacro then WindUI:Notify({ Title=T("macroSec"), Content="Already loaded", Duration=2 }); return end
+                    _G.PhantomMacro=true
+                    task.spawn(function()
+                        local MCen=false; local active=false
+                        local MAX_LEN=900000
+                        local function UpdateAR(b) pcall(function() if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then player.Character:FindFirstChildOfClass("Humanoid").AutoRotate=b end end) end
+                        local function GetUpdCF() local rp=GetHRP(); if not rp then return end; local rpos=rp.Position; return CFrame.new(rpos,Vector3.new(Camera.CFrame.LookVector.X*MAX_LEN,rpos.Y,Camera.CFrame.LookVector.Z*MAX_LEN)) end
+                        local function EnableSL() UpdateAR(false); local cf2=GetUpdCF(); if cf2 and GetHRP() then GetHRP().CFrame=cf2 end end
+                        local function DisableSL() UpdateAR(true); if active and type(active)=="RBXScriptConnection" then pcall(function() active:Disconnect() end); active=false end end
+                        _G.PhantomMacroToggle=function()
+                            MCen=not MCen
+                            if not MCen then DisableSL() end
+                            WindUI:Notify({ Title=T("macroSec"), Content=MCen and "ON" or "OFF", Duration=2 })
+                        end
+                        WindUI:Notify({ Title=T("macroSec"), Content="Loaded! Use toggle below.", Duration=3 })
+                        while not HUB.dead do
+                            task.wait(getgenv().Sentinel.MacroSpeed)
+                            if MCen then if not active then active=RunService.RenderStepped:Connect(EnableSL) else DisableSL() end end
+                        end
+                    end)
+                end
+            })
+            Tabs.HvH:Button({ Title=T("macroToggleLabel"),
+                Callback=function()
+                    if _G.PhantomMacroToggle then _G.PhantomMacroToggle()
+                    else WindUI:Notify({ Title=T("macroSec"), Content="Load macro first", Duration=2 }) end
+                end
+            })
+            Tabs.HvH:Slider({ Flag="mac_spd",  Title=T("macroSpeedLabel2"), Min=1,Max=20,Default=1,Suffix="",Callback=function(v) getgenv().Sentinel.MacroSpeed=v/10 end })
+            Tabs.HvH:Divider({ Title="" })
+            Tabs.HvH:Paragraph({ Title=T("networkSec"), Desc="" })
+            Tabs.HvH:Toggle({ Flag="net_anti", Title=T("networkAntiLabel2"), Default=false,
+                Callback=function(v) getgenv().Sentinel.network=v; WindUI:Notify({ Title=T("networkSec"), Content=v and "ON" or "OFF", Duration=2 }) end
+            })
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- SERVER TAB
+        -- ════════════════════════════════════════════════════════════════
+        do
+            Tabs.Server:Paragraph({ Title=T("serverSec2"), Desc="" })
+            Tabs.Server:Button({ Title=T("rejoinLabel2"),
+                Callback=function()
+                    WindUI:Notify({ Title=T("serverSec2"), Content=T("rejoinLabel2"), Duration=2 })
+                    task.wait(1); pcall(function() TeleportService:TeleportToPlaceInstance(game.PlaceId,game.JobId,player) end)
+                end
+            })
+            Tabs.Server:Button({ Title=T("serverHopLabel2"),
+                Callback=function()
+                    WindUI:Notify({ Title=T("serverSec2"), Content=T("serverHopLabel2"), Duration=3 })
+                    task.spawn(function()
+                        local ok3,err=pcall(function()
+                            local url=("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Asc&limit=100"):format(game.PlaceId)
+                            local data=HttpService:JSONDecode(game:HttpGet(url))
+                            for _,s in ipairs(data.data or {}) do
+                                if type(s.playing)=="number" and s.playing<s.maxPlayers and s.id~=game.JobId then TeleportService:TeleportToPlaceInstance(game.PlaceId,s.id,player); return end
+                            end
+                            TeleportService:Teleport(game.PlaceId,player)
+                        end)
+                        if not ok3 then WindUI:Notify({ Title=T("serverSec2"), Content="Hop failed: "..tostring(err), Duration=4 }) end
+                    end)
+                end
+            })
+            Tabs.Server:Button({ Title=T("copyJobIDLabel2"),
+                Callback=function()
+                    local ok3=pcall(function() (setclipboard or toclipboard or writeclipboard)(game.JobId) end)
+                    WindUI:Notify({ Title=T("serverSec2"), Content=ok3 and "Job ID copied" or "Clipboard unavailable", Duration=2 })
+                end
+            })
+            Tabs.Server:Divider({ Title="" })
+            Tabs.Server:Paragraph({
+                Title = T("sessionInfoLabel2"),
+                Desc = ("PlaceId: %d  |  Players: %d/%d"):format(game.PlaceId,#Players:GetPlayers(),Players.MaxPlayers)
+            })
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- LUAOS TAB
+        -- ════════════════════════════════════════════════════════════════
+        do
+            Tabs.LuaOS:Paragraph({ Title=T("luaOSSec2"), Desc=T("luaOSDescLabel") })
+            Tabs.LuaOS:Button({ Title=T("launchLuaOSLabel"),
+                Callback=function()
+                    WindUI:Notify({ Title="LuaOS", Content="Loading...", Duration=3 })
+                    task.spawn(function()
+                        -- LuaOS is the script from Universal-Script-Lua-os-english-121265.txt
+                        -- Host it on your own GitHub/Pastebin and replace this URL
+                        local ok3,err=pcall(function()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/YourRepo/YourFile/main/LuaOS.lua",true))()
+                        end)
+                        if not ok3 then
+                            WindUI:Notify({ Title="LuaOS", Content="Host the LuaOS file and update the URL in the script.\nErr: "..tostring(err):sub(1,60), Duration=6 })
+                        end
+                    end)
+                end
+            })
+            Tabs.LuaOS:Paragraph({ Title="Features", Desc="Terminal • Notepad • Task Manager • Browser • File Manager • Calculator • Settings • System Monitor" })
+            Tabs.LuaOS:Paragraph({ Title=_G.SelectedLanguage=="Arabic" and "ملاحظة" or "Note", Desc=T("luaOSNote") })
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- CONFIG TAB  (unchanged from original)
+        -- ════════════════════════════════════════════════════════════════
+        do
+            Tabs.Config:Paragraph({ Title=T("scriptSettings"), Desc=T("scriptDesc"), Image="settings", ImageSize=28, Color="White" })
+            CfgEls.SelectThemeDropdown = Tabs.Config:Dropdown({
+                Flag = "SelectThemeDropdown",
+                Title = T("selectTheme"),
+                Values = { "داكن 🌙","فاتح ☀️","وردي 🌸","نباتي 🌿","أحمر 🔴","نيلي 🔵","سماء ☁️","بنفسجي 🟣","زمردي 💚","منتصف الليل 🌙","قرمزي 🩸" },
+                Value = "داكن",
+                Size = "xlarge",
+                Callback = function(val)
+                    local map={["داكن 🌙"]="Dark",["فاتح ☀️"]="Light",["وردي 🌸"]="Rose",["نباتي 🌿"]="Plant",["أحمر 🔴"]="Red",["نيلي 🔵"]="Indigo",["سماء ☁️"]="Sky",["بنفسجي 🟣"]="Violet",["زمردي 💚"]="Emerald",["منتصف الليل 🌙"]="Midnight",["قرمزي 🩸"]="Crimson"}
+                    WindUI:SetTheme(map[val] or "Dark")
+                end
+            })
+            Tabs.Config:Divider({ Title="" })
+            Tabs.Config:Paragraph({ Title=T("toggleUITitle"), Desc=T("toggleUIDesc"), Image="eye", ImageSize=28 })
+            Tabs.Config:Button({ Title=T("toggleUIButton"), Icon="eye", Size="xlarge", Callback=function() Window:Toggle() end })
+            CfgEls.UIToggleKeybind = Tabs.Config:Keybind({
+                Flag="UIToggleKeybind", Title=T("toggleUIKeyTitle"), Desc=T("toggleUIKeyDesc"), Value="K", Size="xlarge",
+                Callback=function(key)
+                    local ok3=pcall(function() Window:SetToggleKey(Enum.KeyCode[key]) end)
+                    WindUI:Notify({ Title=ok3 and T("keybindSetTitle") or T("keybindErrorTitle"), Content=ok3 and T("keybindSetDesc")..key or T("keybindErrorDesc"), Duration=3 })
+                end
+            })
+            Tabs.Config:Divider({ Title="" })
+            Tabs.Config:Paragraph({ Title=T("configManagerTitle"), Desc=T("configManagerDesc"), Image="save", ImageSize=28 })
+            local CfgSysOK, CfgSys = pcall(function()
+                return loadstring(game:HttpGet("https://raw.githubusercontent.com/Cypher666-oss/Ld-/refs/heads/main/PhantomXConfig"))()
+            end)
+            if CfgSysOK and CfgSys then
+                CfgSys.Setup({ Window=Window, ConfigTab=Tabs.Config, CfgElements=CfgEls, T=T, WindUI=WindUI, SelectedLanguage=_G.SelectedLanguage, DefaultConfigName="PhantomX" })
+            else
+                Tabs.Config:Paragraph({ Title=_G.SelectedLanguage=="Arabic" and "تعذر تحميل نظام الإعدادات" or "Failed to load Config System",
+                    Desc=_G.SelectedLanguage=="Arabic" and "تأكد من اتصالك بالإنترنت" or "Check your internet connection",
+                    Image="alert-triangle", ImageSize=24 })
+            end
+            Tabs.Config:Divider({ Title="" })
+            Tabs.Config:Button({ Title=T("changeLanguage"), Icon="refresh-cw", Size="xlarge",
+                Callback=function()
+                    WindUI:Notify({ Title=T("notification"), Content=T("languageChanged"), Duration=3 })
+                    task.wait(1)
+                    _G.SelectedLanguage=_G.SelectedLanguage=="Arabic" and "English" or "Arabic"
+                    Window:Destroy(); cleanupGUI(); task.wait(1); createMainScript()
+                end
+            })
+            Tabs.Config:Button({ Title=T("closeScript"), Icon="power", Size="xlarge",
+                Callback=function()
+                    HUB.Unload(); Window:Destroy(); cleanupGUI()
+                    WindUI:Notify({ Title=T("notification"), Content=T("scriptClosed"), Duration=2 })
+                end
+            })
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- CREDITS TAB  (unchanged from original)
+        -- ════════════════════════════════════════════════════════════════
+        do
+            Tabs.Credits:Paragraph({ Title=T("developerName"), Desc=T("developerDesc"), Image="user", ImageSize=80, Color=Color3.fromHex("#FF6B35") })
+            local function GetDiscordStats()
+                local ok3,res=pcall(function() return game:HttpGet("https://discord.com/api/v10/invites/uRtbxxxrau?with_counts=true") end)
+                if ok3 then local d=HttpService:JSONDecode(res); return d.approximate_member_count or "?", d.approximate_presence_count or "?" end
+                return "?","?"
+            end
+            local mc,oc=GetDiscordStats()
+            local dDesc=T("discordServerDesc"):gsub("{members}",tostring(mc)):gsub("{online}",tostring(oc))
+            Tabs.Credits:Paragraph({ Title=T("discordServerTitle"), Desc=dDesc, Image="rbxassetid://12892030103", ImageSize=100,
+                Buttons={{Title=T("copyInvite"),Icon="copy",Callback=function() setclipboard("https://discord.gg/uRtbxxxrau"); WindUI:Notify({ Title=T("notification"), Content=T("inviteCopied"), Duration=2 }) end}}
+            })
+            Tabs.Credits:Button({ Title=T("joinDiscord"), Icon="message-circle", Size="xlarge",
+                Callback=function() setclipboard("https://discord.gg/uRtbxxxrau"); WindUI:Notify({ Title=T("notification"), Content=_G.SelectedLanguage=="Arabic" and "تم نسخ الرابط" or "Link copied", Duration=2 }) end
+            })
+            Tabs.Credits:Button({ Title=T("version"), Icon="tag", Size="xlarge", Callback=function()end })
+            Tabs.Credits:Button({ Title=T("contactDev"), Icon="mail", Size="xlarge",
+                Callback=function() setclipboard("swightx2"); WindUI:Notify({ Title=T("notification"), Content=_G.SelectedLanguage=="Arabic" and "تم نسخ يوزر المطور" or "Developer username copied", Duration=2 }) end
+            })
+        end
+
+        -- ════════════════════════════════════════════════════════════════
+        -- UNLOAD
+        -- ════════════════════════════════════════════════════════════════
+        function HUB.Unload()
+            if HUB.dead then return end
+            HUB.dead = true
+            for _,c in ipairs(HUB.conns) do pcall(function() c:Disconnect() end) end
+            for _,d in ipairs(HUB.drawings) do pcall(function() d:Remove() end) end
+            for _,h in ipairs(HUB.highlights) do pcall(function() h:Destroy() end) end
+            pcall(function() local hum=GetHum(); if hum then hum.PlatformStand=false; hum.WalkSpeed=16; hum.JumpPower=50 end end)
+            _G.PhantomXAntiAFK=nil; _G.PhantomMacro=nil; _G.PhantomMacroToggle=nil
+            pcall(function() Window:Destroy() end)
+        end
+
+        Window:OnDestroy(function()end)
+
+        task.wait(4)
+        WindUI:Notify({ Title=T("welcome"),
+            Content=_G.SelectedLanguage=="Arabic" and "السكربت شغّال وجاهز!\nتمتع بمميزاتنا الحصرية 🚀" or "Script is running and ready!\nEnjoy our exclusive features 🚀",
+            Duration=6
+        })
+        task.spawn(function()
+            while true do
+                task.wait(600); if HUB.dead then break end
+                WindUI:Notify({ Title=_G.SelectedLanguage=="Arabic" and "🕌 تذكير" or "💜 Reminder",
+                    Content=_G.SelectedLanguage=="Arabic" and "صلّ على النبي ﷺ 🤍\n\nانضم لديسكورد السكربت 💜" or "Enjoying the script? Join our Discord 💜",
+                    Duration=8
+                })
+            end
+        end)
+    end
+else
+    print("Failed to load WindUI")
+end
+
+print("Done")
