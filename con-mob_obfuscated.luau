@@ -1,1140 +1,976 @@
+-- Lua 5.3+ / Luau compatibility polyfills
+if not math.ldexp then math.ldexp = function(x, n) return x * 2 ^ n end end
+if not math.frexp then math.frexp = function(x)
+    if x == 0 then return 0, 0 end
+    local exp = math.floor(math.log(math.abs(x)) / math.log(2)) + 1
+    local mantissa = x / 2 ^ exp
+    return mantissa, exp
+end end
+if not loadstring and load then loadstring = load end
+if not loadstring then loadstring = function(s) return load(s) end end
+
 --[Obfuscated by Hercules v2.0.0 | hercules-obfuscator.xyz/discord | hercules-obfuscator.xyz/source]
-if true then local _ = 74 end
-local ouiktw = 27
-local gegxkt = 26
 if true then local _ = 21 end
-local function ysrigb(wvfued) local _ = 91 end
-if false then local _ = 4 end
-if false then local _ = 48 end
-local mevgln = 9
-local function fwheij(htrlea) local _ = 4 end
-if true then local _ = 22 end
-local wfcrcj = 98
-local function unjuyq(mvyrym) local _ = 86 end
-local gqdnme = 11
-local function hvnnfc(bnraqo) local _ = 91 end
-local thing = 2697;
-local thing2 = 2697;
+while false do local _ = 24 break end
+local function yvdhng(lmgnnl) local _ = 76 end
+local function bdynnu(rwihxk) local _ = 20 end
+if true then local _ = 6 end
+if true then local _ = 87 end
+while false do local _ = 22 break end
+local function magzxo(nfqsiv) local _ = 62 end
+local rfbfux = 95
+local gyhbqw = 75
+while false do local _ = 64 break end
+while false do local _ = 81 break end
+if true then local _ = 59 end
+local thing = 6583;
+local thing2 = 6583;
 local counter = 0;
 while thing == thing2 and counter < 1 do
     thing = thing + 1;
     counter = counter + 1;
     if thing == thing2 then
-        local tbl = {1, 2, 3}; table.sort(tbl, function(a, b) return a > b end);
+        local str = 'dummy'; str = str .. str;
     else
         do
-            do
-    local _BFR,_MFR,T,E,Pa,GM,RG={["getmetatable"]=getmetatable,["pcall"]=pcall,["string.upper"]=string.upper,["type"]=type,["table.remove"]=table.remove,["string.format"]=string.format,["tonumber"]=tonumber,["error"]=error,["select"]=select,["os.time"]=os.time,["string.find"]=string.find,["tostring"]=tostring,["math.sqrt"]=math.sqrt,["math.cos"]=math.cos,["math.deg"]=math.deg,["math.max"]=math.max,["math.abs"]=math.abs,["xpcall"]=xpcall,["os.difftime"]=os.difftime,["math.ceil"]=math.ceil,["os.date"]=os.date,["os.clock"]=os.clock,["rawset"]=rawset,["math.tan"]=math.tan,["string.lower"]=string.lower,["string.sub"]=string.sub,["math.exp"]=math.exp,["string.len"]=string.len,["math.sin"]=math.sin,["math.acos"]=math.acos,["string.rep"]=string.rep,["math.floor"]=math.floor,["math.rad"]=math.rad,["math.modf"]=math.modf,["assert"]=assert,["next"]=next,["string.byte"]=string.byte,["string.char"]=string.char,["math.fmod"]=math.fmod,["rawequal"]=rawequal,["math.atan"]=math.atan,["setmetatable"]=setmetatable,["table.insert"]=table.insert,["string.gmatch"]=string.gmatch,["table.sort"]=table.sort,["rawget"]=rawget,["math.asin"]=math.asin,["string.reverse"]=string.reverse,["string.match"]=string.match,["string.gsub"]=string.gsub,["math.min"]=math.min,["table.concat"]=table.concat},{},type,error,pairs,getmetatable,rawget
-    local DG={table=table,string=string,math=math,os=os}
-    local function check()
-        for n,ref in Pa(_BFR) do
-            if ref==nil then
-                E("Tamper Detected! Reason: Critical function removed: "..n)
-                return
-            end
-            if T(ref)~="function" then
-                E("Tamper Detected! Reason: Critical function type changed: "..n.." (was function, now "..T(ref)..")")
-                return
-            end
-        end
-        for tname in Pa(_MFR) do
-            local parts={}
-            for p in tname:gmatch("[^.]+") do parts[#parts+1]=p end
-            local t=DG[(parts[1])]
-            if t then
-                local mt=GM(t)
-                if mt then
-                    local mf=RG(mt,parts[2])
-                    if mf then
-                        local expected=_MFR[tname]
-                        if T(mf)~=expected then
-                            E("Tamper Detected! Reason: Metamethod tampered: "..tname)
-                            return
-                        end
-                    end
-                end
-            end
-        end
-        local d=debug
-        if T(d)=="table" then
-            local _DK={"info","traceback"}
-            for _,k in Pa(_DK) do
-                if T(d[k])~="function" then
-                    E("Tamper Detected! Reason: Debug library incomplete")
-                    return
-                end
-            end
-        end
-    end
-    check()
+            local ucAIttDQvLq,CwDtTjnc,yNLHulMPnWeB,JGZLauJDL,ISAPGSASAL,BoHOZceTz,NTGjJfRYrNQ,OtnNzgWuQCY,QJyguEPBkDk,TWFRAMWWD,OSwmfwoKCQtU,JHucTHxHyrb,zcaIBebqjsq,QokthjQyq,xTZJbEqllf,vluJuJCEuKo,dngTJjcUkTF,yCczfvNh
+ucAIttDQvLq=error;CwDtTjnc=ipairs;yNLHulMPnWeB=pairs;JGZLauJDL=pcall;ISAPGSASAL=print;BoHOZceTz=rawget;NTGjJfRYrNQ=rawset;OtnNzgWuQCY=select;QJyguEPBkDk=tonumber;TWFRAMWWD=tostring;OSwmfwoKCQtU=math.floor;JHucTHxHyrb=math.max;zcaIBebqjsq=math.random;QokthjQyq=string.char;xTZJbEqllf=string.format;vluJuJCEuKo=table.concat;dngTJjcUkTF=table.insert;yCczfvNh=os.time;
+local vtsOVprpkXPM = {[10]="\\010",[32]=" ",[36]="$",[37]="%",[39]="'",[40]="(",[41]=")",[43]="+",[45]="-",[46]=".",[47]="/",[49]="1",[50]="2",[51]="3",[52]="4",[53]="5",[54]="6",[55]="7",[56]="8",[57]="9",[58]=":",[61]="=",[63]="?",[65]="A",[66]="B",[67]="C",[68]="D",[69]="E",[70]="F",[71]="G",[72]="H",[73]="I",[74]="J",[75]="K",[76]="L",[77]="M",[78]="N",[79]="O",[80]="P",[81]="Q",[82]="R",[83]="S",[84]="T",[85]="U",[86]="V",[87]="W",[88]="X",[89]="Y",[90]="Z",[91]="[",[93]="]",[94]="^",[95]="_",[97]="a",[98]="b",[99]="c",[100]="d",[101]="e",[102]="f",[103]="g",[104]="h",[105]="i",[106]="j",[107]="k",[108]="l",[109]="m",[110]="n",[111]="o",[112]="p",[113]="q",[114]="r",[115]="s",[116]="t",[117]="u",[118]="v",[119]="w",[120]="x",[121]="y",[122]="z",[124]="|",[195]="\\195",[151]="\\151",[194]="\\194",[183]="\\183"}
+local function LSniYNPdUp(iWwOcGlcOV)
+    return (iWwOcGlcOV >= 48 and iWwOcGlcOV <= 57) or (iWwOcGlcOV >= 65 and iWwOcGlcOV <= 90) or (iWwOcGlcOV >= 97 and iWwOcGlcOV <= 122)
 end
 
-local lMAdLSNB,qAAHXIFGcgOh,suRBumSGYTfw,ZedscHfPEOa,WlrrntdzdNNJ,NxnyHPam,lIeOcmjg,htNxMRiNe,JBZKRGiAr,pbiWCvmoWwB,SuhaIECGaLu,kjMaunLUkIUp,pcmcGCaLHmun,UCVzMkRYbA,aMhhSKUsXY,rsWgfulR,auQqpjtwSXE,JdOpjIEjccUy
-lMAdLSNB=error;qAAHXIFGcgOh=ipairs;suRBumSGYTfw=pairs;ZedscHfPEOa=pcall;WlrrntdzdNNJ=print;NxnyHPam=rawget;lIeOcmjg=rawset;htNxMRiNe=select;JBZKRGiAr=tonumber;pbiWCvmoWwB=tostring;SuhaIECGaLu=math.floor;kjMaunLUkIUp=math.max;pcmcGCaLHmun=math.random;UCVzMkRYbA=string.char;aMhhSKUsXY=string.format;rsWgfulR=table.concat;auQqpjtwSXE=table.insert;JdOpjIEjccUy=os.time;
-local ETZEwPwyBF = {[10]="\\010",[32]=" ",[36]="$",[37]="%",[39]="'",[40]="(",[41]=")",[43]="+",[45]="-",[46]=".",[47]="/",[48]="0",[49]="1",[50]="2",[51]="3",[53]="5",[54]="6",[55]="7",[56]="8",[58]=":",[61]="=",[63]="?",[65]="A",[66]="B",[67]="C",[68]="D",[69]="E",[70]="F",[71]="G",[72]="H",[73]="I",[74]="J",[75]="K",[76]="L",[77]="M",[78]="N",[79]="O",[80]="P",[81]="Q",[82]="R",[83]="S",[84]="T",[85]="U",[86]="V",[87]="W",[88]="X",[89]="Y",[90]="Z",[91]="[",[93]="]",[94]="^",[95]="_",[97]="a",[98]="b",[99]="c",[100]="d",[101]="e",[102]="f",[103]="g",[104]="h",[105]="i",[106]="j",[107]="k",[108]="l",[109]="m",[110]="n",[111]="o",[112]="p",[113]="q",[114]="r",[115]="s",[116]="t",[117]="u",[118]="v",[119]="w",[120]="x",[121]="y",[122]="z",[124]="|",[195]="\\195",[151]="\\151",[194]="\\194",[183]="\\183"}
-local function rgxBGEnnnjhW(vmYZrHauSd)
-    return (vmYZrHauSd >= 48 and vmYZrHauSd <= 57) or (vmYZrHauSd >= 65 and vmYZrHauSd <= 90) or (vmYZrHauSd >= 97 and vmYZrHauSd <= 122)
-end
-
-local function KASYeHPY(MXMzndQK, JCBXxCBngHL)
-    local oqAJRwzkdTD = {}
-    for i = 1, #MXMzndQK do
-        local vmYZrHauSd = MXMzndQK:byte(i)
-        if rgxBGEnnnjhW(vmYZrHauSd) then
-            local iCszZaGQ            if vmYZrHauSd >= 48 and vmYZrHauSd <= 57 then
-                iCszZaGQ = ((vmYZrHauSd - 48 - JCBXxCBngHL + 10) % 10) + 48
-            elseif vmYZrHauSd >= 65 and vmYZrHauSd <= 90 then
-                iCszZaGQ = ((vmYZrHauSd - 65 - JCBXxCBngHL + 26) % 26) + 65
-            elseif vmYZrHauSd >= 97 and vmYZrHauSd <= 122 then
-                iCszZaGQ = ((vmYZrHauSd - 97 - JCBXxCBngHL + 26) % 26) + 97
+local function fxpZqKdCnRQ(XbdtNcLgxe, tAMmRMNZzgei)
+    local AWYumKMnm = {}
+    for i = 1, #XbdtNcLgxe do
+        local iWwOcGlcOV = XbdtNcLgxe:byte(i)
+        if LSniYNPdUp(iWwOcGlcOV) then
+            local hXhaVVtYMRn            if iWwOcGlcOV >= 48 and iWwOcGlcOV <= 57 then
+                hXhaVVtYMRn = ((iWwOcGlcOV - 48 - tAMmRMNZzgei + 10) % 10) + 48
+            elseif iWwOcGlcOV >= 65 and iWwOcGlcOV <= 90 then
+                hXhaVVtYMRn = ((iWwOcGlcOV - 65 - tAMmRMNZzgei + 26) % 26) + 65
+            elseif iWwOcGlcOV >= 97 and iWwOcGlcOV <= 122 then
+                hXhaVVtYMRn = ((iWwOcGlcOV - 97 - tAMmRMNZzgei + 26) % 26) + 97
             end
-            table.insert(oqAJRwzkdTD, string.char(iCszZaGQ))
+            table.insert(AWYumKMnm, string.char(hXhaVVtYMRn))
         else
-            table.insert(oqAJRwzkdTD, string.char(vmYZrHauSd))
+            table.insert(AWYumKMnm, string.char(iWwOcGlcOV))
         end
     end
-    return table.concat(oqAJRwzkdTD)
+    return table.concat(AWYumKMnm)
 end
 
-local YCyAKNCnwCi = game:GetService(KASYeHPY((ETZEwPwyBF[142 - (72)]..ETZEwPwyBF[733 - (619)]..ETZEwPwyBF[397 - (283)]..ETZEwPwyBF[-407 + 517]..ETZEwPwyBF[-287 + 368]..ETZEwPwyBF[477 - (378)]..ETZEwPwyBF[689 - (577)]..ETZEwPwyBF[-488 + 604]..ETZEwPwyBF[907 - (804)]..ETZEwPwyBF[-623 + 720]..ETZEwPwyBF[711 - (612)]), 24))
-local DwMvbyHHz = game:GetService(KASYeHPY((ETZEwPwyBF[434 - (357)]..ETZEwPwyBF[159 - (54)]..ETZEwPwyBF[-657 + 777]..ETZEwPwyBF[-344 + 462]..ETZEwPwyBF[574 - (476)]..ETZEwPwyBF[-298 + 409]..ETZEwPwyBF[316 - (204)]), 23))
-local scTUcOxCi = game:GetService(KASYeHPY((ETZEwPwyBF[-424 + 506]..ETZEwPwyBF[-375 + 492]..ETZEwPwyBF[857 - (758)]..ETZEwPwyBF[-472 + 571]..ETZEwPwyBF[629 - (521)]..ETZEwPwyBF[-103 + 184]..ETZEwPwyBF[551 - (452)]..ETZEwPwyBF[922 - (810)]..ETZEwPwyBF[719 - (603)]..ETZEwPwyBF[372 - (269)]..ETZEwPwyBF[891 - (794)]..ETZEwPwyBF[319 - (220)]), 24))
+local ZLEFCdSSAxaz = game:GetService(fxpZqKdCnRQ((vtsOVprpkXPM[816 - (745)]..vtsOVprpkXPM[-674 + 789]..vtsOVprpkXPM[216 - (101)]..vtsOVprpkXPM[-561 + 672]..vtsOVprpkXPM[720 - (638)]..vtsOVprpkXPM[-376 + 476]..vtsOVprpkXPM[958 - (845)]..vtsOVprpkXPM[442 - (325)]..vtsOVprpkXPM[442 - (338)]..vtsOVprpkXPM[-221 + 319]..vtsOVprpkXPM[989 - (889)]), 25))
+local SUySjZSHaf = game:GetService(fxpZqKdCnRQ((vtsOVprpkXPM[245 - (169)]..vtsOVprpkXPM[753 - (649)]..vtsOVprpkXPM[297 - (178)]..vtsOVprpkXPM[649 - (532)]..vtsOVprpkXPM[-736 + 833]..vtsOVprpkXPM[771 - (661)]..vtsOVprpkXPM[500 - (389)]), 22))
+local ySBqiEPfU = game:GetService(fxpZqKdCnRQ((vtsOVprpkXPM[-419 + 499]..vtsOVprpkXPM[941 - (826)]..vtsOVprpkXPM[507 - (410)]..vtsOVprpkXPM[-218 + 315]..vtsOVprpkXPM[946 - (840)]..vtsOVprpkXPM[-201 + 280]..vtsOVprpkXPM[757 - (660)]..vtsOVprpkXPM[459 - (349)]..vtsOVprpkXPM[929 - (815)]..vtsOVprpkXPM[500 - (399)]..vtsOVprpkXPM[-753 + 874]..vtsOVprpkXPM[-876 + 973]), 22))
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
 -- المنصات المتاحة
-local rMRrLMgrr = {KASYeHPY((ETZEwPwyBF[700 - (610)]..ETZEwPwyBF[-448 + 556]..ETZEwPwyBF[703 - (596)]..ETZEwPwyBF[-285 + 397]..ETZEwPwyBF[-133 + 241]..ETZEwPwyBF[-671 + 776]..ETZEwPwyBF[-124 + 222]), 23), KASYeHPY((ETZEwPwyBF[139 - (63)]..ETZEwPwyBF[809 - (699)]..ETZEwPwyBF[-788 + 885]..ETZEwPwyBF[-715 + 819]..ETZEwPwyBF[684 - (577)]..ETZEwPwyBF[-141 + 241]), 25)}
+local dHuKNuezIIE = {fxpZqKdCnRQ((vtsOVprpkXPM[207 - (117)]..vtsOVprpkXPM[-604 + 712]..vtsOVprpkXPM[-409 + 516]..vtsOVprpkXPM[915 - (803)]..vtsOVprpkXPM[-805 + 913]..vtsOVprpkXPM[628 - (523)]..vtsOVprpkXPM[-222 + 320]), 23), fxpZqKdCnRQ((vtsOVprpkXPM[276 - (201)]..vtsOVprpkXPM[529 - (420)]..vtsOVprpkXPM[-137 + 259]..vtsOVprpkXPM[144 - (41)]..vtsOVprpkXPM[830 - (724)]..vtsOVprpkXPM[-676 + 775]), 24)}
 
-local CcdtsIWe = KASYeHPY((ETZEwPwyBF[-667 + 768]..ETZEwPwyBF[935 - (822)]..ETZEwPwyBF[282 - (169)]..ETZEwPwyBF[955 - (846)]..ETZEwPwyBF[-165 + 277]..ETZEwPwyBF[-712 + 770]..ETZEwPwyBF[-112 + 159]..ETZEwPwyBF[677 - (630)]..ETZEwPwyBF[519 - (422)]..ETZEwPwyBF[-717 + 815]..ETZEwPwyBF[475 - (360)]..ETZEwPwyBF[393 - (291)]..ETZEwPwyBF[122 - (0)]..ETZEwPwyBF[194 - (96)]..ETZEwPwyBF[-109 + 215]..ETZEwPwyBF[-828 + 936]..ETZEwPwyBF[-209 + 306]..ETZEwPwyBF[-346 + 444]..ETZEwPwyBF[525 - (480)]..ETZEwPwyBF[-876 + 998]..ETZEwPwyBF[797 - (675)]..ETZEwPwyBF[228 - (115)]..ETZEwPwyBF[-586 + 686]..ETZEwPwyBF[-584 + 686]..ETZEwPwyBF[935 - (881)]..ETZEwPwyBF[-510 + 616]..ETZEwPwyBF[-502 + 622]..ETZEwPwyBF[-156 + 202]..ETZEwPwyBF[-461 + 567]..ETZEwPwyBF[-804 + 924]..ETZEwPwyBF[947 - (840)]..ETZEwPwyBF[674 - (560)]..ETZEwPwyBF[314 - (202)]..ETZEwPwyBF[329 - (283)]..ETZEwPwyBF[-202 + 314]..ETZEwPwyBF[-786 + 895]..ETZEwPwyBF[155 - (35)]..ETZEwPwyBF[934 - (812)]..ETZEwPwyBF[-319 + 417]), 23)
-local oOVYAydohmTF = KASYeHPY((ETZEwPwyBF[345 - (295)]..ETZEwPwyBF[723 - (677)]..ETZEwPwyBF[-418 + 467]..ETZEwPwyBF[127 - (81)]..ETZEwPwyBF[-820 + 869]), 1)
-local oOgiBOUg = KASYeHPY((ETZEwPwyBF[-303 + 369]..ETZEwPwyBF[696 - (618)]..ETZEwPwyBF[270 - (193)]..ETZEwPwyBF[751 - (669)]..ETZEwPwyBF[-338 + 416]..ETZEwPwyBF[960 - (885)]..ETZEwPwyBF[-336 + 404]..ETZEwPwyBF[990 - (895)]..ETZEwPwyBF[520 - (444)]..ETZEwPwyBF[-733 + 811]..ETZEwPwyBF[-85 + 150]..ETZEwPwyBF[-382 + 454]..ETZEwPwyBF[-421 + 496]..ETZEwPwyBF[357 - (289)]), 25)
-local xdhjPfRyKjO = 300
+local lSSoofXRUD = fxpZqKdCnRQ((vtsOVprpkXPM[-827 + 930]..vtsOVprpkXPM[335 - (220)]..vtsOVprpkXPM[665 - (550)]..vtsOVprpkXPM[-246 + 357]..vtsOVprpkXPM[-376 + 490]..vtsOVprpkXPM[-817 + 875]..vtsOVprpkXPM[-870 + 917]..vtsOVprpkXPM[-687 + 734]..vtsOVprpkXPM[-530 + 629]..vtsOVprpkXPM[-593 + 693]..vtsOVprpkXPM[-178 + 295]..vtsOVprpkXPM[446 - (342)]..vtsOVprpkXPM[-606 + 704]..vtsOVprpkXPM[311 - (211)]..vtsOVprpkXPM[207 - (99)]..vtsOVprpkXPM[7 + 103]..vtsOVprpkXPM[352 - (253)]..vtsOVprpkXPM[459 - (359)]..vtsOVprpkXPM[834 - (789)]..vtsOVprpkXPM[768 - (670)]..vtsOVprpkXPM[-429 + 527]..vtsOVprpkXPM[-517 + 632]..vtsOVprpkXPM[132 - (30)]..vtsOVprpkXPM[-805 + 909]..vtsOVprpkXPM[-509 + 565]..vtsOVprpkXPM[320 - (212)]..vtsOVprpkXPM[-140 + 262]..vtsOVprpkXPM[-324 + 370]..vtsOVprpkXPM[942 - (834)]..vtsOVprpkXPM[-183 + 305]..vtsOVprpkXPM[-523 + 632]..vtsOVprpkXPM[200 - (84)]..vtsOVprpkXPM[440 - (326)]..vtsOVprpkXPM[683 - (637)]..vtsOVprpkXPM[279 - (165)]..vtsOVprpkXPM[-513 + 624]..vtsOVprpkXPM[911 - (789)]..vtsOVprpkXPM[193 - (95)]..vtsOVprpkXPM[461 - (361)]), 25)
+local OlwNtoFsKA = fxpZqKdCnRQ((vtsOVprpkXPM[315 - (265)]..vtsOVprpkXPM[505 - (459)]..vtsOVprpkXPM[189 - (140)]..vtsOVprpkXPM[-155 + 201]..vtsOVprpkXPM[191 - (142)]), 1)
+local TqjfHuOX = fxpZqKdCnRQ((vtsOVprpkXPM[-420 + 507]..vtsOVprpkXPM[244 - (171)]..vtsOVprpkXPM[624 - (552)]..vtsOVprpkXPM[-78 + 155]..vtsOVprpkXPM[-350 + 423]..vtsOVprpkXPM[116 - (46)]..vtsOVprpkXPM[903 - (814)]..vtsOVprpkXPM[-591 + 686]..vtsOVprpkXPM[-709 + 780]..vtsOVprpkXPM[575 - (502)]..vtsOVprpkXPM[-835 + 921]..vtsOVprpkXPM[-161 + 228]..vtsOVprpkXPM[426 - (356)]..vtsOVprpkXPM[489 - (400)]), 20)
+local PLmxOBUCHLU = 300
 
-local vlkkzXTnSQw = {
+local gkRsmttkZjGL = {
     [11379739543]    = true,
     [98752102030179] = true,
 }
 
-if not vlkkzXTnSQw[game.PlaceId] then return end
+if not gkRsmttkZjGL[game.PlaceId] then return end
 
-local ElmYKxLib = table.concat(rMRrLMgrr, KASYeHPY((ETZEwPwyBF[973 - (878)]), 1))
-local gWmUBuHtyT = KASYeHPY((ETZEwPwyBF[166 - (58)]..ETZEwPwyBF[277 - (163)]..ETZEwPwyBF[204 - (96)]..ETZEwPwyBF[326 - (231)]..ETZEwPwyBF[-870 + 978]..ETZEwPwyBF[-793 + 913]..ETZEwPwyBF[-540 + 648]..ETZEwPwyBF[702 - (594)]..ETZEwPwyBF[-59 + 154]..ETZEwPwyBF[543 - (432)]..ETZEwPwyBF[696 - (645)]..ETZEwPwyBF[-227 + 322]), 19) .. ElmYKxLib .. KASYeHPY((ETZEwPwyBF[687 - (641)]..ETZEwPwyBF[555 - (439)]..ETZEwPwyBF[453 - (356)]..ETZEwPwyBF[805 - (703)]), 18)
-local WTQgAsnaVlpO  = KASYeHPY((ETZEwPwyBF[-129 + 243]..ETZEwPwyBF[-324 + 444]..ETZEwPwyBF[-188 + 302]..ETZEwPwyBF[105 - (10)]..ETZEwPwyBF[189 - (91)]..ETZEwPwyBF[-93 + 194]..ETZEwPwyBF[-460 + 562]..ETZEwPwyBF[-787 + 882]..ETZEwPwyBF[-1 + 118]..ETZEwPwyBF[-106 + 154]..ETZEwPwyBF[420 - (325)]..ETZEwPwyBF[-727 + 825]..ETZEwPwyBF[290 - (168)]..ETZEwPwyBF[920 - (822)]..ETZEwPwyBF[-12 + 115]..ETZEwPwyBF[-123 + 223]..ETZEwPwyBF[-294 + 340]..ETZEwPwyBF[-15 + 112]..ETZEwPwyBF[290 - (186)]..ETZEwPwyBF[723 - (614)]), 25)
-local GdZTbYHRQkVQ = KASYeHPY((ETZEwPwyBF[254 - (140)]..ETZEwPwyBF[222 - (102)]..ETZEwPwyBF[-772 + 886]..ETZEwPwyBF[-164 + 259]..ETZEwPwyBF[-453 + 575]..ETZEwPwyBF[-737 + 844]..ETZEwPwyBF[-847 + 954]..ETZEwPwyBF[879 - (769)]..ETZEwPwyBF[-243 + 361]..ETZEwPwyBF[563 - (463)]..ETZEwPwyBF[830 - (731)]..ETZEwPwyBF[-771 + 866]..ETZEwPwyBF[-297 + 414]..ETZEwPwyBF[-183 + 231]..ETZEwPwyBF[-44 + 139]), 25) .. ElmYKxLib .. KASYeHPY((ETZEwPwyBF[326 - (280)]..ETZEwPwyBF[-757 + 873]..ETZEwPwyBF[255 - (158)]..ETZEwPwyBF[732 - (630)]), 18)
+local umzUTQuz = table.concat(dHuKNuezIIE, fxpZqKdCnRQ((vtsOVprpkXPM[-321 + 416]), 1))
+local twNMPQaKzM = fxpZqKdCnRQ((vtsOVprpkXPM[823 - (711)]..vtsOVprpkXPM[-502 + 620]..vtsOVprpkXPM[862 - (750)]..vtsOVprpkXPM[580 - (485)]..vtsOVprpkXPM[-679 + 791]..vtsOVprpkXPM[869 - (771)]..vtsOVprpkXPM[493 - (381)]..vtsOVprpkXPM[-679 + 791]..vtsOVprpkXPM[-881 + 976]..vtsOVprpkXPM[445 - (330)]..vtsOVprpkXPM[-92 + 147]..vtsOVprpkXPM[-728 + 823]), 23) .. umzUTQuz .. fxpZqKdCnRQ((vtsOVprpkXPM[340 - (294)]..vtsOVprpkXPM[404 - (285)]..vtsOVprpkXPM[245 - (145)]..vtsOVprpkXPM[538 - (433)]), 21)
+local IQSSqUXix  = fxpZqKdCnRQ((vtsOVprpkXPM[440 - (327)]..vtsOVprpkXPM[-246 + 365]..vtsOVprpkXPM[657 - (544)]..vtsOVprpkXPM[-662 + 757]..vtsOVprpkXPM[591 - (494)]..vtsOVprpkXPM[-687 + 787]..vtsOVprpkXPM[-367 + 468]..vtsOVprpkXPM[734 - (639)]..vtsOVprpkXPM[321 - (205)]..vtsOVprpkXPM[-327 + 384]..vtsOVprpkXPM[667 - (572)]..vtsOVprpkXPM[-668 + 765]..vtsOVprpkXPM[291 - (170)]..vtsOVprpkXPM[-115 + 212]..vtsOVprpkXPM[-870 + 972]..vtsOVprpkXPM[465 - (366)]..vtsOVprpkXPM[-688 + 734]..vtsOVprpkXPM[307 - (185)]..vtsOVprpkXPM[-340 + 443]..vtsOVprpkXPM[-349 + 457]), 24)
+local mgeVJIuN = fxpZqKdCnRQ((vtsOVprpkXPM[-378 + 490]..vtsOVprpkXPM[359 - (241)]..vtsOVprpkXPM[242 - (130)]..vtsOVprpkXPM[862 - (767)]..vtsOVprpkXPM[214 - (94)]..vtsOVprpkXPM[-389 + 494]..vtsOVprpkXPM[984 - (879)]..vtsOVprpkXPM[162 - (54)]..vtsOVprpkXPM[-540 + 656]..vtsOVprpkXPM[854 - (756)]..vtsOVprpkXPM[721 - (624)]..vtsOVprpkXPM[191 - (96)]..vtsOVprpkXPM[-419 + 534]..vtsOVprpkXPM[791 - (735)]..vtsOVprpkXPM[206 - (111)]), 23) .. umzUTQuz .. fxpZqKdCnRQ((vtsOVprpkXPM[767 - (721)]..vtsOVprpkXPM[264 - (145)]..vtsOVprpkXPM[163 - (63)]..vtsOVprpkXPM[-825 + 930]), 21)
 
-local eerCqKBzwBJi = getgenv and getgenv() or _G
-local OGtNbZQwXc = eerCqKBzwBJi.DeviceModeKey
-if type(OGtNbZQwXc) ~= KASYeHPY((ETZEwPwyBF[-194 + 308]..ETZEwPwyBF[516 - (401)]..ETZEwPwyBF[715 - (602)]..ETZEwPwyBF[-212 + 316]..ETZEwPwyBF[-28 + 137]..ETZEwPwyBF[-252 + 354]), 25) or OGtNbZQwXc == KASYeHPY((""), 1) then return end
+local CGrOzpKpASYs = getgenv and getgenv() or _G
+local cbVbzIfPRbE = CGrOzpKpASYs.DeviceModeKey
+if type(cbVbzIfPRbE) ~= fxpZqKdCnRQ((vtsOVprpkXPM[221 - (109)]..vtsOVprpkXPM[-130 + 243]..vtsOVprpkXPM[-827 + 938]..vtsOVprpkXPM[-564 + 666]..vtsOVprpkXPM[-821 + 928]..vtsOVprpkXPM[-597 + 697]), 23) or cbVbzIfPRbE == fxpZqKdCnRQ((""), 1) then return end
 
-local tAAuRAcAEhGh = DwMvbyHHz.LocalPlayer
-if not tAAuRAcAEhGh then
-    DwMvbyHHz:GetPropertyChangedSignal(KASYeHPY((ETZEwPwyBF[-506 + 579]..ETZEwPwyBF[871 - (763)]..ETZEwPwyBF[-506 + 628]..ETZEwPwyBF[-801 + 921]..ETZEwPwyBF[901 - (796)]..ETZEwPwyBF[131 - (54)]..ETZEwPwyBF[-395 + 500]..ETZEwPwyBF[-325 + 445]..ETZEwPwyBF[-877 + 995]..ETZEwPwyBF[-508 + 606]..ETZEwPwyBF[300 - (189)]), 23)):Wait()
-    tAAuRAcAEhGh = DwMvbyHHz.LocalPlayer
+local MIKesVkYnf = SUySjZSHaf.LocalPlayer
+if not MIKesVkYnf then
+    SUySjZSHaf:GetPropertyChangedSignal(fxpZqKdCnRQ((vtsOVprpkXPM[-101 + 173]..vtsOVprpkXPM[264 - (157)]..vtsOVprpkXPM[466 - (345)]..vtsOVprpkXPM[252 - (133)]..vtsOVprpkXPM[-431 + 535]..vtsOVprpkXPM[-773 + 849]..vtsOVprpkXPM[351 - (247)]..vtsOVprpkXPM[-374 + 493]..vtsOVprpkXPM[514 - (397)]..vtsOVprpkXPM[-364 + 461]..vtsOVprpkXPM[-241 + 351]), 22)):Wait()
+    MIKesVkYnf = SUySjZSHaf.LocalPlayer
 end
-if not tAAuRAcAEhGh then return end
+if not MIKesVkYnf then return end
 
-local djGDBQPtYc = pbiWCvmoWwB(tAAuRAcAEhGh.UserId)
+local MRaKBLOD = TWFRAMWWD(MIKesVkYnf.UserId)
 
-local function LwrYIWKiuZGu()
-    local zkDCKjLlKPG = {
-        function() return type(gethwid) == KASYeHPY((ETZEwPwyBF[-612 + 713]..ETZEwPwyBF[669 - (553)]..ETZEwPwyBF[-152 + 261]..ETZEwPwyBF[177 - (79)]..ETZEwPwyBF[-197 + 312]..ETZEwPwyBF[-107 + 211]..ETZEwPwyBF[-91 + 201]..ETZEwPwyBF[849 - (740)]), 25) and gethwid() end,
-        function() return type(get_hwid) == KASYeHPY((ETZEwPwyBF[106 - (8)]..ETZEwPwyBF[588 - (475)]..ETZEwPwyBF[429 - (323)]..ETZEwPwyBF[-530 + 651]..ETZEwPwyBF[661 - (549)]..ETZEwPwyBF[156 - (55)]..ETZEwPwyBF[-711 + 818]..ETZEwPwyBF[104 - (-2)]), 22) and get_hwid() end,
-        function() return type(getHWID) == KASYeHPY((ETZEwPwyBF[920 - (820)]..ETZEwPwyBF[275 - (160)]..ETZEwPwyBF[-187 + 295]..ETZEwPwyBF[562 - (465)]..ETZEwPwyBF[-72 + 186]..ETZEwPwyBF[-603 + 706]..ETZEwPwyBF[-716 + 825]..ETZEwPwyBF[-762 + 870]), 24) and getHWID() end,
-        function() return syn and type(syn.gethwid) == KASYeHPY((ETZEwPwyBF[532 - (432)]..ETZEwPwyBF[-38 + 153]..ETZEwPwyBF[-169 + 277]..ETZEwPwyBF[-200 + 297]..ETZEwPwyBF[617 - (503)]..ETZEwPwyBF[103 - (0)]..ETZEwPwyBF[525 - (416)]..ETZEwPwyBF[453 - (345)]), 24) and syn.gethwid() end,
+local function nHBtNYeLMx()
+    local ZWwUcBXD = {
+        function() return type(gethwid) == fxpZqKdCnRQ((vtsOVprpkXPM[542 - (421)]..vtsOVprpkXPM[780 - (670)]..vtsOVprpkXPM[920 - (817)]..vtsOVprpkXPM[-62 + 180]..vtsOVprpkXPM[-169 + 278]..vtsOVprpkXPM[518 - (420)]..vtsOVprpkXPM[686 - (582)]..vtsOVprpkXPM[371 - (268)]), 19) and gethwid() end,
+        function() return type(get_hwid) == fxpZqKdCnRQ((vtsOVprpkXPM[488 - (390)]..vtsOVprpkXPM[224 - (111)]..vtsOVprpkXPM[-55 + 161]..vtsOVprpkXPM[622 - (501)]..vtsOVprpkXPM[304 - (192)]..vtsOVprpkXPM[736 - (635)]..vtsOVprpkXPM[-682 + 789]..vtsOVprpkXPM[801 - (695)]), 22) and get_hwid() end,
+        function() return type(getHWID) == fxpZqKdCnRQ((vtsOVprpkXPM[-43 + 143]..vtsOVprpkXPM[853 - (738)]..vtsOVprpkXPM[-156 + 264]..vtsOVprpkXPM[427 - (330)]..vtsOVprpkXPM[462 - (348)]..vtsOVprpkXPM[696 - (593)]..vtsOVprpkXPM[382 - (273)]..vtsOVprpkXPM[535 - (427)]), 24) and getHWID() end,
+        function() return syn and type(syn.gethwid) == fxpZqKdCnRQ((vtsOVprpkXPM[-117 + 216]..vtsOVprpkXPM[529 - (415)]..vtsOVprpkXPM[127 - (20)]..vtsOVprpkXPM[-208 + 330]..vtsOVprpkXPM[-484 + 597]..vtsOVprpkXPM[209 - (107)]..vtsOVprpkXPM[-393 + 501]..vtsOVprpkXPM[328 - (221)]), 23) and syn.gethwid() end,
     }
-    for vHdYXEPJa, getter in qAAHXIFGcgOh(zkDCKjLlKPG) do
-        local FozFmilaF, svYzLwGCk = ZedscHfPEOa(getter)
-        if FozFmilaF and type(svYzLwGCk) == KASYeHPY((ETZEwPwyBF[873 - (763)]..ETZEwPwyBF[576 - (465)]..ETZEwPwyBF[-588 + 697]..ETZEwPwyBF[-646 + 746]..ETZEwPwyBF[466 - (361)]..ETZEwPwyBF[-171 + 269]), 21) then
-            svYzLwGCk = svYzLwGCk:gsub(KASYeHPY((ETZEwPwyBF[-506 + 543]..ETZEwPwyBF[-389 + 499]..ETZEwPwyBF[-767 + 810]), 21), KASYeHPY((""), 1))
-            if #svYzLwGCk >= 8 and #svYzLwGCk <= 256 then return svYzLwGCk end
+    for XiQwVudx, getter in CwDtTjnc(ZWwUcBXD) do
+        local xNrgRHZy, CtqTkQBfwMv = JGZLauJDL(getter)
+        if xNrgRHZy and type(CtqTkQBfwMv) == fxpZqKdCnRQ((vtsOVprpkXPM[-310 + 422]..vtsOVprpkXPM[-629 + 742]..vtsOVprpkXPM[330 - (219)]..vtsOVprpkXPM[569 - (467)]..vtsOVprpkXPM[-623 + 730]..vtsOVprpkXPM[140 - (40)]), 23) then
+            CtqTkQBfwMv = CtqTkQBfwMv:gsub(fxpZqKdCnRQ((vtsOVprpkXPM[542 - (505)]..vtsOVprpkXPM[427 - (317)]..vtsOVprpkXPM[311 - (268)]), 21), fxpZqKdCnRQ((""), 1))
+            if #CtqTkQBfwMv >= 8 and #CtqTkQBfwMv <= 256 then return CtqTkQBfwMv end
         end
     end
     return nil
 end
 
-local zIvYxTbLK = LwrYIWKiuZGu()
-local mzIVIkmdVgsN = zIvYxTbLK and (KASYeHPY((ETZEwPwyBF[-75 + 165]..ETZEwPwyBF[924 - (841)]..ETZEwPwyBF[290 - (200)]..ETZEwPwyBF[-890 + 978]..ETZEwPwyBF[376 - (296)]..ETZEwPwyBF[-69 + 148]..ETZEwPwyBF[-527 + 601]..ETZEwPwyBF[746 - (669)]..ETZEwPwyBF[-109 + 154]..ETZEwPwyBF[-336 + 403]..ETZEwPwyBF[997 - (915)]..ETZEwPwyBF[-892 + 960]..ETZEwPwyBF[-730 + 819]..ETZEwPwyBF[504 - (459)]), 21) .. zIvYxTbLK)
-    if (not (47 >= 61)) == (47 < 61) then
-        or (KASYeHPY((ETZEwPwyBF[628 - (547)]..ETZEwPwyBF[307 - (229)]..ETZEwPwyBF[-640 + 705]..ETZEwPwyBF[-382 + 457]..ETZEwPwyBF[-552 + 630]..ETZEwPwyBF[-443 + 530]..ETZEwPwyBF[-235 + 280]..ETZEwPwyBF[168 - (84)]..ETZEwPwyBF[-549 + 631]..ETZEwPwyBF[-135 + 203]..ETZEwPwyBF[775 - (694)]..ETZEwPwyBF[-863 + 908]), 25) .. djGDBQPtYc)
-    end
+local UEXhkMHfL = nHBtNYeLMx()
+local YFiQFMiozd = UEXhkMHfL and (fxpZqKdCnRQ((vtsOVprpkXPM[-79 + 144]..vtsOVprpkXPM[652 - (568)]..vtsOVprpkXPM[724 - (659)]..vtsOVprpkXPM[-378 + 467]..vtsOVprpkXPM[-699 + 780]..vtsOVprpkXPM[-569 + 649]..vtsOVprpkXPM[-167 + 242]..vtsOVprpkXPM[-274 + 352]..vtsOVprpkXPM[-769 + 814]..vtsOVprpkXPM[-148 + 216]..vtsOVprpkXPM[595 - (512)]..vtsOVprpkXPM[-818 + 887]..vtsOVprpkXPM[-379 + 469]..vtsOVprpkXPM[-555 + 600]), 22) .. UEXhkMHfL)
+    or (fxpZqKdCnRQ((vtsOVprpkXPM[822 - (741)]..vtsOVprpkXPM[935 - (857)]..vtsOVprpkXPM[421 - (356)]..vtsOVprpkXPM[319 - (244)]..vtsOVprpkXPM[-704 + 782]..vtsOVprpkXPM[884 - (797)]..vtsOVprpkXPM[-456 + 501]..vtsOVprpkXPM[-576 + 660]..vtsOVprpkXPM[815 - (733)]..vtsOVprpkXPM[-440 + 508]..vtsOVprpkXPM[977 - (896)]..vtsOVprpkXPM[566 - (521)]), 25) .. MRaKBLOD)
 
-local NuiGvtYltLGH = _G.request or request or http_request or (syn and syn.request)
-if type(NuiGvtYltLGH) ~= KASYeHPY((ETZEwPwyBF[333 - (232)]..ETZEwPwyBF[-26 + 142]..ETZEwPwyBF[-448 + 557]..ETZEwPwyBF[-783 + 881]..ETZEwPwyBF[846 - (731)]..ETZEwPwyBF[251 - (147)]..ETZEwPwyBF[717 - (607)]..ETZEwPwyBF[-470 + 579]), 25) then return end
+local ggfSUijUcJ = _G.request or request or http_request or (syn and syn.request)
+if type(ggfSUijUcJ) ~= fxpZqKdCnRQ((vtsOVprpkXPM[378 - (278)]..vtsOVprpkXPM[265 - (150)]..vtsOVprpkXPM[943 - (835)]..vtsOVprpkXPM[376 - (279)]..vtsOVprpkXPM[683 - (569)]..vtsOVprpkXPM[-153 + 256]..vtsOVprpkXPM[833 - (724)]..vtsOVprpkXPM[316 - (208)]), 24) then return end
 
-local function rVKDPoSzI(method, path, body)
-    local FozFmilaF, XUqqWIEBwqK = ZedscHfPEOa(function()
-        return NuiGvtYltLGH({Url= CcdtsIWe .. path,
+local function gVdGSQyRG(method, path, body)
+    local xNrgRHZy, NYqQGyjfi = JGZLauJDL(function()
+        return ggfSUijUcJ({Url= lSSoofXRUD .. path,
             Method = method,
             Headers = {
-                [KASYeHPY((ETZEwPwyBF[427 - (362)]..ETZEwPwyBF[562 - (453)]..ETZEwPwyBF[921 - (813)]..ETZEwPwyBF[104 - (-10)]..ETZEwPwyBF[-231 + 330]..ETZEwPwyBF[597 - (489)]..ETZEwPwyBF[678 - (564)]..ETZEwPwyBF[-302 + 347]..ETZEwPwyBF[-488 + 570]..ETZEwPwyBF[-849 + 968]..ETZEwPwyBF[898 - (788)]..ETZEwPwyBF[770 - (671)]), 24)] = KASYeHPY((ETZEwPwyBF[-286 + 407]..ETZEwPwyBF[581 - (471)]..ETZEwPwyBF[798 - (688)]..ETZEwPwyBF[397 - (291)]..ETZEwPwyBF[676 - (573)]..ETZEwPwyBF[-510 + 607]..ETZEwPwyBF[594 - (473)]..ETZEwPwyBF[-603 + 717]..ETZEwPwyBF[511 - (408)]..ETZEwPwyBF[-358 + 467]..ETZEwPwyBF[861 - (753)]..ETZEwPwyBF[556 - (509)]..ETZEwPwyBF[-564 + 668]..ETZEwPwyBF[-883 + 996]..ETZEwPwyBF[-831 + 940]..ETZEwPwyBF[638 - (530)]), 24),
-                [KASYeHPY((ETZEwPwyBF[930 - (840)]..ETZEwPwyBF[295 - (197)]..ETZEwPwyBF[192 - (94)]..ETZEwPwyBF[675 - (575)]..ETZEwPwyBF[675 - (564)]..ETZEwPwyBF[144 - (29)]), 25)] = KASYeHPY((ETZEwPwyBF[346 - (224)]..ETZEwPwyBF[-801 + 912]..ETZEwPwyBF[-455 + 566]..ETZEwPwyBF[963 - (856)]..ETZEwPwyBF[467 - (363)]..ETZEwPwyBF[679 - (581)]..ETZEwPwyBF[506 - (384)]..ETZEwPwyBF[-758 + 873]..ETZEwPwyBF[-232 + 336]..ETZEwPwyBF[-630 + 740]..ETZEwPwyBF[-320 + 429]..ETZEwPwyBF[519 - (472)]..ETZEwPwyBF[-683 + 788]..ETZEwPwyBF[-247 + 361]..ETZEwPwyBF[-626 + 736]..ETZEwPwyBF[9 + 100]), 25),
+                [fxpZqKdCnRQ((vtsOVprpkXPM[418 - (330)]..vtsOVprpkXPM[-85 + 191]..vtsOVprpkXPM[-7 + 112]..vtsOVprpkXPM[392 - (281)]..vtsOVprpkXPM[975 - (853)]..vtsOVprpkXPM[-743 + 848]..vtsOVprpkXPM[496 - (385)]..vtsOVprpkXPM[-696 + 741]..vtsOVprpkXPM[-488 + 567]..vtsOVprpkXPM[778 - (662)]..vtsOVprpkXPM[767 - (660)]..vtsOVprpkXPM[-151 + 273]), 21)] = fxpZqKdCnRQ((vtsOVprpkXPM[615 - (493)]..vtsOVprpkXPM[180 - (69)]..vtsOVprpkXPM[438 - (327)]..vtsOVprpkXPM[210 - (103)]..vtsOVprpkXPM[-480 + 584]..vtsOVprpkXPM[-477 + 575]..vtsOVprpkXPM[-411 + 533]..vtsOVprpkXPM[827 - (712)]..vtsOVprpkXPM[360 - (256)]..vtsOVprpkXPM[-346 + 456]..vtsOVprpkXPM[401 - (292)]..vtsOVprpkXPM[952 - (905)]..vtsOVprpkXPM[-338 + 443]..vtsOVprpkXPM[338 - (224)]..vtsOVprpkXPM[-748 + 858]..vtsOVprpkXPM[295 - (186)]), 25),
+                [fxpZqKdCnRQ((vtsOVprpkXPM[993 - (910)]..vtsOVprpkXPM[718 - (601)]..vtsOVprpkXPM[881 - (764)]..vtsOVprpkXPM[-247 + 366]..vtsOVprpkXPM[-80 + 184]..vtsOVprpkXPM[449 - (341)]), 18)] = fxpZqKdCnRQ((vtsOVprpkXPM[-335 + 457]..vtsOVprpkXPM[684 - (573)]..vtsOVprpkXPM[-398 + 509]..vtsOVprpkXPM[-412 + 519]..vtsOVprpkXPM[662 - (558)]..vtsOVprpkXPM[-164 + 262]..vtsOVprpkXPM[-137 + 259]..vtsOVprpkXPM[209 - (94)]..vtsOVprpkXPM[906 - (802)]..vtsOVprpkXPM[-466 + 576]..vtsOVprpkXPM[366 - (257)]..vtsOVprpkXPM[252 - (205)]..vtsOVprpkXPM[980 - (875)]..vtsOVprpkXPM[405 - (291)]..vtsOVprpkXPM[-419 + 529]..vtsOVprpkXPM[195 - (86)]), 25),
             },
-            Body = body and YCyAKNCnwCi:JSONEncode(body) or nil,
+            Body = body and ZLEFCdSSAxaz:JSONEncode(body) or nil,
         })
     end)
-    if not FozFmilaF or type(XUqqWIEBwqK) ~= KASYeHPY((ETZEwPwyBF[544 - (435)]..ETZEwPwyBF[637 - (521)]..ETZEwPwyBF[324 - (207)]..ETZEwPwyBF[-475 + 576]..ETZEwPwyBF[-31 + 151]), 19) then
-        return nil, nil, KASYeHPY((ETZEwPwyBF[-393 + 463]..ETZEwPwyBF[168 - (86)]..ETZEwPwyBF[-89 + 171]..ETZEwPwyBF[185 - (107)]..ETZEwPwyBF[817 - (722)]..ETZEwPwyBF[-890 + 970]..ETZEwPwyBF[178 - (111)]..ETZEwPwyBF[-818 + 897]..ETZEwPwyBF[-91 + 174]..ETZEwPwyBF[832 - (765)]..ETZEwPwyBF[-461 + 542]..ETZEwPwyBF[-328 + 410]..ETZEwPwyBF[138 - (43)]..ETZEwPwyBF[-892 + 960]..ETZEwPwyBF[-437 + 526]..ETZEwPwyBF[-838 + 909]..ETZEwPwyBF[-275 + 349]..ETZEwPwyBF[-585 + 652]..ETZEwPwyBF[643 - (577)]), 24)
+    if not xNrgRHZy or type(NYqQGyjfi) ~= fxpZqKdCnRQ((vtsOVprpkXPM[399 - (291)]..vtsOVprpkXPM[434 - (319)]..vtsOVprpkXPM[216 - (100)]..vtsOVprpkXPM[-67 + 167]..vtsOVprpkXPM[-728 + 847]), 18) then
+        return nil, nil, fxpZqKdCnRQ((vtsOVprpkXPM[557 - (486)]..vtsOVprpkXPM[-313 + 396]..vtsOVprpkXPM[561 - (478)]..vtsOVprpkXPM[-507 + 586]..vtsOVprpkXPM[676 - (581)]..vtsOVprpkXPM[-423 + 504]..vtsOVprpkXPM[405 - (337)]..vtsOVprpkXPM[-90 + 170]..vtsOVprpkXPM[-757 + 841]..vtsOVprpkXPM[615 - (547)]..vtsOVprpkXPM[-670 + 752]..vtsOVprpkXPM[401 - (318)]..vtsOVprpkXPM[282 - (187)]..vtsOVprpkXPM[891 - (822)]..vtsOVprpkXPM[291 - (201)]..vtsOVprpkXPM[379 - (307)]..vtsOVprpkXPM[-789 + 864]..vtsOVprpkXPM[739 - (671)]..vtsOVprpkXPM[689 - (622)]), 25)
     end
-    if type(XUqqWIEBwqK.Body) ~= KASYeHPY((ETZEwPwyBF[777 - (675)]..ETZEwPwyBF[-389 + 492]..ETZEwPwyBF[850 - (749)]..ETZEwPwyBF[162 - (44)]..ETZEwPwyBF[-232 + 329]..ETZEwPwyBF[247 - (131)]), 13) or XUqqWIEBwqK.Body == KASYeHPY((""), 1) then
-        return XUqqWIEBwqK, nil, KASYeHPY((ETZEwPwyBF[-288 + 355]..ETZEwPwyBF[356 - (281)]..ETZEwPwyBF[-100 + 178]..ETZEwPwyBF[-595 + 677]..ETZEwPwyBF[-514 + 601]..ETZEwPwyBF[-102 + 197]..ETZEwPwyBF[-26 + 106]..ETZEwPwyBF[-649 + 716]..ETZEwPwyBF[-307 + 388]..ETZEwPwyBF[846 - (768)]..ETZEwPwyBF[747 - (670)]..ETZEwPwyBF[-267 + 343]..ETZEwPwyBF[-551 + 632]..ETZEwPwyBF[-269 + 336]), 24)
+    if type(NYqQGyjfi.Body) ~= fxpZqKdCnRQ((vtsOVprpkXPM[-121 + 231]..vtsOVprpkXPM[-658 + 769]..vtsOVprpkXPM[-29 + 138]..vtsOVprpkXPM[729 - (629)]..vtsOVprpkXPM[556 - (451)]..vtsOVprpkXPM[565 - (467)]), 21) or NYqQGyjfi.Body == fxpZqKdCnRQ((""), 1) then
+        return NYqQGyjfi, nil, fxpZqKdCnRQ((vtsOVprpkXPM[-766 + 832]..vtsOVprpkXPM[539 - (465)]..vtsOVprpkXPM[-874 + 951]..vtsOVprpkXPM[-628 + 709]..vtsOVprpkXPM[-666 + 752]..vtsOVprpkXPM[313 - (218)]..vtsOVprpkXPM[-715 + 794]..vtsOVprpkXPM[-901 + 967]..vtsOVprpkXPM[392 - (312)]..vtsOVprpkXPM[-326 + 403]..vtsOVprpkXPM[787 - (711)]..vtsOVprpkXPM[476 - (401)]..vtsOVprpkXPM[-303 + 383]..vtsOVprpkXPM[-93 + 159]), 23)
     end
-    local zeibrPcThLg, WiHUgGkjmB = ZedscHfPEOa(function()
-        return YCyAKNCnwCi:JSONDecode(XUqqWIEBwqK.Body)
+    local ENteRqUszCxX, sMiYmtBVnb = JGZLauJDL(function()
+        return ZLEFCdSSAxaz:JSONDecode(NYqQGyjfi.Body)
     end)
-    if not zeibrPcThLg or type(WiHUgGkjmB) ~= KASYeHPY((ETZEwPwyBF[998 - (891)]..ETZEwPwyBF[-761 + 875]..ETZEwPwyBF[765 - (650)]..ETZEwPwyBF[-242 + 341]..ETZEwPwyBF[-85 + 203]), 17) then
-        return XUqqWIEBwqK, nil, KASYeHPY((ETZEwPwyBF[-851 + 923]..ETZEwPwyBF[-664 + 741]..ETZEwPwyBF[-744 + 829]..ETZEwPwyBF[543 - (453)]..ETZEwPwyBF[420 - (345)]..ETZEwPwyBF[737 - (665)]..ETZEwPwyBF[-399 + 466]..ETZEwPwyBF[126 - (31)]..ETZEwPwyBF[583 - (510)]..ETZEwPwyBF[406 - (324)]..ETZEwPwyBF[-732 + 810]..ETZEwPwyBF[594 - (517)]), 25)
+    if not ENteRqUszCxX or type(sMiYmtBVnb) ~= fxpZqKdCnRQ((vtsOVprpkXPM[227 - (122)]..vtsOVprpkXPM[-310 + 422]..vtsOVprpkXPM[-220 + 333]..vtsOVprpkXPM[-767 + 864]..vtsOVprpkXPM[559 - (443)]), 15) then
+        return NYqQGyjfi, nil, fxpZqKdCnRQ((vtsOVprpkXPM[-72 + 143]..vtsOVprpkXPM[-720 + 796]..vtsOVprpkXPM[344 - (260)]..vtsOVprpkXPM[-367 + 456]..vtsOVprpkXPM[160 - (86)]..vtsOVprpkXPM[-208 + 279]..vtsOVprpkXPM[804 - (738)]..vtsOVprpkXPM[315 - (220)]..vtsOVprpkXPM[-82 + 154]..vtsOVprpkXPM[-381 + 462]..vtsOVprpkXPM[-117 + 194]..vtsOVprpkXPM[576 - (500)]), 24)
     end
-    return XUqqWIEBwqK, WiHUgGkjmB, nil
+    return NYqQGyjfi, sMiYmtBVnb, nil
 end
 
-local function nkkuuurkG(iso)
-    if type(iso) ~= KASYeHPY((ETZEwPwyBF[208 - (95)]..ETZEwPwyBF[-616 + 730]..ETZEwPwyBF[354 - (242)]..ETZEwPwyBF[772 - (669)]..ETZEwPwyBF[826 - (718)]..ETZEwPwyBF[502 - (401)]), 24) then return nil end
-    local FozFmilaF, mVFrVrVbic = ZedscHfPEOa(function() return DateTime.fromIsoDate(iso) end)
-    if not FozFmilaF or not mVFrVrVbic then return nil end
-    return mVFrVrVbic.UnixTimestamp
+local function dRsfAkMBB(iso)
+    if type(iso) ~= fxpZqKdCnRQ((vtsOVprpkXPM[-80 + 192]..vtsOVprpkXPM[227 - (114)]..vtsOVprpkXPM[-610 + 721]..vtsOVprpkXPM[-26 + 128]..vtsOVprpkXPM[424 - (317)]..vtsOVprpkXPM[-307 + 407]), 23) then return nil end
+    local xNrgRHZy, mKmiAjJMap = JGZLauJDL(function() return DateTime.fromIsoDate(iso) end)
+    if not xNrgRHZy or not mKmiAjJMap then return nil end
+    return mKmiAjJMap.UnixTimestamp
 end
 
-local function IWxPcSaAaXN(seconds)
+local function fYrPNNTl(seconds)
     seconds = math.max(0, math.floor(seconds))
-    local qVzVPVjASa = math.floor(seconds / 86400)
-    local ACzyKaDxHiMQ = math.floor((seconds % 86400) / 3600)
-    local qSYfNxpdqwWA = math.floor((seconds % 3600) / 60)
-    local xNBmdkBeutY = seconds % 60
-    if qVzVPVjASa > 0 then
-        return string.format(KASYeHPY((ETZEwPwyBF[-335 + 372]..ETZEwPwyBF[-728 + 849]..ETZEwPwyBF[377 - (256)]..ETZEwPwyBF[436 - (404)]..ETZEwPwyBF[310 - (273)]..ETZEwPwyBF[-185 + 234]..ETZEwPwyBF[415 - (364)]..ETZEwPwyBF[-358 + 479]..ETZEwPwyBF[469 - (370)]..ETZEwPwyBF[629 - (597)]..ETZEwPwyBF[523 - (486)]..ETZEwPwyBF[568 - (519)]..ETZEwPwyBF[-497 + 548]..ETZEwPwyBF[936 - (815)]..ETZEwPwyBF[-43 + 147]), 21), qVzVPVjASa, ACzyKaDxHiMQ, qSYfNxpdqwWA)
+    local NlzOzEQmuqRF = math.floor(seconds / 86400)
+    local ZMUGCxJoXAK = math.floor((seconds % 86400) / 3600)
+    local xFMVzAQIxJmS = math.floor((seconds % 3600) / 60)
+    local IUGTLUMOq = seconds % 60
+    if NlzOzEQmuqRF > 0 then
+        return string.format(fxpZqKdCnRQ((vtsOVprpkXPM[-429 + 466]..vtsOVprpkXPM[724 - (625)]..vtsOVprpkXPM[-589 + 688]..vtsOVprpkXPM[403 - (371)]..vtsOVprpkXPM[842 - (805)]..vtsOVprpkXPM[-291 + 344]..vtsOVprpkXPM[303 - (248)]..vtsOVprpkXPM[-180 + 279]..vtsOVprpkXPM[859 - (756)]..vtsOVprpkXPM[118 - (86)]..vtsOVprpkXPM[722 - (685)]..vtsOVprpkXPM[-831 + 884]..vtsOVprpkXPM[-836 + 891]..vtsOVprpkXPM[632 - (533)]..vtsOVprpkXPM[-320 + 428]), 25), NlzOzEQmuqRF, ZMUGCxJoXAK, xFMVzAQIxJmS)
     end
-    if ACzyKaDxHiMQ > 0 then
-        return string.format(KASYeHPY((ETZEwPwyBF[482 - (445)]..ETZEwPwyBF[593 - (494)]..ETZEwPwyBF[-540 + 643]..ETZEwPwyBF[-636 + 668]..ETZEwPwyBF[-260 + 297]..ETZEwPwyBF[-142 + 195]..ETZEwPwyBF[-434 + 489]..ETZEwPwyBF[919 - (820)]..ETZEwPwyBF[271 - (163)]..ETZEwPwyBF[956 - (924)]..ETZEwPwyBF[-961 + 998]..ETZEwPwyBF[593 - (540)]..ETZEwPwyBF[-222 + 277]..ETZEwPwyBF[177 - (78)]..ETZEwPwyBF[-426 + 540]), 25), ACzyKaDxHiMQ, qSYfNxpdqwWA, xNBmdkBeutY)
+    if ZMUGCxJoXAK > 0 then
+        return string.format(fxpZqKdCnRQ((vtsOVprpkXPM[-130 + 167]..vtsOVprpkXPM[-475 + 596]..vtsOVprpkXPM[-577 + 676]..vtsOVprpkXPM[506 - (474)]..vtsOVprpkXPM[859 - (822)]..vtsOVprpkXPM[640 - (591)]..vtsOVprpkXPM[-722 + 773]..vtsOVprpkXPM[997 - (876)]..vtsOVprpkXPM[-359 + 463]..vtsOVprpkXPM[-438 + 470]..vtsOVprpkXPM[908 - (871)]..vtsOVprpkXPM[506 - (457)]..vtsOVprpkXPM[585 - (534)]..vtsOVprpkXPM[433 - (312)]..vtsOVprpkXPM[-712 + 822]), 21), ZMUGCxJoXAK, xFMVzAQIxJmS, IUGTLUMOq)
     end
-    return string.format(KASYeHPY((ETZEwPwyBF[-697 + 734]..ETZEwPwyBF[-723 + 779]..ETZEwPwyBF[-456 + 504]..ETZEwPwyBF[713 - (605)]..ETZEwPwyBF[-572 + 689]..ETZEwPwyBF[-208 + 240]..ETZEwPwyBF[-195 + 232]..ETZEwPwyBF[-607 + 663]..ETZEwPwyBF[-165 + 213]..ETZEwPwyBF[-440 + 548]..ETZEwPwyBF[796 - (699)]), 8), qSYfNxpdqwWA, xNBmdkBeutY)
+    return string.format(fxpZqKdCnRQ((vtsOVprpkXPM[-568 + 605]..vtsOVprpkXPM[180 - (128)]..vtsOVprpkXPM[882 - (828)]..vtsOVprpkXPM[347 - (249)]..vtsOVprpkXPM[934 - (827)]..vtsOVprpkXPM[860 - (828)]..vtsOVprpkXPM[879 - (842)]..vtsOVprpkXPM[249 - (197)]..vtsOVprpkXPM[-378 + 432]..vtsOVprpkXPM[447 - (349)]..vtsOVprpkXPM[-711 + 824]), 24), xFMVzAQIxJmS, IUGTLUMOq)
 end
 
 -- ===== الجلسة (بدون تشفير) =====
-local function XNLnNniYME(erdhyrff, mXXiZMuhqsb)
+local function FHJrNvPqMW(NqNYeyaPr, BQRigzmGrBG)
     if not writefile then return end
-    if true then
-        ZedscHfPEOa(writefile, gWmUBuHtyT,
-        erdhyrff .. KASYeHPY((ETZEwPwyBF[899 - (775)]), 1) .. pbiWCvmoWwB(mXXiZMuhqsb) .. KASYeHPY((ETZEwPwyBF[709 - (585)]), 1) .. pbiWCvmoWwB(os.time()))
-    end
+    JGZLauJDL(writefile, twNMPQaKzM,
+        NqNYeyaPr .. fxpZqKdCnRQ((vtsOVprpkXPM[127 - (3)]), 1) .. TWFRAMWWD(BQRigzmGrBG) .. fxpZqKdCnRQ((vtsOVprpkXPM[732 - (608)]), 1) .. TWFRAMWWD(os.time()))
 end
 
-local function gNHbUjVfK()
-    if not (readfile and isfile and isfile(gWmUBuHtyT)) then return nil, nil end
-    local FozFmilaF, WiHUgGkjmB = ZedscHfPEOa(readfile, gWmUBuHtyT)
-    if not FozFmilaF or type(WiHUgGkjmB) ~= KASYeHPY((ETZEwPwyBF[-86 + 200]..ETZEwPwyBF[-842 + 957]..ETZEwPwyBF[196 - (83)]..ETZEwPwyBF[-79 + 183]..ETZEwPwyBF[530 - (421)]..ETZEwPwyBF[546 - (444)]), 25) or WiHUgGkjmB == KASYeHPY((""), 1) then return nil, nil end
-    local erdhyrff, mXXiZMuhqsb, uUbweAbjKnzQ = WiHUgGkjmB:match(KASYeHPY((ETZEwPwyBF[332 - (238)]..ETZEwPwyBF[831 - (791)]..ETZEwPwyBF[151 - (60)]..ETZEwPwyBF[-366 + 460]..ETZEwPwyBF[863 - (739)]..ETZEwPwyBF[-571 + 664]..ETZEwPwyBF[197 - (154)]..ETZEwPwyBF[-316 + 357]..ETZEwPwyBF[982 - (858)]..ETZEwPwyBF[-372 + 412]..ETZEwPwyBF[-763 + 800]..ETZEwPwyBF[-71 + 193]..ETZEwPwyBF[966 - (923)]..ETZEwPwyBF[822 - (781)]..ETZEwPwyBF[168 - (44)]..ETZEwPwyBF[589 - (549)]..ETZEwPwyBF[543 - (506)]..ETZEwPwyBF[-785 + 907]..ETZEwPwyBF[609 - (566)]..ETZEwPwyBF[-912 + 953]..ETZEwPwyBF[-915 + 951]), 22))
-    if not (erdhyrff and mXXiZMuhqsb and uUbweAbjKnzQ) then return nil, nil end
-    mXXiZMuhqsb, uUbweAbjKnzQ = JBZKRGiAr(mXXiZMuhqsb), JBZKRGiAr(uUbweAbjKnzQ)
-    if not (mXXiZMuhqsb and uUbweAbjKnzQ) then return nil, nil end
-    local uGAozZDNYmHW = os.time()
-    if uGAozZDNYmHW >= mXXiZMuhqsb or (uGAozZDNYmHW - uUbweAbjKnzQ) >= xdhjPfRyKjO then
+local function vZdeIANk()
+    if not (readfile and isfile and isfile(twNMPQaKzM)) then return nil, nil end
+    local xNrgRHZy, sMiYmtBVnb = JGZLauJDL(readfile, twNMPQaKzM)
+    if not xNrgRHZy or type(sMiYmtBVnb) ~= fxpZqKdCnRQ((vtsOVprpkXPM[-554 + 667]..vtsOVprpkXPM[790 - (676)]..vtsOVprpkXPM[-662 + 774]..vtsOVprpkXPM[961 - (858)]..vtsOVprpkXPM[672 - (564)]..vtsOVprpkXPM[112 - (11)]), 24) or sMiYmtBVnb == fxpZqKdCnRQ((""), 1) then return nil, nil end
+    local NqNYeyaPr, BQRigzmGrBG, eMNrZUdFIFO = sMiYmtBVnb:match(fxpZqKdCnRQ((vtsOVprpkXPM[946 - (852)]..vtsOVprpkXPM[-115 + 155]..vtsOVprpkXPM[-436 + 527]..vtsOVprpkXPM[104 - (10)]..vtsOVprpkXPM[-794 + 918]..vtsOVprpkXPM[-692 + 785]..vtsOVprpkXPM[365 - (322)]..vtsOVprpkXPM[-852 + 893]..vtsOVprpkXPM[-744 + 868]..vtsOVprpkXPM[184 - (144)]..vtsOVprpkXPM[-598 + 635]..vtsOVprpkXPM[683 - (561)]..vtsOVprpkXPM[385 - (342)]..vtsOVprpkXPM[-548 + 589]..vtsOVprpkXPM[23 + 101]..vtsOVprpkXPM[-110 + 150]..vtsOVprpkXPM[-700 + 737]..vtsOVprpkXPM[718 - (596)]..vtsOVprpkXPM[829 - (786)]..vtsOVprpkXPM[-452 + 493]..vtsOVprpkXPM[-359 + 395]), 22))
+    if not (NqNYeyaPr and BQRigzmGrBG and eMNrZUdFIFO) then return nil, nil end
+    BQRigzmGrBG, eMNrZUdFIFO = QJyguEPBkDk(BQRigzmGrBG), QJyguEPBkDk(eMNrZUdFIFO)
+    if not (BQRigzmGrBG and eMNrZUdFIFO) then return nil, nil end
+    local qOWnypUy = os.time()
+    if qOWnypUy >= BQRigzmGrBG or (qOWnypUy - eMNrZUdFIFO) >= PLmxOBUCHLU then
         return nil, nil
     end
-    return erdhyrff, mXXiZMuhqsb
+    return NqNYeyaPr, BQRigzmGrBG
 end
 
-local function koCFleur()
+local function hqsXYjlG()
     if delfile then
-        ZedscHfPEOa(delfile, gWmUBuHtyT)
+        JGZLauJDL(delfile, twNMPQaKzM)
     elseif writefile then
-        ZedscHfPEOa(writefile, gWmUBuHtyT, KASYeHPY((""), 1))
+        JGZLauJDL(writefile, twNMPQaKzM, fxpZqKdCnRQ((""), 1))
     end
 end
 
 -- ===== المنصات المسموحة =====
-local function xaMcMfAcVBBs(platforms)
-    if not writefile or type(platforms) ~= KASYeHPY((ETZEwPwyBF[-531 + 642]..ETZEwPwyBF[457 - (339)]..ETZEwPwyBF[514 - (395)]..ETZEwPwyBF[584 - (481)]..ETZEwPwyBF[-251 + 373]), 21) then return end
-    local LDhlMJxnG = {}
-    for vHdYXEPJa, platform in qAAHXIFGcgOh(platforms) do
-        local wzTPldaYv = platform == KASYeHPY((ETZEwPwyBF[269 - (162)]..ETZEwPwyBF[324 - (204)]), 21) and KASYeHPY((ETZEwPwyBF[500 - (424)]..ETZEwPwyBF[379 - (290)]), 22)
-            or platform == KASYeHPY((ETZEwPwyBF[727 - (628)]..ETZEwPwyBF[996 - (895)]..ETZEwPwyBF[-846 + 960]..ETZEwPwyBF[556 - (435)]..ETZEwPwyBF[-458 + 556]..ETZEwPwyBF[207 - (90)]), 16) and KASYeHPY((ETZEwPwyBF[268 - (194)]..ETZEwPwyBF[517 - (409)]..ETZEwPwyBF[904 - (783)]..ETZEwPwyBF[388 - (286)]..ETZEwPwyBF[-339 + 444]..ETZEwPwyBF[-694 + 792]), 23)
-            or platform == KASYeHPY((ETZEwPwyBF[-373 + 470]..ETZEwPwyBF[292 - (183)]..ETZEwPwyBF[321 - (213)]..ETZEwPwyBF[-426 + 539]..ETZEwPwyBF[934 - (825)]..ETZEwPwyBF[-718 + 824]..ETZEwPwyBF[935 - (836)]), 24) and KASYeHPY((ETZEwPwyBF[631 - (545)]..ETZEwPwyBF[272 - (168)]..ETZEwPwyBF[-357 + 460]..ETZEwPwyBF[-750 + 858]..ETZEwPwyBF[-749 + 853]..ETZEwPwyBF[447 - (346)]..ETZEwPwyBF[240 - (120)]), 19)
+local function bBPDCWkVD(platforms)
+    if not writefile or type(platforms) ~= fxpZqKdCnRQ((vtsOVprpkXPM[730 - (625)]..vtsOVprpkXPM[-229 + 341]..vtsOVprpkXPM[292 - (179)]..vtsOVprpkXPM[316 - (219)]..vtsOVprpkXPM[200 - (84)]), 15) then return end
+    local uJrDoeXU = {}
+    for XiQwVudx, platform in CwDtTjnc(platforms) do
+        local OOdplWvIPILw = platform == fxpZqKdCnRQ((vtsOVprpkXPM[-384 + 490]..vtsOVprpkXPM[433 - (314)]), 20) and fxpZqKdCnRQ((vtsOVprpkXPM[218 - (128)]..vtsOVprpkXPM[773 - (696)]), 10)
+            or platform == fxpZqKdCnRQ((vtsOVprpkXPM[838 - (730)]..vtsOVprpkXPM[-796 + 906]..vtsOVprpkXPM[179 - (82)]..vtsOVprpkXPM[-232 + 336]..vtsOVprpkXPM[-685 + 792]..vtsOVprpkXPM[-312 + 412]), 25) and fxpZqKdCnRQ((vtsOVprpkXPM[568 - (494)]..vtsOVprpkXPM[339 - (231)]..vtsOVprpkXPM[-423 + 544]..vtsOVprpkXPM[-199 + 301]..vtsOVprpkXPM[795 - (690)]..vtsOVprpkXPM[-399 + 497]), 23)
+            or platform == fxpZqKdCnRQ((vtsOVprpkXPM[250 - (153)]..vtsOVprpkXPM[-55 + 164]..vtsOVprpkXPM[756 - (648)]..vtsOVprpkXPM[533 - (420)]..vtsOVprpkXPM[980 - (871)]..vtsOVprpkXPM[874 - (768)]..vtsOVprpkXPM[512 - (413)]), 24) and fxpZqKdCnRQ((vtsOVprpkXPM[288 - (201)]..vtsOVprpkXPM[699 - (594)]..vtsOVprpkXPM[715 - (611)]..vtsOVprpkXPM[-332 + 441]..vtsOVprpkXPM[310 - (205)]..vtsOVprpkXPM[757 - (655)]..vtsOVprpkXPM[303 - (182)]), 20)
             or platform
-        if wzTPldaYv == KASYeHPY((ETZEwPwyBF[770 - (696)]..ETZEwPwyBF[-602 + 689]), 20) or wzTPldaYv == KASYeHPY((ETZEwPwyBF[-75 + 147]..ETZEwPwyBF[-865 + 971]..ETZEwPwyBF[417 - (298)]..ETZEwPwyBF[159 - (59)]..ETZEwPwyBF[735 - (632)]..ETZEwPwyBF[-822 + 944]), 21) or wzTPldaYv == KASYeHPY((ETZEwPwyBF[-669 + 734]..ETZEwPwyBF[-453 + 562]..ETZEwPwyBF[674 - (566)]..ETZEwPwyBF[154 - (41)]..ETZEwPwyBF[246 - (137)]..ETZEwPwyBF[791 - (685)]..ETZEwPwyBF[-653 + 752]), 24) then
-            table.insert(LDhlMJxnG, wzTPldaYv)
+        if OOdplWvIPILw == fxpZqKdCnRQ((vtsOVprpkXPM[324 - (247)]..vtsOVprpkXPM[242 - (152)]), 23) or OOdplWvIPILw == fxpZqKdCnRQ((vtsOVprpkXPM[-662 + 735]..vtsOVprpkXPM[502 - (395)]..vtsOVprpkXPM[-23 + 143]..vtsOVprpkXPM[-466 + 567]..vtsOVprpkXPM[-768 + 872]..vtsOVprpkXPM[-627 + 724]), 22) or OOdplWvIPILw == fxpZqKdCnRQ((vtsOVprpkXPM[-310 + 376]..vtsOVprpkXPM[-106 + 216]..vtsOVprpkXPM[876 - (767)]..vtsOVprpkXPM[952 - (838)]..vtsOVprpkXPM[-722 + 832]..vtsOVprpkXPM[-355 + 462]..vtsOVprpkXPM[252 - (152)]), 25) then
+            table.insert(uJrDoeXU, OOdplWvIPILw)
         end
     end
-    if #LDhlMJxnG > 0 then
-        ZedscHfPEOa(writefile, GdZTbYHRQkVQ, table.concat(LDhlMJxnG, KASYeHPY((ETZEwPwyBF[-243 + 367]), 1)))
+    if #uJrDoeXU > 0 then
+        JGZLauJDL(writefile, mgeVJIuN, table.concat(uJrDoeXU, fxpZqKdCnRQ((vtsOVprpkXPM[10 + 114]), 1)))
     end
 end
 
-local function RFLRtjITIyB()
-    if not (readfile and isfile and isfile(GdZTbYHRQkVQ)) then return nil end
-    local FozFmilaF, McRtRrJIYyj = ZedscHfPEOa(readfile, GdZTbYHRQkVQ)
-    if not FozFmilaF or type(McRtRrJIYyj) ~= KASYeHPY((ETZEwPwyBF[-471 + 580]..ETZEwPwyBF[-586 + 696]..ETZEwPwyBF[-719 + 827]..ETZEwPwyBF[-558 + 657]..ETZEwPwyBF[247 - (143)]..ETZEwPwyBF[-863 + 960]), 20) or McRtRrJIYyj == KASYeHPY((""), 1) then return nil end
-    local VckHNQJWdPxr = {}
-    for svYzLwGCk in McRtRrJIYyj:gmatch(KASYeHPY((ETZEwPwyBF[608 - (517)]..ETZEwPwyBF[820 - (726)]..ETZEwPwyBF[792 - (668)]..ETZEwPwyBF[-462 + 555]..ETZEwPwyBF[662 - (619)]), 1)) do VckHNQJWdPxr[svYzLwGCk] = true end
-    return VckHNQJWdPxr
+local function ChODrfSo()
+    if not (readfile and isfile and isfile(mgeVJIuN)) then return nil end
+    local xNrgRHZy, tNWRGkwXgdTQ = JGZLauJDL(readfile, mgeVJIuN)
+    if not xNrgRHZy or type(tNWRGkwXgdTQ) ~= fxpZqKdCnRQ((vtsOVprpkXPM[977 - (863)]..vtsOVprpkXPM[-846 + 961]..vtsOVprpkXPM[496 - (383)]..vtsOVprpkXPM[451 - (347)]..vtsOVprpkXPM[899 - (790)]..vtsOVprpkXPM[-161 + 263]), 25) or tNWRGkwXgdTQ == fxpZqKdCnRQ((""), 1) then return nil end
+    local YbjIRukN = {}
+    for CtqTkQBfwMv in tNWRGkwXgdTQ:gmatch(fxpZqKdCnRQ((vtsOVprpkXPM[293 - (202)]..vtsOVprpkXPM[447 - (353)]..vtsOVprpkXPM[-759 + 883]..vtsOVprpkXPM[323 - (230)]..vtsOVprpkXPM[824 - (781)]), 1)) do YbjIRukN[CtqTkQBfwMv] = true end
+    return YbjIRukN
 end
 
-local function jpNISgYrjPa(VckHNQJWdPxr)
-    if not VckHNQJWdPxr then return end
-    local DjlrFkgE = {}
-    for vHdYXEPJa, platform in qAAHXIFGcgOh(rMRrLMgrr) do
-        if VckHNQJWdPxr[platform] then table.insert(DjlrFkgE, platform) end
+local function oEefnDftliCA(YbjIRukN)
+    if not YbjIRukN then return end
+    local cYSqcLtCb = {}
+    for XiQwVudx, platform in CwDtTjnc(dHuKNuezIIE) do
+        if YbjIRukN[platform] then table.insert(cYSqcLtCb, platform) end
     end
-    rMRrLMgrr = DjlrFkgE
+    dHuKNuezIIE = cYSqcLtCb
 end
 
 -- ===== UI =====
-local bKAFOqCEg = Instance.new(KASYeHPY((ETZEwPwyBF[-653 + 732]..ETZEwPwyBF[-337 + 458]..ETZEwPwyBF[957 - (847)]..ETZEwPwyBF[-108 + 205]..ETZEwPwyBF[-855 + 952]..ETZEwPwyBF[986 - (880)]..ETZEwPwyBF[-90 + 157]..ETZEwPwyBF[-749 + 862]..ETZEwPwyBF[-430 + 531]), 22))
-if 61 * 0 + 61 == 61 then
-    bKAFOqCEg.Name = KASYeHPY((ETZEwPwyBF[236 - (170)]..ETZEwPwyBF[478 - (379)]..ETZEwPwyBF[960 - (844)]..ETZEwPwyBF[-341 + 444]..ETZEwPwyBF[191 - (94)]..ETZEwPwyBF[-501 + 600]..ETZEwPwyBF[477 - (402)]..ETZEwPwyBF[101 - (-8)]..ETZEwPwyBF[110 - (12)]..ETZEwPwyBF[-765 + 864]..ETZEwPwyBF[-417 + 486]..ETZEwPwyBF[400 - (294)]..ETZEwPwyBF[301 - (180)]..ETZEwPwyBF[623 - (510)]..ETZEwPwyBF[509 - (396)]), 24)
-    bKAFOqCEg.ResetOnSpawn = false
-elseif 53 > 53 then
-    -- dead
-end
-if 21 % 21 == 0 then
-    bKAFOqCEg.IgnoreGuiInset = true
-    bKAFOqCEg.Parent = tAAuRAcAEhGh:WaitForChild(KASYeHPY((ETZEwPwyBF[-607 + 684]..ETZEwPwyBF[458 - (353)]..ETZEwPwyBF[613 - (493)]..ETZEwPwyBF[509 - (391)]..ETZEwPwyBF[616 - (518)]..ETZEwPwyBF[337 - (226)]..ETZEwPwyBF[-316 + 384]..ETZEwPwyBF[557 - (443)]..ETZEwPwyBF[-147 + 249]), 23))
-end
+local PdrzMsOVjbSn = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[549 - (468)]..vtsOVprpkXPM[873 - (776)]..vtsOVprpkXPM[348 - (236)]..vtsOVprpkXPM[180 - (81)]..vtsOVprpkXPM[687 - (588)]..vtsOVprpkXPM[-254 + 362]..vtsOVprpkXPM[804 - (735)]..vtsOVprpkXPM[-863 + 978]..vtsOVprpkXPM[-842 + 945]), 24))
+PdrzMsOVjbSn.Name = fxpZqKdCnRQ((vtsOVprpkXPM[-332 + 397]..vtsOVprpkXPM[833 - (735)]..vtsOVprpkXPM[3 + 112]..vtsOVprpkXPM[249 - (147)]..vtsOVprpkXPM[382 - (260)]..vtsOVprpkXPM[-184 + 282]..vtsOVprpkXPM[-788 + 862]..vtsOVprpkXPM[816 - (708)]..vtsOVprpkXPM[999 - (902)]..vtsOVprpkXPM[596 - (498)]..vtsOVprpkXPM[850 - (782)]..vtsOVprpkXPM[365 - (260)]..vtsOVprpkXPM[485 - (365)]..vtsOVprpkXPM[670 - (558)]..vtsOVprpkXPM[360 - (248)]), 23)
+PdrzMsOVjbSn.ResetOnSpawn = false
+PdrzMsOVjbSn.IgnoreGuiInset = true
+PdrzMsOVjbSn.Parent = MIKesVkYnf:WaitForChild(fxpZqKdCnRQ((vtsOVprpkXPM[-48 + 127]..vtsOVprpkXPM[937 - (830)]..vtsOVprpkXPM[977 - (855)]..vtsOVprpkXPM[645 - (525)]..vtsOVprpkXPM[-225 + 325]..vtsOVprpkXPM[-99 + 212]..vtsOVprpkXPM[784 - (714)]..vtsOVprpkXPM[-120 + 236]..vtsOVprpkXPM[371 - (267)]), 25))
 
-local guxTGqdL = Instance.new(KASYeHPY((ETZEwPwyBF[185 - (118)]..ETZEwPwyBF[-660 + 771]..ETZEwPwyBF[-725 + 845]..ETZEwPwyBF[334 - (228)]..ETZEwPwyBF[-72 + 170]), 23))
-if 23 % 23 == 0 then
-    guxTGqdL.Name = KASYeHPY((ETZEwPwyBF[177 - (102)]..ETZEwPwyBF[443 - (339)]..ETZEwPwyBF[-451 + 549]..ETZEwPwyBF[-844 + 944]..ETZEwPwyBF[737 - (628)]..ETZEwPwyBF[250 - (136)]..ETZEwPwyBF[646 - (546)]..ETZEwPwyBF[-213 + 296]..ETZEwPwyBF[-280 + 390]..ETZEwPwyBF[-262 + 384]..ETZEwPwyBF[129 - (15)]..ETZEwPwyBF[258 - (143)]), 25)
-    guxTGqdL.AnchorPoint = Vector2.new(1, 0)
-end
-if not (36 ~= 36) then
-    guxTGqdL.Position = UDim2.new(1, 360, 0, 80)
-    guxTGqdL.Size = UDim2.new(0, 310, 0, 86)
-elseif 5 ~= 5 then
-    -- dead
-end
-if true then
-    guxTGqdL.BackgroundColor3 = Color3.fromRGB(13, 16, 26)
-    guxTGqdL.BackgroundTransparency = 0.12
-end
-if (not (33 >= 61)) == (33 < 61) then
-    guxTGqdL.Visible = false
-    guxTGqdL.Parent = bKAFOqCEg
-end
+local oeGbIwLcNj = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[923 - (856)]..vtsOVprpkXPM[-397 + 508]..vtsOVprpkXPM[-396 + 516]..vtsOVprpkXPM[772 - (666)]..vtsOVprpkXPM[-405 + 503]), 23))
+oeGbIwLcNj.Name = fxpZqKdCnRQ((vtsOVprpkXPM[-492 + 566]..vtsOVprpkXPM[103 - (0)]..vtsOVprpkXPM[-171 + 268]..vtsOVprpkXPM[-766 + 865]..vtsOVprpkXPM[175 - (67)]..vtsOVprpkXPM[403 - (290)]..vtsOVprpkXPM[-569 + 668]..vtsOVprpkXPM[164 - (82)]..vtsOVprpkXPM[536 - (427)]..vtsOVprpkXPM[-449 + 570]..vtsOVprpkXPM[421 - (308)]..vtsOVprpkXPM[-254 + 368]), 24)
+oeGbIwLcNj.AnchorPoint = Vector2.new(1, 0)
+oeGbIwLcNj.Position = UDim2.new(1, 360, 0, 80)
+oeGbIwLcNj.Size = UDim2.new(0, 310, 0, 86)
+oeGbIwLcNj.BackgroundColor3 = Color3.fromRGB(13, 16, 26)
+oeGbIwLcNj.BackgroundTransparency = 0.12
+oeGbIwLcNj.Visible = false
+oeGbIwLcNj.Parent = PdrzMsOVjbSn
 
-local mXCvHQtUK = Instance.new(KASYeHPY((ETZEwPwyBF[-693 + 773]..ETZEwPwyBF[380 - (312)]..ETZEwPwyBF[-760 + 848]..ETZEwPwyBF[826 - (720)]..ETZEwPwyBF[622 - (513)]..ETZEwPwyBF[-388 + 493]..ETZEwPwyBF[789 - (667)]..ETZEwPwyBF[636 - (527)]), 21))
-if 100 % 100 == 0 then
-    mXCvHQtUK.CornerRadius = UDim.new(0, 16)
-    mXCvHQtUK.Parent = guxTGqdL
-elseif false then
-    -- dead
-end
+local mEhzNtsGvpie = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[120 - (36)]..vtsOVprpkXPM[-607 + 679]..vtsOVprpkXPM[145 - (79)]..vtsOVprpkXPM[717 - (607)]..vtsOVprpkXPM[608 - (495)]..vtsOVprpkXPM[748 - (639)]..vtsOVprpkXPM[-220 + 320]..vtsOVprpkXPM[-501 + 614]), 25))
+mEhzNtsGvpie.CornerRadius = UDim.new(0, 16)
+mEhzNtsGvpie.Parent = oeGbIwLcNj
 
-local OQqKQSpdWe = Instance.new(KASYeHPY((ETZEwPwyBF[-620 + 700]..ETZEwPwyBF[-560 + 628]..ETZEwPwyBF[676 - (598)]..ETZEwPwyBF[-256 + 367]..ETZEwPwyBF[928 - (819)]..ETZEwPwyBF[621 - (515)]..ETZEwPwyBF[-785 + 887]..ETZEwPwyBF[-741 + 863]), 21))
-if 1 + 47 == 48 then
-    OQqKQSpdWe.Color = Color3.fromRGB(150, 115, 255)
-    OQqKQSpdWe.Transparency = 0.25
-end
-if true then
-    OQqKQSpdWe.Thickness = 1
-    OQqKQSpdWe.Parent = guxTGqdL
-end
+local VLRdXYiokEi = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-134 + 217]..vtsOVprpkXPM[-71 + 142]..vtsOVprpkXPM[-306 + 387]..vtsOVprpkXPM[167 - (53)]..vtsOVprpkXPM[-357 + 469]..vtsOVprpkXPM[995 - (886)]..vtsOVprpkXPM[545 - (440)]..vtsOVprpkXPM[-820 + 919]), 24))
+VLRdXYiokEi.Color = Color3.fromRGB(150, 115, 255)
+VLRdXYiokEi.Transparency = 0.25
+VLRdXYiokEi.Thickness = 1
+VLRdXYiokEi.Parent = oeGbIwLcNj
 
-local HYtsfAxWaPA = Instance.new(KASYeHPY((ETZEwPwyBF[-623 + 707]..ETZEwPwyBF[-897 + 969]..ETZEwPwyBF[-564 + 634]..ETZEwPwyBF[964 - (851)]..ETZEwPwyBF[-2 + 124]..ETZEwPwyBF[688 - (589)]..ETZEwPwyBF[516 - (412)]..ETZEwPwyBF[544 - (444)]..ETZEwPwyBF[957 - (848)]..ETZEwPwyBF[-551 + 666]), 25))
-if true then
-    HYtsfAxWaPA.Color = ColorSequence.new({
+local EFWfWCvgn = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[791 - (707)]..vtsOVprpkXPM[-598 + 670]..vtsOVprpkXPM[577 - (507)]..vtsOVprpkXPM[677 - (564)]..vtsOVprpkXPM[-811 + 933]..vtsOVprpkXPM[248 - (149)]..vtsOVprpkXPM[-700 + 804]..vtsOVprpkXPM[598 - (498)]..vtsOVprpkXPM[499 - (390)]..vtsOVprpkXPM[594 - (479)]), 25))
+EFWfWCvgn.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(30, 25, 57)),
     ColorSequenceKeypoint.new(1, Color3.fromRGB(10, 14, 22)),
-    })
-    HYtsfAxWaPA.Rotation = 18
-elseif not (70 == 70) then
-    -- dead
-end
-if 89 % 89 == 0 then
-    HYtsfAxWaPA.Parent = guxTGqdL
-end
+})
+EFWfWCvgn.Rotation = 18
+EFWfWCvgn.Parent = oeGbIwLcNj
 
-local gFJbsrcclhe = Instance.new(KASYeHPY((ETZEwPwyBF[-339 + 406]..ETZEwPwyBF[-366 + 477]..ETZEwPwyBF[-629 + 749]..ETZEwPwyBF[173 - (67)]..ETZEwPwyBF[-446 + 544]), 23))
-if 34 + 34 == 68 then
-    gFJbsrcclhe.Size = UDim2.new(0, 4, 1, -24)
-    gFJbsrcclhe.Position = UDim2.new(0, 12, 0, 12)
-end
-if true then
-    gFJbsrcclhe.BackgroundColor3 = Color3.fromRGB(151, 112, 255)
-    gFJbsrcclhe.BorderSizePixel = 0
-elseif (not (20 < 26)) == (20 >= 26) then
-    -- dead
-end
-if 37 - 37 == 0 then
-    gFJbsrcclhe.Parent = guxTGqdL
-end
+local vaTPWDkSNVte = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-585 + 651]..vtsOVprpkXPM[-634 + 744]..vtsOVprpkXPM[143 - (24)]..vtsOVprpkXPM[539 - (434)]..vtsOVprpkXPM[644 - (547)]), 22))
+vaTPWDkSNVte.Size = UDim2.new(0, 4, 1, -24)
+vaTPWDkSNVte.Position = UDim2.new(0, 12, 0, 12)
+vaTPWDkSNVte.BackgroundColor3 = Color3.fromRGB(151, 112, 255)
+vaTPWDkSNVte.BorderSizePixel = 0
+vaTPWDkSNVte.Parent = oeGbIwLcNj
 
-local HlGhgvOqzg = Instance.new(KASYeHPY((ETZEwPwyBF[880 - (798)]..ETZEwPwyBF[748 - (678)]..ETZEwPwyBF[857 - (767)]..ETZEwPwyBF[135 - (27)]..ETZEwPwyBF[-388 + 499]..ETZEwPwyBF[-94 + 201]..ETZEwPwyBF[562 - (464)]..ETZEwPwyBF[-74 + 185]), 23))
-if not (65 ~= 65) then
-    HlGhgvOqzg.CornerRadius = UDim.new(1, 0)
-    HlGhgvOqzg.Parent = gFJbsrcclhe
-end
+local sekFnTwWDJtF = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[277 - (193)]..vtsOVprpkXPM[390 - (318)]..vtsOVprpkXPM[776 - (710)]..vtsOVprpkXPM[-744 + 854]..vtsOVprpkXPM[581 - (468)]..vtsOVprpkXPM[-825 + 934]..vtsOVprpkXPM[479 - (379)]..vtsOVprpkXPM[600 - (487)]), 25))
+sekFnTwWDJtF.CornerRadius = UDim.new(1, 0)
+sekFnTwWDJtF.Parent = vaTPWDkSNVte
 
-local UjlcJjzZO = Instance.new(KASYeHPY((ETZEwPwyBF[856 - (773)]..ETZEwPwyBF[711 - (611)]..ETZEwPwyBF[-414 + 533]..ETZEwPwyBF[804 - (689)]..ETZEwPwyBF[-769 + 844]..ETZEwPwyBF[-660 + 782]..ETZEwPwyBF[-466 + 563]..ETZEwPwyBF[819 - (719)]..ETZEwPwyBF[-328 + 435]), 25))
-if 36 + 48 == 84 then
-    UjlcJjzZO.BackgroundTransparency = 1
-    UjlcJjzZO.Position = UDim2.new(0, 29, 0, 14)
-elseif 51 % 51 ~= 0 then
-    -- dead
-end
-if (not (35 >= 55)) == (35 < 55) then
-    UjlcJjzZO.Size = UDim2.new(1, -45, 0, 22)
-    UjlcJjzZO.Font = Enum.Font.GothamBold
-end
-if 35 * 0 + 35 == 35 then
-    UjlcJjzZO.TextSize = 14
-    UjlcJjzZO.TextColor3 = Color3.fromRGB(244, 241, 255)
-end
-if (not (20 >= 58)) == (20 < 58) then
-    UjlcJjzZO.TextXAlignment = Enum.TextXAlignment.Left
-    UjlcJjzZO.Text = KASYeHPY((ETZEwPwyBF[299 - (209)]..ETZEwPwyBF[600 - (503)]..ETZEwPwyBF[-759 + 873]..ETZEwPwyBF[853 - (752)]..ETZEwPwyBF[466 - (345)]..ETZEwPwyBF[-539 + 636]..ETZEwPwyBF[254 - (181)]..ETZEwPwyBF[-50 + 157]..ETZEwPwyBF[-2 + 124]..ETZEwPwyBF[-247 + 344]), 22)
-elseif (not (26 < 37)) == (26 >= 37) then
-    -- dead
-end
-if 92 * 0 + 92 == 92 then
-    UjlcJjzZO.Parent = guxTGqdL
-end
+local zfDLtNmcoz = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-566 + 647]..vtsOVprpkXPM[-173 + 271]..vtsOVprpkXPM[607 - (490)]..vtsOVprpkXPM[436 - (323)]..vtsOVprpkXPM[238 - (165)]..vtsOVprpkXPM[-449 + 569]..vtsOVprpkXPM[-383 + 504]..vtsOVprpkXPM[-54 + 152]..vtsOVprpkXPM[142 - (37)]), 23))
+zfDLtNmcoz.BackgroundTransparency = 1
+zfDLtNmcoz.Position = UDim2.new(0, 29, 0, 14)
+zfDLtNmcoz.Size = UDim2.new(1, -45, 0, 22)
+zfDLtNmcoz.Font = Enum.Font.GothamBold
+zfDLtNmcoz.TextSize = 14
+zfDLtNmcoz.TextColor3 = Color3.fromRGB(244, 241, 255)
+zfDLtNmcoz.TextXAlignment = Enum.TextXAlignment.Left
+zfDLtNmcoz.Text = fxpZqKdCnRQ((vtsOVprpkXPM[873 - (806)]..vtsOVprpkXPM[-881 + 981]..vtsOVprpkXPM[571 - (454)]..vtsOVprpkXPM[-889 + 993]..vtsOVprpkXPM[-328 + 426]..vtsOVprpkXPM[205 - (105)]..vtsOVprpkXPM[830 - (754)]..vtsOVprpkXPM[231 - (121)]..vtsOVprpkXPM[-316 + 415]..vtsOVprpkXPM[557 - (457)]), 25)
+zfDLtNmcoz.Parent = oeGbIwLcNj
 
-local vQYqlKkKxR = Instance.new(KASYeHPY((ETZEwPwyBF[881 - (804)]..ETZEwPwyBF[-872 + 992]..ETZEwPwyBF[440 - (327)]..ETZEwPwyBF[-621 + 730]..ETZEwPwyBF[164 - (95)]..ETZEwPwyBF[-883 + 999]..ETZEwPwyBF[550 - (433)]..ETZEwPwyBF[943 - (823)]..ETZEwPwyBF[-37 + 138]), 19))
-if 52 % 52 == 0 then
-    vQYqlKkKxR.BackgroundTransparency = 1
-    vQYqlKkKxR.Position = UDim2.new(0, 29, 0, 39)
-end
-if true then
-    vQYqlKkKxR.Size = UDim2.new(1, -45, 0, 30)
-    vQYqlKkKxR.Font = Enum.Font.Gotham
-elseif 37 + 50 ~= 87 then
-    -- dead
-end
-if not (25 ~= 25) then
-    vQYqlKkKxR.TextSize = 12
-    vQYqlKkKxR.TextColor3 = Color3.fromRGB(192, 187, 218)
-end
-if true then
-    vQYqlKkKxR.TextXAlignment = Enum.TextXAlignment.Left
-    vQYqlKkKxR.TextWrapped = true
-end
-if true then
-    vQYqlKkKxR.Text = KASYeHPY((ETZEwPwyBF[-318 + 384]..ETZEwPwyBF[944 - (841)]..ETZEwPwyBF[597 - (497)]..ETZEwPwyBF[870 - (772)]..ETZEwPwyBF[460 - (354)]..ETZEwPwyBF[-142 + 246]..ETZEwPwyBF[214 - (105)]..ETZEwPwyBF[-357 + 459]..ETZEwPwyBF[177 - (145)]..ETZEwPwyBF[426 - (319)]..ETZEwPwyBF[-669 + 773]..ETZEwPwyBF[486 - (388)]..ETZEwPwyBF[114 - (14)]..ETZEwPwyBF[604 - (495)]..ETZEwPwyBF[741 - (627)]..ETZEwPwyBF[-858 + 958]..ETZEwPwyBF[286 - (240)]..ETZEwPwyBF[827 - (781)]..ETZEwPwyBF[-149 + 195]), 25)
-    vQYqlKkKxR.Parent = guxTGqdL
-elseif (not (46 < 50)) == (46 >= 50) then
-    -- dead
-end
+local UjPNgopSbF = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-598 + 676]..vtsOVprpkXPM[7 + 114]..vtsOVprpkXPM[-700 + 814]..vtsOVprpkXPM[-836 + 946]..vtsOVprpkXPM[-244 + 314]..vtsOVprpkXPM[204 - (87)]..vtsOVprpkXPM[135 - (17)]..vtsOVprpkXPM[890 - (769)]..vtsOVprpkXPM[-780 + 882]), 20))
+UjPNgopSbF.BackgroundTransparency = 1
+UjPNgopSbF.Position = UDim2.new(0, 29, 0, 39)
+UjPNgopSbF.Size = UDim2.new(1, -45, 0, 30)
+UjPNgopSbF.Font = Enum.Font.Gotham
+UjPNgopSbF.TextSize = 12
+UjPNgopSbF.TextColor3 = Color3.fromRGB(192, 187, 218)
+UjPNgopSbF.TextXAlignment = Enum.TextXAlignment.Left
+UjPNgopSbF.TextWrapped = true
+UjPNgopSbF.Text = fxpZqKdCnRQ((vtsOVprpkXPM[790 - (724)]..vtsOVprpkXPM[822 - (719)]..vtsOVprpkXPM[-371 + 471]..vtsOVprpkXPM[506 - (408)]..vtsOVprpkXPM[930 - (824)]..vtsOVprpkXPM[368 - (264)]..vtsOVprpkXPM[332 - (223)]..vtsOVprpkXPM[-422 + 524]..vtsOVprpkXPM[-107 + 139]..vtsOVprpkXPM[229 - (122)]..vtsOVprpkXPM[878 - (774)]..vtsOVprpkXPM[-192 + 290]..vtsOVprpkXPM[798 - (698)]..vtsOVprpkXPM[-778 + 887]..vtsOVprpkXPM[858 - (744)]..vtsOVprpkXPM[-646 + 746]..vtsOVprpkXPM[-503 + 549]..vtsOVprpkXPM[272 - (226)]..vtsOVprpkXPM[785 - (739)]), 25)
+UjPNgopSbF.Parent = oeGbIwLcNj
 
-local dlikJUVUJvq = 0
+local WXXRbErirf = 0
 
-local function kgYLjQDah(message, color, seconds)
-    dlikJUVUJvq += 1
-    local erdhyrff = dlikJUVUJvq
-    local gHsJsQtYd = color or Color3.fromRGB(151, 112, 255)
-    gFJbsrcclhe.BackgroundColor3 = gHsJsQtYd
-    OQqKQSpdWe.Color = gHsJsQtYd
-    vQYqlKkKxR.TextColor3 = color or Color3.fromRGB(216, 209, 246)
-    vQYqlKkKxR.Text = pbiWCvmoWwB(message)
-    guxTGqdL.Visible = true
-    guxTGqdL.Position = UDim2.new(1, 360, 0, 80)
-    scTUcOxCi:Create(
-        guxTGqdL,
+local function EbrSmmTOYE(message, color, seconds)
+    WXXRbErirf += 1
+    local NqNYeyaPr = WXXRbErirf
+    local coEluWmI = color or Color3.fromRGB(151, 112, 255)
+    vaTPWDkSNVte.BackgroundColor3 = coEluWmI
+    VLRdXYiokEi.Color = coEluWmI
+    UjPNgopSbF.TextColor3 = color or Color3.fromRGB(216, 209, 246)
+    UjPNgopSbF.Text = TWFRAMWWD(message)
+    oeGbIwLcNj.Visible = true
+    oeGbIwLcNj.Position = UDim2.new(1, 360, 0, 80)
+    ySBqiEPfU:Create(
+        oeGbIwLcNj,
         TweenInfo.new(0.45, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
         {Position= UDim2.new(1, -24, 0, 80) }
     ):Play()
     task.delay(seconds or 8, function()
-        if erdhyrff ~= dlikJUVUJvq then return end
-        local xrPqrVFmNl = scTUcOxCi:Create(
-            guxTGqdL,
+        if NqNYeyaPr ~= WXXRbErirf then return end
+        local vkenaZGBbf = ySBqiEPfU:Create(
+            oeGbIwLcNj,
             TweenInfo.new(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
             {Position= UDim2.new(1, 360, 0, 80) }
         )
-        xrPqrVFmNl:Play()
-        local HMflPfcGu = ZedscHfPEOa(function() xrPqrVFmNl.Completed:Wait() end)
-        if HMflPfcGu and erdhyrff == dlikJUVUJvq then guxTGqdL.Visible = false end
+        vkenaZGBbf:Play()
+        local pbGfRazHN = JGZLauJDL(function() vkenaZGBbf.Completed:Wait() end)
+        if pbGfRazHN and NqNYeyaPr == WXXRbErirf then oeGbIwLcNj.Visible = false end
     end)
 end
 
-local function PLNwidWP(message, jbCUYOGSZ)
-    if jbCUYOGSZ then message = message .. KASYeHPY((ETZEwPwyBF[747 - (737)]..ETZEwPwyBF[369 - (294)]..ETZEwPwyBF[144 - (25)]..ETZEwPwyBF[-869 + 977]..ETZEwPwyBF[-441 + 550]..ETZEwPwyBF[-271 + 329]..ETZEwPwyBF[571 - (539)]), 8) .. pbiWCvmoWwB(jbCUYOGSZ) end
-    kgYLjQDah(message, Color3.fromRGB(255, 104, 126), 12)
+local function FMwVFEnTkIgg(message, MkzPPJxUzOcY)
+    if MkzPPJxUzOcY then message = message .. fxpZqKdCnRQ((vtsOVprpkXPM[-730 + 740]..vtsOVprpkXPM[645 - (580)]..vtsOVprpkXPM[320 - (211)]..vtsOVprpkXPM[-360 + 458]..vtsOVprpkXPM[-92 + 191]..vtsOVprpkXPM[837 - (779)]..vtsOVprpkXPM[506 - (474)]), 24) .. TWFRAMWWD(MkzPPJxUzOcY) end
+    EbrSmmTOYE(message, Color3.fromRGB(255, 104, 126), 12)
 end
 
-if true then
-    _G.__dm_killed = false
-end
+_G.__dm_killed = false
 
 -- ===== السبوفر =====
-local function rBjciUteKMD(activeToken, activeExpiry)
+local function eBoYSxeTgD(activeToken, activeExpiry)
     if not game:IsLoaded() then game.Loaded:Wait() end
 
-    local function gXGCBrfVuIv(dev)
-        if writefile then ZedscHfPEOa(writefile, WTQgAsnaVlpO, dev) end
+    local function LouqIWWqhzX(dev)
+        if writefile then JGZLauJDL(writefile, IQSSqUXix, dev) end
         _G.TargetDevice = dev
     end
 
-    local function eSzRTgzG()
+    local function sTxnpMHdZdD()
         return _G.TargetDevice
     end
 
-    local function wByHrODlhe()
+    local function aRkguSMxd()
         if not debug or not debug.getinfo then return true end
-        local UIDREhlNydk = {lIeOcmjg, NxnyHPam, ZedscHfPEOa}
-        if getgc then table.insert(UIDREhlNydk, getgc) end
-        for vHdYXEPJa, func in qAAHXIFGcgOh(UIDREhlNydk) do
-            local HyqxMOem = debug.getinfo(func)
-            if not HyqxMOem or HyqxMOem.what ~= KASYeHPY((ETZEwPwyBF[645 - (556)]), 22) or HyqxMOem.source ~= KASYeHPY((ETZEwPwyBF[-629 + 690]..ETZEwPwyBF[115 - (24)]..ETZEwPwyBF[481 - (411)]..ETZEwPwyBF[227 - (134)]), 3) then
+        local TQGTEBRvjoTT = {NTGjJfRYrNQ, BoHOZceTz, JGZLauJDL}
+        if getgc then table.insert(TQGTEBRvjoTT, getgc) end
+        for XiQwVudx, func in CwDtTjnc(TQGTEBRvjoTT) do
+            local hCLXDdyyNYJU = debug.getinfo(func)
+            if not hCLXDdyyNYJU or hCLXDdyyNYJU.what ~= fxpZqKdCnRQ((vtsOVprpkXPM[-728 + 815]), 20) or hCLXDdyyNYJU.source ~= fxpZqKdCnRQ((vtsOVprpkXPM[870 - (809)]..vtsOVprpkXPM[667 - (576)]..vtsOVprpkXPM[-690 + 778]..vtsOVprpkXPM[-543 + 636]), 21) then
                 return false
             end
         end
         return true
     end
 
-    if not wByHrODlhe() then return end
+    if not aRkguSMxd() then return end
 
     -- أسماء المفاتيح
-    local ZatdEEnu      = KASYeHPY((ETZEwPwyBF[-889 + 954]..ETZEwPwyBF[264 - (166)]..ETZEwPwyBF[748 - (633)]..ETZEwPwyBF[987 - (885)]..ETZEwPwyBF[-747 + 869]..ETZEwPwyBF[-890 + 988]), 23)
-    local oXYRMXBit  = KASYeHPY((ETZEwPwyBF[461 - (393)]..ETZEwPwyBF[439 - (336)]..ETZEwPwyBF[-758 + 876]..ETZEwPwyBF[-840 + 926]..ETZEwPwyBF[402 - (337)]..ETZEwPwyBF[819 - (710)]..ETZEwPwyBF[-433 + 542]..ETZEwPwyBF[246 - (134)]..ETZEwPwyBF[-52 + 150]..ETZEwPwyBF[-525 + 628]..ETZEwPwyBF[119 - (11)]..ETZEwPwyBF[-426 + 547]..ETZEwPwyBF[-495 + 609]..ETZEwPwyBF[-125 + 224]..ETZEwPwyBF[383 - (294)]..ETZEwPwyBF[924 - (811)]..ETZEwPwyBF[-281 + 391]..ETZEwPwyBF[481 - (382)]..ETZEwPwyBF[740 - (643)]..ETZEwPwyBF[265 - (151)]..ETZEwPwyBF[-539 + 619]..ETZEwPwyBF[-21 + 142]..ETZEwPwyBF[-420 + 534]..ETZEwPwyBF[570 - (471)]), 24)
-    local uwkXKixnMdIG  = KASYeHPY((ETZEwPwyBF[962 - (883)]..ETZEwPwyBF[970 - (857)]..ETZEwPwyBF[-723 + 823]..ETZEwPwyBF[500 - (399)]..ETZEwPwyBF[288 - (188)]..ETZEwPwyBF[334 - (221)]..ETZEwPwyBF[283 - (170)]..ETZEwPwyBF[960 - (860)]..ETZEwPwyBF[-794 + 893]..ETZEwPwyBF[-712 + 784]..ETZEwPwyBF[-5 + 114]..ETZEwPwyBF[-673 + 784]..ETZEwPwyBF[-253 + 369]..ETZEwPwyBF[957 - (842)]), 25)
-    local XmViUHzuYI     = KASYeHPY((ETZEwPwyBF[-617 + 707]..ETZEwPwyBF[-735 + 851]..ETZEwPwyBF[-454 + 556]..ETZEwPwyBF[186 - (66)]..ETZEwPwyBF[100 - (-5)]..ETZEwPwyBF[174 - (58)]..ETZEwPwyBF[-34 + 153]), 19)
-    local wwDSlPgo    = KASYeHPY((ETZEwPwyBF[-100 + 173]..ETZEwPwyBF[-555 + 654]..ETZEwPwyBF[506 - (387)]..ETZEwPwyBF[181 - (59)]..ETZEwPwyBF[-168 + 277]..ETZEwPwyBF[-396 + 517]..ETZEwPwyBF[-33 + 145]..ETZEwPwyBF[177 - (79)]), 24)
+    local lGZfFUEzOQHO      = fxpZqKdCnRQ((vtsOVprpkXPM[-681 + 767]..vtsOVprpkXPM[-77 + 196]..vtsOVprpkXPM[-599 + 709]..vtsOVprpkXPM[550 - (453)]..vtsOVprpkXPM[-430 + 547]..vtsOVprpkXPM[-229 + 348]), 18)
+    local ljjtDowhtDk  = fxpZqKdCnRQ((vtsOVprpkXPM[628 - (559)]..vtsOVprpkXPM[-806 + 910]..vtsOVprpkXPM[-225 + 344]..vtsOVprpkXPM[270 - (183)]..vtsOVprpkXPM[283 - (217)]..vtsOVprpkXPM[114 - (4)]..vtsOVprpkXPM[-827 + 937]..vtsOVprpkXPM[-256 + 369]..vtsOVprpkXPM[608 - (509)]..vtsOVprpkXPM[-224 + 328]..vtsOVprpkXPM[-788 + 897]..vtsOVprpkXPM[150 - (28)]..vtsOVprpkXPM[-276 + 391]..vtsOVprpkXPM[-131 + 231]..vtsOVprpkXPM[-448 + 538]..vtsOVprpkXPM[762 - (648)]..vtsOVprpkXPM[716 - (605)]..vtsOVprpkXPM[970 - (870)]..vtsOVprpkXPM[-561 + 659]..vtsOVprpkXPM[949 - (834)]..vtsOVprpkXPM[-145 + 226]..vtsOVprpkXPM[-322 + 444]..vtsOVprpkXPM[535 - (420)]..vtsOVprpkXPM[727 - (627)]), 25)
+    local eyhTKrwk  = fxpZqKdCnRQ((vtsOVprpkXPM[830 - (751)]..vtsOVprpkXPM[-594 + 707]..vtsOVprpkXPM[-783 + 883]..vtsOVprpkXPM[-602 + 703]..vtsOVprpkXPM[-424 + 524]..vtsOVprpkXPM[638 - (525)]..vtsOVprpkXPM[-209 + 322]..vtsOVprpkXPM[-10 + 110]..vtsOVprpkXPM[564 - (465)]..vtsOVprpkXPM[-771 + 843]..vtsOVprpkXPM[886 - (777)]..vtsOVprpkXPM[-886 + 997]..vtsOVprpkXPM[862 - (746)]..vtsOVprpkXPM[-53 + 168]), 25)
+    local MOMHzvyRsGFs     = fxpZqKdCnRQ((vtsOVprpkXPM[466 - (399)]..vtsOVprpkXPM[874 - (755)]..vtsOVprpkXPM[951 - (846)]..vtsOVprpkXPM[-277 + 374]..vtsOVprpkXPM[-481 + 589]..vtsOVprpkXPM[-733 + 852]..vtsOVprpkXPM[-480 + 602]), 22)
+    local MaWIxBvnua    = fxpZqKdCnRQ((vtsOVprpkXPM[-509 + 583]..vtsOVprpkXPM[-855 + 955]..vtsOVprpkXPM[-863 + 983]..vtsOVprpkXPM[-687 + 784]..vtsOVprpkXPM[987 - (877)]..vtsOVprpkXPM[251 - (129)]..vtsOVprpkXPM[-480 + 593]..vtsOVprpkXPM[-396 + 495]), 25)
 
-    local function pACRiNkigr()
-        local bItFufYa = KASYeHPY((""), 1)
-        for vHdYXEPJa = 1, math.random(10, 16) do
-            bItFufYa = bItFufYa .. string.char(math.random(97, 122))
+    local function cGAonJWNCl()
+        local ouSDvKsQZ = fxpZqKdCnRQ((""), 1)
+        for XiQwVudx = 1, math.random(10, 16) do
+            ouSDvKsQZ = ouSDvKsQZ .. string.char(math.random(97, 122))
         end
-        return bItFufYa
+        return ouSDvKsQZ
     end
 
-    local function rJFAHDwgl()
-        local MpBxcGfNyD = game.Players.LocalPlayer
-        if not MpBxcGfNyD then return end
-        local zqdscykjO = MpBxcGfNyD:FindFirstChild(KASYeHPY((ETZEwPwyBF[780 - (701)]..ETZEwPwyBF[715 - (608)]..ETZEwPwyBF[393 - (271)]..ETZEwPwyBF[-661 + 781]..ETZEwPwyBF[-559 + 659]..ETZEwPwyBF[-357 + 470]..ETZEwPwyBF[559 - (489)]..ETZEwPwyBF[-423 + 539]..ETZEwPwyBF[676 - (572)]), 25)) or MpBxcGfNyD:WaitForChild(KASYeHPY((ETZEwPwyBF[760 - (683)]..ETZEwPwyBF[284 - (179)]..ETZEwPwyBF[-282 + 402]..ETZEwPwyBF[-118 + 236]..ETZEwPwyBF[103 - (5)]..ETZEwPwyBF[294 - (183)]..ETZEwPwyBF[-698 + 766]..ETZEwPwyBF[805 - (691)]..ETZEwPwyBF[-145 + 247]), 23), 10)
-        if not zqdscykjO then return end
-        local ziRcRozIJ = zqdscykjO:FindFirstChild(KASYeHPY((ETZEwPwyBF[-592 + 668]..ETZEwPwyBF[-142 + 260]..ETZEwPwyBF[-341 + 448]..ETZEwPwyBF[823 - (703)]..ETZEwPwyBF[-334 + 454]..ETZEwPwyBF[-497 + 600]), 19)) or zqdscykjO:WaitForChild(KASYeHPY((ETZEwPwyBF[876 - (799)]..ETZEwPwyBF[887 - (768)]..ETZEwPwyBF[651 - (543)]..ETZEwPwyBF[657 - (536)]..ETZEwPwyBF[-571 + 692]..ETZEwPwyBF[743 - (639)]), 20), 10)
-        if not ziRcRozIJ then return end
-        ziRcRozIJ.Enabled = true
-        local kPoaSSkn = ziRcRozIJ:FindFirstChild(KASYeHPY((ETZEwPwyBF[336 - (246)]..ETZEwPwyBF[120 - (12)]..ETZEwPwyBF[901 - (794)]..ETZEwPwyBF[-612 + 724]..ETZEwPwyBF[184 - (76)]..ETZEwPwyBF[-139 + 244]..ETZEwPwyBF[-128 + 226]..ETZEwPwyBF[-25 + 114]..ETZEwPwyBF[218 - (104)]..ETZEwPwyBF[128 - (15)]..ETZEwPwyBF[-279 + 392]..ETZEwPwyBF[621 - (513)]..ETZEwPwyBF[-884 + 991]), 23), true)
-        if kPoaSSkn and kPoaSSkn:IsA(KASYeHPY((ETZEwPwyBF[263 - (194)]..ETZEwPwyBF[888 - (773)]..ETZEwPwyBF[-458 + 561]..ETZEwPwyBF[-827 + 904]..ETZEwPwyBF[-16 + 138]..ETZEwPwyBF[811 - (707)]..ETZEwPwyBF[692 - (593)]..ETZEwPwyBF[-894 + 991]..ETZEwPwyBF[-101 + 215]), 24)) then kPoaSSkn.Visible = false end
-        local CQHDbuvO = ziRcRozIJ:FindFirstChild(KASYeHPY((ETZEwPwyBF[-609 + 688]..ETZEwPwyBF[-199 + 299]..ETZEwPwyBF[250 - (149)]..ETZEwPwyBF[410 - (312)]..ETZEwPwyBF[-215 + 327]..ETZEwPwyBF[-534 + 606]..ETZEwPwyBF[752 - (645)]..ETZEwPwyBF[-31 + 152]..ETZEwPwyBF[530 - (427)]..ETZEwPwyBF[358 - (271)]..ETZEwPwyBF[965 - (855)]..ETZEwPwyBF[-282 + 379]..ETZEwPwyBF[613 - (494)]), 22))
-            or ziRcRozIJ:WaitForChild(KASYeHPY((ETZEwPwyBF[-763 + 843]..ETZEwPwyBF[-304 + 405]..ETZEwPwyBF[-400 + 502]..ETZEwPwyBF[-302 + 401]..ETZEwPwyBF[662 - (549)]..ETZEwPwyBF[-607 + 680]..ETZEwPwyBF[-253 + 361]..ETZEwPwyBF[-618 + 740]..ETZEwPwyBF[253 - (149)]..ETZEwPwyBF[263 - (175)]..ETZEwPwyBF[855 - (744)]..ETZEwPwyBF[-56 + 154]..ETZEwPwyBF[-671 + 791]), 23), 10)
-        if not (CQHDbuvO and CQHDbuvO:IsA(KASYeHPY((ETZEwPwyBF[530 - (461)]..ETZEwPwyBF[-546 + 661]..ETZEwPwyBF[388 - (285)]..ETZEwPwyBF[-35 + 112]..ETZEwPwyBF[-429 + 551]..ETZEwPwyBF[-848 + 952]..ETZEwPwyBF[330 - (231)]..ETZEwPwyBF[123 - (26)]..ETZEwPwyBF[154 - (40)]), 24))) then return end
-        CQHDbuvO.Visible = true
-        local BvpWBAGfMO = CQHDbuvO:FindFirstChild(KASYeHPY((ETZEwPwyBF[251 - (168)]..ETZEwPwyBF[188 - (78)]..ETZEwPwyBF[-541 + 643]..ETZEwPwyBF[749 - (647)]..ETZEwPwyBF[299 - (192)]..ETZEwPwyBF[-305 + 405]), 25))
-            or CQHDbuvO:WaitForChild(KASYeHPY((ETZEwPwyBF[486 - (405)]..ETZEwPwyBF[-435 + 543]..ETZEwPwyBF[408 - (308)]..ETZEwPwyBF[288 - (188)]..ETZEwPwyBF[934 - (829)]..ETZEwPwyBF[628 - (530)]), 23), 10)
-        local GPZmVziWxyn = ziRcRozIJ:FindFirstChild(KASYeHPY((ETZEwPwyBF[221 - (145)]..ETZEwPwyBF[206 - (96)]..ETZEwPwyBF[-816 + 932]..ETZEwPwyBF[-654 + 768]..ETZEwPwyBF[-283 + 383]..ETZEwPwyBF[-303 + 378]..ETZEwPwyBF[-309 + 419]..ETZEwPwyBF[247 - (149)]..ETZEwPwyBF[-663 + 769]..ETZEwPwyBF[-581 + 681]..ETZEwPwyBF[589 - (490)]..ETZEwPwyBF[270 - (204)]..ETZEwPwyBF[565 - (449)]..ETZEwPwyBF[238 - (125)]..ETZEwPwyBF[499 - (385)]..ETZEwPwyBF[-702 + 812]..ETZEwPwyBF[-67 + 180]), 25))
-            or ziRcRozIJ:WaitForChild(KASYeHPY((ETZEwPwyBF[602 - (528)]..ETZEwPwyBF[-796 + 904]..ETZEwPwyBF[-339 + 453]..ETZEwPwyBF[349 - (237)]..ETZEwPwyBF[120 - (22)]..ETZEwPwyBF[-518 + 591]..ETZEwPwyBF[560 - (452)]..ETZEwPwyBF[205 - (83)]..ETZEwPwyBF[242 - (138)]..ETZEwPwyBF[654 - (556)]..ETZEwPwyBF[365 - (268)]..ETZEwPwyBF[-506 + 596]..ETZEwPwyBF[581 - (467)]..ETZEwPwyBF[-841 + 952]..ETZEwPwyBF[339 - (227)]..ETZEwPwyBF[300 - (192)]..ETZEwPwyBF[842 - (731)]), 23), 10)
-        if not (BvpWBAGfMO and BvpWBAGfMO:IsA(KASYeHPY((ETZEwPwyBF[478 - (388)]..ETZEwPwyBF[-53 + 163]..ETZEwPwyBF[608 - (510)]..ETZEwPwyBF[-90 + 162]..ETZEwPwyBF[-144 + 261]..ETZEwPwyBF[-449 + 548]..ETZEwPwyBF[336 - (216)]..ETZEwPwyBF[231 - (113)]..ETZEwPwyBF[457 - (348)]), 19))) then return end
-        BvpWBAGfMO.Visible = true
-        if not (GPZmVziWxyn and GPZmVziWxyn:IsA(KASYeHPY((ETZEwPwyBF[915 - (850)]..ETZEwPwyBF[-160 + 271]..ETZEwPwyBF[-640 + 739]..ETZEwPwyBF[272 - (199)]..ETZEwPwyBF[-476 + 594]..ETZEwPwyBF[-403 + 503]..ETZEwPwyBF[-236 + 357]..ETZEwPwyBF[-101 + 220]..ETZEwPwyBF[-89 + 199]), 20))) then return end
+    local function xIpDQgbm()
+        local mNkcEkrSuqEN = game.Players.LocalPlayer
+        if not mNkcEkrSuqEN then return end
+        local YHbfnNNLyWre = mNkcEkrSuqEN:FindFirstChild(fxpZqKdCnRQ((vtsOVprpkXPM[900 - (822)]..vtsOVprpkXPM[973 - (867)]..vtsOVprpkXPM[192 - (71)]..vtsOVprpkXPM[-198 + 317]..vtsOVprpkXPM[-894 + 993]..vtsOVprpkXPM[178 - (66)]..vtsOVprpkXPM[-773 + 842]..vtsOVprpkXPM[522 - (407)]..vtsOVprpkXPM[525 - (422)]), 24)) or mNkcEkrSuqEN:WaitForChild(fxpZqKdCnRQ((vtsOVprpkXPM[587 - (511)]..vtsOVprpkXPM[-619 + 723]..vtsOVprpkXPM[-153 + 272]..vtsOVprpkXPM[913 - (796)]..vtsOVprpkXPM[818 - (721)]..vtsOVprpkXPM[345 - (235)]..vtsOVprpkXPM[377 - (310)]..vtsOVprpkXPM[138 - (25)]..vtsOVprpkXPM[937 - (836)]), 22), 10)
+        if not YHbfnNNLyWre then return end
+        local ilRxRssB = YHbfnNNLyWre:FindFirstChild(fxpZqKdCnRQ((vtsOVprpkXPM[679 - (604)]..vtsOVprpkXPM[269 - (152)]..vtsOVprpkXPM[-174 + 280]..vtsOVprpkXPM[758 - (639)]..vtsOVprpkXPM[-11 + 130]..vtsOVprpkXPM[-313 + 415]), 18)) or YHbfnNNLyWre:WaitForChild(fxpZqKdCnRQ((vtsOVprpkXPM[-182 + 258]..vtsOVprpkXPM[-344 + 462]..vtsOVprpkXPM[-196 + 303]..vtsOVprpkXPM[-208 + 328]..vtsOVprpkXPM[242 - (122)]..vtsOVprpkXPM[-865 + 968]), 19), 10)
+        if not ilRxRssB then return end
+        ilRxRssB.Enabled = true
+        local rMfDauXEg = ilRxRssB:FindFirstChild(fxpZqKdCnRQ((vtsOVprpkXPM[676 - (587)]..vtsOVprpkXPM[-231 + 338]..vtsOVprpkXPM[-154 + 260]..vtsOVprpkXPM[-719 + 830]..vtsOVprpkXPM[-353 + 460]..vtsOVprpkXPM[479 - (375)]..vtsOVprpkXPM[489 - (392)]..vtsOVprpkXPM[690 - (602)]..vtsOVprpkXPM[-571 + 684]..vtsOVprpkXPM[-443 + 555]..vtsOVprpkXPM[-382 + 494]..vtsOVprpkXPM[725 - (618)]..vtsOVprpkXPM[582 - (476)]), 22), true)
+        if rMfDauXEg and rMfDauXEg:IsA(fxpZqKdCnRQ((vtsOVprpkXPM[-559 + 627]..vtsOVprpkXPM[472 - (358)]..vtsOVprpkXPM[-628 + 730]..vtsOVprpkXPM[-714 + 790]..vtsOVprpkXPM[152 - (31)]..vtsOVprpkXPM[430 - (327)]..vtsOVprpkXPM[-624 + 722]..vtsOVprpkXPM[479 - (357)]..vtsOVprpkXPM[-258 + 371]), 23)) then rMfDauXEg.Visible = false end
+        local nghaJLRKK = ilRxRssB:FindFirstChild(fxpZqKdCnRQ((vtsOVprpkXPM[-570 + 652]..vtsOVprpkXPM[-462 + 565]..vtsOVprpkXPM[-653 + 757]..vtsOVprpkXPM[-251 + 352]..vtsOVprpkXPM[594 - (479)]..vtsOVprpkXPM[394 - (319)]..vtsOVprpkXPM[756 - (646)]..vtsOVprpkXPM[-164 + 262]..vtsOVprpkXPM[-324 + 430]..vtsOVprpkXPM[310 - (220)]..vtsOVprpkXPM[-597 + 710]..vtsOVprpkXPM[-192 + 292]..vtsOVprpkXPM[-450 + 572]), 25))
+            or ilRxRssB:WaitForChild(fxpZqKdCnRQ((vtsOVprpkXPM[618 - (536)]..vtsOVprpkXPM[601 - (498)]..vtsOVprpkXPM[-606 + 710]..vtsOVprpkXPM[-798 + 899]..vtsOVprpkXPM[-37 + 152]..vtsOVprpkXPM[-283 + 358]..vtsOVprpkXPM[4 + 106]..vtsOVprpkXPM[625 - (527)]..vtsOVprpkXPM[125 - (19)]..vtsOVprpkXPM[-817 + 907]..vtsOVprpkXPM[-347 + 460]..vtsOVprpkXPM[-715 + 815]..vtsOVprpkXPM[-403 + 525]), 25), 10)
+        if not (nghaJLRKK and nghaJLRKK:IsA(fxpZqKdCnRQ((vtsOVprpkXPM[-375 + 444]..vtsOVprpkXPM[820 - (705)]..vtsOVprpkXPM[-511 + 614]..vtsOVprpkXPM[-894 + 971]..vtsOVprpkXPM[-392 + 514]..vtsOVprpkXPM[-780 + 884]..vtsOVprpkXPM[939 - (840)]..vtsOVprpkXPM[865 - (768)]..vtsOVprpkXPM[459 - (345)]), 24))) then return end
+        nghaJLRKK.Visible = true
+        local BaPYhAVZ = nghaJLRKK:FindFirstChild(fxpZqKdCnRQ((vtsOVprpkXPM[886 - (804)]..vtsOVprpkXPM[-492 + 601]..vtsOVprpkXPM[-210 + 311]..vtsOVprpkXPM[457 - (356)]..vtsOVprpkXPM[-376 + 482]..vtsOVprpkXPM[956 - (857)]), 24))
+            or nghaJLRKK:WaitForChild(fxpZqKdCnRQ((vtsOVprpkXPM[616 - (534)]..vtsOVprpkXPM[237 - (128)]..vtsOVprpkXPM[-701 + 802]..vtsOVprpkXPM[350 - (249)]..vtsOVprpkXPM[-302 + 408]..vtsOVprpkXPM[-157 + 256]), 24), 10)
+        local OAkIDcav = ilRxRssB:FindFirstChild(fxpZqKdCnRQ((vtsOVprpkXPM[-906 + 980]..vtsOVprpkXPM[-252 + 360]..vtsOVprpkXPM[815 - (701)]..vtsOVprpkXPM[-652 + 764]..vtsOVprpkXPM[-540 + 638]..vtsOVprpkXPM[180 - (107)]..vtsOVprpkXPM[-632 + 740]..vtsOVprpkXPM[634 - (512)]..vtsOVprpkXPM[677 - (573)]..vtsOVprpkXPM[-132 + 230]..vtsOVprpkXPM[407 - (310)]..vtsOVprpkXPM[118 - (28)]..vtsOVprpkXPM[-838 + 952]..vtsOVprpkXPM[-389 + 500]..vtsOVprpkXPM[505 - (393)]..vtsOVprpkXPM[-444 + 552]..vtsOVprpkXPM[157 - (46)]), 23))
+            or ilRxRssB:WaitForChild(fxpZqKdCnRQ((vtsOVprpkXPM[730 - (658)]..vtsOVprpkXPM[477 - (371)]..vtsOVprpkXPM[-440 + 552]..vtsOVprpkXPM[-583 + 693]..vtsOVprpkXPM[-823 + 945]..vtsOVprpkXPM[-315 + 386]..vtsOVprpkXPM[618 - (512)]..vtsOVprpkXPM[-865 + 985]..vtsOVprpkXPM[-404 + 506]..vtsOVprpkXPM[702 - (580)]..vtsOVprpkXPM[417 - (296)]..vtsOVprpkXPM[350 - (262)]..vtsOVprpkXPM[684 - (572)]..vtsOVprpkXPM[438 - (329)]..vtsOVprpkXPM[373 - (263)]..vtsOVprpkXPM[986 - (880)]..vtsOVprpkXPM[-346 + 455]), 21), 10)
+        if not (BaPYhAVZ and BaPYhAVZ:IsA(fxpZqKdCnRQ((vtsOVprpkXPM[-352 + 422]..vtsOVprpkXPM[529 - (413)]..vtsOVprpkXPM[-179 + 283]..vtsOVprpkXPM[-54 + 132]..vtsOVprpkXPM[-313 + 410]..vtsOVprpkXPM[273 - (168)]..vtsOVprpkXPM[-716 + 816]..vtsOVprpkXPM[573 - (475)]..vtsOVprpkXPM[-583 + 698]), 25))) then return end
+        BaPYhAVZ.Visible = true
+        if not (OAkIDcav and OAkIDcav:IsA(fxpZqKdCnRQ((vtsOVprpkXPM[947 - (877)]..vtsOVprpkXPM[478 - (362)]..vtsOVprpkXPM[-611 + 715]..vtsOVprpkXPM[633 - (555)]..vtsOVprpkXPM[-4 + 101]..vtsOVprpkXPM[-608 + 713]..vtsOVprpkXPM[-620 + 720]..vtsOVprpkXPM[-285 + 383]..vtsOVprpkXPM[323 - (208)]), 25))) then return end
 
-        local function EQDNPrev()
-            local lXcEcXmiBkWu = BvpWBAGfMO.Active or BvpWBAGfMO.Selected
-                or (BvpWBAGfMO:IsA(KASYeHPY((ETZEwPwyBF[285 - (214)]..ETZEwPwyBF[-797 + 904]..ETZEwPwyBF[-351 + 472]..ETZEwPwyBF[680 - (579)]..ETZEwPwyBF[503 - (404)]..ETZEwPwyBF[-767 + 857]..ETZEwPwyBF[-528 + 643]..ETZEwPwyBF[-314 + 428]..ETZEwPwyBF[-59 + 173]..ETZEwPwyBF[-619 + 728]..ETZEwPwyBF[-566 + 674]), 24)) and BvpWBAGfMO.ImageRectOffset.X > 0)
-            GPZmVziWxyn.Visible = lXcEcXmiBkWu
+        local function zKWVQRDxkw()
+            local WACbEhgISuoh = BaPYhAVZ.Active or BaPYhAVZ.Selected
+                or (BaPYhAVZ:IsA(fxpZqKdCnRQ((vtsOVprpkXPM[-579 + 649]..vtsOVprpkXPM[-721 + 827]..vtsOVprpkXPM[-499 + 619]..vtsOVprpkXPM[935 - (835)]..vtsOVprpkXPM[691 - (593)]..vtsOVprpkXPM[-870 + 959]..vtsOVprpkXPM[-498 + 612]..vtsOVprpkXPM[559 - (446)]..vtsOVprpkXPM[958 - (845)]..vtsOVprpkXPM[947 - (839)]..vtsOVprpkXPM[209 - (102)]), 23)) and BaPYhAVZ.ImageRectOffset.X > 0)
+            OAkIDcav.Visible = WACbEhgISuoh
         end
-        EQDNPrev()
+        zKWVQRDxkw()
 
-        if not BvpWBAGfMO:GetAttribute(KASYeHPY((ETZEwPwyBF[-872 + 961]..ETZEwPwyBF[165 - (52)]..ETZEwPwyBF[-624 + 734]..ETZEwPwyBF[783 - (672)]..ETZEwPwyBF[-341 + 448]..ETZEwPwyBF[-453 + 563]..ETZEwPwyBF[-146 + 234]..ETZEwPwyBF[986 - (879)]..ETZEwPwyBF[-761 + 874]..ETZEwPwyBF[670 - (564)]..ETZEwPwyBF[528 - (406)]), 22)) then
-            BvpWBAGfMO:SetAttribute(KASYeHPY((ETZEwPwyBF[926 - (836)]..ETZEwPwyBF[958 - (844)]..ETZEwPwyBF[-513 + 624]..ETZEwPwyBF[128 - (16)]..ETZEwPwyBF[-101 + 209]..ETZEwPwyBF[949 - (838)]..ETZEwPwyBF[674 - (585)]..ETZEwPwyBF[-292 + 400]..ETZEwPwyBF[101 - (-13)]..ETZEwPwyBF[-27 + 134]..ETZEwPwyBF[-291 + 388]), 23), true)
-            BvpWBAGfMO:GetPropertyChangedSignal(KASYeHPY((ETZEwPwyBF[169 - (86)]..ETZEwPwyBF[792 - (675)]..ETZEwPwyBF[-47 + 155]..ETZEwPwyBF[506 - (409)]..ETZEwPwyBF[-490 + 600]..ETZEwPwyBF[976 - (857)]), 18)):Connect(EQDNPrev)
-            BvpWBAGfMO:GetPropertyChangedSignal(KASYeHPY((ETZEwPwyBF[-616 + 698]..ETZEwPwyBF[-163 + 263]..ETZEwPwyBF[813 - (706)]..ETZEwPwyBF[-79 + 179]..ETZEwPwyBF[831 - (733)]..ETZEwPwyBF[-45 + 160]..ETZEwPwyBF[-580 + 680]..ETZEwPwyBF[-365 + 464]), 25)):Connect(EQDNPrev)
-            if BvpWBAGfMO:IsA(KASYeHPY((ETZEwPwyBF[-124 + 192]..ETZEwPwyBF[454 - (340)]..ETZEwPwyBF[835 - (733)]..ETZEwPwyBF[772 - (683)]..ETZEwPwyBF[986 - (872)]..ETZEwPwyBF[-487 + 600]..ETZEwPwyBF[228 - (115)]..ETZEwPwyBF[308 - (200)]..ETZEwPwyBF[4 + 103]), 23)) then
-                BvpWBAGfMO.MouseButton1Click:Connect(function()
+        if not BaPYhAVZ:GetAttribute(fxpZqKdCnRQ((vtsOVprpkXPM[-532 + 619]..vtsOVprpkXPM[-414 + 525]..vtsOVprpkXPM[424 - (316)]..vtsOVprpkXPM[618 - (509)]..vtsOVprpkXPM[562 - (457)]..vtsOVprpkXPM[-471 + 579]..vtsOVprpkXPM[-456 + 542]..vtsOVprpkXPM[439 - (334)]..vtsOVprpkXPM[683 - (572)]..vtsOVprpkXPM[-151 + 255]..vtsOVprpkXPM[161 - (41)]), 20)) then
+            BaPYhAVZ:SetAttribute(fxpZqKdCnRQ((vtsOVprpkXPM[652 - (566)]..vtsOVprpkXPM[-426 + 536]..vtsOVprpkXPM[-14 + 121]..vtsOVprpkXPM[-101 + 209]..vtsOVprpkXPM[953 - (849)]..vtsOVprpkXPM[-34 + 141]..vtsOVprpkXPM[-556 + 641]..vtsOVprpkXPM[136 - (32)]..vtsOVprpkXPM[-323 + 433]..vtsOVprpkXPM[-454 + 557]..vtsOVprpkXPM[-129 + 248]), 19), true)
+            BaPYhAVZ:GetPropertyChangedSignal(fxpZqKdCnRQ((vtsOVprpkXPM[-500 + 588]..vtsOVprpkXPM[686 - (564)]..vtsOVprpkXPM[-432 + 545]..vtsOVprpkXPM[386 - (284)]..vtsOVprpkXPM[-668 + 783]..vtsOVprpkXPM[-726 + 824]), 23)):Connect(zKWVQRDxkw)
+            BaPYhAVZ:GetPropertyChangedSignal(fxpZqKdCnRQ((vtsOVprpkXPM[-857 + 939]..vtsOVprpkXPM[-734 + 834]..vtsOVprpkXPM[415 - (308)]..vtsOVprpkXPM[-354 + 454]..vtsOVprpkXPM[635 - (537)]..vtsOVprpkXPM[-434 + 549]..vtsOVprpkXPM[-486 + 586]..vtsOVprpkXPM[588 - (489)]), 25)):Connect(zKWVQRDxkw)
+            if BaPYhAVZ:IsA(fxpZqKdCnRQ((vtsOVprpkXPM[-577 + 663]..vtsOVprpkXPM[-463 + 569]..vtsOVprpkXPM[902 - (782)]..vtsOVprpkXPM[245 - (164)]..vtsOVprpkXPM[-269 + 375]..vtsOVprpkXPM[-731 + 836]..vtsOVprpkXPM[-796 + 901]..vtsOVprpkXPM[-116 + 216]..vtsOVprpkXPM[-132 + 231]), 15)) then
+                BaPYhAVZ.MouseButton1Click:Connect(function()
                     task.wait(0.05)
-                    EQDNPrev()
+                    zKWVQRDxkw()
                 end)
             end
         end
     end
 
-    local function LHQboOxm(targetDevice)
+    local function gprFldlxAZX(targetDevice)
         if not targetDevice or not getgc then return 0, 0 end
-        local FozFmilaF, FIJftVKrLNq = ZedscHfPEOa(getgc, true)
-        if not FozFmilaF or not FIJftVKrLNq then return 0, 0 end
-        local QXvzGqvtHFxX, FuLcJSvQQhZ = 0, 0
-        for vHdYXEPJa, obj in qAAHXIFGcgOh(FIJftVKrLNq) do
-            FuLcJSvQQhZ += 1
-            if FuLcJSvQQhZ > 150000 then break end
-            if type(obj) == KASYeHPY((ETZEwPwyBF[-775 + 889]..ETZEwPwyBF[570 - (449)]..ETZEwPwyBF[-46 + 168]..ETZEwPwyBF[412 - (306)]..ETZEwPwyBF[377 - (278)]), 24) then
-                local AjhmmHAVXp, RyMmmldu = ZedscHfPEOa(NxnyHPam, obj, ZatdEEnu)
-                if AjhmmHAVXp and (RyMmmldu == KASYeHPY((ETZEwPwyBF[989 - (915)]..ETZEwPwyBF[898 - (790)]..ETZEwPwyBF[-712 + 833]..ETZEwPwyBF[758 - (656)]..ETZEwPwyBF[-67 + 172]..ETZEwPwyBF[-339 + 437]), 23) or RyMmmldu == KASYeHPY((ETZEwPwyBF[-730 + 818]..ETZEwPwyBF[-727 + 802]), 8) or RyMmmldu == KASYeHPY((ETZEwPwyBF[-280 + 346]..ETZEwPwyBF[197 - (87)]..ETZEwPwyBF[-275 + 384]..ETZEwPwyBF[762 - (648)]..ETZEwPwyBF[-662 + 772]..ETZEwPwyBF[131 - (24)]..ETZEwPwyBF[671 - (571)]), 25)) then
-                    ZedscHfPEOa(function()
-                        lIeOcmjg(obj, ZatdEEnu, targetDevice)
+        local xNrgRHZy, oxOWMRJBlycF = JGZLauJDL(getgc, true)
+        if not xNrgRHZy or not oxOWMRJBlycF then return 0, 0 end
+        local rSwYNTnQy, eFGPfTLvAEJg = 0, 0
+        for XiQwVudx, obj in CwDtTjnc(oxOWMRJBlycF) do
+            eFGPfTLvAEJg += 1
+            if eFGPfTLvAEJg > 150000 then break end
+            if type(obj) == fxpZqKdCnRQ((vtsOVprpkXPM[895 - (782)]..vtsOVprpkXPM[668 - (548)]..vtsOVprpkXPM[-704 + 825]..vtsOVprpkXPM[-153 + 258]..vtsOVprpkXPM[897 - (799)]), 23) then
+                local NPaGjVGQGmo, ewPAKLHJMXWj = JGZLauJDL(BoHOZceTz, obj, lGZfFUEzOQHO)
+                if NPaGjVGQGmo and (ewPAKLHJMXWj == fxpZqKdCnRQ((vtsOVprpkXPM[-204 + 275]..vtsOVprpkXPM[711 - (606)]..vtsOVprpkXPM[711 - (593)]..vtsOVprpkXPM[-737 + 836]..vtsOVprpkXPM[834 - (732)]..vtsOVprpkXPM[-418 + 539]), 20) or ewPAKLHJMXWj == fxpZqKdCnRQ((vtsOVprpkXPM[366 - (294)]..vtsOVprpkXPM[139 - (54)]), 18) or ewPAKLHJMXWj == fxpZqKdCnRQ((vtsOVprpkXPM[-372 + 460]..vtsOVprpkXPM[4 + 102]..vtsOVprpkXPM[-175 + 280]..vtsOVprpkXPM[-455 + 565]..vtsOVprpkXPM[365 - (259)]..vtsOVprpkXPM[-177 + 280]..vtsOVprpkXPM[178 - (56)]), 21)) then
+                    JGZLauJDL(function()
+                        NTGjJfRYrNQ(obj, lGZfFUEzOQHO, targetDevice)
                         -- SmallScreen ما نلمسه
-                        local dqVdaDPahi = NxnyHPam(obj, oXYRMXBit)
-                        if type(dqVdaDPahi) == KASYeHPY((ETZEwPwyBF[926 - (829)]..ETZEwPwyBF[-704 + 816]..ETZEwPwyBF[622 - (517)]..ETZEwPwyBF[-745 + 865]..ETZEwPwyBF[561 - (450)]..ETZEwPwyBF[-95 + 195]..ETZEwPwyBF[920 - (814)]..ETZEwPwyBF[-162 + 267]), 21) then ZedscHfPEOa(dqVdaDPahi, obj) end
-                        QXvzGqvtHFxX += 1
+                        local eZFRwHaJ = BoHOZceTz(obj, ljjtDowhtDk)
+                        if type(eZFRwHaJ) == fxpZqKdCnRQ((vtsOVprpkXPM[-54 + 155]..vtsOVprpkXPM[442 - (326)]..vtsOVprpkXPM[200 - (91)]..vtsOVprpkXPM[-686 + 784]..vtsOVprpkXPM[633 - (518)]..vtsOVprpkXPM[135 - (31)]..vtsOVprpkXPM[891 - (781)]..vtsOVprpkXPM[-16 + 125]), 25) then JGZLauJDL(eZFRwHaJ, obj) end
+                        rSwYNTnQy += 1
                     end)
                 end
-                local jWHmMxtx, YNhTokSdlX = ZedscHfPEOa(NxnyHPam, obj, uwkXKixnMdIG)
-                if jWHmMxtx and type(YNhTokSdlX) == KASYeHPY((ETZEwPwyBF[273 - (162)]..ETZEwPwyBF[-128 + 246]..ETZEwPwyBF[-15 + 134]..ETZEwPwyBF[-160 + 263]..ETZEwPwyBF[700 - (578)]), 21) then
-                    local KWujFIcP = (targetDevice == KASYeHPY((ETZEwPwyBF[358 - (268)]..ETZEwPwyBF[-557 + 665]..ETZEwPwyBF[652 - (545)]..ETZEwPwyBF[-46 + 158]..ETZEwPwyBF[-386 + 494]..ETZEwPwyBF[509 - (404)]..ETZEwPwyBF[525 - (427)]), 23))
-                        and NxnyHPam(obj, XmViUHzuYI)
-                        or NxnyHPam(obj, wwDSlPgo)
-                    if type(KWujFIcP) == KASYeHPY((ETZEwPwyBF[350 - (237)]..ETZEwPwyBF[506 - (386)]..ETZEwPwyBF[380 - (259)]..ETZEwPwyBF[-560 + 665]..ETZEwPwyBF[382 - (284)]), 23) and YNhTokSdlX ~= KWujFIcP then
-                        ZedscHfPEOa(function()
-                            lIeOcmjg(obj, uwkXKixnMdIG, KWujFIcP)
-                            QXvzGqvtHFxX += 1
+                local XSIawNbeFAZH, yyFhpTEsxv = JGZLauJDL(BoHOZceTz, obj, eyhTKrwk)
+                if XSIawNbeFAZH and type(yyFhpTEsxv) == fxpZqKdCnRQ((vtsOVprpkXPM[578 - (467)]..vtsOVprpkXPM[863 - (745)]..vtsOVprpkXPM[-778 + 897]..vtsOVprpkXPM[-481 + 584]..vtsOVprpkXPM[812 - (690)]), 21) then
+                    local VtFTHWwCBeLJ = (targetDevice == fxpZqKdCnRQ((vtsOVprpkXPM[-190 + 280]..vtsOVprpkXPM[-600 + 708]..vtsOVprpkXPM[234 - (127)]..vtsOVprpkXPM[-510 + 622]..vtsOVprpkXPM[-845 + 953]..vtsOVprpkXPM[-149 + 254]..vtsOVprpkXPM[914 - (816)]), 23))
+                        and BoHOZceTz(obj, MOMHzvyRsGFs)
+                        or BoHOZceTz(obj, MaWIxBvnua)
+                    if type(VtFTHWwCBeLJ) == fxpZqKdCnRQ((vtsOVprpkXPM[-141 + 255]..vtsOVprpkXPM[-844 + 965]..vtsOVprpkXPM[371 - (249)]..vtsOVprpkXPM[-57 + 163]..vtsOVprpkXPM[-338 + 437]), 24) and yyFhpTEsxv ~= VtFTHWwCBeLJ then
+                        JGZLauJDL(function()
+                            NTGjJfRYrNQ(obj, eyhTKrwk, VtFTHWwCBeLJ)
+                            rSwYNTnQy += 1
                         end)
                     end
                 end
             end
         end
-        return QXvzGqvtHFxX, FuLcJSvQQhZ
+        return rSwYNTnQy, eFGPfTLvAEJg
     end
 
-    local function mHYRhQyj()
+    local function rYWbEaXi()
         if _G.__dm_killed then return end
-        local FpKmkuOcU = eSzRTgzG()
-        if FpKmkuOcU then
-            ZedscHfPEOa(rJFAHDwgl)
-            ZedscHfPEOa(LHQboOxm, FpKmkuOcU)
+        local pvgldVhrcyF = sTxnpMHdZdD()
+        if pvgldVhrcyF then
+            JGZLauJDL(xIpDQgbm)
+            JGZLauJDL(gprFldlxAZX, pvgldVhrcyF)
         end
     end
 
-    local function YTkdwKvP()
-        if typeof(gethui) == KASYeHPY((ETZEwPwyBF[-67 + 168]..ETZEwPwyBF[880 - (764)]..ETZEwPwyBF[521 - (412)]..ETZEwPwyBF[-856 + 954]..ETZEwPwyBF[226 - (111)]..ETZEwPwyBF[908 - (804)]..ETZEwPwyBF[-825 + 935]..ETZEwPwyBF[785 - (676)]), 25) then
-            local TLgUpKOPZXb, sJicQjTauQ = ZedscHfPEOa(gethui)
-            if TLgUpKOPZXb and sJicQjTauQ then return sJicQjTauQ end
+    local function VoJZrNjWQ()
+        if typeof(gethui) == fxpZqKdCnRQ((vtsOVprpkXPM[741 - (624)]..vtsOVprpkXPM[-446 + 552]..vtsOVprpkXPM[-568 + 667]..vtsOVprpkXPM[-576 + 690]..vtsOVprpkXPM[527 - (422)]..vtsOVprpkXPM[864 - (744)]..vtsOVprpkXPM[901 - (801)]..vtsOVprpkXPM[228 - (129)]), 15) then
+            local KLhMtQvfoc, CoIJconcO = JGZLauJDL(gethui)
+            if KLhMtQvfoc and CoIJconcO then return CoIJconcO end
         end
-        if typeof(get_hidden_gui) == KASYeHPY((ETZEwPwyBF[-36 + 136]..ETZEwPwyBF[-212 + 327]..ETZEwPwyBF[146 - (38)]..ETZEwPwyBF[-83 + 180]..ETZEwPwyBF[-173 + 287]..ETZEwPwyBF[-822 + 925]..ETZEwPwyBF[-660 + 769]..ETZEwPwyBF[-365 + 473]), 24) then
-            local TLgUpKOPZXb, sJicQjTauQ = ZedscHfPEOa(get_hidden_gui)
-            if TLgUpKOPZXb and sJicQjTauQ then return sJicQjTauQ end
+        if typeof(get_hidden_gui) == fxpZqKdCnRQ((vtsOVprpkXPM[285 - (188)]..vtsOVprpkXPM[822 - (710)]..vtsOVprpkXPM[-688 + 793]..vtsOVprpkXPM[220 - (100)]..vtsOVprpkXPM[-625 + 736]..vtsOVprpkXPM[645 - (545)]..vtsOVprpkXPM[887 - (781)]..vtsOVprpkXPM[839 - (734)]), 21) then
+            local KLhMtQvfoc, CoIJconcO = JGZLauJDL(get_hidden_gui)
+            if KLhMtQvfoc and CoIJconcO then return CoIJconcO end
         end
-        local oUrHcttcI = game:GetService(KASYeHPY((ETZEwPwyBF[245 - (179)]..ETZEwPwyBF[-289 + 399]..ETZEwPwyBF[433 - (320)]..ETZEwPwyBF[-35 + 135]..ETZEwPwyBF[-795 + 865]..ETZEwPwyBF[-722 + 838]..ETZEwPwyBF[-106 + 210]), 25))
-        if syn and typeof(syn.protect_gui) == KASYeHPY((ETZEwPwyBF[-850 + 950]..ETZEwPwyBF[-224 + 339]..ETZEwPwyBF[693 - (585)]..ETZEwPwyBF[-359 + 456]..ETZEwPwyBF[-267 + 381]..ETZEwPwyBF[785 - (682)]..ETZEwPwyBF[-363 + 472]..ETZEwPwyBF[-881 + 989]), 24) then return oUrHcttcI end
-        local MpBxcGfNyD = game:GetService(KASYeHPY((ETZEwPwyBF[-335 + 410]..ETZEwPwyBF[-679 + 782]..ETZEwPwyBF[270 - (152)]..ETZEwPwyBF[553 - (437)]..ETZEwPwyBF[495 - (373)]..ETZEwPwyBF[276 - (167)]..ETZEwPwyBF[783 - (673)]), 21)).LocalPlayer
-        return oUrHcttcI:FindFirstChild(KASYeHPY((ETZEwPwyBF[-812 + 887]..ETZEwPwyBF[816 - (712)]..ETZEwPwyBF[396 - (279)]..ETZEwPwyBF[864 - (763)]..ETZEwPwyBF[483 - (379)]..ETZEwPwyBF[438 - (325)]..ETZEwPwyBF[931 - (841)]..ETZEwPwyBF[-103 + 213]..ETZEwPwyBF[774 - (676)]), 19)) or (MpBxcGfNyD and MpBxcGfNyD:WaitForChild(KASYeHPY((ETZEwPwyBF[858 - (780)]..ETZEwPwyBF[203 - (97)]..ETZEwPwyBF[424 - (303)]..ETZEwPwyBF[528 - (409)]..ETZEwPwyBF[611 - (512)]..ETZEwPwyBF[504 - (392)]..ETZEwPwyBF[-400 + 469]..ETZEwPwyBF[790 - (675)]..ETZEwPwyBF[-486 + 589]), 24)))
+        local iLRmOUmijcN = game:GetService(fxpZqKdCnRQ((vtsOVprpkXPM[-481 + 547]..vtsOVprpkXPM[-64 + 174]..vtsOVprpkXPM[-794 + 907]..vtsOVprpkXPM[-645 + 745]..vtsOVprpkXPM[-197 + 267]..vtsOVprpkXPM[-467 + 583]..vtsOVprpkXPM[411 - (307)]), 25))
+        if syn and typeof(syn.protect_gui) == fxpZqKdCnRQ((vtsOVprpkXPM[-623 + 724]..vtsOVprpkXPM[415 - (299)]..vtsOVprpkXPM[173 - (64)]..vtsOVprpkXPM[-67 + 165]..vtsOVprpkXPM[376 - (261)]..vtsOVprpkXPM[-635 + 739]..vtsOVprpkXPM[184 - (74)]..vtsOVprpkXPM[545 - (436)]), 25) then return iLRmOUmijcN end
+        local mNkcEkrSuqEN = game:GetService(fxpZqKdCnRQ((vtsOVprpkXPM[-280 + 359]..vtsOVprpkXPM[431 - (324)]..vtsOVprpkXPM[-21 + 143]..vtsOVprpkXPM[-214 + 334]..vtsOVprpkXPM[-231 + 331]..vtsOVprpkXPM[366 - (253)]..vtsOVprpkXPM[301 - (187)]), 25)).LocalPlayer
+        return iLRmOUmijcN:FindFirstChild(fxpZqKdCnRQ((vtsOVprpkXPM[280 - (200)]..vtsOVprpkXPM[522 - (413)]..vtsOVprpkXPM[567 - (445)]..vtsOVprpkXPM[906 - (800)]..vtsOVprpkXPM[522 - (413)]..vtsOVprpkXPM[-804 + 922]..vtsOVprpkXPM[-830 + 899]..vtsOVprpkXPM[-105 + 220]..vtsOVprpkXPM[383 - (280)]), 24)) or (mNkcEkrSuqEN and mNkcEkrSuqEN:WaitForChild(fxpZqKdCnRQ((vtsOVprpkXPM[756 - (677)]..vtsOVprpkXPM[-282 + 389]..vtsOVprpkXPM[-115 + 237]..vtsOVprpkXPM[-797 + 917]..vtsOVprpkXPM[-631 + 731]..vtsOVprpkXPM[916 - (803)]..vtsOVprpkXPM[-267 + 337]..vtsOVprpkXPM[556 - (440)]..vtsOVprpkXPM[-339 + 443]), 25)))
     end
 
-    local VRtlshauAoZo = {}
+    local zYKVGcXMw = {}
 
-    local function enIGhBuvD()
-        local scTUcOxCi = game:GetService(KASYeHPY((ETZEwPwyBF[-205 + 287]..ETZEwPwyBF[-434 + 551]..ETZEwPwyBF[798 - (699)]..ETZEwPwyBF[620 - (521)]..ETZEwPwyBF[-746 + 854]..ETZEwPwyBF[-322 + 403]..ETZEwPwyBF[-366 + 465]..ETZEwPwyBF[-273 + 385]..ETZEwPwyBF[-90 + 206]..ETZEwPwyBF[-128 + 231]..ETZEwPwyBF[886 - (789)]..ETZEwPwyBF[-180 + 279]), 24))
-        local MpBxcGfNyD = game.Players.LocalPlayer
-        local HSZQRfimt = YTkdwKvP()
-        local CIQFFfyMUajg = eSzRTgzG()
-        local mFOymDMQMr  = nil
-        local PtOBItRI = false
+    local function ywiEoeaugV()
+        local ySBqiEPfU = game:GetService(fxpZqKdCnRQ((vtsOVprpkXPM[-697 + 776]..vtsOVprpkXPM[441 - (327)]..vtsOVprpkXPM[-295 + 417]..vtsOVprpkXPM[-639 + 761]..vtsOVprpkXPM[-851 + 956]..vtsOVprpkXPM[936 - (858)]..vtsOVprpkXPM[773 - (651)]..vtsOVprpkXPM[-662 + 771]..vtsOVprpkXPM[984 - (871)]..vtsOVprpkXPM[756 - (656)]..vtsOVprpkXPM[-291 + 411]..vtsOVprpkXPM[-809 + 931]), 21))
+        local mNkcEkrSuqEN = game.Players.LocalPlayer
+        local etURCZTyFJY = VoJZrNjWQ()
+        local ZGGzHMGLja = sTxnpMHdZdD()
+        local syuHVBtqDOLs  = nil
+        local NklHoIrsxk = false
 
-        local bBHbnyZZ = Instance.new(KASYeHPY((ETZEwPwyBF[731 - (656)]..ETZEwPwyBF[291 - (174)]..ETZEwPwyBF[910 - (804)]..ETZEwPwyBF[-105 + 224]..ETZEwPwyBF[302 - (183)]..ETZEwPwyBF[802 - (700)]..ETZEwPwyBF[-311 + 400]..ETZEwPwyBF[-7 + 116]..ETZEwPwyBF[-783 + 880]), 18))
-        bBHbnyZZ.Name = pACRiNkigr()
-        bBHbnyZZ.ResetOnSpawn = false
-        bBHbnyZZ.IgnoreGuiInset = true
-        bBHbnyZZ.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-        if syn and typeof(syn.protect_gui) == KASYeHPY((ETZEwPwyBF[406 - (305)]..ETZEwPwyBF[273 - (157)]..ETZEwPwyBF[-849 + 958]..ETZEwPwyBF[583 - (485)]..ETZEwPwyBF[-870 + 985]..ETZEwPwyBF[643 - (539)]..ETZEwPwyBF[-622 + 732]..ETZEwPwyBF[306 - (197)]), 25) then
-            ZedscHfPEOa(syn.protect_gui, bBHbnyZZ)
+        local IkjSjVPJQk = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[303 - (229)]..vtsOVprpkXPM[881 - (765)]..vtsOVprpkXPM[398 - (293)]..vtsOVprpkXPM[988 - (870)]..vtsOVprpkXPM[312 - (194)]..vtsOVprpkXPM[-156 + 257]..vtsOVprpkXPM[-452 + 540]..vtsOVprpkXPM[-205 + 313]..vtsOVprpkXPM[-642 + 764]), 17))
+        IkjSjVPJQk.Name = cGAonJWNCl()
+        IkjSjVPJQk.ResetOnSpawn = false
+        IkjSjVPJQk.IgnoreGuiInset = true
+        IkjSjVPJQk.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        if syn and typeof(syn.protect_gui) == fxpZqKdCnRQ((vtsOVprpkXPM[-37 + 135]..vtsOVprpkXPM[825 - (712)]..vtsOVprpkXPM[629 - (523)]..vtsOVprpkXPM[106 - (-15)]..vtsOVprpkXPM[954 - (842)]..vtsOVprpkXPM[-260 + 361]..vtsOVprpkXPM[-173 + 280]..vtsOVprpkXPM[-270 + 376]), 22) then
+            JGZLauJDL(syn.protect_gui, IkjSjVPJQk)
         end
-        bBHbnyZZ.Parent = HSZQRfimt
-        table.insert(VRtlshauAoZo, bBHbnyZZ)
+        IkjSjVPJQk.Parent = etURCZTyFJY
+        table.insert(zYKVGcXMw, IkjSjVPJQk)
 
-        local MVQLzrbi = Instance.new(KASYeHPY((ETZEwPwyBF[-631 + 710]..ETZEwPwyBF[950 - (828)]..ETZEwPwyBF[832 - (717)]..ETZEwPwyBF[559 - (448)]..ETZEwPwyBF[978 - (891)]..ETZEwPwyBF[664 - (552)]..ETZEwPwyBF[-197 + 308]..ETZEwPwyBF[141 - (30)]..ETZEwPwyBF[-39 + 145]..ETZEwPwyBF[-312 + 417]), 21))
-        MVQLzrbi.Name = pACRiNkigr()
-        MVQLzrbi.Size = UDim2.fromOffset(36, 36)
-        MVQLzrbi.Position = UDim2.new(0, 16, 0.5, -18)
-        MVQLzrbi.BackgroundColor3 = Color3.fromRGB(12, 12, 15)
-        MVQLzrbi.BackgroundTransparency = 0.05
-        MVQLzrbi.Text = KASYeHPY((ETZEwPwyBF[-30 + 102]..ETZEwPwyBF[131 - (51)]), 18)
-        MVQLzrbi.TextColor3 = Color3.fromRGB(255, 255, 255)
-        MVQLzrbi.TextSize = 13
-        MVQLzrbi.Font = Enum.Font.GothamBold
-        MVQLzrbi.AutoButtonColor = false
-        MVQLzrbi.Active = true
-        MVQLzrbi.Draggable = true
-        MVQLzrbi.Parent = bBHbnyZZ
+        local HoQrBWPcLwtE = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[276 - (194)]..vtsOVprpkXPM[232 - (133)]..vtsOVprpkXPM[865 - (747)]..vtsOVprpkXPM[201 - (87)]..vtsOVprpkXPM[247 - (157)]..vtsOVprpkXPM[-652 + 767]..vtsOVprpkXPM[653 - (539)]..vtsOVprpkXPM[-528 + 642]..vtsOVprpkXPM[-865 + 974]..vtsOVprpkXPM[-245 + 353]), 24))
+        HoQrBWPcLwtE.Name = cGAonJWNCl()
+        HoQrBWPcLwtE.Size = UDim2.fromOffset(36, 36)
+        HoQrBWPcLwtE.Position = UDim2.new(0, 16, 0.5, -18)
+        HoQrBWPcLwtE.BackgroundColor3 = Color3.fromRGB(12, 12, 15)
+        HoQrBWPcLwtE.BackgroundTransparency = 0.05
+        HoQrBWPcLwtE.Text = fxpZqKdCnRQ((vtsOVprpkXPM[-220 + 309]..vtsOVprpkXPM[-684 + 755]), 9)
+        HoQrBWPcLwtE.TextColor3 = Color3.fromRGB(255, 255, 255)
+        HoQrBWPcLwtE.TextSize = 13
+        HoQrBWPcLwtE.Font = Enum.Font.GothamBold
+        HoQrBWPcLwtE.AutoButtonColor = false
+        HoQrBWPcLwtE.Active = true
+        HoQrBWPcLwtE.Draggable = true
+        HoQrBWPcLwtE.Parent = IkjSjVPJQk
 
-        local dWhGRGawCy = Instance.new(KASYeHPY((ETZEwPwyBF[596 - (515)]..ETZEwPwyBF[814 - (745)]..ETZEwPwyBF[529 - (440)]..ETZEwPwyBF[-292 + 399]..ETZEwPwyBF[-175 + 285]..ETZEwPwyBF[-579 + 685]..ETZEwPwyBF[791 - (694)]..ETZEwPwyBF[530 - (420)]), 22))
-        dWhGRGawCy.CornerRadius = UDim.new(0, 7)
-        dWhGRGawCy.Parent = MVQLzrbi
+        local ZNEDSHbvhp = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-192 + 263]..vtsOVprpkXPM[243 - (158)]..vtsOVprpkXPM[-33 + 112]..vtsOVprpkXPM[-493 + 590]..vtsOVprpkXPM[399 - (299)]..vtsOVprpkXPM[267 - (145)]..vtsOVprpkXPM[-701 + 814]..vtsOVprpkXPM[-451 + 551]), 12))
+        ZNEDSHbvhp.CornerRadius = UDim.new(0, 7)
+        ZNEDSHbvhp.Parent = HoQrBWPcLwtE
 
-        local KwBqurYyE = Instance.new(KASYeHPY((ETZEwPwyBF[995 - (911)]..ETZEwPwyBF[-332 + 404]..ETZEwPwyBF[-863 + 945]..ETZEwPwyBF[-759 + 874]..ETZEwPwyBF[-756 + 869]..ETZEwPwyBF[-59 + 169]..ETZEwPwyBF[666 - (560)]..ETZEwPwyBF[310 - (210)]), 25))
-        KwBqurYyE.Color = Color3.fromRGB(60, 60, 75)
-        KwBqurYyE.Transparency = 0.3
-        KwBqurYyE.Thickness = 1
-        KwBqurYyE.Parent = MVQLzrbi
+        local ACSPxUOhwSB = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[481 - (404)]..vtsOVprpkXPM[114 - (49)]..vtsOVprpkXPM[-312 + 387]..vtsOVprpkXPM[329 - (221)]..vtsOVprpkXPM[408 - (302)]..vtsOVprpkXPM[586 - (483)]..vtsOVprpkXPM[-376 + 475]..vtsOVprpkXPM[-852 + 971]), 18))
+        ACSPxUOhwSB.Color = Color3.fromRGB(60, 60, 75)
+        ACSPxUOhwSB.Transparency = 0.3
+        ACSPxUOhwSB.Thickness = 1
+        ACSPxUOhwSB.Parent = HoQrBWPcLwtE
 
-        local OiKLWmrdq = Instance.new(KASYeHPY((ETZEwPwyBF[409 - (321)]..ETZEwPwyBF[364 - (258)]..ETZEwPwyBF[647 - (532)]..ETZEwPwyBF[-25 + 126]..ETZEwPwyBF[535 - (416)]), 18))
-        OiKLWmrdq.Name = pACRiNkigr()
-        OiKLWmrdq.Size = UDim2.fromOffset(250, 215)
-        OiKLWmrdq.Position = UDim2.new(0.5, -125, 0.5, -107)
-        OiKLWmrdq.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        OiKLWmrdq.BackgroundTransparency = 0.05
-        OiKLWmrdq.BorderSizePixel = 0
-        OiKLWmrdq.Visible = false
-        OiKLWmrdq.ClipsDescendants = true
-        OiKLWmrdq.Parent = bBHbnyZZ
+        local UnGMhIQktAac = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-799 + 888]..vtsOVprpkXPM[-808 + 915]..vtsOVprpkXPM[780 - (664)]..vtsOVprpkXPM[781 - (679)]..vtsOVprpkXPM[-319 + 439]), 19))
+        UnGMhIQktAac.Name = cGAonJWNCl()
+        UnGMhIQktAac.Size = UDim2.fromOffset(250, 215)
+        UnGMhIQktAac.Position = UDim2.new(0.5, -125, 0.5, -107)
+        UnGMhIQktAac.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        UnGMhIQktAac.BackgroundTransparency = 0.05
+        UnGMhIQktAac.BorderSizePixel = 0
+        UnGMhIQktAac.Visible = false
+        UnGMhIQktAac.ClipsDescendants = true
+        UnGMhIQktAac.Parent = IkjSjVPJQk
 
-        local RGdGJXZdD = Instance.new(KASYeHPY((ETZEwPwyBF[-34 + 115]..ETZEwPwyBF[-832 + 901]..ETZEwPwyBF[776 - (709)]..ETZEwPwyBF[-214 + 324]..ETZEwPwyBF[771 - (652)]..ETZEwPwyBF[-566 + 688]..ETZEwPwyBF[-357 + 458]..ETZEwPwyBF[320 - (223)]..ETZEwPwyBF[984 - (878)]..ETZEwPwyBF[785 - (673)]), 22))
-        RGdGJXZdD.Rotation = 90
-        RGdGJXZdD.Color = ColorSequence.new({
+        local bPtlXMHBhBdj = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[695 - (612)]..vtsOVprpkXPM[460 - (389)]..vtsOVprpkXPM[-165 + 234]..vtsOVprpkXPM[904 - (792)]..vtsOVprpkXPM[117 - (-4)]..vtsOVprpkXPM[-327 + 425]..vtsOVprpkXPM[-620 + 723]..vtsOVprpkXPM[-633 + 732]..vtsOVprpkXPM[-698 + 806]..vtsOVprpkXPM[-845 + 959]), 24))
+        bPtlXMHBhBdj.Rotation = 90
+        bPtlXMHBhBdj.Color = ColorSequence.new({
             ColorSequenceKeypoint.new(0, Color3.fromRGB(80, 90, 115)),
             ColorSequenceKeypoint.new(0.35, Color3.fromRGB(15, 16, 22)),
             ColorSequenceKeypoint.new(1, Color3.fromRGB(5, 5, 8)),
         })
-        RGdGJXZdD.Transparency = NumberSequence.new({
+        bPtlXMHBhBdj.Transparency = NumberSequence.new({
             NumberSequenceKeypoint.new(0, 0.45),
             NumberSequenceKeypoint.new(0.35, 0.05),
             NumberSequenceKeypoint.new(1, 0.0),
         })
-        RGdGJXZdD.Parent = OiKLWmrdq
+        bPtlXMHBhBdj.Parent = UnGMhIQktAac
 
-        local qDVEyLGCqC = Instance.new(KASYeHPY((ETZEwPwyBF[-233 + 317]..ETZEwPwyBF[208 - (136)]..ETZEwPwyBF[619 - (553)]..ETZEwPwyBF[-850 + 960]..ETZEwPwyBF[-163 + 276]..ETZEwPwyBF[-236 + 345]..ETZEwPwyBF[-508 + 608]..ETZEwPwyBF[-571 + 684]), 25))
-        qDVEyLGCqC.CornerRadius = UDim.new(0, 12)
-        qDVEyLGCqC.Parent = OiKLWmrdq
+        local bUVnbvgzu = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[783 - (699)]..vtsOVprpkXPM[-279 + 351]..vtsOVprpkXPM[618 - (552)]..vtsOVprpkXPM[264 - (154)]..vtsOVprpkXPM[360 - (247)]..vtsOVprpkXPM[301 - (192)]..vtsOVprpkXPM[-551 + 651]..vtsOVprpkXPM[-568 + 681]), 25))
+        bUVnbvgzu.CornerRadius = UDim.new(0, 12)
+        bUVnbvgzu.Parent = UnGMhIQktAac
 
-        local ZSyfQnBl = Instance.new(KASYeHPY((ETZEwPwyBF[948 - (865)]..ETZEwPwyBF[-660 + 731]..ETZEwPwyBF[-100 + 181]..ETZEwPwyBF[-498 + 612]..ETZEwPwyBF[724 - (612)]..ETZEwPwyBF[-62 + 171]..ETZEwPwyBF[295 - (190)]..ETZEwPwyBF[-268 + 367]), 24))
-        ZSyfQnBl.Color = Color3.fromRGB(255, 255, 255)
-        ZSyfQnBl.Transparency = 0.8
-        ZSyfQnBl.Thickness = 1
-        ZSyfQnBl.Parent = OiKLWmrdq
+        local SvMAnxGdMxMC = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[720 - (639)]..vtsOVprpkXPM[-923 + 992]..vtsOVprpkXPM[118 - (39)]..vtsOVprpkXPM[-147 + 259]..vtsOVprpkXPM[130 - (20)]..vtsOVprpkXPM[-801 + 908]..vtsOVprpkXPM[126 - (23)]..vtsOVprpkXPM[-405 + 502]), 22))
+        SvMAnxGdMxMC.Color = Color3.fromRGB(255, 255, 255)
+        SvMAnxGdMxMC.Transparency = 0.8
+        SvMAnxGdMxMC.Thickness = 1
+        SvMAnxGdMxMC.Parent = UnGMhIQktAac
 
-        local NPVdilFxmfIN = Instance.new(KASYeHPY((ETZEwPwyBF[-382 + 449]..ETZEwPwyBF[613 - (502)]..ETZEwPwyBF[936 - (816)]..ETZEwPwyBF[162 - (56)]..ETZEwPwyBF[460 - (362)]), 23))
-        NPVdilFxmfIN.Size = UDim2.new(1, 0, 0, 42)
-        NPVdilFxmfIN.BackgroundTransparency = 1
-        NPVdilFxmfIN.Parent = OiKLWmrdq
+        local SczssmSqyYwy = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-722 + 788]..vtsOVprpkXPM[910 - (800)]..vtsOVprpkXPM[577 - (458)]..vtsOVprpkXPM[-193 + 298]..vtsOVprpkXPM[940 - (843)]), 22))
+        SczssmSqyYwy.Size = UDim2.new(1, 0, 0, 42)
+        SczssmSqyYwy.BackgroundTransparency = 1
+        SczssmSqyYwy.Parent = UnGMhIQktAac
 
-        local riPMpsoxB = Instance.new(KASYeHPY((ETZEwPwyBF[-180 + 262]..ETZEwPwyBF[-429 + 528]..ETZEwPwyBF[-329 + 447]..ETZEwPwyBF[-98 + 212]..ETZEwPwyBF[464 - (390)]..ETZEwPwyBF[546 - (425)]..ETZEwPwyBF[-498 + 620]..ETZEwPwyBF[227 - (128)]..ETZEwPwyBF[-667 + 773]), 24))
-        riPMpsoxB.Size = UDim2.new(1, -40, 1, 0)
-        riPMpsoxB.Position = UDim2.fromOffset(14, 0)
-        riPMpsoxB.BackgroundTransparency = 1
-        riPMpsoxB.Text = KASYeHPY((ETZEwPwyBF[315 - (237)]..ETZEwPwyBF[191 - (89)]..ETZEwPwyBF[643 - (522)]..ETZEwPwyBF[574 - (466)]..ETZEwPwyBF[301 - (187)]..ETZEwPwyBF[-174 + 283]..ETZEwPwyBF[675 - (568)]..ETZEwPwyBF[553 - (467)]..ETZEwPwyBF[565 - (533)]..ETZEwPwyBF[829 - (763)]..ETZEwPwyBF[-888 + 987]..ETZEwPwyBF[-784 + 900]..ETZEwPwyBF[397 - (294)]..ETZEwPwyBF[-589 + 686]..ETZEwPwyBF[-803 + 902]..ETZEwPwyBF[-113 + 145]..ETZEwPwyBF[961 - (880)]..ETZEwPwyBF[6 + 104]..ETZEwPwyBF[-749 + 858]..ETZEwPwyBF[-538 + 647]..ETZEwPwyBF[797 - (697)]..ETZEwPwyBF[-268 + 367]..ETZEwPwyBF[-427 + 539]), 24)
-        riPMpsoxB.TextColor3 = Color3.fromRGB(255, 255, 255)
-        riPMpsoxB.TextSize = 12
-        riPMpsoxB.Font = Enum.Font.GothamBold
-        riPMpsoxB.TextXAlignment = Enum.TextXAlignment.Left
-        riPMpsoxB.Parent = NPVdilFxmfIN
+        local lHGDVxVgdpq = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-228 + 307]..vtsOVprpkXPM[244 - (122)]..vtsOVprpkXPM[-559 + 674]..vtsOVprpkXPM[-479 + 590]..vtsOVprpkXPM[-636 + 707]..vtsOVprpkXPM[144 - (26)]..vtsOVprpkXPM[-503 + 622]..vtsOVprpkXPM[-649 + 771]..vtsOVprpkXPM[981 - (878)]), 21))
+        lHGDVxVgdpq.Size = UDim2.new(1, -40, 1, 0)
+        lHGDVxVgdpq.Position = UDim2.fromOffset(14, 0)
+        lHGDVxVgdpq.BackgroundTransparency = 1
+        lHGDVxVgdpq.Text = fxpZqKdCnRQ((vtsOVprpkXPM[486 - (408)]..vtsOVprpkXPM[538 - (436)]..vtsOVprpkXPM[-666 + 787]..vtsOVprpkXPM[392 - (284)]..vtsOVprpkXPM[-370 + 484]..vtsOVprpkXPM[-724 + 833]..vtsOVprpkXPM[653 - (546)]..vtsOVprpkXPM[326 - (240)]..vtsOVprpkXPM[-466 + 498]..vtsOVprpkXPM[-853 + 919]..vtsOVprpkXPM[166 - (67)]..vtsOVprpkXPM[-35 + 151]..vtsOVprpkXPM[-687 + 790]..vtsOVprpkXPM[-780 + 877]..vtsOVprpkXPM[780 - (681)]..vtsOVprpkXPM[997 - (965)]..vtsOVprpkXPM[190 - (109)]..vtsOVprpkXPM[-237 + 347]..vtsOVprpkXPM[-33 + 142]..vtsOVprpkXPM[-722 + 831]..vtsOVprpkXPM[-826 + 926]..vtsOVprpkXPM[211 - (112)]..vtsOVprpkXPM[520 - (408)]), 24)
+        lHGDVxVgdpq.TextColor3 = Color3.fromRGB(255, 255, 255)
+        lHGDVxVgdpq.TextSize = 12
+        lHGDVxVgdpq.Font = Enum.Font.GothamBold
+        lHGDVxVgdpq.TextXAlignment = Enum.TextXAlignment.Left
+        lHGDVxVgdpq.Parent = SczssmSqyYwy
 
-        local EqUAfEtVV = Instance.new(KASYeHPY((ETZEwPwyBF[-792 + 872]..ETZEwPwyBF[-321 + 418]..ETZEwPwyBF[736 - (620)]..ETZEwPwyBF[933 - (821)]..ETZEwPwyBF[706 - (618)]..ETZEwPwyBF[-369 + 482]..ETZEwPwyBF[518 - (406)]..ETZEwPwyBF[776 - (664)]..ETZEwPwyBF[-607 + 714]..ETZEwPwyBF[581 - (475)]), 22))
-        EqUAfEtVV.Size = UDim2.fromOffset(26, 26)
-        EqUAfEtVV.Position = UDim2.new(1, -32, 0.5, -13)
-        EqUAfEtVV.BackgroundTransparency = 1
-        EqUAfEtVV.Text = KASYeHPY((ETZEwPwyBF[-107 + 302]..ETZEwPwyBF[104 - (-47)]), 1)
-        EqUAfEtVV.TextColor3 = Color3.fromRGB(200, 200, 210)
-        EqUAfEtVV.TextSize = 18
-        EqUAfEtVV.Font = Enum.Font.GothamMedium
-        EqUAfEtVV.Parent = NPVdilFxmfIN
+        local bCpDMVoqyB = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[258 - (176)]..vtsOVprpkXPM[495 - (396)]..vtsOVprpkXPM[-649 + 767]..vtsOVprpkXPM[-544 + 658]..vtsOVprpkXPM[786 - (696)]..vtsOVprpkXPM[805 - (690)]..vtsOVprpkXPM[-334 + 448]..vtsOVprpkXPM[-812 + 926]..vtsOVprpkXPM[-128 + 237]..vtsOVprpkXPM[799 - (691)]), 24))
+        bCpDMVoqyB.Size = UDim2.fromOffset(26, 26)
+        bCpDMVoqyB.Position = UDim2.new(1, -32, 0.5, -13)
+        bCpDMVoqyB.BackgroundTransparency = 1
+        bCpDMVoqyB.Text = fxpZqKdCnRQ((vtsOVprpkXPM[-168 + 363]..vtsOVprpkXPM[-134 + 285]), 1)
+        bCpDMVoqyB.TextColor3 = Color3.fromRGB(200, 200, 210)
+        bCpDMVoqyB.TextSize = 18
+        bCpDMVoqyB.Font = Enum.Font.GothamMedium
+        bCpDMVoqyB.Parent = SczssmSqyYwy
 
-        local XHPgfIDa = Instance.new(KASYeHPY((ETZEwPwyBF[329 - (262)]..ETZEwPwyBF[-624 + 735]..ETZEwPwyBF[-2 + 122]..ETZEwPwyBF[-128 + 234]..ETZEwPwyBF[-414 + 512]), 23))
-        XHPgfIDa.Size = UDim2.new(1, -28, 0, 1)
-        XHPgfIDa.Position = UDim2.fromOffset(14, 42)
-        XHPgfIDa.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        XHPgfIDa.BackgroundTransparency = 0.88
-        XHPgfIDa.BorderSizePixel = 0
-        XHPgfIDa.Parent = OiKLWmrdq
+        local akFXMHxH = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[297 - (210)]..vtsOVprpkXPM[-524 + 629]..vtsOVprpkXPM[615 - (501)]..vtsOVprpkXPM[674 - (574)]..vtsOVprpkXPM[222 - (104)]), 17))
+        akFXMHxH.Size = UDim2.new(1, -28, 0, 1)
+        akFXMHxH.Position = UDim2.fromOffset(14, 42)
+        akFXMHxH.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        akFXMHxH.BackgroundTransparency = 0.88
+        akFXMHxH.BorderSizePixel = 0
+        akFXMHxH.Parent = UnGMhIQktAac
 
-        local vwheDZzHTJzt = Instance.new(KASYeHPY((ETZEwPwyBF[-726 + 794]..ETZEwPwyBF[-599 + 711]..ETZEwPwyBF[-573 + 694]..ETZEwPwyBF[-664 + 771]..ETZEwPwyBF[903 - (804)]), 24))
-        vwheDZzHTJzt.Size = UDim2.new(1, -28, 0, 150)
-        vwheDZzHTJzt.Position = UDim2.fromOffset(14, 52)
-        vwheDZzHTJzt.BackgroundTransparency = 1
-        vwheDZzHTJzt.Parent = OiKLWmrdq
+        local vzlcTCLvZp = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[494 - (428)]..vtsOVprpkXPM[-604 + 714]..vtsOVprpkXPM[362 - (243)]..vtsOVprpkXPM[-373 + 478]..vtsOVprpkXPM[-451 + 548]), 22))
+        vzlcTCLvZp.Size = UDim2.new(1, -28, 0, 150)
+        vzlcTCLvZp.Position = UDim2.fromOffset(14, 52)
+        vzlcTCLvZp.BackgroundTransparency = 1
+        vzlcTCLvZp.Parent = UnGMhIQktAac
 
-        local moOTcKoW = Instance.new(KASYeHPY((ETZEwPwyBF[-225 + 304]..ETZEwPwyBF[-301 + 368]..ETZEwPwyBF[-479 + 549]..ETZEwPwyBF[548 - (449)]..ETZEwPwyBF[478 - (369)]..ETZEwPwyBF[601 - (491)]..ETZEwPwyBF[725 - (655)]..ETZEwPwyBF[117 - (0)]..ETZEwPwyBF[575 - (460)]..ETZEwPwyBF[-88 + 193]..ETZEwPwyBF[-804 + 915]..ETZEwPwyBF[296 - (186)]), 20))
-        moOTcKoW.Padding = UDim.new(0, 6)
-        moOTcKoW.SortOrder = Enum.SortOrder.LayoutOrder
-        moOTcKoW.Parent = vwheDZzHTJzt
+        local IRkVuRGsHZAW = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-811 + 894]..vtsOVprpkXPM[640 - (569)]..vtsOVprpkXPM[862 - (788)]..vtsOVprpkXPM[538 - (435)]..vtsOVprpkXPM[395 - (282)]..vtsOVprpkXPM[225 - (111)]..vtsOVprpkXPM[-901 + 975]..vtsOVprpkXPM[-235 + 356]..vtsOVprpkXPM[-83 + 202]..vtsOVprpkXPM[664 - (555)]..vtsOVprpkXPM[-698 + 813]..vtsOVprpkXPM[-155 + 269]), 24))
+        IRkVuRGsHZAW.Padding = UDim.new(0, 6)
+        IRkVuRGsHZAW.SortOrder = Enum.SortOrder.LayoutOrder
+        IRkVuRGsHZAW.Parent = vzlcTCLvZp
 
-        local wVLniFWn = {}
+        local eLWNCZNSqIbU = {}
 
-        local function tnLYOhNFoJnY()
-            for name, btnData in suRBumSGYTfw(wVLniFWn) do
-                if name == mFOymDMQMr then
-                    scTUcOxCi:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(210, 110, 30),
+        local function SRcWCtRC()
+            for name, btnData in yNLHulMPnWeB(eLWNCZNSqIbU) do
+                if name == syuHVBtqDOLs then
+                    ySBqiEPfU:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(210, 110, 30),
                         BackgroundTransparency = 0.15,
                     }):Play()
-                    btnData.Text.Text = KASYeHPY((ETZEwPwyBF[-16 + 106]..ETZEwPwyBF[-789 + 902]..ETZEwPwyBF[820 - (720)]..ETZEwPwyBF[-630 + 662]..ETZEwPwyBF[-453 + 573]..ETZEwPwyBF[-632 + 742]..ETZEwPwyBF[-272 + 388]..ETZEwPwyBF[-232 + 264]..ETZEwPwyBF[525 - (411)]..ETZEwPwyBF[492 - (376)]..ETZEwPwyBF[-452 + 565]..ETZEwPwyBF[272 - (172)]..ETZEwPwyBF[347 - (284)]..ETZEwPwyBF[550 - (518)]..ETZEwPwyBF[-217 + 257]..ETZEwPwyBF[-910 + 996]..ETZEwPwyBF[625 - (521)]..ETZEwPwyBF[-279 + 386]..ETZEwPwyBF[745 - (638)]..ETZEwPwyBF[-365 + 397]..ETZEwPwyBF[464 - (383)]..ETZEwPwyBF[-3 + 103]..ETZEwPwyBF[-712 + 817]..ETZEwPwyBF[731 - (621)]..ETZEwPwyBF[-701 + 805]..ETZEwPwyBF[995 - (886)]..ETZEwPwyBF[-263 + 304]), 25)
+                    btnData.Text.Text = fxpZqKdCnRQ((vtsOVprpkXPM[-903 + 993]..vtsOVprpkXPM[933 - (820)]..vtsOVprpkXPM[-369 + 469]..vtsOVprpkXPM[573 - (541)]..vtsOVprpkXPM[340 - (220)]..vtsOVprpkXPM[871 - (761)]..vtsOVprpkXPM[812 - (696)]..vtsOVprpkXPM[509 - (477)]..vtsOVprpkXPM[-410 + 524]..vtsOVprpkXPM[604 - (488)]..vtsOVprpkXPM[672 - (559)]..vtsOVprpkXPM[921 - (821)]..vtsOVprpkXPM[-693 + 756]..vtsOVprpkXPM[-487 + 519]..vtsOVprpkXPM[581 - (541)]..vtsOVprpkXPM[-291 + 377]..vtsOVprpkXPM[-835 + 939]..vtsOVprpkXPM[-217 + 324]..vtsOVprpkXPM[631 - (524)]..vtsOVprpkXPM[-872 + 904]..vtsOVprpkXPM[444 - (363)]..vtsOVprpkXPM[-403 + 503]..vtsOVprpkXPM[611 - (506)]..vtsOVprpkXPM[151 - (41)]..vtsOVprpkXPM[314 - (210)]..vtsOVprpkXPM[598 - (489)]..vtsOVprpkXPM[276 - (235)]), 25)
                     btnData.Text.TextColor3 = Color3.fromRGB(255, 255, 255)
-                    scTUcOxCi:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 150, 50),
+                    ySBqiEPfU:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 150, 50),
                         Transparency = 0.1,
                     }):Play()
-                elseif name == CIQFFfyMUajg then
-                    scTUcOxCi:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(90, 50, 150),
+                elseif name == ZGGzHMGLja then
+                    ySBqiEPfU:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(90, 50, 150),
                         BackgroundTransparency = 0.2,
                     }):Play()
-                    btnData.Text.Text = name .. KASYeHPY((ETZEwPwyBF[290 - (258)]..ETZEwPwyBF[-504 + 595]..ETZEwPwyBF[-483 + 567]..ETZEwPwyBF[-181 + 299]..ETZEwPwyBF[-793 + 902]..ETZEwPwyBF[-438 + 536]..ETZEwPwyBF[-262 + 373]..ETZEwPwyBF[-694 + 814]..ETZEwPwyBF[-801 + 894]), 19)
+                    btnData.Text.Text = name .. fxpZqKdCnRQ((vtsOVprpkXPM[620 - (588)]..vtsOVprpkXPM[-793 + 884]..vtsOVprpkXPM[-604 + 685]..vtsOVprpkXPM[486 - (371)]..vtsOVprpkXPM[669 - (563)]..vtsOVprpkXPM[180 - (59)]..vtsOVprpkXPM[-710 + 818]..vtsOVprpkXPM[-110 + 227]..vtsOVprpkXPM[438 - (345)]), 16)
                     btnData.Text.TextColor3 = Color3.fromRGB(230, 200, 255)
-                    scTUcOxCi:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(180, 130, 255),
+                    ySBqiEPfU:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(180, 130, 255),
                         Transparency = 0.1,
                     }):Play()
                 else
-                    scTUcOxCi:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
+                    ySBqiEPfU:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
                         BackgroundTransparency = 0.35,
                     }):Play()
                     btnData.Text.Text = name
                     btnData.Text.TextColor3 = Color3.fromRGB(210, 215, 225)
-                    scTUcOxCi:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 255, 255),
+                    ySBqiEPfU:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 255, 255),
                         Transparency = 0.88,
                     }):Play()
                 end
             end
         end
 
-        local function vqaixjKSagbq(name, order)
-            local NxiBCQKgBc = Instance.new(KASYeHPY((ETZEwPwyBF[345 - (262)]..ETZEwPwyBF[663 - (563)]..ETZEwPwyBF[693 - (574)]..ETZEwPwyBF[519 - (404)]..ETZEwPwyBF[525 - (460)]..ETZEwPwyBF[185 - (69)]..ETZEwPwyBF[773 - (658)]..ETZEwPwyBF[-122 + 237]..ETZEwPwyBF[-370 + 480]..ETZEwPwyBF[152 - (43)]), 25))
-            NxiBCQKgBc.Size = UDim2.new(1, 0, 0, 42)
-            NxiBCQKgBc.BackgroundColor3 = Color3.fromRGB(18, 20, 28)
-            NxiBCQKgBc.BackgroundTransparency = 0.35
-            NxiBCQKgBc.Text = KASYeHPY((""), 1)
-            NxiBCQKgBc.AutoButtonColor = false
-            NxiBCQKgBc.LayoutOrder = order
-            NxiBCQKgBc.Parent = vwheDZzHTJzt
+        local function HyQaINDbaYxR(name, order)
+            local oqWZcCRKLd = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-47 + 126]..vtsOVprpkXPM[-688 + 810]..vtsOVprpkXPM[728 - (613)]..vtsOVprpkXPM[-178 + 289]..vtsOVprpkXPM[793 - (706)]..vtsOVprpkXPM[570 - (458)]..vtsOVprpkXPM[482 - (371)]..vtsOVprpkXPM[-181 + 292]..vtsOVprpkXPM[-784 + 890]..vtsOVprpkXPM[151 - (46)]), 21))
+            oqWZcCRKLd.Size = UDim2.new(1, 0, 0, 42)
+            oqWZcCRKLd.BackgroundColor3 = Color3.fromRGB(18, 20, 28)
+            oqWZcCRKLd.BackgroundTransparency = 0.35
+            oqWZcCRKLd.Text = fxpZqKdCnRQ((""), 1)
+            oqWZcCRKLd.AutoButtonColor = false
+            oqWZcCRKLd.LayoutOrder = order
+            oqWZcCRKLd.Parent = vzlcTCLvZp
 
-            local yYpkPpnPw = Instance.new(KASYeHPY((ETZEwPwyBF[-612 + 696]..ETZEwPwyBF[879 - (807)]..ETZEwPwyBF[706 - (640)]..ETZEwPwyBF[765 - (655)]..ETZEwPwyBF[-637 + 750]..ETZEwPwyBF[553 - (444)]..ETZEwPwyBF[-161 + 261]..ETZEwPwyBF[-536 + 649]), 25))
-            yYpkPpnPw.CornerRadius = UDim.new(0, 8)
-            yYpkPpnPw.Parent = NxiBCQKgBc
+            local wMAXaHQc = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[545 - (462)]..vtsOVprpkXPM[859 - (788)]..vtsOVprpkXPM[-74 + 139]..vtsOVprpkXPM[-143 + 252]..vtsOVprpkXPM[187 - (75)]..vtsOVprpkXPM[705 - (597)]..vtsOVprpkXPM[-573 + 672]..vtsOVprpkXPM[657 - (545)]), 24))
+            wMAXaHQc.CornerRadius = UDim.new(0, 8)
+            wMAXaHQc.Parent = oqWZcCRKLd
 
-            local UrtlTdyO = Instance.new(KASYeHPY((ETZEwPwyBF[912 - (830)]..ETZEwPwyBF[283 - (213)]..ETZEwPwyBF[-852 + 932]..ETZEwPwyBF[592 - (479)]..ETZEwPwyBF[960 - (849)]..ETZEwPwyBF[-338 + 446]..ETZEwPwyBF[-14 + 118]..ETZEwPwyBF[318 - (220)]), 23))
-            UrtlTdyO.Color = Color3.fromRGB(255, 255, 255)
-            UrtlTdyO.Transparency = 0.88
-            UrtlTdyO.Thickness = 1
-            UrtlTdyO.Parent = NxiBCQKgBc
+            local dDDuYwlwrxL = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-528 + 610]..vtsOVprpkXPM[-586 + 656]..vtsOVprpkXPM[816 - (736)]..vtsOVprpkXPM[531 - (418)]..vtsOVprpkXPM[-499 + 610]..vtsOVprpkXPM[882 - (774)]..vtsOVprpkXPM[-503 + 607]..vtsOVprpkXPM[-744 + 842]), 23))
+            dDDuYwlwrxL.Color = Color3.fromRGB(255, 255, 255)
+            dDDuYwlwrxL.Transparency = 0.88
+            dDDuYwlwrxL.Thickness = 1
+            dDDuYwlwrxL.Parent = oqWZcCRKLd
 
-            local rXTjDDHHpB = Instance.new(KASYeHPY((ETZEwPwyBF[894 - (816)]..ETZEwPwyBF[171 - (50)]..ETZEwPwyBF[-810 + 924]..ETZEwPwyBF[432 - (322)]..ETZEwPwyBF[293 - (223)]..ETZEwPwyBF[-19 + 136]..ETZEwPwyBF[-300 + 418]..ETZEwPwyBF[200 - (79)]..ETZEwPwyBF[-483 + 585]), 20))
-            rXTjDDHHpB.Size = UDim2.new(1, -20, 1, 0)
-            rXTjDDHHpB.Position = UDim2.fromOffset(12, 0)
-            rXTjDDHHpB.BackgroundTransparency = 1
-            rXTjDDHHpB.Text = name
-            rXTjDDHHpB.TextColor3 = Color3.fromRGB(210, 215, 225)
-            rXTjDDHHpB.TextSize = 11
-            rXTjDDHHpB.Font = Enum.Font.GothamMedium
-            rXTjDDHHpB.TextXAlignment = Enum.TextXAlignment.Left
-            rXTjDDHHpB.Parent = NxiBCQKgBc
+            local VKfVcOqOQej = Instance.new(fxpZqKdCnRQ((vtsOVprpkXPM[-78 + 160]..vtsOVprpkXPM[666 - (567)]..vtsOVprpkXPM[-691 + 809]..vtsOVprpkXPM[332 - (218)]..vtsOVprpkXPM[-481 + 555]..vtsOVprpkXPM[313 - (192)]..vtsOVprpkXPM[370 - (248)]..vtsOVprpkXPM[-681 + 780]..vtsOVprpkXPM[828 - (722)]), 24))
+            VKfVcOqOQej.Size = UDim2.new(1, -20, 1, 0)
+            VKfVcOqOQej.Position = UDim2.fromOffset(12, 0)
+            VKfVcOqOQej.BackgroundTransparency = 1
+            VKfVcOqOQej.Text = name
+            VKfVcOqOQej.TextColor3 = Color3.fromRGB(210, 215, 225)
+            VKfVcOqOQej.TextSize = 11
+            VKfVcOqOQej.Font = Enum.Font.GothamMedium
+            VKfVcOqOQej.TextXAlignment = Enum.TextXAlignment.Left
+            VKfVcOqOQej.Parent = oqWZcCRKLd
 
-            wVLniFWn[name] = {Btn= NxiBCQKgBc, Stroke = UrtlTdyO, Text = rXTjDDHHpB }
+            eLWNCZNSqIbU[name] = {Btn= oqWZcCRKLd, Stroke = dDDuYwlwrxL, Text = VKfVcOqOQej }
 
-            NxiBCQKgBc.MouseEnter:Connect(function()
-                if mFOymDMQMr ~= name and CIQFFfyMUajg ~= name then
-                    scTUcOxCi:Create(NxiBCQKgBc, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(32, 36, 50),
+            oqWZcCRKLd.MouseEnter:Connect(function()
+                if syuHVBtqDOLs ~= name and ZGGzHMGLja ~= name then
+                    ySBqiEPfU:Create(oqWZcCRKLd, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(32, 36, 50),
                         BackgroundTransparency = 0.2,
                     }):Play()
                 end
             end)
-            NxiBCQKgBc.MouseLeave:Connect(function()
-                if mFOymDMQMr ~= name and CIQFFfyMUajg ~= name then
-                    scTUcOxCi:Create(NxiBCQKgBc, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
+            oqWZcCRKLd.MouseLeave:Connect(function()
+                if syuHVBtqDOLs ~= name and ZGGzHMGLja ~= name then
+                    ySBqiEPfU:Create(oqWZcCRKLd, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
                         BackgroundTransparency = 0.35,
                     }):Play()
                 end
             end)
 
-            if true then
-                NxiBCQKgBc.MouseButton1Click:Connect(function()
-                if CIQFFfyMUajg == name then return end
-                if mFOymDMQMr == name then
-                CIQFFfyMUajg = name
-                gXGCBrfVuIv(name)
-                mFOymDMQMr = nil
-                if activeToken and activeExpiry then
-                XNLnNniYME(activeToken, activeExpiry)
+            oqWZcCRKLd.MouseButton1Click:Connect(function()
+                if ZGGzHMGLja == name then return end
+                if syuHVBtqDOLs == name then
+                    ZGGzHMGLja = name
+                    LouqIWWqhzX(name)
+                    syuHVBtqDOLs = nil
+                    if activeToken and activeExpiry then
+                        FHJrNvPqMW(activeToken, activeExpiry)
+                    end
+                    VKfVcOqOQej.Text = fxpZqKdCnRQ((vtsOVprpkXPM[-69 + 150]..vtsOVprpkXPM[887 - (787)]..vtsOVprpkXPM[-399 + 504]..vtsOVprpkXPM[-555 + 665]..vtsOVprpkXPM[-299 + 403]..vtsOVprpkXPM[-555 + 664]..vtsOVprpkXPM[-635 + 739]..vtsOVprpkXPM[893 - (784)]..vtsOVprpkXPM[192 - (90)]..vtsOVprpkXPM[223 - (177)]..vtsOVprpkXPM[-197 + 243]..vtsOVprpkXPM[-528 + 574]), 25)
+                    SRcWCtRC()
+                    rYWbEaXi()
+                    if queue_on_teleport then
+                        queue_on_teleport(fxpZqKdCnRQ((vtsOVprpkXPM[760 - (665)]..vtsOVprpkXPM[-134 + 204]..vtsOVprpkXPM[-504 + 550]..vtsOVprpkXPM[787 - (704)]..vtsOVprpkXPM[264 - (142)]..vtsOVprpkXPM[722 - (609)]..vtsOVprpkXPM[268 - (166)]..vtsOVprpkXPM[-804 + 904]..vtsOVprpkXPM[566 - (451)]..vtsOVprpkXPM[-508 + 575]..vtsOVprpkXPM[-632 + 732]..vtsOVprpkXPM[-654 + 771]..vtsOVprpkXPM[-750 + 854]..vtsOVprpkXPM[-838 + 936]..vtsOVprpkXPM[-575 + 675]..vtsOVprpkXPM[-937 + 969]..vtsOVprpkXPM[-882 + 943]..vtsOVprpkXPM[199 - (167)]..vtsOVprpkXPM[712 - (673)]), 25) .. name .. fxpZqKdCnRQ((vtsOVprpkXPM[-266 + 305]), 1))
+                    end
+                    task.wait(0.2)
+                    game:GetService(fxpZqKdCnRQ((vtsOVprpkXPM[796 - (713)]..vtsOVprpkXPM[-80 + 180]..vtsOVprpkXPM[-713 + 820]..vtsOVprpkXPM[641 - (541)]..vtsOVprpkXPM[-520 + 631]..vtsOVprpkXPM[706 - (596)]..vtsOVprpkXPM[-69 + 182]..vtsOVprpkXPM[298 - (183)]..vtsOVprpkXPM[539 - (457)]..vtsOVprpkXPM[-137 + 237]..vtsOVprpkXPM[117 - (4)]..vtsOVprpkXPM[178 - (61)]..vtsOVprpkXPM[472 - (368)]..vtsOVprpkXPM[-813 + 911]..vtsOVprpkXPM[-176 + 276]), 25)):TeleportToPlaceInstance(
+                        game.PlaceId, game.JobId, mNkcEkrSuqEN
+                    )
+                    return
                 end
-                rXTjDDHHpB.Text = KASYeHPY((ETZEwPwyBF[-574 + 653]..ETZEwPwyBF[-486 + 584]..ETZEwPwyBF[-661 + 764]..ETZEwPwyBF[230 - (122)]..ETZEwPwyBF[-896 + 998]..ETZEwPwyBF[235 - (128)]..ETZEwPwyBF[240 - (138)]..ETZEwPwyBF[458 - (351)]..ETZEwPwyBF[505 - (405)]..ETZEwPwyBF[379 - (333)]..ETZEwPwyBF[586 - (540)]..ETZEwPwyBF[-900 + 946]), 23)
-                tnLYOhNFoJnY()
-                mHYRhQyj()
-                if queue_on_teleport then
-                queue_on_teleport(KASYeHPY((ETZEwPwyBF[-162 + 257]..ETZEwPwyBF[842 - (772)]..ETZEwPwyBF[-604 + 650]..ETZEwPwyBF[-28 + 111]..ETZEwPwyBF[-723 + 845]..ETZEwPwyBF[445 - (332)]..ETZEwPwyBF[150 - (48)]..ETZEwPwyBF[390 - (290)]..ETZEwPwyBF[543 - (428)]..ETZEwPwyBF[749 - (682)]..ETZEwPwyBF[-130 + 230]..ETZEwPwyBF[767 - (650)]..ETZEwPwyBF[811 - (707)]..ETZEwPwyBF[762 - (664)]..ETZEwPwyBF[-466 + 566]..ETZEwPwyBF[-906 + 938]..ETZEwPwyBF[533 - (472)]..ETZEwPwyBF[669 - (637)]..ETZEwPwyBF[388 - (349)]), 25) .. name .. KASYeHPY((ETZEwPwyBF[-598 + 637]), 1))
-                end
-                task.wait(0.2)
-                game:GetService(KASYeHPY((ETZEwPwyBF[-63 + 145]..ETZEwPwyBF[-834 + 933]..ETZEwPwyBF[-114 + 220]..ETZEwPwyBF[-557 + 656]..ETZEwPwyBF[-207 + 317]..ETZEwPwyBF[927 - (818)]..ETZEwPwyBF[-65 + 177]..ETZEwPwyBF[-526 + 640]..ETZEwPwyBF[542 - (461)]..ETZEwPwyBF[-176 + 275]..ETZEwPwyBF[-804 + 916]..ETZEwPwyBF[633 - (517)]..ETZEwPwyBF[-806 + 909]..ETZEwPwyBF[-733 + 830]..ETZEwPwyBF[572 - (473)]), 24)):TeleportToPlaceInstance(
-                game.PlaceId, game.JobId, MpBxcGfNyD
-                )
-                return
-                end
-                mFOymDMQMr = name
-                tnLYOhNFoJnY()
-                end)
-            end
+                syuHVBtqDOLs = name
+                SRcWCtRC()
+            end)
         end
 
-        for i, plat in qAAHXIFGcgOh(rMRrLMgrr) do
-            vqaixjKSagbq(plat, i)
+        for i, plat in CwDtTjnc(dHuKNuezIIE) do
+            HyQaINDbaYxR(plat, i)
         end
-        if 4 >= 4 then
-            tnLYOhNFoJnY()
-        elseif 60 > 60 then
-            -- dead
-        end
+        SRcWCtRC()
 
-        local function RdoXSOey()
-            PtOBItRI = true
-            OiKLWmrdq.Visible = true
-            OiKLWmrdq.Position = UDim2.new(0.5, -125, 0.5, -97)
-            scTUcOxCi:Create(
-                OiKLWmrdq,
+        local function fBTaGkmKacd()
+            NklHoIrsxk = true
+            UnGMhIQktAac.Visible = true
+            UnGMhIQktAac.Position = UDim2.new(0.5, -125, 0.5, -97)
+            ySBqiEPfU:Create(
+                UnGMhIQktAac,
                 TweenInfo.new(0.22, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
                 {Position= UDim2.new(0.5, -125, 0.5, -107) }
             ):Play()
-            scTUcOxCi:Create(ZSyfQnBl, TweenInfo.new(0.22), {Transparency= 0.65,
+            ySBqiEPfU:Create(SvMAnxGdMxMC, TweenInfo.new(0.22), {Transparency= 0.65,
             }):Play()
         end
 
-        local function tlsQCrdY()
-            PtOBItRI = false
-            mFOymDMQMr = nil
-            tnLYOhNFoJnY()
-            local omsGWOhydGf = scTUcOxCi:Create(
-                OiKLWmrdq,
+        local function SACUYMbdiWW()
+            NklHoIrsxk = false
+            syuHVBtqDOLs = nil
+            SRcWCtRC()
+            local ZJBRmoKwLXfz = ySBqiEPfU:Create(
+                UnGMhIQktAac,
                 TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
                 {Position= UDim2.new(0.5, -125, 0.5, -97) }
             )
-            scTUcOxCi:Create(ZSyfQnBl, TweenInfo.new(0.15), {Transparency= 1,
+            ySBqiEPfU:Create(SvMAnxGdMxMC, TweenInfo.new(0.15), {Transparency= 1,
             }):Play()
-            omsGWOhydGf:Play()
-            omsGWOhydGf.Completed:Once(function()
-                if not PtOBItRI then OiKLWmrdq.Visible = false end
+            ZJBRmoKwLXfz:Play()
+            ZJBRmoKwLXfz.Completed:Once(function()
+                if not NklHoIrsxk then UnGMhIQktAac.Visible = false end
             end)
         end
 
-        if true then
-            MVQLzrbi.MouseButton1Click:Connect(function()
-            if PtOBItRI then tlsQCrdY() else RdoXSOey() end
-            end)
-        end
-        if (not (39 >= 72)) == (39 < 72) then
-            EqUAfEtVV.MouseButton1Click:Connect(function() tlsQCrdY() end)
-        end
-
-        if 36 % 36 == 0 then
-            MVQLzrbi.MouseEnter:Connect(function()
-            scTUcOxCi:Create(KwBqurYyE, TweenInfo.new(0.12), {Transparency= 0.1,
-            }):Play()
-            scTUcOxCi:Create(MVQLzrbi, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(22, 22, 28),
-            }):Play()
-            end)
-        elseif 20 ~= 20 then
-            -- dead
-        end
-        if true then
-            MVQLzrbi.MouseLeave:Connect(function()
-            scTUcOxCi:Create(KwBqurYyE, TweenInfo.new(0.12), {Transparency= 0.3,
-            }):Play()
-            scTUcOxCi:Create(MVQLzrbi, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(12, 12, 15),
-            }):Play()
-            end)
-        end
-    end
-
-    if 88 >= 88 then
-        enIGhBuvD()
-    end
-
-    if true then
-        task.spawn(function()
-        for vHdYXEPJa = 1, 15 do
-        if _G.__dm_killed then return end
-        mHYRhQyj()
-        task.wait(0.8)
-        end
+        HoQrBWPcLwtE.MouseButton1Click:Connect(function()
+            if NklHoIrsxk then SACUYMbdiWW() else fBTaGkmKacd() end
         end)
-    elseif false then
-        -- dead
-    end
+        bCpDMVoqyB.MouseButton1Click:Connect(function() SACUYMbdiWW() end)
 
-    if 37 % 37 == 0 then
-        task.spawn(function()
-        local MpBxcGfNyD = game.Players.LocalPlayer
-        if not MpBxcGfNyD then
-        game.Players:GetPropertyChangedSignal(KASYeHPY((ETZEwPwyBF[-414 + 489]..ETZEwPwyBF[-349 + 459]..ETZEwPwyBF[-261 + 359]..ETZEwPwyBF[740 - (618)]..ETZEwPwyBF[-58 + 165]..ETZEwPwyBF[333 - (254)]..ETZEwPwyBF[-761 + 868]..ETZEwPwyBF[915 - (793)]..ETZEwPwyBF[240 - (120)]..ETZEwPwyBF[984 - (884)]..ETZEwPwyBF[199 - (86)]), 25)):Wait()
-        MpBxcGfNyD = game.Players.LocalPlayer
-        end
-        MpBxcGfNyD.CharacterAdded:Connect(function()
-        task.wait(1)
-        if _G.__dm_killed then return end
-        mHYRhQyj()
+        HoQrBWPcLwtE.MouseEnter:Connect(function()
+            ySBqiEPfU:Create(ACSPxUOhwSB, TweenInfo.new(0.12), {Transparency= 0.1,
+            }):Play()
+            ySBqiEPfU:Create(HoQrBWPcLwtE, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(22, 22, 28),
+            }):Play()
         end)
+        HoQrBWPcLwtE.MouseLeave:Connect(function()
+            ySBqiEPfU:Create(ACSPxUOhwSB, TweenInfo.new(0.12), {Transparency= 0.3,
+            }):Play()
+            ySBqiEPfU:Create(HoQrBWPcLwtE, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(12, 12, 15),
+            }):Play()
         end)
     end
 
-    if 31 * 0 + 31 == 31 then
-        task.spawn(function()
+    ywiEoeaugV()
+
+    task.spawn(function()
+        for XiQwVudx = 1, 15 do
+            if _G.__dm_killed then return end
+            rYWbEaXi()
+            task.wait(0.8)
+        end
+    end)
+
+    task.spawn(function()
+        local mNkcEkrSuqEN = game.Players.LocalPlayer
+        if not mNkcEkrSuqEN then
+            game.Players:GetPropertyChangedSignal(fxpZqKdCnRQ((vtsOVprpkXPM[-838 + 908]..vtsOVprpkXPM[894 - (789)]..vtsOVprpkXPM[-290 + 409]..vtsOVprpkXPM[862 - (745)]..vtsOVprpkXPM[-155 + 257]..vtsOVprpkXPM[-35 + 109]..vtsOVprpkXPM[-600 + 702]..vtsOVprpkXPM[282 - (165)]..vtsOVprpkXPM[360 - (245)]..vtsOVprpkXPM[-596 + 717]..vtsOVprpkXPM[-9 + 117]), 20)):Wait()
+            mNkcEkrSuqEN = game.Players.LocalPlayer
+        end
+        mNkcEkrSuqEN.CharacterAdded:Connect(function()
+            task.wait(1)
+            if _G.__dm_killed then return end
+            rYWbEaXi()
+        end)
+    end)
+
+    task.spawn(function()
         while not _G.__dm_killed do task.wait(0.5) end
-        for vHdYXEPJa, g in qAAHXIFGcgOh(VRtlshauAoZo) do
-        ZedscHfPEOa(function() g:Destroy() end)
+        for XiQwVudx, g in CwDtTjnc(zYKVGcXMw) do
+            JGZLauJDL(function() g:Destroy() end)
         end
-        end)
-    end
+    end)
 end
 
 -- ===== التفعيل =====
-local sMHocGmXFgpb, fuvgTuSMjk = gNHbUjVfK()
-if (not (16 >= 67)) == (16 < 67) then
-    jpNISgYrjPa(RFLRtjITIyB())
-    if #rMRrLMgrr == 0 then
-elseif false then
-    -- dead
-end
-    if 48 + 11 == 59 then
-        PLNwidWP(KASYeHPY((ETZEwPwyBF[-427 + 504]..ETZEwPwyBF[304 - (194)]..ETZEwPwyBF[-627 + 659]..ETZEwPwyBF[-53 + 151]..ETZEwPwyBF[216 - (106)]..ETZEwPwyBF[346 - (238)]..ETZEwPwyBF[175 - (64)]..ETZEwPwyBF[-770 + 892]..ETZEwPwyBF[645 - (530)]..ETZEwPwyBF[-178 + 282]..ETZEwPwyBF[775 - (678)]..ETZEwPwyBF[-729 + 836]..ETZEwPwyBF[992 - (892)]..ETZEwPwyBF[365 - (333)]..ETZEwPwyBF[-543 + 642]..ETZEwPwyBF[863 - (763)]..ETZEwPwyBF[468 - (351)]..ETZEwPwyBF[255 - (151)]..ETZEwPwyBF[246 - (148)]..ETZEwPwyBF[-308 + 408]..ETZEwPwyBF[-364 + 396]..ETZEwPwyBF[400 - (290)]..ETZEwPwyBF[-713 + 824]..ETZEwPwyBF[-91 + 206]..ETZEwPwyBF[-553 + 657]..ETZEwPwyBF[524 - (414)]..ETZEwPwyBF[502 - (393)]..ETZEwPwyBF[875 - (843)]..ETZEwPwyBF[181 - (77)]..ETZEwPwyBF[-269 + 383]..ETZEwPwyBF[-740 + 772]..ETZEwPwyBF[-685 + 785]..ETZEwPwyBF[234 - (125)]..ETZEwPwyBF[-790 + 912]..ETZEwPwyBF[892 - (795)]..ETZEwPwyBF[720 - (613)]..ETZEwPwyBF[-295 + 395]..ETZEwPwyBF[695 - (596)]..ETZEwPwyBF[-653 + 685]..ETZEwPwyBF[-740 + 841]..ETZEwPwyBF[-574 + 684]..ETZEwPwyBF[619 - (506)]..ETZEwPwyBF[420 - (388)]..ETZEwPwyBF[811 - (696)]..ETZEwPwyBF[495 - (392)]..ETZEwPwyBF[910 - (806)]..ETZEwPwyBF[577 - (463)]..ETZEwPwyBF[852 - (820)]..ETZEwPwyBF[271 - (149)]..ETZEwPwyBF[-397 + 495]..ETZEwPwyBF[861 - (763)]..ETZEwPwyBF[-657 + 767]..ETZEwPwyBF[-518 + 634]..ETZEwPwyBF[606 - (497)]..ETZEwPwyBF[219 - (104)]), 25), KASYeHPY((ETZEwPwyBF[412 - (338)]..ETZEwPwyBF[-659 + 734]..ETZEwPwyBF[-469 + 564]..ETZEwPwyBF[682 - (593)]..ETZEwPwyBF[255 - (180)]..ETZEwPwyBF[-544 + 617]..ETZEwPwyBF[594 - (518)]..ETZEwPwyBF[-869 + 956]..ETZEwPwyBF[204 - (124)]..ETZEwPwyBF[-268 + 337]..ETZEwPwyBF[-845 + 933]..ETZEwPwyBF[403 - (331)]..ETZEwPwyBF[605 - (540)]..ETZEwPwyBF[614 - (519)]..ETZEwPwyBF[556 - (480)]..ETZEwPwyBF[518 - (446)]..ETZEwPwyBF[404 - (317)]..ETZEwPwyBF[832 - (752)]..ETZEwPwyBF[756 - (690)]..ETZEwPwyBF[-663 + 738]..ETZEwPwyBF[-368 + 446]..ETZEwPwyBF[-532 + 605]), 22))
-        return
-    end
+local VybSDZQHTzK, IWYSlOhXQpY = vZdeIANk()
+oEefnDftliCA(ChODrfSo())
+if #dHuKNuezIIE == 0 then
+    FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-340 + 417]..vtsOVprpkXPM[-213 + 323]..vtsOVprpkXPM[874 - (842)]..vtsOVprpkXPM[980 - (882)]..vtsOVprpkXPM[228 - (118)]..vtsOVprpkXPM[664 - (556)]..vtsOVprpkXPM[928 - (817)]..vtsOVprpkXPM[651 - (529)]..vtsOVprpkXPM[834 - (719)]..vtsOVprpkXPM[-140 + 244]..vtsOVprpkXPM[925 - (828)]..vtsOVprpkXPM[-402 + 509]..vtsOVprpkXPM[-284 + 384]..vtsOVprpkXPM[341 - (309)]..vtsOVprpkXPM[-289 + 388]..vtsOVprpkXPM[-692 + 792]..vtsOVprpkXPM[-277 + 394]..vtsOVprpkXPM[751 - (647)]..vtsOVprpkXPM[681 - (583)]..vtsOVprpkXPM[-129 + 229]..vtsOVprpkXPM[715 - (683)]..vtsOVprpkXPM[615 - (505)]..vtsOVprpkXPM[-218 + 329]..vtsOVprpkXPM[936 - (821)]..vtsOVprpkXPM[-374 + 478]..vtsOVprpkXPM[-622 + 732]..vtsOVprpkXPM[558 - (449)]..vtsOVprpkXPM[-644 + 676]..vtsOVprpkXPM[-5 + 109]..vtsOVprpkXPM[166 - (52)]..vtsOVprpkXPM[-677 + 709]..vtsOVprpkXPM[-665 + 765]..vtsOVprpkXPM[316 - (207)]..vtsOVprpkXPM[-481 + 603]..vtsOVprpkXPM[911 - (814)]..vtsOVprpkXPM[328 - (221)]..vtsOVprpkXPM[461 - (361)]..vtsOVprpkXPM[-116 + 215]..vtsOVprpkXPM[-473 + 505]..vtsOVprpkXPM[-236 + 337]..vtsOVprpkXPM[470 - (360)]..vtsOVprpkXPM[953 - (840)]..vtsOVprpkXPM[-834 + 866]..vtsOVprpkXPM[-242 + 357]..vtsOVprpkXPM[-47 + 150]..vtsOVprpkXPM[889 - (785)]..vtsOVprpkXPM[-164 + 278]..vtsOVprpkXPM[176 - (144)]..vtsOVprpkXPM[612 - (490)]..vtsOVprpkXPM[375 - (277)]..vtsOVprpkXPM[-367 + 465]..vtsOVprpkXPM[-877 + 987]..vtsOVprpkXPM[-737 + 853]..vtsOVprpkXPM[-243 + 352]..vtsOVprpkXPM[564 - (449)]), 25), fxpZqKdCnRQ((vtsOVprpkXPM[-188 + 260]..vtsOVprpkXPM[-457 + 530]..vtsOVprpkXPM[-56 + 151]..vtsOVprpkXPM[611 - (524)]..vtsOVprpkXPM[379 - (306)]..vtsOVprpkXPM[-64 + 135]..vtsOVprpkXPM[-131 + 205]..vtsOVprpkXPM[-712 + 797]..vtsOVprpkXPM[570 - (492)]..vtsOVprpkXPM[344 - (277)]..vtsOVprpkXPM[200 - (114)]..vtsOVprpkXPM[-899 + 969]..vtsOVprpkXPM[287 - (198)]..vtsOVprpkXPM[-832 + 927]..vtsOVprpkXPM[585 - (511)]..vtsOVprpkXPM[-44 + 114]..vtsOVprpkXPM[418 - (333)]..vtsOVprpkXPM[778 - (700)]..vtsOVprpkXPM[208 - (118)]..vtsOVprpkXPM[-702 + 775]..vtsOVprpkXPM[-511 + 587]..vtsOVprpkXPM[714 - (643)]), 20))
+    return
 end
 
-if sMHocGmXFgpb then
-    local vHdYXEPJa, CQJfMAqrTlDD = rVKDPoSzI(KASYeHPY((ETZEwPwyBF[-238 + 315]..ETZEwPwyBF[-31 + 107]..ETZEwPwyBF[-887 + 967]..ETZEwPwyBF[522 - (441)]), 23), KASYeHPY((ETZEwPwyBF[122 - (75)]..ETZEwPwyBF[180 - (58)]..ETZEwPwyBF[230 - (119)]..ETZEwPwyBF[-94 + 198]..ETZEwPwyBF[-752 + 799]..ETZEwPwyBF[403 - (296)]..ETZEwPwyBF[-454 + 558]..ETZEwPwyBF[-269 + 367]..ETZEwPwyBF[277 - (177)]..ETZEwPwyBF[729 - (620)]..ETZEwPwyBF[-821 + 935]..ETZEwPwyBF[130 - (30)]..ETZEwPwyBF[-344 + 391]..ETZEwPwyBF[388 - (285)]..ETZEwPwyBF[494 - (394)]..ETZEwPwyBF[119 - (-3)]..ETZEwPwyBF[-464 + 577]..ETZEwPwyBF[928 - (813)]..ETZEwPwyBF[-259 + 356]..ETZEwPwyBF[896 - (796)]..ETZEwPwyBF[920 - (798)]..ETZEwPwyBF[314 - (199)]), 25), {sessionToken= sMHocGmXFgpb,
-        scriptVariant = oOgiBOUg,
-        deviceFingerprint = mzIVIkmdVgsN,
-        robloxUserId = djGDBQPtYc,
+if VybSDZQHTzK then
+    local XiQwVudx, DuZuQeqT = gVdGSQyRG(fxpZqKdCnRQ((vtsOVprpkXPM[209 - (130)]..vtsOVprpkXPM[134 - (56)]..vtsOVprpkXPM[-576 + 658]..vtsOVprpkXPM[406 - (323)]), 25), fxpZqKdCnRQ((vtsOVprpkXPM[-659 + 706]..vtsOVprpkXPM[152 - (30)]..vtsOVprpkXPM[168 - (57)]..vtsOVprpkXPM[-558 + 662]..vtsOVprpkXPM[423 - (376)]..vtsOVprpkXPM[-403 + 510]..vtsOVprpkXPM[-348 + 452]..vtsOVprpkXPM[230 - (132)]..vtsOVprpkXPM[685 - (585)]..vtsOVprpkXPM[613 - (504)]..vtsOVprpkXPM[-360 + 474]..vtsOVprpkXPM[488 - (388)]..vtsOVprpkXPM[-243 + 290]..vtsOVprpkXPM[-208 + 311]..vtsOVprpkXPM[465 - (365)]..vtsOVprpkXPM[986 - (864)]..vtsOVprpkXPM[428 - (315)]..vtsOVprpkXPM[886 - (771)]..vtsOVprpkXPM[-89 + 186]..vtsOVprpkXPM[-588 + 688]..vtsOVprpkXPM[884 - (762)]..vtsOVprpkXPM[-711 + 826]), 25), {sessionToken= VybSDZQHTzK,
+        scriptVariant = TqjfHuOX,
+        deviceFingerprint = YFiQFMiozd,
+        robloxUserId = MRaKBLOD,
     })
-    if not CQJfMAqrTlDD or CQJfMAqrTlDD.success ~= true then
+    if not DuZuQeqT or DuZuQeqT.success ~= true then
         _G.__dm_killed = true
-        koCFleur()
-        PLNwidWP(KASYeHPY((ETZEwPwyBF[-44 + 119]..ETZEwPwyBF[860 - (756)]..ETZEwPwyBF[-856 + 954]..ETZEwPwyBF[-83 + 183]..ETZEwPwyBF[-440 + 549]..ETZEwPwyBF[978 - (864)]..ETZEwPwyBF[-488 + 588]..ETZEwPwyBF[-79 + 111]..ETZEwPwyBF[249 - (132)]..ETZEwPwyBF[-338 + 438]..ETZEwPwyBF[-531 + 644]..ETZEwPwyBF[705 - (601)]..ETZEwPwyBF[560 - (459)]..ETZEwPwyBF[-434 + 538]..ETZEwPwyBF[410 - (312)]..ETZEwPwyBF[3 + 119]..ETZEwPwyBF[160 - (45)]..ETZEwPwyBF[-745 + 849]..ETZEwPwyBF[121 - (11)]..ETZEwPwyBF[516 - (407)]..ETZEwPwyBF[-427 + 459]..ETZEwPwyBF[294 - (193)]..ETZEwPwyBF[661 - (539)]..ETZEwPwyBF[474 - (370)]..ETZEwPwyBF[205 - (98)]..ETZEwPwyBF[269 - (169)]..ETZEwPwyBF[-558 + 657]), 25), CQJfMAqrTlDD and CQJfMAqrTlDD.error or KASYeHPY((ETZEwPwyBF[-439 + 510]..ETZEwPwyBF[582 - (514)]..ETZEwPwyBF[624 - (534)]..ETZEwPwyBF[798 - (717)]..ETZEwPwyBF[636 - (553)]..ETZEwPwyBF[808 - (743)]..ETZEwPwyBF[588 - (520)]..ETZEwPwyBF[766 - (676)]..ETZEwPwyBF[-246 + 329]..ETZEwPwyBF[390 - (295)]..ETZEwPwyBF[330 - (261)]..ETZEwPwyBF[-642 + 732]..ETZEwPwyBF[204 - (132)]..ETZEwPwyBF[880 - (805)]..ETZEwPwyBF[-763 + 831]..ETZEwPwyBF[738 - (671)]), 25))
+        hqsXYjlG()
+        FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-133 + 207]..vtsOVprpkXPM[-313 + 416]..vtsOVprpkXPM[505 - (408)]..vtsOVprpkXPM[993 - (894)]..vtsOVprpkXPM[240 - (132)]..vtsOVprpkXPM[-321 + 434]..vtsOVprpkXPM[-531 + 630]..vtsOVprpkXPM[569 - (537)]..vtsOVprpkXPM[-657 + 773]..vtsOVprpkXPM[-299 + 398]..vtsOVprpkXPM[-224 + 336]..vtsOVprpkXPM[239 - (136)]..vtsOVprpkXPM[-840 + 940]..vtsOVprpkXPM[426 - (323)]..vtsOVprpkXPM[-602 + 699]..vtsOVprpkXPM[-709 + 830]..vtsOVprpkXPM[451 - (337)]..vtsOVprpkXPM[-620 + 723]..vtsOVprpkXPM[-827 + 936]..vtsOVprpkXPM[182 - (74)]..vtsOVprpkXPM[-601 + 633]..vtsOVprpkXPM[423 - (323)]..vtsOVprpkXPM[-687 + 808]..vtsOVprpkXPM[423 - (320)]..vtsOVprpkXPM[851 - (745)]..vtsOVprpkXPM[561 - (462)]..vtsOVprpkXPM[898 - (800)]), 24), DuZuQeqT and DuZuQeqT.error or fxpZqKdCnRQ((vtsOVprpkXPM[-395 + 466]..vtsOVprpkXPM[-901 + 969]..vtsOVprpkXPM[-55 + 145]..vtsOVprpkXPM[475 - (394)]..vtsOVprpkXPM[-56 + 139]..vtsOVprpkXPM[750 - (685)]..vtsOVprpkXPM[587 - (519)]..vtsOVprpkXPM[681 - (591)]..vtsOVprpkXPM[-577 + 660]..vtsOVprpkXPM[709 - (614)]..vtsOVprpkXPM[-521 + 590]..vtsOVprpkXPM[328 - (238)]..vtsOVprpkXPM[385 - (313)]..vtsOVprpkXPM[839 - (764)]..vtsOVprpkXPM[-711 + 779]..vtsOVprpkXPM[367 - (300)]), 25))
         return
     end
 
-    task.spawn(rBjciUteKMD, sMHocGmXFgpb, fuvgTuSMjk)
+    task.spawn(eBoYSxeTgD, VybSDZQHTzK, IWYSlOhXQpY)
     task.spawn(function()
-        while os.time() < fuvgTuSMjk do
+        while os.time() < IWYSlOhXQpY do
             task.wait(20)
-            if os.time() >= fuvgTuSMjk then
+            if os.time() >= IWYSlOhXQpY then
                 _G.__dm_killed = true
-                koCFleur()
+                hqsXYjlG()
                 break
             end
-            local vHdYXEPJa, dySQZztOfwAl = rVKDPoSzI(KASYeHPY((ETZEwPwyBF[-522 + 601]..ETZEwPwyBF[457 - (379)]..ETZEwPwyBF[-105 + 187]..ETZEwPwyBF[296 - (213)]), 25), KASYeHPY((ETZEwPwyBF[169 - (122)]..ETZEwPwyBF[11 + 109]..ETZEwPwyBF[606 - (497)]..ETZEwPwyBF[177 - (75)]..ETZEwPwyBF[-253 + 300]..ETZEwPwyBF[-591 + 696]..ETZEwPwyBF[936 - (834)]..ETZEwPwyBF[363 - (241)]..ETZEwPwyBF[254 - (156)]..ETZEwPwyBF[-436 + 543]..ETZEwPwyBF[879 - (767)]..ETZEwPwyBF[-856 + 954]..ETZEwPwyBF[-602 + 649]..ETZEwPwyBF[-466 + 567]..ETZEwPwyBF[394 - (296)]..ETZEwPwyBF[-333 + 453]..ETZEwPwyBF[315 - (204)]..ETZEwPwyBF[-434 + 547]..ETZEwPwyBF[254 - (133)]..ETZEwPwyBF[-389 + 487]..ETZEwPwyBF[462 - (342)]..ETZEwPwyBF[-424 + 537]), 23), {sessionToken= sMHocGmXFgpb,
-                scriptVariant = oOgiBOUg,
-                deviceFingerprint = mzIVIkmdVgsN,
-                robloxUserId = djGDBQPtYc,
+            local XiQwVudx, tOGxmGepOJ = gVdGSQyRG(fxpZqKdCnRQ((vtsOVprpkXPM[-661 + 739]..vtsOVprpkXPM[-44 + 121]..vtsOVprpkXPM[-360 + 441]..vtsOVprpkXPM[958 - (876)]), 24), fxpZqKdCnRQ((vtsOVprpkXPM[-692 + 739]..vtsOVprpkXPM[497 - (375)]..vtsOVprpkXPM[253 - (142)]..vtsOVprpkXPM[461 - (357)]..vtsOVprpkXPM[-69 + 116]..vtsOVprpkXPM[665 - (558)]..vtsOVprpkXPM[297 - (193)]..vtsOVprpkXPM[829 - (731)]..vtsOVprpkXPM[-601 + 701]..vtsOVprpkXPM[780 - (671)]..vtsOVprpkXPM[-275 + 389]..vtsOVprpkXPM[830 - (730)]..vtsOVprpkXPM[-394 + 441]..vtsOVprpkXPM[807 - (704)]..vtsOVprpkXPM[-705 + 805]..vtsOVprpkXPM[-787 + 909]..vtsOVprpkXPM[-493 + 606]..vtsOVprpkXPM[248 - (133)]..vtsOVprpkXPM[485 - (388)]..vtsOVprpkXPM[268 - (168)]..vtsOVprpkXPM[320 - (198)]..vtsOVprpkXPM[-38 + 153]), 25), {sessionToken= VybSDZQHTzK,
+                scriptVariant = TqjfHuOX,
+                deviceFingerprint = YFiQFMiozd,
+                robloxUserId = MRaKBLOD,
             })
-            if not dySQZztOfwAl or dySQZztOfwAl.success ~= true then
+            if not tOGxmGepOJ or tOGxmGepOJ.success ~= true then
                 _G.__dm_killed = true
-                koCFleur()
+                hqsXYjlG()
                 break
             end
         end
     end)
-    if true then
-        WlrrntdzdNNJ(KASYeHPY((ETZEwPwyBF[-579 + 676]..ETZEwPwyBF[-462 + 570]..ETZEwPwyBF[909 - (802)]..ETZEwPwyBF[726 - (628)]), 23))
-        return
-    end
-end
-
-if not (81 ~= 81) then
-    kgYLjQDah(KASYeHPY((ETZEwPwyBF[-205 + 271]..ETZEwPwyBF[288 - (178)]..ETZEwPwyBF[-704 + 813]..ETZEwPwyBF[376 - (267)]..ETZEwPwyBF[-741 + 841]..ETZEwPwyBF[300 - (202)]..ETZEwPwyBF[106 - (-9)]..ETZEwPwyBF[-134 + 238]..ETZEwPwyBF[-85 + 194]..ETZEwPwyBF[572 - (470)]..ETZEwPwyBF[586 - (554)]..ETZEwPwyBF[-735 + 850]..ETZEwPwyBF[378 - (268)]..ETZEwPwyBF[413 - (381)]..ETZEwPwyBF[803 - (689)]..ETZEwPwyBF[223 - (123)]..ETZEwPwyBF[-330 + 428]..ETZEwPwyBF[-782 + 898]..ETZEwPwyBF[-531 + 644]..ETZEwPwyBF[994 - (894)]..ETZEwPwyBF[308 - (276)]..ETZEwPwyBF[150 - (43)]..ETZEwPwyBF[-278 + 382]..ETZEwPwyBF[-84 + 182]..ETZEwPwyBF[635 - (535)]..ETZEwPwyBF[811 - (702)]..ETZEwPwyBF[-29 + 143]..ETZEwPwyBF[-436 + 536]..ETZEwPwyBF[974 - (942)]..ETZEwPwyBF[-690 + 804]..ETZEwPwyBF[-274 + 374]..ETZEwPwyBF[-315 + 428]..ETZEwPwyBF[-381 + 498]..ETZEwPwyBF[624 - (520)]..ETZEwPwyBF[332 - (234)]..ETZEwPwyBF[-770 + 870]..ETZEwPwyBF[306 - (260)]..ETZEwPwyBF[975 - (929)]..ETZEwPwyBF[784 - (738)]), 25), Color3.fromRGB(151, 112, 255), 5)
-elseif 81 > 81 then
-    -- dead
-end
-
-if 47 * 0 + 47 == 47 then
-    local vHdYXEPJa, sOknfsofFDcS, SrlBIGUrr = rVKDPoSzI(KASYeHPY((ETZEwPwyBF[-643 + 710]..ETZEwPwyBF[192 - (127)]..ETZEwPwyBF[283 - (203)]), 22), KASYeHPY((ETZEwPwyBF[449 - (402)]..ETZEwPwyBF[138 - (16)]..ETZEwPwyBF[-193 + 304]..ETZEwPwyBF[233 - (129)]..ETZEwPwyBF[-319 + 366]..ETZEwPwyBF[625 - (518)]..ETZEwPwyBF[-167 + 271]..ETZEwPwyBF[197 - (99)]..ETZEwPwyBF[627 - (527)]..ETZEwPwyBF[-589 + 698]..ETZEwPwyBF[-579 + 693]..ETZEwPwyBF[-833 + 933]..ETZEwPwyBF[564 - (517)]..ETZEwPwyBF[-189 + 300]..ETZEwPwyBF[-33 + 146]..ETZEwPwyBF[893 - (783)]..ETZEwPwyBF[-697 + 796]..ETZEwPwyBF[621 - (505)]..ETZEwPwyBF[-613 + 711]..ETZEwPwyBF[-843 + 958]), 25))
-    if not sOknfsofFDcS then PLNwidWP(KASYeHPY((ETZEwPwyBF[-656 + 736]..ETZEwPwyBF[-150 + 248]..ETZEwPwyBF[-744 + 855]..ETZEwPwyBF[840 - (725)]..ETZEwPwyBF[-204 + 306]..ETZEwPwyBF[566 - (444)]..ETZEwPwyBF[524 - (426)]..ETZEwPwyBF[-207 + 239]..ETZEwPwyBF[-629 + 743]..ETZEwPwyBF[-687 + 794]..ETZEwPwyBF[-547 + 667]..ETZEwPwyBF[889 - (774)]..ETZEwPwyBF[552 - (432)]..ETZEwPwyBF[-322 + 424]..ETZEwPwyBF[295 - (190)]..ETZEwPwyBF[-561 + 681]..ETZEwPwyBF[-675 + 796]..ETZEwPwyBF[528 - (423)]..ETZEwPwyBF[-78 + 176]), 23), SrlBIGUrr) return end
-end
-if sOknfsofFDcS.enabled ~= true then
-    PLNwidWP(KASYeHPY((ETZEwPwyBF[222 - (155)]..ETZEwPwyBF[-840 + 940]..ETZEwPwyBF[641 - (524)]..ETZEwPwyBF[-426 + 530]..ETZEwPwyBF[425 - (327)]..ETZEwPwyBF[-46 + 146]..ETZEwPwyBF[585 - (509)]..ETZEwPwyBF[-37 + 147]..ETZEwPwyBF[741 - (642)]..ETZEwPwyBF[-519 + 619]..ETZEwPwyBF[-299 + 331]..ETZEwPwyBF[259 - (155)]..ETZEwPwyBF[948 - (834)]..ETZEwPwyBF[-677 + 709]..ETZEwPwyBF[-683 + 781]..ETZEwPwyBF[793 - (677)]..ETZEwPwyBF[767 - (654)]..ETZEwPwyBF[851 - (738)]..ETZEwPwyBF[970 - (870)]..ETZEwPwyBF[105 - (-4)]..ETZEwPwyBF[-626 + 741]..ETZEwPwyBF[-303 + 410]..ETZEwPwyBF[586 - (466)]..ETZEwPwyBF[700 - (668)]..ETZEwPwyBF[870 - (771)]..ETZEwPwyBF[-143 + 247]..ETZEwPwyBF[850 - (736)]..ETZEwPwyBF[-105 + 227]..ETZEwPwyBF[-768 + 865]..ETZEwPwyBF[671 - (564)]..ETZEwPwyBF[916 - (816)]..ETZEwPwyBF[-432 + 531]), 25), KASYeHPY((ETZEwPwyBF[303 - (228)]..ETZEwPwyBF[-881 + 958]..ETZEwPwyBF[-585 + 659]..ETZEwPwyBF[775 - (686)]..ETZEwPwyBF[-462 + 542]..ETZEwPwyBF[-450 + 538]..ETZEwPwyBF[-182 + 261]..ETZEwPwyBF[936 - (841)]..ETZEwPwyBF[345 - (256)]..ETZEwPwyBF[100 - (32)]..ETZEwPwyBF[-659 + 737]..ETZEwPwyBF[-414 + 500]..ETZEwPwyBF[-353 + 440]..ETZEwPwyBF[-458 + 529]..ETZEwPwyBF[388 - (298)]..ETZEwPwyBF[510 - (421)]), 21))
-    return
-end
-if sOknfsofFDcS.minimumSupportedVersion and oOVYAydohmTF < sOknfsofFDcS.minimumSupportedVersion then
-    PLNwidWP(KASYeHPY((ETZEwPwyBF[-771 + 849]..ETZEwPwyBF[-878 + 984]..ETZEwPwyBF[855 - (756)]..ETZEwPwyBF[-640 + 761]..ETZEwPwyBF[144 - (31)]..ETZEwPwyBF[538 - (439)]..ETZEwPwyBF[-197 + 229]..ETZEwPwyBF[-340 + 455]..ETZEwPwyBF[955 - (845)]..ETZEwPwyBF[860 - (762)]..ETZEwPwyBF[860 - (739)]..ETZEwPwyBF[420 - (306)]..ETZEwPwyBF[127 - (28)]..ETZEwPwyBF[-577 + 609]..ETZEwPwyBF[924 - (805)]..ETZEwPwyBF[924 - (815)]..ETZEwPwyBF[999 - (884)]..ETZEwPwyBF[630 - (518)]..ETZEwPwyBF[-230 + 262]..ETZEwPwyBF[446 - (380)]..ETZEwPwyBF[510 - (411)]..ETZEwPwyBF[-289 + 405]..ETZEwPwyBF[-295 + 398]..ETZEwPwyBF[-709 + 806]..ETZEwPwyBF[-554 + 653]..ETZEwPwyBF[137 - (62)]..ETZEwPwyBF[239 - (130)]..ETZEwPwyBF[-425 + 523]..ETZEwPwyBF[995 - (896)]..ETZEwPwyBF[728 - (696)]..ETZEwPwyBF[-658 + 771]..ETZEwPwyBF[-128 + 225]..ETZEwPwyBF[-776 + 888]..ETZEwPwyBF[-330 + 433]..ETZEwPwyBF[616 - (506)]..ETZEwPwyBF[515 - (401)]), 24), KASYeHPY((ETZEwPwyBF[-857 + 922]..ETZEwPwyBF[704 - (630)]..ETZEwPwyBF[869 - (798)]..ETZEwPwyBF[-103 + 170]..ETZEwPwyBF[-81 + 157]..ETZEwPwyBF[513 - (431)]..ETZEwPwyBF[622 - (527)]..ETZEwPwyBF[838 - (755)]..ETZEwPwyBF[-312 + 390]..ETZEwPwyBF[743 - (677)]..ETZEwPwyBF[707 - (618)]..ETZEwPwyBF[-901 + 983]..ETZEwPwyBF[455 - (388)]..ETZEwPwyBF[252 - (157)]..ETZEwPwyBF[-23 + 103]..ETZEwPwyBF[-924 + 991]..ETZEwPwyBF[-183 + 262]..ETZEwPwyBF[533 - (450)]..ETZEwPwyBF[-308 + 379]..ETZEwPwyBF[681 - (601)]..ETZEwPwyBF[-57 + 124]..ETZEwPwyBF[-53 + 119]), 24))
+    ISAPGSASAL(fxpZqKdCnRQ((vtsOVprpkXPM[843 - (744)]..vtsOVprpkXPM[143 - (33)]..vtsOVprpkXPM[561 - (452)]..vtsOVprpkXPM[275 - (175)]), 25))
     return
 end
 
-local rMJfZiuN = {licenseKey= OGtNbZQwXc,
-    clientVersion = oOVYAydohmTF,
-    scriptVariant = oOgiBOUg,
-    deviceFingerprint = mzIVIkmdVgsN,
-    robloxUserId = djGDBQPtYc,
+EbrSmmTOYE(fxpZqKdCnRQ((vtsOVprpkXPM[-893 + 959]..vtsOVprpkXPM[-733 + 843]..vtsOVprpkXPM[-840 + 949]..vtsOVprpkXPM[-882 + 991]..vtsOVprpkXPM[300 - (200)]..vtsOVprpkXPM[-365 + 463]..vtsOVprpkXPM[706 - (591)]..vtsOVprpkXPM[-248 + 352]..vtsOVprpkXPM[-655 + 764]..vtsOVprpkXPM[-308 + 410]..vtsOVprpkXPM[692 - (660)]..vtsOVprpkXPM[-745 + 860]..vtsOVprpkXPM[489 - (379)]..vtsOVprpkXPM[632 - (600)]..vtsOVprpkXPM[-651 + 765]..vtsOVprpkXPM[152 - (52)]..vtsOVprpkXPM[-133 + 231]..vtsOVprpkXPM[-116 + 232]..vtsOVprpkXPM[-162 + 275]..vtsOVprpkXPM[-545 + 645]..vtsOVprpkXPM[673 - (641)]..vtsOVprpkXPM[305 - (198)]..vtsOVprpkXPM[-276 + 380]..vtsOVprpkXPM[-334 + 432]..vtsOVprpkXPM[-848 + 948]..vtsOVprpkXPM[558 - (449)]..vtsOVprpkXPM[793 - (679)]..vtsOVprpkXPM[-26 + 126]..vtsOVprpkXPM[-155 + 187]..vtsOVprpkXPM[-737 + 851]..vtsOVprpkXPM[758 - (658)]..vtsOVprpkXPM[-270 + 383]..vtsOVprpkXPM[-389 + 506]..vtsOVprpkXPM[283 - (179)]..vtsOVprpkXPM[-344 + 442]..vtsOVprpkXPM[-578 + 678]..vtsOVprpkXPM[759 - (713)]..vtsOVprpkXPM[-146 + 192]..vtsOVprpkXPM[726 - (680)]), 25), Color3.fromRGB(151, 112, 255), 5)
+
+local XiQwVudx, jtQUOqoDh, NkEQQTxk = gVdGSQyRG(fxpZqKdCnRQ((vtsOVprpkXPM[868 - (781)]..vtsOVprpkXPM[-806 + 891]..vtsOVprpkXPM[-123 + 197]), 16), fxpZqKdCnRQ((vtsOVprpkXPM[-134 + 181]..vtsOVprpkXPM[874 - (752)]..vtsOVprpkXPM[546 - (435)]..vtsOVprpkXPM[-343 + 447]..vtsOVprpkXPM[407 - (360)]..vtsOVprpkXPM[-343 + 450]..vtsOVprpkXPM[-773 + 877]..vtsOVprpkXPM[-232 + 330]..vtsOVprpkXPM[139 - (39)]..vtsOVprpkXPM[-680 + 789]..vtsOVprpkXPM[697 - (583)]..vtsOVprpkXPM[841 - (741)]..vtsOVprpkXPM[562 - (515)]..vtsOVprpkXPM[499 - (388)]..vtsOVprpkXPM[243 - (130)]..vtsOVprpkXPM[-37 + 147]..vtsOVprpkXPM[444 - (345)]..vtsOVprpkXPM[-798 + 914]..vtsOVprpkXPM[-300 + 398]..vtsOVprpkXPM[-597 + 712]), 25))
+if not jtQUOqoDh then FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-346 + 428]..vtsOVprpkXPM[996 - (896)]..vtsOVprpkXPM[-234 + 347]..vtsOVprpkXPM[688 - (571)]..vtsOVprpkXPM[638 - (534)]..vtsOVprpkXPM[-407 + 505]..vtsOVprpkXPM[-833 + 933]..vtsOVprpkXPM[-647 + 679]..vtsOVprpkXPM[-239 + 355]..vtsOVprpkXPM[998 - (889)]..vtsOVprpkXPM[-107 + 229]..vtsOVprpkXPM[-233 + 350]..vtsOVprpkXPM[143 - (21)]..vtsOVprpkXPM[382 - (278)]..vtsOVprpkXPM[487 - (380)]..vtsOVprpkXPM[-503 + 625]..vtsOVprpkXPM[395 - (298)]..vtsOVprpkXPM[557 - (450)]..vtsOVprpkXPM[405 - (305)]), 25), NkEQQTxk) return end
+if jtQUOqoDh.enabled ~= true then
+    FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-271 + 338]..vtsOVprpkXPM[136 - (36)]..vtsOVprpkXPM[-661 + 778]..vtsOVprpkXPM[-1 + 105]..vtsOVprpkXPM[-378 + 476]..vtsOVprpkXPM[-155 + 255]..vtsOVprpkXPM[800 - (724)]..vtsOVprpkXPM[857 - (747)]..vtsOVprpkXPM[695 - (596)]..vtsOVprpkXPM[-556 + 656]..vtsOVprpkXPM[-871 + 903]..vtsOVprpkXPM[647 - (543)]..vtsOVprpkXPM[-827 + 941]..vtsOVprpkXPM[-780 + 812]..vtsOVprpkXPM[-28 + 126]..vtsOVprpkXPM[-457 + 573]..vtsOVprpkXPM[421 - (308)]..vtsOVprpkXPM[762 - (649)]..vtsOVprpkXPM[572 - (472)]..vtsOVprpkXPM[441 - (332)]..vtsOVprpkXPM[600 - (485)]..vtsOVprpkXPM[-828 + 935]..vtsOVprpkXPM[-483 + 603]..vtsOVprpkXPM[-743 + 775]..vtsOVprpkXPM[-565 + 664]..vtsOVprpkXPM[-355 + 459]..vtsOVprpkXPM[-105 + 219]..vtsOVprpkXPM[385 - (263)]..vtsOVprpkXPM[-273 + 370]..vtsOVprpkXPM[695 - (588)]..vtsOVprpkXPM[682 - (582)]..vtsOVprpkXPM[-558 + 657]), 25), fxpZqKdCnRQ((vtsOVprpkXPM[260 - (182)]..vtsOVprpkXPM[332 - (252)]..vtsOVprpkXPM[-204 + 281]..vtsOVprpkXPM[845 - (779)]..vtsOVprpkXPM[-616 + 699]..vtsOVprpkXPM[-749 + 814]..vtsOVprpkXPM[845 - (763)]..vtsOVprpkXPM[253 - (158)]..vtsOVprpkXPM[897 - (831)]..vtsOVprpkXPM[-566 + 637]..vtsOVprpkXPM[940 - (859)]..vtsOVprpkXPM[767 - (678)]..vtsOVprpkXPM[333 - (243)]..vtsOVprpkXPM[-447 + 521]..vtsOVprpkXPM[291 - (224)]..vtsOVprpkXPM[864 - (798)]), 24))
+    return
+end
+if jtQUOqoDh.minimumSupportedVersion and OlwNtoFsKA < jtQUOqoDh.minimumSupportedVersion then
+    FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-390 + 468]..vtsOVprpkXPM[897 - (791)]..vtsOVprpkXPM[660 - (561)]..vtsOVprpkXPM[-606 + 727]..vtsOVprpkXPM[874 - (761)]..vtsOVprpkXPM[-813 + 912]..vtsOVprpkXPM[289 - (257)]..vtsOVprpkXPM[-304 + 419]..vtsOVprpkXPM[-726 + 836]..vtsOVprpkXPM[758 - (660)]..vtsOVprpkXPM[824 - (703)]..vtsOVprpkXPM[-862 + 976]..vtsOVprpkXPM[-689 + 788]..vtsOVprpkXPM[-742 + 774]..vtsOVprpkXPM[-739 + 858]..vtsOVprpkXPM[-604 + 713]..vtsOVprpkXPM[-479 + 594]..vtsOVprpkXPM[-248 + 360]..vtsOVprpkXPM[465 - (433)]..vtsOVprpkXPM[843 - (777)]..vtsOVprpkXPM[849 - (750)]..vtsOVprpkXPM[-268 + 384]..vtsOVprpkXPM[-716 + 819]..vtsOVprpkXPM[126 - (29)]..vtsOVprpkXPM[-394 + 493]..vtsOVprpkXPM[-594 + 669]..vtsOVprpkXPM[914 - (805)]..vtsOVprpkXPM[-775 + 873]..vtsOVprpkXPM[-810 + 909]..vtsOVprpkXPM[200 - (168)]..vtsOVprpkXPM[-728 + 841]..vtsOVprpkXPM[483 - (386)]..vtsOVprpkXPM[453 - (341)]..vtsOVprpkXPM[547 - (444)]..vtsOVprpkXPM[775 - (665)]..vtsOVprpkXPM[844 - (730)]), 24), fxpZqKdCnRQ((vtsOVprpkXPM[793 - (727)]..vtsOVprpkXPM[819 - (744)]..vtsOVprpkXPM[-765 + 837]..vtsOVprpkXPM[281 - (213)]..vtsOVprpkXPM[-351 + 428]..vtsOVprpkXPM[-159 + 242]..vtsOVprpkXPM[-768 + 863]..vtsOVprpkXPM[245 - (161)]..vtsOVprpkXPM[829 - (750)]..vtsOVprpkXPM[296 - (229)]..vtsOVprpkXPM[539 - (449)]..vtsOVprpkXPM[765 - (682)]..vtsOVprpkXPM[966 - (898)]..vtsOVprpkXPM[-82 + 177]..vtsOVprpkXPM[-666 + 747]..vtsOVprpkXPM[-746 + 814]..vtsOVprpkXPM[476 - (396)]..vtsOVprpkXPM[450 - (366)]..vtsOVprpkXPM[-189 + 261]..vtsOVprpkXPM[410 - (329)]..vtsOVprpkXPM[-335 + 403]..vtsOVprpkXPM[-673 + 740]), 25))
+    return
+end
+
+local axJlACukunK = {licenseKey= cbVbzIfPRbE,
+    clientVersion = OlwNtoFsKA,
+    scriptVariant = TqjfHuOX,
+    deviceFingerprint = YFiQFMiozd,
+    robloxUserId = MRaKBLOD,
 }
 
-if (not (10 >= 69)) == (10 < 69) then
-    local vHdYXEPJa, ocHeRkDxL, gxOiUdOyoEm = rVKDPoSzI(KASYeHPY((ETZEwPwyBF[-389 + 459]..ETZEwPwyBF[744 - (675)]..ETZEwPwyBF[694 - (621)]..ETZEwPwyBF[-254 + 328]), 16), KASYeHPY((ETZEwPwyBF[901 - (854)]..ETZEwPwyBF[646 - (524)]..ETZEwPwyBF[-644 + 755]..ETZEwPwyBF[944 - (840)]..ETZEwPwyBF[-722 + 769]..ETZEwPwyBF[380 - (273)]..ETZEwPwyBF[-416 + 520]..ETZEwPwyBF[194 - (96)]..ETZEwPwyBF[-40 + 140]..ETZEwPwyBF[-353 + 462]..ETZEwPwyBF[109 - (-5)]..ETZEwPwyBF[245 - (145)]..ETZEwPwyBF[-156 + 203]..ETZEwPwyBF[274 - (152)]..ETZEwPwyBF[-200 + 298]..ETZEwPwyBF[786 - (671)]..ETZEwPwyBF[964 - (860)]..ETZEwPwyBF[967 - (850)]..ETZEwPwyBF[758 - (636)]..ETZEwPwyBF[851 - (736)]..ETZEwPwyBF[-135 + 235]), 25), rMJfZiuN)
-    if not ocHeRkDxL or ocHeRkDxL.success ~= true then
-end
-    local jbCUYOGSZ = ocHeRkDxL and ocHeRkDxL.error or gxOiUdOyoEm or KASYeHPY((ETZEwPwyBF[-890 + 978]..ETZEwPwyBF[329 - (239)]..ETZEwPwyBF[163 - (82)]..ETZEwPwyBF[897 - (827)]..ETZEwPwyBF[-753 + 836]..ETZEwPwyBF[333 - (245)]..ETZEwPwyBF[576 - (495)]..ETZEwPwyBF[-871 + 941]..ETZEwPwyBF[-793 + 869]..ETZEwPwyBF[-269 + 344]..ETZEwPwyBF[-496 + 591]..ETZEwPwyBF[422 - (355)]..ETZEwPwyBF[-589 + 677]..ETZEwPwyBF[-797 + 867]..ETZEwPwyBF[900 - (827)]..ETZEwPwyBF[-280 + 346]..ETZEwPwyBF[860 - (795)]), 23)
-    if jbCUYOGSZ == KASYeHPY((ETZEwPwyBF[655 - (580)]..ETZEwPwyBF[-247 + 319]..ETZEwPwyBF[-860 + 926]..ETZEwPwyBF[157 - (89)]..ETZEwPwyBF[588 - (511)]..ETZEwPwyBF[645 - (563)]..ETZEwPwyBF[797 - (729)]..ETZEwPwyBF[-566 + 661]..ETZEwPwyBF[416 - (348)]..ETZEwPwyBF[749 - (662)]..ETZEwPwyBF[-200 + 279]..ETZEwPwyBF[252 - (180)]..ETZEwPwyBF[-97 + 178]..ETZEwPwyBF[-898 + 966]..ETZEwPwyBF[-815 + 882]), 25) then
-        PLNwidWP(KASYeHPY((ETZEwPwyBF[-54 + 129]..ETZEwPwyBF[-179 + 283]..ETZEwPwyBF[258 - (160)]..ETZEwPwyBF[-28 + 128]..ETZEwPwyBF[-230 + 339]..ETZEwPwyBF[515 - (401)]..ETZEwPwyBF[392 - (292)]..ETZEwPwyBF[-753 + 785]..ETZEwPwyBF[948 - (848)]..ETZEwPwyBF[-44 + 163]..ETZEwPwyBF[-747 + 858]..ETZEwPwyBF[457 - (353)]..ETZEwPwyBF[-866 + 979]..ETZEwPwyBF[322 - (222)]..ETZEwPwyBF[-263 + 362]), 25), jbCUYOGSZ)
-    elseif jbCUYOGSZ == KASYeHPY((ETZEwPwyBF[617 - (535)]..ETZEwPwyBF[-861 + 941]..ETZEwPwyBF[461 - (395)]..ETZEwPwyBF[-189 + 268]..ETZEwPwyBF[-751 + 846]..ETZEwPwyBF[192 - (117)]..ETZEwPwyBF[-636 + 712]..ETZEwPwyBF[-272 + 353]..ETZEwPwyBF[683 - (588)]..ETZEwPwyBF[-165 + 253]..ETZEwPwyBF[740 - (667)]..ETZEwPwyBF[589 - (516)]..ETZEwPwyBF[-38 + 114]..ETZEwPwyBF[619 - (535)]..ETZEwPwyBF[-507 + 573]..ETZEwPwyBF[996 - (931)]), 23) then
-        PLNwidWP(KASYeHPY((ETZEwPwyBF[-542 + 625]..ETZEwPwyBF[-175 + 278]..ETZEwPwyBF[884 - (780)]..ETZEwPwyBF[-840 + 954]..ETZEwPwyBF[-926 + 958]..ETZEwPwyBF[-762 + 843]..ETZEwPwyBF[-137 + 247]..ETZEwPwyBF[486 - (389)]..ETZEwPwyBF[-43 + 150]..ETZEwPwyBF[-323 + 433]..ETZEwPwyBF[885 - (766)]..ETZEwPwyBF[922 - (890)]..ETZEwPwyBF[-366 + 488]..ETZEwPwyBF[-718 + 816]..ETZEwPwyBF[508 - (410)]..ETZEwPwyBF[-612 + 722]..ETZEwPwyBF[-154 + 270]..ETZEwPwyBF[563 - (454)]..ETZEwPwyBF[-191 + 306]..ETZEwPwyBF[655 - (623)]..ETZEwPwyBF[572 - (468)]..ETZEwPwyBF[-453 + 567]..ETZEwPwyBF[-103 + 135]..ETZEwPwyBF[-611 + 720]..ETZEwPwyBF[728 - (618)]..ETZEwPwyBF[371 - (256)]..ETZEwPwyBF[-296 + 328]..ETZEwPwyBF[914 - (792)]..ETZEwPwyBF[-670 + 786]..ETZEwPwyBF[-744 + 859]..ETZEwPwyBF[599 - (496)]..ETZEwPwyBF[-580 + 690]..ETZEwPwyBF[736 - (623)]..ETZEwPwyBF[534 - (430)]..ETZEwPwyBF[-833 + 954]..ETZEwPwyBF[285 - (185)]..ETZEwPwyBF[-611 + 710]), 25), jbCUYOGSZ)
-    elseif jbCUYOGSZ == KASYeHPY((ETZEwPwyBF[-799 + 865]..ETZEwPwyBF[-369 + 436]..ETZEwPwyBF[-217 + 301]..ETZEwPwyBF[-198 + 269]..ETZEwPwyBF[367 - (302)]..ETZEwPwyBF[357 - (290)]..ETZEwPwyBF[-258 + 353]..ETZEwPwyBF[822 - (747)]..ETZEwPwyBF[-792 + 863]..ETZEwPwyBF[-167 + 248]..ETZEwPwyBF[-741 + 816]..ETZEwPwyBF[-360 + 449]..ETZEwPwyBF[826 - (744)]..ETZEwPwyBF[318 - (253)]..ETZEwPwyBF[683 - (613)]), 24) then
-        PLNwidWP(KASYeHPY((ETZEwPwyBF[885 - (802)]..ETZEwPwyBF[708 - (605)]..ETZEwPwyBF[114 - (10)]..ETZEwPwyBF[-105 + 219]..ETZEwPwyBF[-855 + 887]..ETZEwPwyBF[-637 + 736]..ETZEwPwyBF[-620 + 720]..ETZEwPwyBF[-361 + 478]..ETZEwPwyBF[-453 + 557]..ETZEwPwyBF[-20 + 118]..ETZEwPwyBF[-339 + 439]..ETZEwPwyBF[-503 + 535]..ETZEwPwyBF[359 - (255)]..ETZEwPwyBF[644 - (530)]..ETZEwPwyBF[284 - (252)]..ETZEwPwyBF[115 - (6)]..ETZEwPwyBF[-711 + 821]..ETZEwPwyBF[525 - (410)]..ETZEwPwyBF[422 - (390)]..ETZEwPwyBF[328 - (231)]..ETZEwPwyBF[-860 + 970]..ETZEwPwyBF[578 - (462)]..ETZEwPwyBF[-852 + 961]..ETZEwPwyBF[138 - (39)]..ETZEwPwyBF[-725 + 757]..ETZEwPwyBF[-472 + 587]..ETZEwPwyBF[-158 + 268]..ETZEwPwyBF[785 - (753)]..ETZEwPwyBF[-2 + 117]..ETZEwPwyBF[858 - (755)]..ETZEwPwyBF[-550 + 650]..ETZEwPwyBF[-84 + 116]..ETZEwPwyBF[-218 + 325]..ETZEwPwyBF[-636 + 740]..ETZEwPwyBF[110 - (12)]..ETZEwPwyBF[-886 + 986]..ETZEwPwyBF[-866 + 975]..ETZEwPwyBF[-878 + 992]..ETZEwPwyBF[552 - (452)]), 25), jbCUYOGSZ)
-    elseif jbCUYOGSZ == KASYeHPY((ETZEwPwyBF[316 - (246)]..ETZEwPwyBF[346 - (271)]..ETZEwPwyBF[514 - (431)]..ETZEwPwyBF[671 - (583)]..ETZEwPwyBF[691 - (618)]..ETZEwPwyBF[160 - (90)]..ETZEwPwyBF[-597 + 662]..ETZEwPwyBF[137 - (42)]..ETZEwPwyBF[-725 + 798]..ETZEwPwyBF[898 - (828)]..ETZEwPwyBF[-373 + 463]..ETZEwPwyBF[810 - (744)]..ETZEwPwyBF[-454 + 529]..ETZEwPwyBF[-671 + 751]..ETZEwPwyBF[882 - (816)]), 23) then
-        PLNwidWP(KASYeHPY((ETZEwPwyBF[-200 + 273]..ETZEwPwyBF[-563 + 665]..ETZEwPwyBF[472 - (350)]..ETZEwPwyBF[-706 + 804]..ETZEwPwyBF[848 - (741)]..ETZEwPwyBF[-253 + 365]..ETZEwPwyBF[-222 + 320]..ETZEwPwyBF[724 - (692)]..ETZEwPwyBF[-150 + 254]..ETZEwPwyBF[758 - (660)]..ETZEwPwyBF[-98 + 216]..ETZEwPwyBF[-917 + 949]..ETZEwPwyBF[-599 + 715]..ETZEwPwyBF[-848 + 968]..ETZEwPwyBF[-249 + 361]..ETZEwPwyBF[520 - (488)]..ETZEwPwyBF[-13 + 120]..ETZEwPwyBF[613 - (505)]..ETZEwPwyBF[740 - (627)]..ETZEwPwyBF[-590 + 622]..ETZEwPwyBF[-460 + 559]..ETZEwPwyBF[-230 + 338]..ETZEwPwyBF[-486 + 600]..ETZEwPwyBF[146 - (39)]..ETZEwPwyBF[218 - (121)]), 23), jbCUYOGSZ)
+local XiQwVudx, IPFuPfEnA, yyhriHtEg = gVdGSQyRG(fxpZqKdCnRQ((vtsOVprpkXPM[-318 + 389]..vtsOVprpkXPM[933 - (863)]..vtsOVprpkXPM[774 - (700)]..vtsOVprpkXPM[264 - (189)]), 17), fxpZqKdCnRQ((vtsOVprpkXPM[-438 + 485]..vtsOVprpkXPM[733 - (612)]..vtsOVprpkXPM[301 - (191)]..vtsOVprpkXPM[425 - (322)]..vtsOVprpkXPM[-867 + 914]..vtsOVprpkXPM[349 - (243)]..vtsOVprpkXPM[766 - (663)]..vtsOVprpkXPM[-633 + 730]..vtsOVprpkXPM[950 - (851)]..vtsOVprpkXPM[-28 + 136]..vtsOVprpkXPM[-205 + 318]..vtsOVprpkXPM[-736 + 835]..vtsOVprpkXPM[-133 + 180]..vtsOVprpkXPM[994 - (873)]..vtsOVprpkXPM[-123 + 220]..vtsOVprpkXPM[-877 + 991]..vtsOVprpkXPM[384 - (281)]..vtsOVprpkXPM[-253 + 369]..vtsOVprpkXPM[-343 + 464]..vtsOVprpkXPM[348 - (234)]..vtsOVprpkXPM[-277 + 376]), 24), axJlACukunK)
+if not IPFuPfEnA or IPFuPfEnA.success ~= true then
+    local MkzPPJxUzOcY = IPFuPfEnA and IPFuPfEnA.error or yyhriHtEg or fxpZqKdCnRQ((vtsOVprpkXPM[-600 + 687]..vtsOVprpkXPM[-841 + 930]..vtsOVprpkXPM[139 - (59)]..vtsOVprpkXPM[378 - (309)]..vtsOVprpkXPM[793 - (711)]..vtsOVprpkXPM[-808 + 895]..vtsOVprpkXPM[249 - (169)]..vtsOVprpkXPM[-458 + 527]..vtsOVprpkXPM[-663 + 738]..vtsOVprpkXPM[863 - (789)]..vtsOVprpkXPM[628 - (533)]..vtsOVprpkXPM[-35 + 101]..vtsOVprpkXPM[617 - (530)]..vtsOVprpkXPM[545 - (476)]..vtsOVprpkXPM[864 - (792)]..vtsOVprpkXPM[289 - (224)]..vtsOVprpkXPM[-803 + 893]), 22)
+    if MkzPPJxUzOcY == fxpZqKdCnRQ((vtsOVprpkXPM[337 - (264)]..vtsOVprpkXPM[-561 + 631]..vtsOVprpkXPM[425 - (335)]..vtsOVprpkXPM[222 - (156)]..vtsOVprpkXPM[-51 + 126]..vtsOVprpkXPM[818 - (738)]..vtsOVprpkXPM[-745 + 811]..vtsOVprpkXPM[479 - (384)]..vtsOVprpkXPM[-63 + 129]..vtsOVprpkXPM[-279 + 364]..vtsOVprpkXPM[993 - (916)]..vtsOVprpkXPM[-916 + 986]..vtsOVprpkXPM[-183 + 262]..vtsOVprpkXPM[526 - (460)]..vtsOVprpkXPM[799 - (734)]), 23) then
+        FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[885 - (810)]..vtsOVprpkXPM[-887 + 991]..vtsOVprpkXPM[327 - (229)]..vtsOVprpkXPM[-303 + 403]..vtsOVprpkXPM[-504 + 613]..vtsOVprpkXPM[351 - (237)]..vtsOVprpkXPM[-248 + 348]..vtsOVprpkXPM[-319 + 351]..vtsOVprpkXPM[-655 + 755]..vtsOVprpkXPM[328 - (209)]..vtsOVprpkXPM[-126 + 237]..vtsOVprpkXPM[-711 + 815]..vtsOVprpkXPM[445 - (332)]..vtsOVprpkXPM[571 - (471)]..vtsOVprpkXPM[-798 + 897]), 25), MkzPPJxUzOcY)
+    elseif MkzPPJxUzOcY == fxpZqKdCnRQ((vtsOVprpkXPM[547 - (463)]..vtsOVprpkXPM[284 - (202)]..vtsOVprpkXPM[557 - (489)]..vtsOVprpkXPM[165 - (84)]..vtsOVprpkXPM[-109 + 204]..vtsOVprpkXPM[-777 + 854]..vtsOVprpkXPM[759 - (681)]..vtsOVprpkXPM[868 - (785)]..vtsOVprpkXPM[-264 + 359]..vtsOVprpkXPM[-618 + 708]..vtsOVprpkXPM[358 - (283)]..vtsOVprpkXPM[-282 + 357]..vtsOVprpkXPM[295 - (217)]..vtsOVprpkXPM[-721 + 807]..vtsOVprpkXPM[-429 + 497]..vtsOVprpkXPM[-179 + 246]), 25) then
+        FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[399 - (317)]..vtsOVprpkXPM[132 - (30)]..vtsOVprpkXPM[497 - (394)]..vtsOVprpkXPM[-35 + 148]..vtsOVprpkXPM[762 - (730)]..vtsOVprpkXPM[725 - (645)]..vtsOVprpkXPM[9 + 100]..vtsOVprpkXPM[-256 + 378]..vtsOVprpkXPM[-258 + 364]..vtsOVprpkXPM[220 - (111)]..vtsOVprpkXPM[-514 + 632]..vtsOVprpkXPM[291 - (259)]..vtsOVprpkXPM[-333 + 454]..vtsOVprpkXPM[-711 + 808]..vtsOVprpkXPM[-400 + 497]..vtsOVprpkXPM[-622 + 731]..vtsOVprpkXPM[767 - (652)]..vtsOVprpkXPM[-742 + 850]..vtsOVprpkXPM[150 - (36)]..vtsOVprpkXPM[-594 + 626]..vtsOVprpkXPM[636 - (533)]..vtsOVprpkXPM[821 - (708)]..vtsOVprpkXPM[-424 + 456]..vtsOVprpkXPM[830 - (722)]..vtsOVprpkXPM[-289 + 398]..vtsOVprpkXPM[-326 + 440]..vtsOVprpkXPM[296 - (264)]..vtsOVprpkXPM[858 - (737)]..vtsOVprpkXPM[622 - (507)]..vtsOVprpkXPM[-372 + 486]..vtsOVprpkXPM[-659 + 761]..vtsOVprpkXPM[395 - (286)]..vtsOVprpkXPM[-698 + 810]..vtsOVprpkXPM[-28 + 131]..vtsOVprpkXPM[-673 + 793]..vtsOVprpkXPM[806 - (707)]..vtsOVprpkXPM[-569 + 667]), 24), MkzPPJxUzOcY)
+    elseif MkzPPJxUzOcY == fxpZqKdCnRQ((vtsOVprpkXPM[505 - (417)]..vtsOVprpkXPM[-102 + 191]..vtsOVprpkXPM[589 - (509)]..vtsOVprpkXPM[-861 + 928]..vtsOVprpkXPM[320 - (233)]..vtsOVprpkXPM[355 - (266)]..vtsOVprpkXPM[-12 + 107]..vtsOVprpkXPM[501 - (430)]..vtsOVprpkXPM[-601 + 668]..vtsOVprpkXPM[111 - (34)]..vtsOVprpkXPM[124 - (53)]..vtsOVprpkXPM[795 - (710)]..vtsOVprpkXPM[-896 + 974]..vtsOVprpkXPM[600 - (513)]..vtsOVprpkXPM[340 - (274)]), 20) then
+        FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-358 + 441]..vtsOVprpkXPM[572 - (469)]..vtsOVprpkXPM[531 - (427)]..vtsOVprpkXPM[-534 + 648]..vtsOVprpkXPM[-120 + 152]..vtsOVprpkXPM[197 - (98)]..vtsOVprpkXPM[846 - (746)]..vtsOVprpkXPM[-6 + 123]..vtsOVprpkXPM[147 - (43)]..vtsOVprpkXPM[-353 + 451]..vtsOVprpkXPM[-109 + 209]..vtsOVprpkXPM[-525 + 557]..vtsOVprpkXPM[-132 + 236]..vtsOVprpkXPM[982 - (868)]..vtsOVprpkXPM[816 - (784)]..vtsOVprpkXPM[-708 + 817]..vtsOVprpkXPM[-69 + 179]..vtsOVprpkXPM[124 - (9)]..vtsOVprpkXPM[-908 + 940]..vtsOVprpkXPM[-574 + 671]..vtsOVprpkXPM[-49 + 159]..vtsOVprpkXPM[-745 + 861]..vtsOVprpkXPM[-354 + 463]..vtsOVprpkXPM[976 - (877)]..vtsOVprpkXPM[642 - (610)]..vtsOVprpkXPM[-535 + 650]..vtsOVprpkXPM[-573 + 683]..vtsOVprpkXPM[-76 + 108]..vtsOVprpkXPM[147 - (32)]..vtsOVprpkXPM[-466 + 569]..vtsOVprpkXPM[652 - (552)]..vtsOVprpkXPM[784 - (752)]..vtsOVprpkXPM[-645 + 752]..vtsOVprpkXPM[-803 + 907]..vtsOVprpkXPM[-424 + 522]..vtsOVprpkXPM[517 - (417)]..vtsOVprpkXPM[690 - (581)]..vtsOVprpkXPM[821 - (707)]..vtsOVprpkXPM[538 - (438)]), 25), MkzPPJxUzOcY)
+    elseif MkzPPJxUzOcY == fxpZqKdCnRQ((vtsOVprpkXPM[-347 + 414]..vtsOVprpkXPM[106 - (34)]..vtsOVprpkXPM[859 - (779)]..vtsOVprpkXPM[-613 + 698]..vtsOVprpkXPM[661 - (591)]..vtsOVprpkXPM[798 - (731)]..vtsOVprpkXPM[741 - (653)]..vtsOVprpkXPM[934 - (839)]..vtsOVprpkXPM[836 - (766)]..vtsOVprpkXPM[-311 + 378]..vtsOVprpkXPM[826 - (739)]..vtsOVprpkXPM[332 - (243)]..vtsOVprpkXPM[-796 + 868]..vtsOVprpkXPM[-209 + 286]..vtsOVprpkXPM[-18 + 107]), 20) then
+        FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[962 - (887)]..vtsOVprpkXPM[518 - (414)]..vtsOVprpkXPM[704 - (606)]..vtsOVprpkXPM[167 - (67)]..vtsOVprpkXPM[-72 + 181]..vtsOVprpkXPM[-9 + 123]..vtsOVprpkXPM[-638 + 738]..vtsOVprpkXPM[928 - (896)]..vtsOVprpkXPM[959 - (853)]..vtsOVprpkXPM[731 - (631)]..vtsOVprpkXPM[514 - (394)]..vtsOVprpkXPM[-297 + 329]..vtsOVprpkXPM[-169 + 287]..vtsOVprpkXPM[140 - (18)]..vtsOVprpkXPM[829 - (715)]..vtsOVprpkXPM[559 - (527)]..vtsOVprpkXPM[227 - (118)]..vtsOVprpkXPM[677 - (567)]..vtsOVprpkXPM[167 - (52)]..vtsOVprpkXPM[-828 + 860]..vtsOVprpkXPM[742 - (641)]..vtsOVprpkXPM[-698 + 808]..vtsOVprpkXPM[290 - (174)]..vtsOVprpkXPM[-821 + 930]..vtsOVprpkXPM[353 - (254)]), 25), MkzPPJxUzOcY)
     else
-        PLNwidWP(KASYeHPY((ETZEwPwyBF[-124 + 199]..ETZEwPwyBF[538 - (434)]..ETZEwPwyBF[609 - (511)]..ETZEwPwyBF[357 - (257)]..ETZEwPwyBF[984 - (875)]..ETZEwPwyBF[679 - (565)]..ETZEwPwyBF[728 - (628)]..ETZEwPwyBF[-552 + 584]..ETZEwPwyBF[323 - (206)]..ETZEwPwyBF[936 - (836)]..ETZEwPwyBF[757 - (644)]..ETZEwPwyBF[-608 + 712]..ETZEwPwyBF[-457 + 558]..ETZEwPwyBF[-378 + 482]..ETZEwPwyBF[-338 + 436]..ETZEwPwyBF[321 - (199)]..ETZEwPwyBF[-348 + 463]..ETZEwPwyBF[955 - (851)]..ETZEwPwyBF[433 - (323)]..ETZEwPwyBF[-554 + 663]..ETZEwPwyBF[-806 + 838]..ETZEwPwyBF[374 - (273)]..ETZEwPwyBF[-314 + 436]..ETZEwPwyBF[-854 + 958]..ETZEwPwyBF[174 - (67)]..ETZEwPwyBF[-579 + 679]..ETZEwPwyBF[331 - (232)]), 25), jbCUYOGSZ)
+        FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[909 - (834)]..vtsOVprpkXPM[-212 + 316]..vtsOVprpkXPM[-670 + 768]..vtsOVprpkXPM[-409 + 509]..vtsOVprpkXPM[148 - (39)]..vtsOVprpkXPM[665 - (551)]..vtsOVprpkXPM[-90 + 190]..vtsOVprpkXPM[-115 + 147]..vtsOVprpkXPM[142 - (25)]..vtsOVprpkXPM[952 - (852)]..vtsOVprpkXPM[-6 + 119]..vtsOVprpkXPM[431 - (327)]..vtsOVprpkXPM[-648 + 749]..vtsOVprpkXPM[-278 + 382]..vtsOVprpkXPM[-552 + 650]..vtsOVprpkXPM[313 - (191)]..vtsOVprpkXPM[-436 + 551]..vtsOVprpkXPM[301 - (197)]..vtsOVprpkXPM[113 - (3)]..vtsOVprpkXPM[-219 + 328]..vtsOVprpkXPM[145 - (113)]..vtsOVprpkXPM[887 - (786)]..vtsOVprpkXPM[883 - (761)]..vtsOVprpkXPM[813 - (709)]..vtsOVprpkXPM[-443 + 550]..vtsOVprpkXPM[872 - (772)]..vtsOVprpkXPM[209 - (110)]), 25), MkzPPJxUzOcY)
     end
     return
 end
 
-local cCblPMzKAw = ocHeRkDxL.sessionToken
-local bdkLhNFQmUc = ocHeRkDxL.license and nkkuuurkG(ocHeRkDxL.license.expiresAt)
-if type(cCblPMzKAw) ~= KASYeHPY((ETZEwPwyBF[187 - (74)]..ETZEwPwyBF[969 - (855)]..ETZEwPwyBF[753 - (641)]..ETZEwPwyBF[-824 + 927]..ETZEwPwyBF[-100 + 208]..ETZEwPwyBF[975 - (874)]), 24) or cCblPMzKAw == KASYeHPY((""), 1) or not bdkLhNFQmUc then
-    PLNwidWP(KASYeHPY((ETZEwPwyBF[-82 + 163]..ETZEwPwyBF[105 - (6)]..ETZEwPwyBF[-763 + 875]..ETZEwPwyBF[-809 + 925]..ETZEwPwyBF[-85 + 184]..ETZEwPwyBF[-677 + 789]..ETZEwPwyBF[-477 + 509]..ETZEwPwyBF[-65 + 177]..ETZEwPwyBF[-240 + 339]..ETZEwPwyBF[154 - (40)]..ETZEwPwyBF[886 - (771)]..ETZEwPwyBF[-481 + 593]..ETZEwPwyBF[-325 + 433]..ETZEwPwyBF[393 - (294)]..ETZEwPwyBF[913 - (815)]..ETZEwPwyBF[-569 + 601]..ETZEwPwyBF[-139 + 260]..ETZEwPwyBF[-414 + 522]..ETZEwPwyBF[513 - (481)]..ETZEwPwyBF[524 - (421)]..ETZEwPwyBF[143 - (35)]..ETZEwPwyBF[656 - (559)]..ETZEwPwyBF[-774 + 883]..ETZEwPwyBF[867 - (760)]..ETZEwPwyBF[-862 + 972]..ETZEwPwyBF[351 - (245)]..ETZEwPwyBF[933 - (834)]..ETZEwPwyBF[-462 + 576]..ETZEwPwyBF[962 - (863)]..ETZEwPwyBF[552 - (520)]..ETZEwPwyBF[736 - (630)]..ETZEwPwyBF[676 - (573)]..ETZEwPwyBF[-554 + 651]..ETZEwPwyBF[468 - (369)]..ETZEwPwyBF[-429 + 537]..ETZEwPwyBF[-92 + 205]..ETZEwPwyBF[-412 + 511]..ETZEwPwyBF[988 - (956)]..ETZEwPwyBF[580 - (468)]..ETZEwPwyBF[-225 + 324]..ETZEwPwyBF[393 - (280)]..ETZEwPwyBF[873 - (763)]..ETZEwPwyBF[931 - (822)]..ETZEwPwyBF[-193 + 301]..ETZEwPwyBF[767 - (654)]..ETZEwPwyBF[-614 + 713]), 24), KASYeHPY((ETZEwPwyBF[107 - (37)]..ETZEwPwyBF[626 - (551)]..ETZEwPwyBF[-784 + 867]..ETZEwPwyBF[498 - (410)]..ETZEwPwyBF[412 - (339)]..ETZEwPwyBF[879 - (809)]..ETZEwPwyBF[850 - (785)]..ETZEwPwyBF[574 - (479)]..ETZEwPwyBF[364 - (276)]..ETZEwPwyBF[-77 + 167]..ETZEwPwyBF[-98 + 179]..ETZEwPwyBF[582 - (512)]..ETZEwPwyBF[847 - (764)]..ETZEwPwyBF[714 - (626)]..ETZEwPwyBF[872 - (791)]..ETZEwPwyBF[205 - (135)]..ETZEwPwyBF[-75 + 151]..ETZEwPwyBF[438 - (363)]), 23))
+local IKjZRkNqX = IPFuPfEnA.sessionToken
+local xZGhmtlI = IPFuPfEnA.license and dRsfAkMBB(IPFuPfEnA.license.expiresAt)
+if type(IKjZRkNqX) ~= fxpZqKdCnRQ((vtsOVprpkXPM[-879 + 984]..vtsOVprpkXPM[463 - (357)]..vtsOVprpkXPM[153 - (49)]..vtsOVprpkXPM[824 - (703)]..vtsOVprpkXPM[940 - (840)]..vtsOVprpkXPM[862 - (743)]), 16) or IKjZRkNqX == fxpZqKdCnRQ((""), 1) or not xZGhmtlI then
+    FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-630 + 712]..vtsOVprpkXPM[787 - (687)]..vtsOVprpkXPM[-337 + 450]..vtsOVprpkXPM[-705 + 822]..vtsOVprpkXPM[-732 + 832]..vtsOVprpkXPM[358 - (245)]..vtsOVprpkXPM[377 - (345)]..vtsOVprpkXPM[-582 + 695]..vtsOVprpkXPM[985 - (885)]..vtsOVprpkXPM[-300 + 415]..vtsOVprpkXPM[325 - (209)]..vtsOVprpkXPM[234 - (121)]..vtsOVprpkXPM[667 - (558)]..vtsOVprpkXPM[-682 + 782]..vtsOVprpkXPM[731 - (632)]..vtsOVprpkXPM[-571 + 603]..vtsOVprpkXPM[993 - (871)]..vtsOVprpkXPM[417 - (308)]..vtsOVprpkXPM[648 - (616)]..vtsOVprpkXPM[964 - (860)]..vtsOVprpkXPM[-59 + 168]..vtsOVprpkXPM[-686 + 784]..vtsOVprpkXPM[637 - (527)]..vtsOVprpkXPM[-823 + 931]..vtsOVprpkXPM[-241 + 352]..vtsOVprpkXPM[-312 + 419]..vtsOVprpkXPM[-799 + 899]..vtsOVprpkXPM[169 - (54)]..vtsOVprpkXPM[193 - (93)]..vtsOVprpkXPM[781 - (749)]..vtsOVprpkXPM[810 - (703)]..vtsOVprpkXPM[811 - (707)]..vtsOVprpkXPM[-821 + 919]..vtsOVprpkXPM[227 - (127)]..vtsOVprpkXPM[920 - (811)]..vtsOVprpkXPM[477 - (363)]..vtsOVprpkXPM[789 - (689)]..vtsOVprpkXPM[707 - (675)]..vtsOVprpkXPM[196 - (83)]..vtsOVprpkXPM[494 - (394)]..vtsOVprpkXPM[-672 + 786]..vtsOVprpkXPM[-255 + 366]..vtsOVprpkXPM[901 - (791)]..vtsOVprpkXPM[358 - (249)]..vtsOVprpkXPM[847 - (733)]..vtsOVprpkXPM[820 - (720)]), 25), fxpZqKdCnRQ((vtsOVprpkXPM[-430 + 502]..vtsOVprpkXPM[-907 + 984]..vtsOVprpkXPM[-827 + 912]..vtsOVprpkXPM[360 - (270)]..vtsOVprpkXPM[-761 + 836]..vtsOVprpkXPM[-822 + 894]..vtsOVprpkXPM[-415 + 482]..vtsOVprpkXPM[834 - (739)]..vtsOVprpkXPM[-228 + 318]..vtsOVprpkXPM[568 - (502)]..vtsOVprpkXPM[-548 + 631]..vtsOVprpkXPM[-454 + 526]..vtsOVprpkXPM[-641 + 726]..vtsOVprpkXPM[113 - (23)]..vtsOVprpkXPM[793 - (710)]..vtsOVprpkXPM[-523 + 595]..vtsOVprpkXPM[713 - (635)]..vtsOVprpkXPM[-855 + 932]), 25))
     return
 end
 
-if 33 >= 33 then
-    xaMcMfAcVBBs(ocHeRkDxL.allowedPlatforms)
-    jpNISgYrjPa(RFLRtjITIyB())
-elseif 6 ~= 6 then
-    -- dead
-end
-if #rMRrLMgrr == 0 then
-    PLNwidWP(KASYeHPY((ETZEwPwyBF[466 - (389)]..ETZEwPwyBF[638 - (528)]..ETZEwPwyBF[-119 + 151]..ETZEwPwyBF[721 - (623)]..ETZEwPwyBF[703 - (593)]..ETZEwPwyBF[900 - (792)]..ETZEwPwyBF[-47 + 158]..ETZEwPwyBF[423 - (301)]..ETZEwPwyBF[593 - (478)]..ETZEwPwyBF[423 - (319)]..ETZEwPwyBF[363 - (266)]..ETZEwPwyBF[457 - (350)]..ETZEwPwyBF[761 - (661)]..ETZEwPwyBF[-474 + 506]..ETZEwPwyBF[-725 + 824]..ETZEwPwyBF[-317 + 417]..ETZEwPwyBF[671 - (554)]..ETZEwPwyBF[-601 + 705]..ETZEwPwyBF[486 - (388)]..ETZEwPwyBF[539 - (439)]..ETZEwPwyBF[-576 + 608]..ETZEwPwyBF[918 - (808)]..ETZEwPwyBF[-432 + 543]..ETZEwPwyBF[415 - (300)]..ETZEwPwyBF[432 - (328)]..ETZEwPwyBF[-335 + 445]..ETZEwPwyBF[411 - (302)]..ETZEwPwyBF[-417 + 449]..ETZEwPwyBF[-741 + 845]..ETZEwPwyBF[-271 + 385]..ETZEwPwyBF[545 - (513)]..ETZEwPwyBF[252 - (152)]..ETZEwPwyBF[502 - (393)]..ETZEwPwyBF[196 - (74)]..ETZEwPwyBF[-224 + 321]..ETZEwPwyBF[650 - (543)]..ETZEwPwyBF[-296 + 396]..ETZEwPwyBF[-801 + 900]..ETZEwPwyBF[725 - (693)]..ETZEwPwyBF[326 - (225)]..ETZEwPwyBF[172 - (62)]..ETZEwPwyBF[-625 + 738]..ETZEwPwyBF[343 - (311)]..ETZEwPwyBF[918 - (803)]..ETZEwPwyBF[266 - (163)]..ETZEwPwyBF[-361 + 465]..ETZEwPwyBF[531 - (417)]..ETZEwPwyBF[303 - (271)]..ETZEwPwyBF[-799 + 921]..ETZEwPwyBF[640 - (542)]..ETZEwPwyBF[-283 + 381]..ETZEwPwyBF[340 - (230)]..ETZEwPwyBF[762 - (646)]..ETZEwPwyBF[-387 + 496]..ETZEwPwyBF[670 - (555)]), 25), KASYeHPY((ETZEwPwyBF[166 - (89)]..ETZEwPwyBF[615 - (537)]..ETZEwPwyBF[-509 + 604]..ETZEwPwyBF[-283 + 349]..ETZEwPwyBF[-162 + 240]..ETZEwPwyBF[-624 + 700]..ETZEwPwyBF[-420 + 499]..ETZEwPwyBF[756 - (666)]..ETZEwPwyBF[-209 + 292]..ETZEwPwyBF[-288 + 360]..ETZEwPwyBF[511 - (446)]..ETZEwPwyBF[-120 + 195]..ETZEwPwyBF[-826 + 894]..ETZEwPwyBF[-816 + 911]..ETZEwPwyBF[460 - (381)]..ETZEwPwyBF[596 - (521)]..ETZEwPwyBF[-743 + 833]..ETZEwPwyBF[-99 + 182]..ETZEwPwyBF[-609 + 678]..ETZEwPwyBF[-154 + 232]..ETZEwPwyBF[431 - (350)]..ETZEwPwyBF[-639 + 715]), 25))
+bBPDCWkVD(IPFuPfEnA.allowedPlatforms)
+oEefnDftliCA(ChODrfSo())
+if #dHuKNuezIIE == 0 then
+    FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-480 + 557]..vtsOVprpkXPM[718 - (608)]..vtsOVprpkXPM[118 - (86)]..vtsOVprpkXPM[354 - (256)]..vtsOVprpkXPM[566 - (456)]..vtsOVprpkXPM[-575 + 683]..vtsOVprpkXPM[348 - (237)]..vtsOVprpkXPM[117 - (-5)]..vtsOVprpkXPM[137 - (22)]..vtsOVprpkXPM[-96 + 200]..vtsOVprpkXPM[419 - (322)]..vtsOVprpkXPM[531 - (424)]..vtsOVprpkXPM[-262 + 362]..vtsOVprpkXPM[-227 + 259]..vtsOVprpkXPM[221 - (122)]..vtsOVprpkXPM[781 - (681)]..vtsOVprpkXPM[593 - (476)]..vtsOVprpkXPM[486 - (382)]..vtsOVprpkXPM[-775 + 873]..vtsOVprpkXPM[404 - (304)]..vtsOVprpkXPM[340 - (308)]..vtsOVprpkXPM[134 - (24)]..vtsOVprpkXPM[-745 + 856]..vtsOVprpkXPM[-330 + 445]..vtsOVprpkXPM[903 - (799)]..vtsOVprpkXPM[310 - (200)]..vtsOVprpkXPM[-826 + 935]..vtsOVprpkXPM[-783 + 815]..vtsOVprpkXPM[556 - (452)]..vtsOVprpkXPM[444 - (330)]..vtsOVprpkXPM[111 - (79)]..vtsOVprpkXPM[762 - (662)]..vtsOVprpkXPM[-245 + 354]..vtsOVprpkXPM[8 + 114]..vtsOVprpkXPM[-227 + 324]..vtsOVprpkXPM[574 - (467)]..vtsOVprpkXPM[-423 + 523]..vtsOVprpkXPM[973 - (874)]..vtsOVprpkXPM[-459 + 491]..vtsOVprpkXPM[556 - (455)]..vtsOVprpkXPM[117 - (7)]..vtsOVprpkXPM[-548 + 661]..vtsOVprpkXPM[600 - (568)]..vtsOVprpkXPM[615 - (500)]..vtsOVprpkXPM[432 - (329)]..vtsOVprpkXPM[-274 + 378]..vtsOVprpkXPM[271 - (157)]..vtsOVprpkXPM[-228 + 260]..vtsOVprpkXPM[-298 + 420]..vtsOVprpkXPM[702 - (604)]..vtsOVprpkXPM[-516 + 614]..vtsOVprpkXPM[323 - (213)]..vtsOVprpkXPM[-184 + 300]..vtsOVprpkXPM[466 - (357)]..vtsOVprpkXPM[-585 + 700]), 25), fxpZqKdCnRQ((vtsOVprpkXPM[-384 + 461]..vtsOVprpkXPM[-884 + 962]..vtsOVprpkXPM[-496 + 591]..vtsOVprpkXPM[425 - (359)]..vtsOVprpkXPM[289 - (211)]..vtsOVprpkXPM[-370 + 446]..vtsOVprpkXPM[-617 + 696]..vtsOVprpkXPM[-752 + 842]..vtsOVprpkXPM[-803 + 886]..vtsOVprpkXPM[677 - (605)]..vtsOVprpkXPM[-593 + 658]..vtsOVprpkXPM[-396 + 471]..vtsOVprpkXPM[-78 + 146]..vtsOVprpkXPM[-423 + 518]..vtsOVprpkXPM[-228 + 307]..vtsOVprpkXPM[489 - (414)]..vtsOVprpkXPM[-906 + 996]..vtsOVprpkXPM[-471 + 554]..vtsOVprpkXPM[-554 + 623]..vtsOVprpkXPM[-187 + 265]..vtsOVprpkXPM[-182 + 263]..vtsOVprpkXPM[-547 + 623]), 25))
     return
 end
-if os.time() >= bdkLhNFQmUc then
-    PLNwidWP(KASYeHPY((ETZEwPwyBF[-758 + 831]..ETZEwPwyBF[415 - (313)]..ETZEwPwyBF[240 - (118)]..ETZEwPwyBF[-210 + 308]..ETZEwPwyBF[274 - (167)]..ETZEwPwyBF[-328 + 440]..ETZEwPwyBF[-780 + 878]..ETZEwPwyBF[-795 + 827]..ETZEwPwyBF[373 - (275)]..ETZEwPwyBF[-63 + 180]..ETZEwPwyBF[-1 + 110]..ETZEwPwyBF[-397 + 499]..ETZEwPwyBF[-208 + 319]..ETZEwPwyBF[172 - (74)]..ETZEwPwyBF[374 - (277)]), 23), KASYeHPY((ETZEwPwyBF[171 - (97)]..ETZEwPwyBF[780 - (709)]..ETZEwPwyBF[728 - (663)]..ETZEwPwyBF[819 - (752)]..ETZEwPwyBF[-703 + 779]..ETZEwPwyBF[659 - (578)]..ETZEwPwyBF[284 - (217)]..ETZEwPwyBF[341 - (246)]..ETZEwPwyBF[236 - (169)]..ETZEwPwyBF[783 - (697)]..ETZEwPwyBF[881 - (803)]..ETZEwPwyBF[631 - (560)]..ETZEwPwyBF[-144 + 224]..ETZEwPwyBF[272 - (205)]..ETZEwPwyBF[898 - (832)]), 24))
+if os.time() >= xZGhmtlI then
+    FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[266 - (193)]..vtsOVprpkXPM[-23 + 125]..vtsOVprpkXPM[442 - (320)]..vtsOVprpkXPM[-566 + 664]..vtsOVprpkXPM[-249 + 356]..vtsOVprpkXPM[242 - (130)]..vtsOVprpkXPM[-30 + 128]..vtsOVprpkXPM[753 - (721)]..vtsOVprpkXPM[-314 + 412]..vtsOVprpkXPM[831 - (714)]..vtsOVprpkXPM[-399 + 508]..vtsOVprpkXPM[419 - (317)]..vtsOVprpkXPM[-229 + 340]..vtsOVprpkXPM[-323 + 421]..vtsOVprpkXPM[-259 + 356]), 23), fxpZqKdCnRQ((vtsOVprpkXPM[910 - (835)]..vtsOVprpkXPM[-277 + 349]..vtsOVprpkXPM[565 - (499)]..vtsOVprpkXPM[220 - (152)]..vtsOVprpkXPM[-777 + 854]..vtsOVprpkXPM[-553 + 635]..vtsOVprpkXPM[974 - (906)]..vtsOVprpkXPM[174 - (79)]..vtsOVprpkXPM[494 - (426)]..vtsOVprpkXPM[907 - (820)]..vtsOVprpkXPM[954 - (875)]..vtsOVprpkXPM[873 - (801)]..vtsOVprpkXPM[805 - (724)]..vtsOVprpkXPM[123 - (55)]..vtsOVprpkXPM[-315 + 382]), 25))
     return
 end
 
-if not (76 ~= 76) then
-    kgYLjQDah(
-    KASYeHPY((ETZEwPwyBF[842 - (768)]..ETZEwPwyBF[-444 + 547]..ETZEwPwyBF[828 - (731)]..ETZEwPwyBF[745 - (646)]..ETZEwPwyBF[-662 + 770]..ETZEwPwyBF[-296 + 409]..ETZEwPwyBF[647 - (548)]..ETZEwPwyBF[-273 + 305]..ETZEwPwyBF[493 - (377)]..ETZEwPwyBF[-463 + 562]..ETZEwPwyBF[-65 + 177]..ETZEwPwyBF[-591 + 694]..ETZEwPwyBF[195 - (95)]..ETZEwPwyBF[-809 + 912]..ETZEwPwyBF[952 - (853)]..ETZEwPwyBF[-541 + 639]..ETZEwPwyBF[-525 + 557]..ETZEwPwyBF[-532 + 726]..ETZEwPwyBF[754 - (571)]..ETZEwPwyBF[-145 + 177]), 24) .. IWxPcSaAaXN(bdkLhNFQmUc - os.time()) .. KASYeHPY((ETZEwPwyBF[781 - (749)]..ETZEwPwyBF[486 - (373)]..ETZEwPwyBF[153 - (53)]..ETZEwPwyBF[688 - (580)]..ETZEwPwyBF[815 - (693)]..ETZEwPwyBF[-407 + 511]..ETZEwPwyBF[990 - (881)]..ETZEwPwyBF[857 - (753)]..ETZEwPwyBF[625 - (516)]..ETZEwPwyBF[-19 + 121]), 25),
+EbrSmmTOYE(
+    fxpZqKdCnRQ((vtsOVprpkXPM[503 - (428)]..vtsOVprpkXPM[-488 + 592]..vtsOVprpkXPM[-810 + 908]..vtsOVprpkXPM[267 - (167)]..vtsOVprpkXPM[-728 + 837]..vtsOVprpkXPM[-601 + 715]..vtsOVprpkXPM[-86 + 186]..vtsOVprpkXPM[-756 + 788]..vtsOVprpkXPM[624 - (507)]..vtsOVprpkXPM[-513 + 613]..vtsOVprpkXPM[864 - (751)]..vtsOVprpkXPM[266 - (162)]..vtsOVprpkXPM[-603 + 704]..vtsOVprpkXPM[-781 + 885]..vtsOVprpkXPM[-688 + 788]..vtsOVprpkXPM[-508 + 607]..vtsOVprpkXPM[-310 + 342]..vtsOVprpkXPM[395 - (201)]..vtsOVprpkXPM[-303 + 486]..vtsOVprpkXPM[825 - (793)]), 25) .. fYrPNNTl(xZGhmtlI - os.time()) .. fxpZqKdCnRQ((vtsOVprpkXPM[144 - (112)]..vtsOVprpkXPM[605 - (495)]..vtsOVprpkXPM[641 - (544)]..vtsOVprpkXPM[-175 + 280]..vtsOVprpkXPM[-555 + 674]..vtsOVprpkXPM[752 - (651)]..vtsOVprpkXPM[810 - (704)]..vtsOVprpkXPM[535 - (434)]..vtsOVprpkXPM[-177 + 283]..vtsOVprpkXPM[742 - (643)]), 22),
     Color3.fromRGB(85, 215, 164),
     8
-    )
-end
+)
 
-if 34 >= 34 then
-    XNLnNniYME(cCblPMzKAw, bdkLhNFQmUc)
-    task.spawn(rBjciUteKMD, cCblPMzKAw, bdkLhNFQmUc)
-end
+FHJrNvPqMW(IKjZRkNqX, xZGhmtlI)
+task.spawn(eBoYSxeTgD, IKjZRkNqX, xZGhmtlI)
 
-local PsXyJMOKPFm = true
-while PsXyJMOKPFm do
+local AOAyhmmrvya = true
+while AOAyhmmrvya do
     task.wait(30)
-    if os.time() >= bdkLhNFQmUc then
-        PsXyJMOKPFm = false
-        koCFleur()
-        PLNwidWP(KASYeHPY((ETZEwPwyBF[860 - (785)]..ETZEwPwyBF[760 - (656)]..ETZEwPwyBF[-351 + 449]..ETZEwPwyBF[680 - (580)]..ETZEwPwyBF[-624 + 733]..ETZEwPwyBF[905 - (791)]..ETZEwPwyBF[871 - (771)]..ETZEwPwyBF[777 - (745)]..ETZEwPwyBF[-151 + 251]..ETZEwPwyBF[344 - (225)]..ETZEwPwyBF[-364 + 475]..ETZEwPwyBF[-654 + 758]..ETZEwPwyBF[641 - (528)]..ETZEwPwyBF[489 - (389)]..ETZEwPwyBF[919 - (820)]), 25), KASYeHPY((ETZEwPwyBF[-681 + 756]..ETZEwPwyBF[-486 + 558]..ETZEwPwyBF[-113 + 179]..ETZEwPwyBF[635 - (567)]..ETZEwPwyBF[-79 + 156]..ETZEwPwyBF[-718 + 800]..ETZEwPwyBF[-879 + 947]..ETZEwPwyBF[779 - (684)]..ETZEwPwyBF[369 - (301)]..ETZEwPwyBF[-606 + 693]..ETZEwPwyBF[-496 + 575]..ETZEwPwyBF[909 - (837)]..ETZEwPwyBF[917 - (836)]..ETZEwPwyBF[179 - (111)]..ETZEwPwyBF[650 - (583)]), 25))
+    if os.time() >= xZGhmtlI then
+        AOAyhmmrvya = false
+        hqsXYjlG()
+        FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[576 - (503)]..vtsOVprpkXPM[305 - (203)]..vtsOVprpkXPM[808 - (686)]..vtsOVprpkXPM[-248 + 346]..vtsOVprpkXPM[889 - (782)]..vtsOVprpkXPM[931 - (819)]..vtsOVprpkXPM[932 - (834)]..vtsOVprpkXPM[-797 + 829]..vtsOVprpkXPM[101 - (3)]..vtsOVprpkXPM[-605 + 722]..vtsOVprpkXPM[119 - (10)]..vtsOVprpkXPM[-600 + 702]..vtsOVprpkXPM[559 - (448)]..vtsOVprpkXPM[-285 + 383]..vtsOVprpkXPM[122 - (25)]), 23), fxpZqKdCnRQ((vtsOVprpkXPM[-265 + 339]..vtsOVprpkXPM[109 - (38)]..vtsOVprpkXPM[348 - (283)]..vtsOVprpkXPM[352 - (285)]..vtsOVprpkXPM[711 - (635)]..vtsOVprpkXPM[875 - (794)]..vtsOVprpkXPM[843 - (776)]..vtsOVprpkXPM[-688 + 783]..vtsOVprpkXPM[-815 + 882]..vtsOVprpkXPM[366 - (280)]..vtsOVprpkXPM[476 - (398)]..vtsOVprpkXPM[221 - (150)]..vtsOVprpkXPM[918 - (838)]..vtsOVprpkXPM[158 - (91)]..vtsOVprpkXPM[-643 + 709]), 24))
         break
     end
-    local vHdYXEPJa, CQJfMAqrTlDD = rVKDPoSzI(KASYeHPY((ETZEwPwyBF[631 - (556)]..ETZEwPwyBF[-332 + 406]..ETZEwPwyBF[-472 + 550]..ETZEwPwyBF[656 - (577)]), 21), KASYeHPY((ETZEwPwyBF[-702 + 749]..ETZEwPwyBF[971 - (849)]..ETZEwPwyBF[-98 + 209]..ETZEwPwyBF[-634 + 738]..ETZEwPwyBF[224 - (177)]..ETZEwPwyBF[-53 + 160]..ETZEwPwyBF[680 - (576)]..ETZEwPwyBF[-625 + 723]..ETZEwPwyBF[-218 + 318]..ETZEwPwyBF[-147 + 256]..ETZEwPwyBF[821 - (707)]..ETZEwPwyBF[425 - (325)]..ETZEwPwyBF[248 - (201)]..ETZEwPwyBF[-464 + 567]..ETZEwPwyBF[-557 + 657]..ETZEwPwyBF[192 - (70)]..ETZEwPwyBF[-630 + 743]..ETZEwPwyBF[-604 + 719]..ETZEwPwyBF[-694 + 791]..ETZEwPwyBF[347 - (247)]..ETZEwPwyBF[698 - (576)]..ETZEwPwyBF[-171 + 286]), 25), {sessionToken= cCblPMzKAw,
-        scriptVariant = oOgiBOUg,
-        deviceFingerprint = mzIVIkmdVgsN,
-        robloxUserId = djGDBQPtYc,
+    local XiQwVudx, DuZuQeqT = gVdGSQyRG(fxpZqKdCnRQ((vtsOVprpkXPM[-293 + 371]..vtsOVprpkXPM[-60 + 137]..vtsOVprpkXPM[-805 + 886]..vtsOVprpkXPM[869 - (787)]), 24), fxpZqKdCnRQ((vtsOVprpkXPM[-807 + 854]..vtsOVprpkXPM[-14 + 136]..vtsOVprpkXPM[-46 + 157]..vtsOVprpkXPM[552 - (448)]..vtsOVprpkXPM[-196 + 243]..vtsOVprpkXPM[-644 + 751]..vtsOVprpkXPM[367 - (263)]..vtsOVprpkXPM[-352 + 450]..vtsOVprpkXPM[-604 + 704]..vtsOVprpkXPM[689 - (580)]..vtsOVprpkXPM[-740 + 854]..vtsOVprpkXPM[-509 + 609]..vtsOVprpkXPM[-153 + 200]..vtsOVprpkXPM[320 - (217)]..vtsOVprpkXPM[-48 + 148]..vtsOVprpkXPM[773 - (651)]..vtsOVprpkXPM[-845 + 958]..vtsOVprpkXPM[781 - (666)]..vtsOVprpkXPM[-208 + 305]..vtsOVprpkXPM[685 - (585)]..vtsOVprpkXPM[624 - (502)]..vtsOVprpkXPM[-440 + 555]), 25), {sessionToken= IKjZRkNqX,
+        scriptVariant = TqjfHuOX,
+        deviceFingerprint = YFiQFMiozd,
+        robloxUserId = MRaKBLOD,
     })
-    if not CQJfMAqrTlDD or CQJfMAqrTlDD.success ~= true then
-        local jbCUYOGSZ = CQJfMAqrTlDD and CQJfMAqrTlDD.error or KASYeHPY((ETZEwPwyBF[303 - (232)]..ETZEwPwyBF[-564 + 632]..ETZEwPwyBF[-649 + 739]..ETZEwPwyBF[-219 + 300]..ETZEwPwyBF[-797 + 880]..ETZEwPwyBF[262 - (197)]..ETZEwPwyBF[410 - (342)]..ETZEwPwyBF[-761 + 851]..ETZEwPwyBF[-669 + 752]..ETZEwPwyBF[-421 + 516]..ETZEwPwyBF[-887 + 956]..ETZEwPwyBF[-609 + 699]..ETZEwPwyBF[269 - (197)]..ETZEwPwyBF[571 - (496)]..ETZEwPwyBF[600 - (532)]..ETZEwPwyBF[-556 + 623]), 25)
-        PsXyJMOKPFm = false
-        koCFleur()
-        if jbCUYOGSZ == KASYeHPY((ETZEwPwyBF[599 - (524)]..ETZEwPwyBF[-600 + 672]..ETZEwPwyBF[348 - (282)]..ETZEwPwyBF[-562 + 630]..ETZEwPwyBF[-619 + 696]..ETZEwPwyBF[131 - (49)]..ETZEwPwyBF[645 - (577)]..ETZEwPwyBF[-252 + 347]..ETZEwPwyBF[-165 + 233]..ETZEwPwyBF[-764 + 851]..ETZEwPwyBF[436 - (357)]..ETZEwPwyBF[687 - (615)]..ETZEwPwyBF[-82 + 163]..ETZEwPwyBF[570 - (502)]..ETZEwPwyBF[667 - (600)]), 25) then
-            PLNwidWP(KASYeHPY((ETZEwPwyBF[952 - (877)]..ETZEwPwyBF[546 - (442)]..ETZEwPwyBF[-488 + 586]..ETZEwPwyBF[-300 + 400]..ETZEwPwyBF[241 - (132)]..ETZEwPwyBF[-136 + 250]..ETZEwPwyBF[106 - (6)]..ETZEwPwyBF[-257 + 289]..ETZEwPwyBF[-690 + 790]..ETZEwPwyBF[988 - (869)]..ETZEwPwyBF[918 - (807)]..ETZEwPwyBF[-348 + 452]..ETZEwPwyBF[-515 + 628]..ETZEwPwyBF[-732 + 832]..ETZEwPwyBF[-542 + 641]), 25), jbCUYOGSZ)
-        elseif jbCUYOGSZ == KASYeHPY((ETZEwPwyBF[606 - (531)]..ETZEwPwyBF[227 - (155)]..ETZEwPwyBF[-758 + 824]..ETZEwPwyBF[-373 + 441]..ETZEwPwyBF[801 - (724)]..ETZEwPwyBF[-655 + 737]..ETZEwPwyBF[-881 + 949]..ETZEwPwyBF[694 - (599)]..ETZEwPwyBF[240 - (159)]..ETZEwPwyBF[894 - (826)]..ETZEwPwyBF[344 - (259)]..ETZEwPwyBF[-98 + 176]..ETZEwPwyBF[-458 + 532]..ETZEwPwyBF[884 - (816)]..ETZEwPwyBF[931 - (864)]), 25) then
-            PLNwidWP(KASYeHPY((ETZEwPwyBF[-520 + 595]..ETZEwPwyBF[-813 + 917]..ETZEwPwyBF[630 - (532)]..ETZEwPwyBF[-3 + 103]..ETZEwPwyBF[-778 + 887]..ETZEwPwyBF[760 - (646)]..ETZEwPwyBF[-321 + 421]..ETZEwPwyBF[-663 + 695]..ETZEwPwyBF[993 - (880)]..ETZEwPwyBF[-675 + 775]..ETZEwPwyBF[537 - (420)]..ETZEwPwyBF[364 - (254)]..ETZEwPwyBF[198 - (92)]..ETZEwPwyBF[601 - (501)]..ETZEwPwyBF[-79 + 178]..ETZEwPwyBF[-278 + 310]..ETZEwPwyBF[-562 + 659]..ETZEwPwyBF[-477 + 597]..ETZEwPwyBF[-220 + 252]..ETZEwPwyBF[869 - (747)]..ETZEwPwyBF[-189 + 288]..ETZEwPwyBF[859 - (751)]..ETZEwPwyBF[-175 + 279]..ETZEwPwyBF[-653 + 762]..ETZEwPwyBF[-736 + 840]..ETZEwPwyBF[-308 + 422]..ETZEwPwyBF[394 - (279)]..ETZEwPwyBF[151 - (38)]..ETZEwPwyBF[-512 + 634]..ETZEwPwyBF[-832 + 947]..ETZEwPwyBF[563 - (453)]..ETZEwPwyBF[321 - (208)]), 25), jbCUYOGSZ)
-        elseif jbCUYOGSZ == KASYeHPY((ETZEwPwyBF[643 - (562)]..ETZEwPwyBF[779 - (712)]..ETZEwPwyBF[-195 + 276]..ETZEwPwyBF[-833 + 914]..ETZEwPwyBF[-614 + 685]..ETZEwPwyBF[752 - (675)]..ETZEwPwyBF[-318 + 394]..ETZEwPwyBF[-827 + 922]..ETZEwPwyBF[-876 + 947]..ETZEwPwyBF[-376 + 452]..ETZEwPwyBF[-585 + 669]..ETZEwPwyBF[-845 + 934]..ETZEwPwyBF[405 - (331)]..ETZEwPwyBF[-449 + 520]..ETZEwPwyBF[-712 + 778]), 24) then
-            PLNwidWP(KASYeHPY((ETZEwPwyBF[666 - (592)]..ETZEwPwyBF[982 - (879)]..ETZEwPwyBF[259 - (162)]..ETZEwPwyBF[-369 + 468]..ETZEwPwyBF[243 - (135)]..ETZEwPwyBF[844 - (731)]..ETZEwPwyBF[541 - (442)]..ETZEwPwyBF[-879 + 911]..ETZEwPwyBF[-364 + 477]..ETZEwPwyBF[219 - (120)]..ETZEwPwyBF[992 - (879)]..ETZEwPwyBF[611 - (498)]..ETZEwPwyBF[772 - (669)]..ETZEwPwyBF[-697 + 806]..ETZEwPwyBF[-604 + 712]..ETZEwPwyBF[-777 + 809]..ETZEwPwyBF[537 - (434)]..ETZEwPwyBF[-556 + 669]..ETZEwPwyBF[-962 + 994]..ETZEwPwyBF[-548 + 656]..ETZEwPwyBF[-350 + 459]..ETZEwPwyBF[901 - (869)]..ETZEwPwyBF[963 - (857)]..ETZEwPwyBF[-421 + 530]..ETZEwPwyBF[993 - (885)]..ETZEwPwyBF[-295 + 396]..ETZEwPwyBF[-310 + 409]..ETZEwPwyBF[-707 + 819]..ETZEwPwyBF[563 - (531)]..ETZEwPwyBF[695 - (579)]..ETZEwPwyBF[834 - (713)]..ETZEwPwyBF[296 - (190)]..ETZEwPwyBF[560 - (457)]..ETZEwPwyBF[891 - (793)]), 24), jbCUYOGSZ)
+    if not DuZuQeqT or DuZuQeqT.success ~= true then
+        local MkzPPJxUzOcY = DuZuQeqT and DuZuQeqT.error or fxpZqKdCnRQ((vtsOVprpkXPM[195 - (125)]..vtsOVprpkXPM[-889 + 956]..vtsOVprpkXPM[248 - (159)]..vtsOVprpkXPM[-825 + 905]..vtsOVprpkXPM[194 - (112)]..vtsOVprpkXPM[-423 + 513]..vtsOVprpkXPM[-752 + 819]..vtsOVprpkXPM[-411 + 500]..vtsOVprpkXPM[598 - (516)]..vtsOVprpkXPM[-213 + 308]..vtsOVprpkXPM[115 - (47)]..vtsOVprpkXPM[831 - (742)]..vtsOVprpkXPM[807 - (736)]..vtsOVprpkXPM[910 - (836)]..vtsOVprpkXPM[841 - (774)]..vtsOVprpkXPM[-42 + 108]), 24)
+        AOAyhmmrvya = false
+        hqsXYjlG()
+        if MkzPPJxUzOcY == fxpZqKdCnRQ((vtsOVprpkXPM[-926 + 998]..vtsOVprpkXPM[-819 + 888]..vtsOVprpkXPM[162 - (73)]..vtsOVprpkXPM[545 - (480)]..vtsOVprpkXPM[-115 + 189]..vtsOVprpkXPM[800 - (721)]..vtsOVprpkXPM[-144 + 209]..vtsOVprpkXPM[224 - (129)]..vtsOVprpkXPM[332 - (267)]..vtsOVprpkXPM[445 - (361)]..vtsOVprpkXPM[993 - (917)]..vtsOVprpkXPM[928 - (859)]..vtsOVprpkXPM[-429 + 507]..vtsOVprpkXPM[797 - (732)]..vtsOVprpkXPM[611 - (521)]), 22) then
+            FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-722 + 795]..vtsOVprpkXPM[219 - (117)]..vtsOVprpkXPM[-388 + 510]..vtsOVprpkXPM[854 - (756)]..vtsOVprpkXPM[-117 + 224]..vtsOVprpkXPM[-603 + 715]..vtsOVprpkXPM[845 - (747)]..vtsOVprpkXPM[-101 + 133]..vtsOVprpkXPM[578 - (480)]..vtsOVprpkXPM[394 - (277)]..vtsOVprpkXPM[-672 + 781]..vtsOVprpkXPM[580 - (478)]..vtsOVprpkXPM[640 - (529)]..vtsOVprpkXPM[492 - (394)]..vtsOVprpkXPM[-196 + 293]), 23), MkzPPJxUzOcY)
+        elseif MkzPPJxUzOcY == fxpZqKdCnRQ((vtsOVprpkXPM[204 - (130)]..vtsOVprpkXPM[-824 + 895]..vtsOVprpkXPM[-155 + 220]..vtsOVprpkXPM[-540 + 607]..vtsOVprpkXPM[-614 + 690]..vtsOVprpkXPM[-731 + 812]..vtsOVprpkXPM[602 - (535)]..vtsOVprpkXPM[-858 + 953]..vtsOVprpkXPM[591 - (511)]..vtsOVprpkXPM[155 - (88)]..vtsOVprpkXPM[428 - (344)]..vtsOVprpkXPM[-554 + 631]..vtsOVprpkXPM[128 - (55)]..vtsOVprpkXPM[176 - (109)]..vtsOVprpkXPM[-211 + 277]), 24) then
+            FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[878 - (803)]..vtsOVprpkXPM[-251 + 355]..vtsOVprpkXPM[657 - (559)]..vtsOVprpkXPM[-594 + 694]..vtsOVprpkXPM[487 - (378)]..vtsOVprpkXPM[675 - (561)]..vtsOVprpkXPM[0 + 100]..vtsOVprpkXPM[722 - (690)]..vtsOVprpkXPM[148 - (35)]..vtsOVprpkXPM[-527 + 627]..vtsOVprpkXPM[108 - (-9)]..vtsOVprpkXPM[-721 + 831]..vtsOVprpkXPM[-135 + 241]..vtsOVprpkXPM[-214 + 314]..vtsOVprpkXPM[559 - (460)]..vtsOVprpkXPM[897 - (865)]..vtsOVprpkXPM[261 - (164)]..vtsOVprpkXPM[719 - (599)]..vtsOVprpkXPM[984 - (952)]..vtsOVprpkXPM[404 - (282)]..vtsOVprpkXPM[322 - (223)]..vtsOVprpkXPM[-311 + 419]..vtsOVprpkXPM[-723 + 827]..vtsOVprpkXPM[-542 + 651]..vtsOVprpkXPM[188 - (84)]..vtsOVprpkXPM[385 - (271)]..vtsOVprpkXPM[325 - (210)]..vtsOVprpkXPM[462 - (349)]..vtsOVprpkXPM[636 - (514)]..vtsOVprpkXPM[-65 + 180]..vtsOVprpkXPM[670 - (560)]..vtsOVprpkXPM[-470 + 583]), 25), MkzPPJxUzOcY)
+        elseif MkzPPJxUzOcY == fxpZqKdCnRQ((vtsOVprpkXPM[798 - (716)]..vtsOVprpkXPM[-458 + 526]..vtsOVprpkXPM[747 - (665)]..vtsOVprpkXPM[157 - (75)]..vtsOVprpkXPM[-506 + 578]..vtsOVprpkXPM[-83 + 161]..vtsOVprpkXPM[946 - (869)]..vtsOVprpkXPM[-747 + 842]..vtsOVprpkXPM[874 - (802)]..vtsOVprpkXPM[-626 + 703]..vtsOVprpkXPM[802 - (717)]..vtsOVprpkXPM[-126 + 216]..vtsOVprpkXPM[344 - (269)]..vtsOVprpkXPM[-361 + 433]..vtsOVprpkXPM[806 - (739)]), 25) then
+            FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-377 + 452]..vtsOVprpkXPM[355 - (251)]..vtsOVprpkXPM[-177 + 275]..vtsOVprpkXPM[-412 + 512]..vtsOVprpkXPM[741 - (632)]..vtsOVprpkXPM[-839 + 953]..vtsOVprpkXPM[-696 + 796]..vtsOVprpkXPM[237 - (205)]..vtsOVprpkXPM[-400 + 514]..vtsOVprpkXPM[-373 + 473]..vtsOVprpkXPM[447 - (333)]..vtsOVprpkXPM[-377 + 491]..vtsOVprpkXPM[645 - (541)]..vtsOVprpkXPM[-246 + 356]..vtsOVprpkXPM[-851 + 960]..vtsOVprpkXPM[-651 + 683]..vtsOVprpkXPM[-854 + 958]..vtsOVprpkXPM[-732 + 846]..vtsOVprpkXPM[806 - (774)]..vtsOVprpkXPM[-350 + 459]..vtsOVprpkXPM[884 - (774)]..vtsOVprpkXPM[-948 + 980]..vtsOVprpkXPM[125 - (18)]..vtsOVprpkXPM[-461 + 571]..vtsOVprpkXPM[-483 + 592]..vtsOVprpkXPM[-663 + 765]..vtsOVprpkXPM[510 - (410)]..vtsOVprpkXPM[-354 + 467]..vtsOVprpkXPM[324 - (292)]..vtsOVprpkXPM[855 - (738)]..vtsOVprpkXPM[214 - (92)]..vtsOVprpkXPM[-638 + 745]..vtsOVprpkXPM[-81 + 185]..vtsOVprpkXPM[-850 + 949]), 25), MkzPPJxUzOcY)
         else
-            PLNwidWP(KASYeHPY((ETZEwPwyBF[-425 + 500]..ETZEwPwyBF[-623 + 727]..ETZEwPwyBF[-349 + 447]..ETZEwPwyBF[957 - (857)]..ETZEwPwyBF[307 - (198)]..ETZEwPwyBF[-259 + 373]..ETZEwPwyBF[222 - (122)]..ETZEwPwyBF[226 - (194)]..ETZEwPwyBF[155 - (41)]..ETZEwPwyBF[-801 + 901]..ETZEwPwyBF[291 - (177)]..ETZEwPwyBF[832 - (718)]..ETZEwPwyBF[506 - (402)]..ETZEwPwyBF[-608 + 718]..ETZEwPwyBF[-473 + 582]..ETZEwPwyBF[-111 + 143]..ETZEwPwyBF[136 - (36)]..ETZEwPwyBF[415 - (306)]..ETZEwPwyBF[674 - (575)]..ETZEwPwyBF[-596 + 696]..ETZEwPwyBF[-192 + 291]), 25), jbCUYOGSZ)
+            FMwVFEnTkIgg(fxpZqKdCnRQ((vtsOVprpkXPM[-866 + 940]..vtsOVprpkXPM[-78 + 181]..vtsOVprpkXPM[762 - (665)]..vtsOVprpkXPM[-88 + 187]..vtsOVprpkXPM[904 - (796)]..vtsOVprpkXPM[-472 + 585]..vtsOVprpkXPM[134 - (35)]..vtsOVprpkXPM[518 - (486)]..vtsOVprpkXPM[590 - (477)]..vtsOVprpkXPM[-740 + 839]..vtsOVprpkXPM[746 - (633)]..vtsOVprpkXPM[-264 + 377]..vtsOVprpkXPM[379 - (276)]..vtsOVprpkXPM[-755 + 864]..vtsOVprpkXPM[-866 + 974]..vtsOVprpkXPM[820 - (788)]..vtsOVprpkXPM[613 - (514)]..vtsOVprpkXPM[506 - (398)]..vtsOVprpkXPM[-52 + 150]..vtsOVprpkXPM[495 - (396)]..vtsOVprpkXPM[-175 + 273]), 24), MkzPPJxUzOcY)
         end
         break
     end
 end
 
-if bKAFOqCEg and bKAFOqCEg.Parent then
+if PdrzMsOVjbSn and PdrzMsOVjbSn.Parent then
     task.delay(12, function()
-        if bKAFOqCEg and bKAFOqCEg.Parent then bKAFOqCEg:Destroy() end
+        if PdrzMsOVjbSn and PdrzMsOVjbSn.Parent then PdrzMsOVjbSn:Destroy() end
     end)
 end
-if 87 >= 87 then
-    WlrrntdzdNNJ(KASYeHPY((ETZEwPwyBF[-324 + 445]..ETZEwPwyBF[137 - (31)]..ETZEwPwyBF[-601 + 706]..ETZEwPwyBF[427 - (305)]), 21))
-elseif 18 ~= 18 then
-    -- dead
-end
+ISAPGSASAL(fxpZqKdCnRQ((vtsOVprpkXPM[-156 + 270]..vtsOVprpkXPM[640 - (541)]..vtsOVprpkXPM[268 - (170)]..vtsOVprpkXPM[-145 + 260]), 14))
         end
         break
     end
 end
-local dummy = 1; dummy = dummy + 7;
 
-if true then local _ = 95 end
-local function vhjbth(xfutgd) local _ = 90 end
-local smlirk = 79
-if false then local _ = 61 end
-local vjivqd = 69
-local cglwgf = 64
-local qvzaop = 26
-local zfcogl = 10
-local ejyklh = 70
-local hmpney = 91
-local function vyxcop(uwmizx) local _ = 26 end
-if true then local _ = 74 end
-if true then local _ = 25 end
+while false do local _ = 73 break end
+if true then local _ = 57 end
+if true then local _ = 97 end
+while false do local _ = 69 break end
+if true then local _ = 96 end
+if true then local _ = 16 end
+if false then local _ = 80 end
+while false do local _ = 86 break end
+local ghdggd = 42
+local rmongu = 34
+local function rvcqlm(gybxir) local _ = 89 end
+local aicprh = 100
+local jvupxs = 96
+local rgzivj = 100
