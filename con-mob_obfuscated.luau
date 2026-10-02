@@ -1,14 +1,3 @@
--- Lua 5.3+ / Luau compatibility polyfills
-if not math.ldexp then math.ldexp = function(x, n) return x * 2 ^ n end end
-if not math.frexp then math.frexp = function(x)
-    if x == 0 then return 0, 0 end
-    local exp = math.floor(math.log(math.abs(x)) / math.log(2)) + 1
-    local mantissa = x / 2 ^ exp
-    return mantissa, exp
-end end
-if not loadstring and load then loadstring = load end
-if not loadstring then loadstring = function(s) return load(s) end end
-
 --[Obfuscated by Hercules v2.0.0 | hercules-obfuscator.xyz/discord | hercules-obfuscator.xyz/source]
 if true then local _ = 74 end
 local ouiktw = 27
