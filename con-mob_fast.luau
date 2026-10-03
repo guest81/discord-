@@ -10,946 +10,942 @@ if not loadstring and load then loadstring = load end
 if not loadstring then loadstring = function(s) return load(s) end end
 
 --[Obfuscated by Hercules v2.0.0 | hercules-obfuscator.xyz/discord | hercules-obfuscator.xyz/source]
-if true then local _ = 22 end
-if false then local _ = 5 end
-while false do local _ = 78 break end
-local ndapsj = 65
-local jkjjvf = 88
-local function wbnrfu(mhoenw) local _ = 67 end
-if true then local _ = 94 end
-local nwozrh = 72
-if true then local _ = 19 end
-if true then local _ = 98 end
-local vlypfu = 59
-if false then local _ = 9 end
-if true then local _ = 20 end
-local fkhzxf = 60
-local function undous(zrejsg) local _ = 35 end
-local thing = 6049;
-local thing2 = 6049;
+if true then local _ = 7 end
+while false do local _ = 36 break end
+if true then local _ = 80 end
+local function aupcwy(dgchid) local _ = 68 end
+local ltnehn = 88
+local dokvto = 87
+if false then local _ = 34 end
+local function nbrglt(vejpqe) local _ = 44 end
+local ymutcc = 47
+local dkvzhu = 21
+while false do local _ = 31 break end
+local pzrifg = 38
+local thing = 1600;
+local thing2 = 1600;
 local counter = 0;
 while thing == thing2 and counter < 1 do
     thing = thing + 1;
     counter = counter + 1;
     if thing == thing2 then
-        local tbl = {1, 2, 3}; table.sort(tbl, function(a, b) return a > b end);
+        local temp = 98; temp = temp * 2;
     else
         do
-            local shcxMhbTf,VYwJbcJom,OOEpSvcmM,bGZwfejQfml,RjHcPSjpFE,sBuPpaDNr,QwqMifTSiq,GkPjKoiNQ,GYvYCRCGYmW,qMsHOFqPzO,PavEdyCGGhtt,EQPCIgcQm,VkhKWYNJr,zWShtOEd,MVYmVLYVu,uUwGvmeNzIA,XEiigfnpWghI,OBxOHPOa
-shcxMhbTf=error;VYwJbcJom=ipairs;OOEpSvcmM=pairs;bGZwfejQfml=pcall;RjHcPSjpFE=print;sBuPpaDNr=rawget;QwqMifTSiq=rawset;GkPjKoiNQ=select;GYvYCRCGYmW=tonumber;qMsHOFqPzO=tostring;PavEdyCGGhtt=math.floor;EQPCIgcQm=math.max;VkhKWYNJr=math.random;zWShtOEd=string.char;MVYmVLYVu=string.format;uUwGvmeNzIA=table.concat;XEiigfnpWghI=table.insert;OBxOHPOa=os.time;
-local kIXHEVkXu = game:GetService("HttpService")
-local WoJcQVvirkx = game:GetService("Players")
-local wmGejyarqad = game:GetService("TweenService")
+            local mkTAEvHAj,pGeZzgRfIj,QyCmNkCfQ,FpmUOlkiL,xrAmOWuea,GiepjcWpw,bIxtrqudiK,epaCqNIXAAo,wUyHINxNHo,hQsHHMocY,skQMwwRT,PvQLaFNgG,FncJUVnbIKn,OSgTDStqR,ZHglibQK,JffJfhVseml,IcsmbSth,RBfTlgobrsRv
+mkTAEvHAj=error;pGeZzgRfIj=ipairs;QyCmNkCfQ=pairs;FpmUOlkiL=pcall;xrAmOWuea=print;GiepjcWpw=rawget;bIxtrqudiK=rawset;epaCqNIXAAo=select;wUyHINxNHo=tonumber;hQsHHMocY=tostring;skQMwwRT=math.floor;PvQLaFNgG=math.max;FncJUVnbIKn=math.random;OSgTDStqR=string.char;ZHglibQK=string.format;JffJfhVseml=table.concat;IcsmbSth=table.insert;RBfTlgobrsRv=os.time;
+local bAMiQSKZC = game:GetService("HttpService")
+local wWoMUxNcOH = game:GetService("Players")
+local croPVBAjy = game:GetService("TweenService")
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
 -- المنصات المتاحة
-local iiwwZyNcz = {"Console", "Mobile"}
+local bMyqYOIE = {"Console", "Mobile"}
 
-local zmQNxrDJTpqg = "https://devicemode-cctgi3ma.manus.space"
-local wbTUdIZLDHM = "1.0.0"
-local zshvjkCTS = "CONSOLE_MOBILE"
-local GpJEFxuux = 300
+local yXKxcMTfc = "https://devicemode-cctgi3ma.manus.space"
+local iNZlznCkZZX = "1.0.0"
+local enVkrlIqPJI = "CONSOLE_MOBILE"
+local gsfsOhNwc = 300
 
-local NoyXCDmH = {
+local wHhKcHjLKgWz = {
     [11379739543]    = true,
     [98752102030179] = true,
 }
 
-if not NoyXCDmH[game.PlaceId] then return end
+if not wHhKcHjLKgWz[game.PlaceId] then return end
 
-local irUefNTvdU = table.concat(iiwwZyNcz, "_")
-local PmuWBlhu = "sys_sess_v4_" .. irUefNTvdU .. ".bin"
-local cUMWUizPj  = "sys_cfg_v5_cache.bin"
-local mLBsGksH = "sys_allowed_v5_" .. irUefNTvdU .. ".bin"
+local FqXgHQBufm = table.concat(bMyqYOIE, "_")
+local GehHlaHyAPo = "sys_sess_v4_" .. FqXgHQBufm .. ".bin"
+local GAXlOumnXr  = "sys_cfg_v5_cache.bin"
+local rJxBJkPKdHOP = "sys_allowed_v5_" .. FqXgHQBufm .. ".bin"
 
-local jZvOjRtaPqwn = getgenv and getgenv() or _G
-local YPbwXhSn = jZvOjRtaPqwn.DeviceModeKey
-if type(YPbwXhSn) ~= "string" or YPbwXhSn == "" then return end
+local vLnOnbofoD = getgenv and getgenv() or _G
+local gcptLSWXtIB = vLnOnbofoD.DeviceModeKey
+if type(gcptLSWXtIB) ~= "string" or gcptLSWXtIB == "" then return end
 
-local FRsdErUS = WoJcQVvirkx.LocalPlayer
-if not FRsdErUS then
-    WoJcQVvirkx:GetPropertyChangedSignal("LocalPlayer"):Wait()
-    FRsdErUS = WoJcQVvirkx.LocalPlayer
+local CznsCDXp = wWoMUxNcOH.LocalPlayer
+if not CznsCDXp then
+    wWoMUxNcOH:GetPropertyChangedSignal("LocalPlayer"):Wait()
+    CznsCDXp = wWoMUxNcOH.LocalPlayer
 end
-if not FRsdErUS then return end
+if not CznsCDXp then return end
 
-local vMQUrsKdVTTA = qMsHOFqPzO(FRsdErUS.UserId)
+local tWyNBDTZgW = hQsHHMocY(CznsCDXp.UserId)
 
-local function tKhtxinr()
-    local MkgNwHfEwQNp = {
+local function NtqopCScqn()
+    local ofsYXcuH = {
         function() return type(gethwid) == "function" and gethwid() end,
         function() return type(get_hwid) == "function" and get_hwid() end,
         function() return type(getHWID) == "function" and getHWID() end,
         function() return syn and type(syn.gethwid) == "function" and syn.gethwid() end,
     }
-    for jQjfYWqOhbVa, getter in VYwJbcJom(MkgNwHfEwQNp) do
-        local bRMEqpJRn, daZARWmo = bGZwfejQfml(getter)
-        if bRMEqpJRn and type(daZARWmo) == "string" then
-            daZARWmo = daZARWmo:gsub("%s+", "")
-            if #daZARWmo >= 8 and #daZARWmo <= 256 then return daZARWmo end
+    for cJaLYsJew, getter in pGeZzgRfIj(ofsYXcuH) do
+        local eIuUaEQWf, OsLqXWnkLv = FpmUOlkiL(getter)
+        if eIuUaEQWf and type(OsLqXWnkLv) == "string" then
+            OsLqXWnkLv = OsLqXWnkLv:gsub("%s+", "")
+            if #OsLqXWnkLv >= 8 and #OsLqXWnkLv <= 256 then return OsLqXWnkLv end
         end
     end
     return nil
 end
 
-local TOOUqZiZtWgz = tKhtxinr()
-local OQvfYUvD = TOOUqZiZtWgz and ("EXECUTOR-HWID-" .. TOOUqZiZtWgz)
-    or ("ROBLOX-USER-" .. vMQUrsKdVTTA)
+local bwbcwrZmdmdl = NtqopCScqn()
+local dCAArTWHdYq = bwbcwrZmdmdl and ("EXECUTOR-HWID-" .. bwbcwrZmdmdl)
+    or ("ROBLOX-USER-" .. tWyNBDTZgW)
 
-local flUOxgIauNCt = _G.request or request or http_request or (syn and syn.request)
-if type(flUOxgIauNCt) ~= "function" then return end
+local fdDXdazbfgd = _G.request or request or http_request or (syn and syn.request)
+if type(fdDXdazbfgd) ~= "function" then return end
 
-local function bsQNUymxp(method, path, body)
-    local bRMEqpJRn, GEltkmKGVIcH = bGZwfejQfml(function()
-        return flUOxgIauNCt({Url= zmQNxrDJTpqg .. path,
+local function sGgeZgzj(method, path, body)
+    local eIuUaEQWf, jioJZNobhJL = FpmUOlkiL(function()
+        return fdDXdazbfgd({Url= yXKxcMTfc .. path,
             Method = method,
             Headers = {
                 ["Content-Type"] = "application/json",
                 ["Accept"] = "application/json",
             },
-            Body = body and kIXHEVkXu:JSONEncode(body) or nil,
+            Body = body and bAMiQSKZC:JSONEncode(body) or nil,
         })
     end)
-    if not bRMEqpJRn or type(GEltkmKGVIcH) ~= "table" then
+    if not eIuUaEQWf or type(jioJZNobhJL) ~= "table" then
         return nil, nil, "HTTP_REQUEST_FAILED"
     end
-    if type(GEltkmKGVIcH.Body) ~= "string" or GEltkmKGVIcH.Body == "" then
-        return GEltkmKGVIcH, nil, "EMPTY_RESPONSE"
+    if type(jioJZNobhJL.Body) ~= "string" or jioJZNobhJL.Body == "" then
+        return jioJZNobhJL, nil, "EMPTY_RESPONSE"
     end
-    local AefvaPWXnu, oCmeKsPiUoCF = bGZwfejQfml(function()
-        return kIXHEVkXu:JSONDecode(GEltkmKGVIcH.Body)
+    local RdBUPbAkOZM, TiwAnritrd = FpmUOlkiL(function()
+        return bAMiQSKZC:JSONDecode(jioJZNobhJL.Body)
     end)
-    if not AefvaPWXnu or type(oCmeKsPiUoCF) ~= "table" then
-        return GEltkmKGVIcH, nil, "INVALID_JSON"
+    if not RdBUPbAkOZM or type(TiwAnritrd) ~= "table" then
+        return jioJZNobhJL, nil, "INVALID_JSON"
     end
-    return GEltkmKGVIcH, oCmeKsPiUoCF, nil
+    return jioJZNobhJL, TiwAnritrd, nil
 end
 
-local function ogXZJUWm(iso)
+local function iiGCpVuFjd(iso)
     if type(iso) ~= "string" then return nil end
-    local bRMEqpJRn, SUoyvhZyg = bGZwfejQfml(function() return DateTime.fromIsoDate(iso) end)
-    if not bRMEqpJRn or not SUoyvhZyg then return nil end
-    return SUoyvhZyg.UnixTimestamp
+    local eIuUaEQWf, EOQGINJkHmk = FpmUOlkiL(function() return DateTime.fromIsoDate(iso) end)
+    if not eIuUaEQWf or not EOQGINJkHmk then return nil end
+    return EOQGINJkHmk.UnixTimestamp
 end
 
-local function kkockaBt(seconds)
+local function GkyKooff(seconds)
     seconds = math.max(0, math.floor(seconds))
-    local zCcoobvCZEIF = math.floor(seconds / 86400)
-    local MgYAwfhqcWqS = math.floor((seconds % 86400) / 3600)
-    local gNkowJlX = math.floor((seconds % 3600) / 60)
-    local ZhTeydRyikq = seconds % 60
-    if zCcoobvCZEIF > 0 then
-        return string.format("%dd %02dh %02dm", zCcoobvCZEIF, MgYAwfhqcWqS, gNkowJlX)
+    local dRLjJEvWKmFf = math.floor(seconds / 86400)
+    local fNoSgLfLwmaj = math.floor((seconds % 86400) / 3600)
+    local waknKmToIws = math.floor((seconds % 3600) / 60)
+    local UElJsBxLAhJ = seconds % 60
+    if dRLjJEvWKmFf > 0 then
+        return string.format("%dd %02dh %02dm", dRLjJEvWKmFf, fNoSgLfLwmaj, waknKmToIws)
     end
-    if MgYAwfhqcWqS > 0 then
-        return string.format("%dh %02dm %02ds", MgYAwfhqcWqS, gNkowJlX, ZhTeydRyikq)
+    if fNoSgLfLwmaj > 0 then
+        return string.format("%dh %02dm %02ds", fNoSgLfLwmaj, waknKmToIws, UElJsBxLAhJ)
     end
-    return string.format("%02dm %02ds", gNkowJlX, ZhTeydRyikq)
+    return string.format("%02dm %02ds", waknKmToIws, UElJsBxLAhJ)
 end
 
 -- ===== الجلسة (بدون تشفير) =====
-local function JTFLnHBgcYKc(ltLCczOYyR, TPkvXPTLpw)
+local function VHKpUsHbthR(nSsCDlwETiWZ, MlZMqZYJ)
     if not writefile then return end
-    bGZwfejQfml(writefile, PmuWBlhu,
-        ltLCczOYyR .. "|" .. qMsHOFqPzO(TPkvXPTLpw) .. "|" .. qMsHOFqPzO(os.time()))
+    FpmUOlkiL(writefile, GehHlaHyAPo,
+        nSsCDlwETiWZ .. "|" .. hQsHHMocY(MlZMqZYJ) .. "|" .. hQsHHMocY(os.time()))
 end
 
-local function uLknHihpozY()
-    if not (readfile and isfile and isfile(PmuWBlhu)) then return nil, nil end
-    local bRMEqpJRn, oCmeKsPiUoCF = bGZwfejQfml(readfile, PmuWBlhu)
-    if not bRMEqpJRn or type(oCmeKsPiUoCF) ~= "string" or oCmeKsPiUoCF == "" then return nil, nil end
-    local ltLCczOYyR, TPkvXPTLpw, VQPTrubkO = oCmeKsPiUoCF:match("^([^|]+)|(%d+)|(%d+)$")
-    if not (ltLCczOYyR and TPkvXPTLpw and VQPTrubkO) then return nil, nil end
-    TPkvXPTLpw, VQPTrubkO = GYvYCRCGYmW(TPkvXPTLpw), GYvYCRCGYmW(VQPTrubkO)
-    if not (TPkvXPTLpw and VQPTrubkO) then return nil, nil end
-    local werWMduAlhsF = os.time()
-    if werWMduAlhsF >= TPkvXPTLpw or (werWMduAlhsF - VQPTrubkO) >= GpJEFxuux then
+local function CPzhmQzPlYZ()
+    if not (readfile and isfile and isfile(GehHlaHyAPo)) then return nil, nil end
+    local eIuUaEQWf, TiwAnritrd = FpmUOlkiL(readfile, GehHlaHyAPo)
+    if not eIuUaEQWf or type(TiwAnritrd) ~= "string" or TiwAnritrd == "" then return nil, nil end
+    local nSsCDlwETiWZ, MlZMqZYJ, LCHxMaQRAf = TiwAnritrd:match("^([^|]+)|(%d+)|(%d+)$")
+    if not (nSsCDlwETiWZ and MlZMqZYJ and LCHxMaQRAf) then return nil, nil end
+    MlZMqZYJ, LCHxMaQRAf = wUyHINxNHo(MlZMqZYJ), wUyHINxNHo(LCHxMaQRAf)
+    if not (MlZMqZYJ and LCHxMaQRAf) then return nil, nil end
+    local fZVzCNOA = os.time()
+    if fZVzCNOA >= MlZMqZYJ or (fZVzCNOA - LCHxMaQRAf) >= gsfsOhNwc then
         return nil, nil
     end
-    return ltLCczOYyR, TPkvXPTLpw
+    return nSsCDlwETiWZ, MlZMqZYJ
 end
 
-local function RyIheXZM()
+local function PJLSKruHxH()
     if delfile then
-        bGZwfejQfml(delfile, PmuWBlhu)
+        FpmUOlkiL(delfile, GehHlaHyAPo)
     elseif writefile then
-        bGZwfejQfml(writefile, PmuWBlhu, "")
+        FpmUOlkiL(writefile, GehHlaHyAPo, "")
     end
 end
 
 -- ===== المنصات المسموحة =====
-local function NUVlQispi(platforms)
+local function MxgzNzZRU(platforms)
     if not writefile or type(platforms) ~= "table" then return end
-    local bvsCohTJ = {}
-    for jQjfYWqOhbVa, platform in VYwJbcJom(platforms) do
-        local yaJRlNCQj = platform == "pc" and "PC"
+    local GISjRVsyARE = {}
+    for cJaLYsJew, platform in pGeZzgRfIj(platforms) do
+        local WuwqzGoPiI = platform == "pc" and "PC"
             or platform == "mobile" and "Mobile"
             or platform == "console" and "Console"
             or platform
-        if yaJRlNCQj == "PC" or yaJRlNCQj == "Mobile" or yaJRlNCQj == "Console" then
-            table.insert(bvsCohTJ, yaJRlNCQj)
+        if WuwqzGoPiI == "PC" or WuwqzGoPiI == "Mobile" or WuwqzGoPiI == "Console" then
+            table.insert(GISjRVsyARE, WuwqzGoPiI)
         end
     end
-    if #bvsCohTJ > 0 then
-        bGZwfejQfml(writefile, mLBsGksH, table.concat(bvsCohTJ, "|"))
+    if #GISjRVsyARE > 0 then
+        FpmUOlkiL(writefile, rJxBJkPKdHOP, table.concat(GISjRVsyARE, "|"))
     end
 end
 
-local function KvQGIrbxnfg()
-    if not (readfile and isfile and isfile(mLBsGksH)) then return nil end
-    local bRMEqpJRn, wofXBxVwx = bGZwfejQfml(readfile, mLBsGksH)
-    if not bRMEqpJRn or type(wofXBxVwx) ~= "string" or wofXBxVwx == "" then return nil end
-    local LDBJshjhs = {}
-    for daZARWmo in wofXBxVwx:gmatch("[^|]+") do LDBJshjhs[daZARWmo] = true end
-    return LDBJshjhs
+local function zSqkkswSf()
+    if not (readfile and isfile and isfile(rJxBJkPKdHOP)) then return nil end
+    local eIuUaEQWf, RlVlnmqCwaQn = FpmUOlkiL(readfile, rJxBJkPKdHOP)
+    if not eIuUaEQWf or type(RlVlnmqCwaQn) ~= "string" or RlVlnmqCwaQn == "" then return nil end
+    local VWRqjSAVpSFH = {}
+    for OsLqXWnkLv in RlVlnmqCwaQn:gmatch("[^|]+") do VWRqjSAVpSFH[OsLqXWnkLv] = true end
+    return VWRqjSAVpSFH
 end
 
-local function bCCSRisttjM(LDBJshjhs)
-    if not LDBJshjhs then return end
-    local VzITxBezONHv = {}
-    for jQjfYWqOhbVa, platform in VYwJbcJom(iiwwZyNcz) do
-        if LDBJshjhs[platform] then table.insert(VzITxBezONHv, platform) end
+local function dDZWYwogRKnN(VWRqjSAVpSFH)
+    if not VWRqjSAVpSFH then return end
+    local jTvqTvfh = {}
+    for cJaLYsJew, platform in pGeZzgRfIj(bMyqYOIE) do
+        if VWRqjSAVpSFH[platform] then table.insert(jTvqTvfh, platform) end
     end
-    iiwwZyNcz = VzITxBezONHv
+    bMyqYOIE = jTvqTvfh
 end
 
 -- ===== UI =====
-local EzaDvRYmh = Instance.new("ScreenGui")
-EzaDvRYmh.Name = "DeviceModeGlass"
-EzaDvRYmh.ResetOnSpawn = false
-EzaDvRYmh.IgnoreGuiInset = true
-EzaDvRYmh.Parent = FRsdErUS:WaitForChild("PlayerGui")
+local kTPezDSsY = Instance.new("ScreenGui")
+kTPezDSsY.Name = "DeviceModeGlass"
+kTPezDSsY.ResetOnSpawn = false
+kTPezDSsY.IgnoreGuiInset = true
+kTPezDSsY.Parent = CznsCDXp:WaitForChild("PlayerGui")
 
-local BDTguHhqexM = Instance.new("Frame")
-BDTguHhqexM.Name = "LicenseToast"
-BDTguHhqexM.AnchorPoint = Vector2.new(1, 0)
-BDTguHhqexM.Position = UDim2.new(1, 360, 0, 80)
-BDTguHhqexM.Size = UDim2.new(0, 310, 0, 86)
-BDTguHhqexM.BackgroundColor3 = Color3.fromRGB(13, 16, 26)
-BDTguHhqexM.BackgroundTransparency = 0.12
-BDTguHhqexM.Visible = false
-BDTguHhqexM.Parent = EzaDvRYmh
+local xEKzetBhncza = Instance.new("Frame")
+xEKzetBhncza.Name = "LicenseToast"
+xEKzetBhncza.AnchorPoint = Vector2.new(1, 0)
+xEKzetBhncza.Position = UDim2.new(1, 360, 0, 80)
+xEKzetBhncza.Size = UDim2.new(0, 310, 0, 86)
+xEKzetBhncza.BackgroundColor3 = Color3.fromRGB(13, 16, 26)
+xEKzetBhncza.BackgroundTransparency = 0.12
+xEKzetBhncza.Visible = false
+xEKzetBhncza.Parent = kTPezDSsY
 
-local VkuwpZhmcyo = Instance.new("UICorner")
-VkuwpZhmcyo.CornerRadius = UDim.new(0, 16)
-VkuwpZhmcyo.Parent = BDTguHhqexM
+local APoXLmTdFIEX = Instance.new("UICorner")
+APoXLmTdFIEX.CornerRadius = UDim.new(0, 16)
+APoXLmTdFIEX.Parent = xEKzetBhncza
 
-local OiSxTwCBdAs = Instance.new("UIStroke")
-OiSxTwCBdAs.Color = Color3.fromRGB(150, 115, 255)
-OiSxTwCBdAs.Transparency = 0.25
-OiSxTwCBdAs.Thickness = 1
-OiSxTwCBdAs.Parent = BDTguHhqexM
+local XazQXmTa = Instance.new("UIStroke")
+XazQXmTa.Color = Color3.fromRGB(150, 115, 255)
+XazQXmTa.Transparency = 0.25
+XazQXmTa.Thickness = 1
+XazQXmTa.Parent = xEKzetBhncza
 
-local ockUIgrf = Instance.new("UIGradient")
-ockUIgrf.Color = ColorSequence.new({
+local vTvUJavcw = Instance.new("UIGradient")
+vTvUJavcw.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(30, 25, 57)),
     ColorSequenceKeypoint.new(1, Color3.fromRGB(10, 14, 22)),
 })
-ockUIgrf.Rotation = 18
-ockUIgrf.Parent = BDTguHhqexM
+vTvUJavcw.Rotation = 18
+vTvUJavcw.Parent = xEKzetBhncza
 
-local LLXxJKQjdu = Instance.new("Frame")
-LLXxJKQjdu.Size = UDim2.new(0, 4, 1, -24)
-LLXxJKQjdu.Position = UDim2.new(0, 12, 0, 12)
-LLXxJKQjdu.BackgroundColor3 = Color3.fromRGB(151, 112, 255)
-LLXxJKQjdu.BorderSizePixel = 0
-LLXxJKQjdu.Parent = BDTguHhqexM
+local WnaIOxkg = Instance.new("Frame")
+WnaIOxkg.Size = UDim2.new(0, 4, 1, -24)
+WnaIOxkg.Position = UDim2.new(0, 12, 0, 12)
+WnaIOxkg.BackgroundColor3 = Color3.fromRGB(151, 112, 255)
+WnaIOxkg.BorderSizePixel = 0
+WnaIOxkg.Parent = xEKzetBhncza
 
-local vhyHslKGK = Instance.new("UICorner")
-vhyHslKGK.CornerRadius = UDim.new(1, 0)
-vhyHslKGK.Parent = LLXxJKQjdu
+local EOGdYzXmT = Instance.new("UICorner")
+EOGdYzXmT.CornerRadius = UDim.new(1, 0)
+EOGdYzXmT.Parent = WnaIOxkg
 
-local gwMauyKRH = Instance.new("TextLabel")
-gwMauyKRH.BackgroundTransparency = 1
-gwMauyKRH.Position = UDim2.new(0, 29, 0, 14)
-gwMauyKRH.Size = UDim2.new(1, -45, 0, 22)
-gwMauyKRH.Font = Enum.Font.GothamBold
-gwMauyKRH.TextSize = 14
-gwMauyKRH.TextColor3 = Color3.fromRGB(244, 241, 255)
-gwMauyKRH.TextXAlignment = Enum.TextXAlignment.Left
-gwMauyKRH.Text = "DeviceMode"
-gwMauyKRH.Parent = BDTguHhqexM
+local TvHqLeViLl = Instance.new("TextLabel")
+TvHqLeViLl.BackgroundTransparency = 1
+TvHqLeViLl.Position = UDim2.new(0, 29, 0, 14)
+TvHqLeViLl.Size = UDim2.new(1, -45, 0, 22)
+TvHqLeViLl.Font = Enum.Font.GothamBold
+TvHqLeViLl.TextSize = 14
+TvHqLeViLl.TextColor3 = Color3.fromRGB(244, 241, 255)
+TvHqLeViLl.TextXAlignment = Enum.TextXAlignment.Left
+TvHqLeViLl.Text = "DeviceMode"
+TvHqLeViLl.Parent = xEKzetBhncza
 
-local sQvxegBe = Instance.new("TextLabel")
-sQvxegBe.BackgroundTransparency = 1
-sQvxegBe.Position = UDim2.new(0, 29, 0, 39)
-sQvxegBe.Size = UDim2.new(1, -45, 0, 30)
-sQvxegBe.Font = Enum.Font.Gotham
-sQvxegBe.TextSize = 12
-sQvxegBe.TextColor3 = Color3.fromRGB(192, 187, 218)
-sQvxegBe.TextXAlignment = Enum.TextXAlignment.Left
-sQvxegBe.TextWrapped = true
-sQvxegBe.Text = "Checking license..."
-sQvxegBe.Parent = BDTguHhqexM
+local LcnBeEhHKjm = Instance.new("TextLabel")
+LcnBeEhHKjm.BackgroundTransparency = 1
+LcnBeEhHKjm.Position = UDim2.new(0, 29, 0, 39)
+LcnBeEhHKjm.Size = UDim2.new(1, -45, 0, 30)
+LcnBeEhHKjm.Font = Enum.Font.Gotham
+LcnBeEhHKjm.TextSize = 12
+LcnBeEhHKjm.TextColor3 = Color3.fromRGB(192, 187, 218)
+LcnBeEhHKjm.TextXAlignment = Enum.TextXAlignment.Left
+LcnBeEhHKjm.TextWrapped = true
+LcnBeEhHKjm.Text = "Checking license..."
+LcnBeEhHKjm.Parent = xEKzetBhncza
 
-local DpdDyzLEt = 0
+local wkXgQOScwrff = 0
 
-local function NFzBJKkIGpk(message, color, seconds)
-    DpdDyzLEt += 1
-    local ltLCczOYyR = DpdDyzLEt
-    local KAVpadJl = color or Color3.fromRGB(151, 112, 255)
-    LLXxJKQjdu.BackgroundColor3 = KAVpadJl
-    OiSxTwCBdAs.Color = KAVpadJl
-    sQvxegBe.TextColor3 = color or Color3.fromRGB(216, 209, 246)
-    sQvxegBe.Text = qMsHOFqPzO(message)
-    BDTguHhqexM.Visible = true
-    BDTguHhqexM.Position = UDim2.new(1, 360, 0, 80)
-    wmGejyarqad:Create(
-        BDTguHhqexM,
+local function EDSyQgNJBl(message, color, seconds)
+    wkXgQOScwrff += 1
+    local nSsCDlwETiWZ = wkXgQOScwrff
+    local XtZntMwIkHM = color or Color3.fromRGB(151, 112, 255)
+    WnaIOxkg.BackgroundColor3 = XtZntMwIkHM
+    XazQXmTa.Color = XtZntMwIkHM
+    LcnBeEhHKjm.TextColor3 = color or Color3.fromRGB(216, 209, 246)
+    LcnBeEhHKjm.Text = hQsHHMocY(message)
+    xEKzetBhncza.Visible = true
+    xEKzetBhncza.Position = UDim2.new(1, 360, 0, 80)
+    croPVBAjy:Create(
+        xEKzetBhncza,
         TweenInfo.new(0.45, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
         {Position= UDim2.new(1, -24, 0, 80) }
     ):Play()
     task.delay(seconds or 8, function()
-        if ltLCczOYyR ~= DpdDyzLEt then return end
-        local vaGmfMBxyb = wmGejyarqad:Create(
-            BDTguHhqexM,
+        if nSsCDlwETiWZ ~= wkXgQOScwrff then return end
+        local akUTDUdf = croPVBAjy:Create(
+            xEKzetBhncza,
             TweenInfo.new(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
             {Position= UDim2.new(1, 360, 0, 80) }
         )
-        vaGmfMBxyb:Play()
-        local FMkEdOdW = bGZwfejQfml(function() vaGmfMBxyb.Completed:Wait() end)
-        if FMkEdOdW and ltLCczOYyR == DpdDyzLEt then BDTguHhqexM.Visible = false end
+        akUTDUdf:Play()
+        local sbJczHnwIIV = FpmUOlkiL(function() akUTDUdf.Completed:Wait() end)
+        if sbJczHnwIIV and nSsCDlwETiWZ == wkXgQOScwrff then xEKzetBhncza.Visible = false end
     end)
 end
 
-local function jrCDYhRqPX(message, jGXEesiIVpj)
-    if jGXEesiIVpj then message = message .. "\nCode: " .. qMsHOFqPzO(jGXEesiIVpj) end
-    NFzBJKkIGpk(message, Color3.fromRGB(255, 104, 126), 12)
+local function kazMWRwBPyhq(message, LqQBzaxMfj)
+    if LqQBzaxMfj then message = message .. "\nCode: " .. hQsHHMocY(LqQBzaxMfj) end
+    EDSyQgNJBl(message, Color3.fromRGB(255, 104, 126), 12)
 end
 
 _G.__dm_killed = false
 
 -- ===== السبوفر =====
-local function JZFgzfiC(activeToken, activeExpiry)
+local function nBuamglqUebg(activeToken, activeExpiry)
     if not game:IsLoaded() then game.Loaded:Wait() end
 
-    local function ahNleTRX(dev)
-        if writefile then bGZwfejQfml(writefile, cUMWUizPj, dev) end
+    local function yGPecptX(dev)
+        if writefile then FpmUOlkiL(writefile, GAXlOumnXr, dev) end
         _G.TargetDevice = dev
     end
 
-    local function TXkjcvcF()
+    local function LOnSaBQABKq()
         return _G.TargetDevice
     end
 
-    local function YbGUpFejEWPb()
+    local function kFlNrJfFu()
         if not debug or not debug.getinfo then return true end
-        local arCTrtCHd = {QwqMifTSiq, sBuPpaDNr, bGZwfejQfml}
-        if getgc then table.insert(arCTrtCHd, getgc) end
-        for jQjfYWqOhbVa, func in VYwJbcJom(arCTrtCHd) do
-            local lqvQitxhzP = debug.getinfo(func)
-            if not lqvQitxhzP or lqvQitxhzP.what ~= "C" or lqvQitxhzP.source ~= "=[C]" then
+        local oVhYFUJKVqcw = {bIxtrqudiK, GiepjcWpw, FpmUOlkiL}
+        if getgc then table.insert(oVhYFUJKVqcw, getgc) end
+        for cJaLYsJew, func in pGeZzgRfIj(oVhYFUJKVqcw) do
+            local auBnRleeqkcD = debug.getinfo(func)
+            if not auBnRleeqkcD or auBnRleeqkcD.what ~= "C" or auBnRleeqkcD.source ~= "=[C]" then
                 return false
             end
         end
         return true
     end
 
-    if not YbGUpFejEWPb() then return end
+    if not kFlNrJfFu() then return end
 
     -- أسماء المفاتيح
-    local JPxKYtTDbFI      = "Device"
-    local zcxLBIKAhTr  = "FixXCoordinateAspectRate"
-    local LwXKYOxUiGL  = "PreferredInput"
-    local VCjpGQAOhHP     = "Gamepad"
-    local sqfzhzTb    = "Keyboard"
+    local gvQBejBPQQQ      = "Device"
+    local jGmDlHxc  = "FixXCoordinateAspectRate"
+    local PtulbhrVLF  = "PreferredInput"
+    local flpbdhCjuH     = "Gamepad"
+    local vuchjpUHWo    = "Keyboard"
 
-    local function RBuybrKfvck()
-        local MmoRflhBhv = ""
-        for jQjfYWqOhbVa = 1, math.random(10, 16) do
-            MmoRflhBhv = MmoRflhBhv .. string.char(math.random(97, 122))
+    local function qKEdBbZX()
+        local AVQDMBUIrM = ""
+        for cJaLYsJew = 1, math.random(10, 16) do
+            AVQDMBUIrM = AVQDMBUIrM .. string.char(math.random(97, 122))
         end
-        return MmoRflhBhv
+        return AVQDMBUIrM
     end
 
-    local function skpsMAJyUr()
-        local FjCOadxMWVHn = game.Players.LocalPlayer
-        if not FjCOadxMWVHn then return end
-        local okOShRzyHCMZ = FjCOadxMWVHn:FindFirstChild("PlayerGui") or FjCOadxMWVHn:WaitForChild("PlayerGui", 10)
-        if not okOShRzyHCMZ then return end
-        local SJlhfLRNlnc = okOShRzyHCMZ:FindFirstChild("Screen") or okOShRzyHCMZ:WaitForChild("Screen", 10)
-        if not SJlhfLRNlnc then return end
-        SJlhfLRNlnc.Enabled = true
-        local rVqnUGRWyS = SJlhfLRNlnc:FindFirstChild("ConsoleButton", true)
-        if rVqnUGRWyS and rVqnUGRWyS:IsA("GuiObject") then rVqnUGRWyS.Visible = false end
-        local woItCPGsZ = SJlhfLRNlnc:FindFirstChild("ShiftLockArea")
-            or SJlhfLRNlnc:WaitForChild("ShiftLockArea", 10)
-        if not (woItCPGsZ and woItCPGsZ:IsA("GuiObject")) then return end
-        woItCPGsZ.Visible = true
-        local erGCZqzhYwF = woItCPGsZ:FindFirstChild("Toggle")
-            or woItCPGsZ:WaitForChild("Toggle", 10)
-        local oebktYKkQzd = SJlhfLRNlnc:FindFirstChild("MouseLockedCursor")
-            or SJlhfLRNlnc:WaitForChild("MouseLockedCursor", 10)
-        if not (erGCZqzhYwF and erGCZqzhYwF:IsA("GuiObject")) then return end
-        erGCZqzhYwF.Visible = true
-        if not (oebktYKkQzd and oebktYKkQzd:IsA("GuiObject")) then return end
+    local function dCgDkPVw()
+        local PxBxLZXezbuI = game.Players.LocalPlayer
+        if not PxBxLZXezbuI then return end
+        local HRWDJlLH = PxBxLZXezbuI:FindFirstChild("PlayerGui") or PxBxLZXezbuI:WaitForChild("PlayerGui", 10)
+        if not HRWDJlLH then return end
+        local zjwbLAayBVq = HRWDJlLH:FindFirstChild("Screen") or HRWDJlLH:WaitForChild("Screen", 10)
+        if not zjwbLAayBVq then return end
+        zjwbLAayBVq.Enabled = true
+        local ozqprFWkd = zjwbLAayBVq:FindFirstChild("ConsoleButton", true)
+        if ozqprFWkd and ozqprFWkd:IsA("GuiObject") then ozqprFWkd.Visible = false end
+        local FhdzAfdbDi = zjwbLAayBVq:FindFirstChild("ShiftLockArea")
+            or zjwbLAayBVq:WaitForChild("ShiftLockArea", 10)
+        if not (FhdzAfdbDi and FhdzAfdbDi:IsA("GuiObject")) then return end
+        FhdzAfdbDi.Visible = true
+        local CtKXjJFC = FhdzAfdbDi:FindFirstChild("Toggle")
+            or FhdzAfdbDi:WaitForChild("Toggle", 10)
+        local kRkooKXPEy = zjwbLAayBVq:FindFirstChild("MouseLockedCursor")
+            or zjwbLAayBVq:WaitForChild("MouseLockedCursor", 10)
+        if not (CtKXjJFC and CtKXjJFC:IsA("GuiObject")) then return end
+        CtKXjJFC.Visible = true
+        if not (kRkooKXPEy and kRkooKXPEy:IsA("GuiObject")) then return end
 
-        local function IYjEArcJw()
-            local oIdlErAAwfnM = erGCZqzhYwF.Active or erGCZqzhYwF.Selected
-                or (erGCZqzhYwF:IsA("ImageButton") and erGCZqzhYwF.ImageRectOffset.X > 0)
-            oebktYKkQzd.Visible = oIdlErAAwfnM
+        local function uhPtVGgQx()
+            local SeCBiqNAPy = CtKXjJFC.Active or CtKXjJFC.Selected
+                or (CtKXjJFC:IsA("ImageButton") and CtKXjJFC.ImageRectOffset.X > 0)
+            kRkooKXPEy.Visible = SeCBiqNAPy
         end
-        IYjEArcJw()
+        uhPtVGgQx()
 
-        if not erGCZqzhYwF:GetAttribute("CursorBound") then
-            erGCZqzhYwF:SetAttribute("CursorBound", true)
-            erGCZqzhYwF:GetPropertyChangedSignal("Active"):Connect(IYjEArcJw)
-            erGCZqzhYwF:GetPropertyChangedSignal("Selected"):Connect(IYjEArcJw)
-            if erGCZqzhYwF:IsA("GuiButton") then
-                erGCZqzhYwF.MouseButton1Click:Connect(function()
+        if not CtKXjJFC:GetAttribute("CursorBound") then
+            CtKXjJFC:SetAttribute("CursorBound", true)
+            CtKXjJFC:GetPropertyChangedSignal("Active"):Connect(uhPtVGgQx)
+            CtKXjJFC:GetPropertyChangedSignal("Selected"):Connect(uhPtVGgQx)
+            if CtKXjJFC:IsA("GuiButton") then
+                CtKXjJFC.MouseButton1Click:Connect(function()
                     task.wait(0.05)
-                    IYjEArcJw()
+                    uhPtVGgQx()
                 end)
             end
         end
     end
 
-    local function MmAqRRjLfr(targetDevice)
+    local function CyuzVNmBV(targetDevice)
         if not targetDevice or not getgc then return 0, 0 end
-        local bRMEqpJRn, vKzIlXBFwMXh = bGZwfejQfml(getgc, true)
-        if not bRMEqpJRn or not vKzIlXBFwMXh then return 0, 0 end
-        local zuTKLrBT, XnzRlzVCtvH = 0, 0
-        for jQjfYWqOhbVa, obj in VYwJbcJom(vKzIlXBFwMXh) do
-            XnzRlzVCtvH += 1
-            if XnzRlzVCtvH > 150000 then break end
+        local eIuUaEQWf, BsFacjngA = FpmUOlkiL(getgc, true)
+        if not eIuUaEQWf or not BsFacjngA then return 0, 0 end
+        local DSxdIjPVMwG, LuxSeTpp = 0, 0
+        for cJaLYsJew, obj in pGeZzgRfIj(BsFacjngA) do
+            LuxSeTpp += 1
+            if LuxSeTpp > 150000 then break end
             if type(obj) == "table" then
-                local HvMaNpyKkfDw, BatuenUoDEG = bGZwfejQfml(sBuPpaDNr, obj, JPxKYtTDbFI)
-                if HvMaNpyKkfDw and (BatuenUoDEG == "Mobile" or BatuenUoDEG == "PC" or BatuenUoDEG == "Console") then
-                    bGZwfejQfml(function()
-                        QwqMifTSiq(obj, JPxKYtTDbFI, targetDevice)
+                local AVmHlBqYW, FMWxQYeolLM = FpmUOlkiL(GiepjcWpw, obj, gvQBejBPQQQ)
+                if AVmHlBqYW and (FMWxQYeolLM == "Mobile" or FMWxQYeolLM == "PC" or FMWxQYeolLM == "Console") then
+                    FpmUOlkiL(function()
+                        bIxtrqudiK(obj, gvQBejBPQQQ, targetDevice)
                         -- SmallScreen ما نلمسه
-                        local WdGEaSfvbL = sBuPpaDNr(obj, zcxLBIKAhTr)
-                        if type(WdGEaSfvbL) == "function" then bGZwfejQfml(WdGEaSfvbL, obj) end
-                        zuTKLrBT += 1
+                        local msXNQllWSXey = GiepjcWpw(obj, jGmDlHxc)
+                        if type(msXNQllWSXey) == "function" then FpmUOlkiL(msXNQllWSXey, obj) end
+                        DSxdIjPVMwG += 1
                     end)
                 end
-                local gnQHbKoz, bCybUQsIAUU = bGZwfejQfml(sBuPpaDNr, obj, LwXKYOxUiGL)
-                if gnQHbKoz and type(bCybUQsIAUU) == "table" then
-                    local oeMYEDGQ = (targetDevice == "Console")
-                        and sBuPpaDNr(obj, VCjpGQAOhHP)
-                        or sBuPpaDNr(obj, sqfzhzTb)
-                    if type(oeMYEDGQ) == "table" and bCybUQsIAUU ~= oeMYEDGQ then
-                        bGZwfejQfml(function()
-                            QwqMifTSiq(obj, LwXKYOxUiGL, oeMYEDGQ)
-                            zuTKLrBT += 1
+                local EUtPzueoksjB, NyhKcRqWwS = FpmUOlkiL(GiepjcWpw, obj, PtulbhrVLF)
+                if EUtPzueoksjB and type(NyhKcRqWwS) == "table" then
+                    local nDZsTdLcgi = (targetDevice == "Console")
+                        and GiepjcWpw(obj, flpbdhCjuH)
+                        or GiepjcWpw(obj, vuchjpUHWo)
+                    if type(nDZsTdLcgi) == "table" and NyhKcRqWwS ~= nDZsTdLcgi then
+                        FpmUOlkiL(function()
+                            bIxtrqudiK(obj, PtulbhrVLF, nDZsTdLcgi)
+                            DSxdIjPVMwG += 1
                         end)
                     end
                 end
             end
         end
-        return zuTKLrBT, XnzRlzVCtvH
+        return DSxdIjPVMwG, LuxSeTpp
     end
 
-    local function TMKqmCRLzZa()
+    local function ulnjBQaE()
         if _G.__dm_killed then return end
-        local CMHilIeUsM = TXkjcvcF()
-        if CMHilIeUsM then
-            bGZwfejQfml(skpsMAJyUr)
-            bGZwfejQfml(MmAqRRjLfr, CMHilIeUsM)
+        local RvmxAnbgOv = LOnSaBQABKq()
+        if RvmxAnbgOv then
+            FpmUOlkiL(dCgDkPVw)
+            FpmUOlkiL(CyuzVNmBV, RvmxAnbgOv)
         end
     end
 
-    local function yJjgxXfqzG()
+    local function cniNxYSGmr()
         if typeof(gethui) == "function" then
-            local UvfaZMuAL, ksxufRVYxeX = bGZwfejQfml(gethui)
-            if UvfaZMuAL and ksxufRVYxeX then return ksxufRVYxeX end
+            local VypySMRRrTJD, gDKPsmyEKLo = FpmUOlkiL(gethui)
+            if VypySMRRrTJD and gDKPsmyEKLo then return gDKPsmyEKLo end
         end
         if typeof(get_hidden_gui) == "function" then
-            local UvfaZMuAL, ksxufRVYxeX = bGZwfejQfml(get_hidden_gui)
-            if UvfaZMuAL and ksxufRVYxeX then return ksxufRVYxeX end
+            local VypySMRRrTJD, gDKPsmyEKLo = FpmUOlkiL(get_hidden_gui)
+            if VypySMRRrTJD and gDKPsmyEKLo then return gDKPsmyEKLo end
         end
-        local NjzlTMwnq = game:GetService("CoreGui")
-        if syn and typeof(syn.protect_gui) == "function" then return NjzlTMwnq end
-        local FjCOadxMWVHn = game:GetService("Players").LocalPlayer
-        return NjzlTMwnq:FindFirstChild("RobloxGui") or (FjCOadxMWVHn and FjCOadxMWVHn:WaitForChild("PlayerGui"))
+        local ByjjIdnszU = game:GetService("CoreGui")
+        if syn and typeof(syn.protect_gui) == "function" then return ByjjIdnszU end
+        local PxBxLZXezbuI = game:GetService("Players").LocalPlayer
+        return ByjjIdnszU:FindFirstChild("RobloxGui") or (PxBxLZXezbuI and PxBxLZXezbuI:WaitForChild("PlayerGui"))
     end
 
-    local gaUHhDuNP = {}
+    local LLtPVGGRo = {}
 
-    local function jzgdRpocogj()
-        local wmGejyarqad = game:GetService("TweenService")
-        local FjCOadxMWVHn = game.Players.LocalPlayer
-        local EVtDoDBH = yJjgxXfqzG()
-        local SPXKKwIyfOyq = TXkjcvcF()
-        local qlJOBsCyK  = nil
-        local NGRWGCoHzcbd = false
+    local function GsRyikhW()
+        local croPVBAjy = game:GetService("TweenService")
+        local PxBxLZXezbuI = game.Players.LocalPlayer
+        local OVlQOAIULV = cniNxYSGmr()
+        local gxdyiSOVMmE = LOnSaBQABKq()
+        local clUFPbft  = nil
+        local fwMJnBFEB = false
 
-        local dFDIzAzJnv = Instance.new("ScreenGui")
-        dFDIzAzJnv.Name = RBuybrKfvck()
-        dFDIzAzJnv.ResetOnSpawn = false
-        dFDIzAzJnv.IgnoreGuiInset = true
-        dFDIzAzJnv.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        local klLyzUEzDlhO = Instance.new("ScreenGui")
+        klLyzUEzDlhO.Name = qKEdBbZX()
+        klLyzUEzDlhO.ResetOnSpawn = false
+        klLyzUEzDlhO.IgnoreGuiInset = true
+        klLyzUEzDlhO.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
         if syn and typeof(syn.protect_gui) == "function" then
-            bGZwfejQfml(syn.protect_gui, dFDIzAzJnv)
+            FpmUOlkiL(syn.protect_gui, klLyzUEzDlhO)
         end
-        dFDIzAzJnv.Parent = EVtDoDBH
-        table.insert(gaUHhDuNP, dFDIzAzJnv)
+        klLyzUEzDlhO.Parent = OVlQOAIULV
+        table.insert(LLtPVGGRo, klLyzUEzDlhO)
 
-        local wMkLHgWLiH = Instance.new("TextButton")
-        wMkLHgWLiH.Name = RBuybrKfvck()
-        wMkLHgWLiH.Size = UDim2.fromOffset(36, 36)
-        wMkLHgWLiH.Position = UDim2.new(0, 16, 0.5, -18)
-        wMkLHgWLiH.BackgroundColor3 = Color3.fromRGB(12, 12, 15)
-        wMkLHgWLiH.BackgroundTransparency = 0.05
-        wMkLHgWLiH.Text = "PX"
-        wMkLHgWLiH.TextColor3 = Color3.fromRGB(255, 255, 255)
-        wMkLHgWLiH.TextSize = 13
-        wMkLHgWLiH.Font = Enum.Font.GothamBold
-        wMkLHgWLiH.AutoButtonColor = false
-        wMkLHgWLiH.Active = true
-        wMkLHgWLiH.Draggable = true
-        wMkLHgWLiH.Parent = dFDIzAzJnv
+        local zvLfXlBrga = Instance.new("TextButton")
+        zvLfXlBrga.Name = qKEdBbZX()
+        zvLfXlBrga.Size = UDim2.fromOffset(36, 36)
+        zvLfXlBrga.Position = UDim2.new(0, 16, 0.5, -18)
+        zvLfXlBrga.BackgroundColor3 = Color3.fromRGB(12, 12, 15)
+        zvLfXlBrga.BackgroundTransparency = 0.05
+        zvLfXlBrga.Text = "PX"
+        zvLfXlBrga.TextColor3 = Color3.fromRGB(255, 255, 255)
+        zvLfXlBrga.TextSize = 13
+        zvLfXlBrga.Font = Enum.Font.GothamBold
+        zvLfXlBrga.AutoButtonColor = false
+        zvLfXlBrga.Active = true
+        zvLfXlBrga.Draggable = true
+        zvLfXlBrga.Parent = klLyzUEzDlhO
 
-        local dwDMEEiXWY = Instance.new("UICorner")
-        dwDMEEiXWY.CornerRadius = UDim.new(0, 7)
-        dwDMEEiXWY.Parent = wMkLHgWLiH
+        local ChlUOToCphAI = Instance.new("UICorner")
+        ChlUOToCphAI.CornerRadius = UDim.new(0, 7)
+        ChlUOToCphAI.Parent = zvLfXlBrga
 
-        local TrKvXJcvDh = Instance.new("UIStroke")
-        TrKvXJcvDh.Color = Color3.fromRGB(60, 60, 75)
-        TrKvXJcvDh.Transparency = 0.3
-        TrKvXJcvDh.Thickness = 1
-        TrKvXJcvDh.Parent = wMkLHgWLiH
+        local jFJoXPqRJ = Instance.new("UIStroke")
+        jFJoXPqRJ.Color = Color3.fromRGB(60, 60, 75)
+        jFJoXPqRJ.Transparency = 0.3
+        jFJoXPqRJ.Thickness = 1
+        jFJoXPqRJ.Parent = zvLfXlBrga
 
-        local pZTKyvNP = Instance.new("Frame")
-        pZTKyvNP.Name = RBuybrKfvck()
-        pZTKyvNP.Size = UDim2.fromOffset(250, 215)
-        pZTKyvNP.Position = UDim2.new(0.5, -125, 0.5, -107)
-        pZTKyvNP.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        pZTKyvNP.BackgroundTransparency = 0.05
-        pZTKyvNP.BorderSizePixel = 0
-        pZTKyvNP.Visible = false
-        pZTKyvNP.ClipsDescendants = true
-        pZTKyvNP.Parent = dFDIzAzJnv
+        local PWzcRmjqURsV = Instance.new("Frame")
+        PWzcRmjqURsV.Name = qKEdBbZX()
+        PWzcRmjqURsV.Size = UDim2.fromOffset(250, 215)
+        PWzcRmjqURsV.Position = UDim2.new(0.5, -125, 0.5, -107)
+        PWzcRmjqURsV.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        PWzcRmjqURsV.BackgroundTransparency = 0.05
+        PWzcRmjqURsV.BorderSizePixel = 0
+        PWzcRmjqURsV.Visible = false
+        PWzcRmjqURsV.ClipsDescendants = true
+        PWzcRmjqURsV.Parent = klLyzUEzDlhO
 
-        local kJOmlvmE = Instance.new("UIGradient")
-        kJOmlvmE.Rotation = 90
-        kJOmlvmE.Color = ColorSequence.new({
+        local lunPABOI = Instance.new("UIGradient")
+        lunPABOI.Rotation = 90
+        lunPABOI.Color = ColorSequence.new({
             ColorSequenceKeypoint.new(0, Color3.fromRGB(80, 90, 115)),
             ColorSequenceKeypoint.new(0.35, Color3.fromRGB(15, 16, 22)),
             ColorSequenceKeypoint.new(1, Color3.fromRGB(5, 5, 8)),
         })
-        kJOmlvmE.Transparency = NumberSequence.new({
+        lunPABOI.Transparency = NumberSequence.new({
             NumberSequenceKeypoint.new(0, 0.45),
             NumberSequenceKeypoint.new(0.35, 0.05),
             NumberSequenceKeypoint.new(1, 0.0),
         })
-        kJOmlvmE.Parent = pZTKyvNP
+        lunPABOI.Parent = PWzcRmjqURsV
 
-        local EGpoCuaqv = Instance.new("UICorner")
-        EGpoCuaqv.CornerRadius = UDim.new(0, 12)
-        EGpoCuaqv.Parent = pZTKyvNP
+        local fVRjAyQambIa = Instance.new("UICorner")
+        fVRjAyQambIa.CornerRadius = UDim.new(0, 12)
+        fVRjAyQambIa.Parent = PWzcRmjqURsV
 
-        local mVYrSAhrQol = Instance.new("UIStroke")
-        mVYrSAhrQol.Color = Color3.fromRGB(255, 255, 255)
-        mVYrSAhrQol.Transparency = 0.8
-        mVYrSAhrQol.Thickness = 1
-        mVYrSAhrQol.Parent = pZTKyvNP
+        local zrCpiSQGAw = Instance.new("UIStroke")
+        zrCpiSQGAw.Color = Color3.fromRGB(255, 255, 255)
+        zrCpiSQGAw.Transparency = 0.8
+        zrCpiSQGAw.Thickness = 1
+        zrCpiSQGAw.Parent = PWzcRmjqURsV
 
-        local ErGPqXAghA = Instance.new("Frame")
-        ErGPqXAghA.Size = UDim2.new(1, 0, 0, 42)
-        ErGPqXAghA.BackgroundTransparency = 1
-        ErGPqXAghA.Parent = pZTKyvNP
+        local xQPSjiAKgpAP = Instance.new("Frame")
+        xQPSjiAKgpAP.Size = UDim2.new(1, 0, 0, 42)
+        xQPSjiAKgpAP.BackgroundTransparency = 1
+        xQPSjiAKgpAP.Parent = PWzcRmjqURsV
 
-        local QvKCpmqG = Instance.new("TextLabel")
-        QvKCpmqG.Size = UDim2.new(1, -40, 1, 0)
-        QvKCpmqG.Position = UDim2.fromOffset(14, 0)
-        QvKCpmqG.BackgroundTransparency = 1
-        QvKCpmqG.Text = "PhantomX Device Spoofer"
-        QvKCpmqG.TextColor3 = Color3.fromRGB(255, 255, 255)
-        QvKCpmqG.TextSize = 12
-        QvKCpmqG.Font = Enum.Font.GothamBold
-        QvKCpmqG.TextXAlignment = Enum.TextXAlignment.Left
-        QvKCpmqG.Parent = ErGPqXAghA
+        local BbNktAZFzI = Instance.new("TextLabel")
+        BbNktAZFzI.Size = UDim2.new(1, -40, 1, 0)
+        BbNktAZFzI.Position = UDim2.fromOffset(14, 0)
+        BbNktAZFzI.BackgroundTransparency = 1
+        BbNktAZFzI.Text = "PhantomX Device Spoofer"
+        BbNktAZFzI.TextColor3 = Color3.fromRGB(255, 255, 255)
+        BbNktAZFzI.TextSize = 12
+        BbNktAZFzI.Font = Enum.Font.GothamBold
+        BbNktAZFzI.TextXAlignment = Enum.TextXAlignment.Left
+        BbNktAZFzI.Parent = xQPSjiAKgpAP
 
-        local JgdpmbuwaTF = Instance.new("TextButton")
-        JgdpmbuwaTF.Size = UDim2.fromOffset(26, 26)
-        JgdpmbuwaTF.Position = UDim2.new(1, -32, 0.5, -13)
-        JgdpmbuwaTF.BackgroundTransparency = 1
-        JgdpmbuwaTF.Text = "×"
-        JgdpmbuwaTF.TextColor3 = Color3.fromRGB(200, 200, 210)
-        JgdpmbuwaTF.TextSize = 18
-        JgdpmbuwaTF.Font = Enum.Font.GothamMedium
-        JgdpmbuwaTF.Parent = ErGPqXAghA
+        local ADMlqFQRKYv = Instance.new("TextButton")
+        ADMlqFQRKYv.Size = UDim2.fromOffset(26, 26)
+        ADMlqFQRKYv.Position = UDim2.new(1, -32, 0.5, -13)
+        ADMlqFQRKYv.BackgroundTransparency = 1
+        ADMlqFQRKYv.Text = "×"
+        ADMlqFQRKYv.TextColor3 = Color3.fromRGB(200, 200, 210)
+        ADMlqFQRKYv.TextSize = 18
+        ADMlqFQRKYv.Font = Enum.Font.GothamMedium
+        ADMlqFQRKYv.Parent = xQPSjiAKgpAP
 
-        local FIjGGsjCJ = Instance.new("Frame")
-        FIjGGsjCJ.Size = UDim2.new(1, -28, 0, 1)
-        FIjGGsjCJ.Position = UDim2.fromOffset(14, 42)
-        FIjGGsjCJ.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        FIjGGsjCJ.BackgroundTransparency = 0.88
-        FIjGGsjCJ.BorderSizePixel = 0
-        FIjGGsjCJ.Parent = pZTKyvNP
+        local bsPpSwAOG = Instance.new("Frame")
+        bsPpSwAOG.Size = UDim2.new(1, -28, 0, 1)
+        bsPpSwAOG.Position = UDim2.fromOffset(14, 42)
+        bsPpSwAOG.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        bsPpSwAOG.BackgroundTransparency = 0.88
+        bsPpSwAOG.BorderSizePixel = 0
+        bsPpSwAOG.Parent = PWzcRmjqURsV
 
-        local tHqFJeVP = Instance.new("Frame")
-        tHqFJeVP.Size = UDim2.new(1, -28, 0, 150)
-        tHqFJeVP.Position = UDim2.fromOffset(14, 52)
-        tHqFJeVP.BackgroundTransparency = 1
-        tHqFJeVP.Parent = pZTKyvNP
+        local VFWYsMeH = Instance.new("Frame")
+        VFWYsMeH.Size = UDim2.new(1, -28, 0, 150)
+        VFWYsMeH.Position = UDim2.fromOffset(14, 52)
+        VFWYsMeH.BackgroundTransparency = 1
+        VFWYsMeH.Parent = PWzcRmjqURsV
 
-        local eYNnTzChjdpv = Instance.new("UIListLayout")
-        eYNnTzChjdpv.Padding = UDim.new(0, 6)
-        eYNnTzChjdpv.SortOrder = Enum.SortOrder.LayoutOrder
-        eYNnTzChjdpv.Parent = tHqFJeVP
+        local jTMrMafcYl = Instance.new("UIListLayout")
+        jTMrMafcYl.Padding = UDim.new(0, 6)
+        jTMrMafcYl.SortOrder = Enum.SortOrder.LayoutOrder
+        jTMrMafcYl.Parent = VFWYsMeH
 
-        local XUlgahKDCmn = {}
+        local aSBPyfibh = {}
 
-        local function oJRkqoWf()
-            for name, btnData in OOEpSvcmM(XUlgahKDCmn) do
-                if name == qlJOBsCyK then
-                    wmGejyarqad:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(210, 110, 30),
+        local function zpyrbDckdg()
+            for name, btnData in QyCmNkCfQ(aSBPyfibh) do
+                if name == clUFPbft then
+                    croPVBAjy:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(210, 110, 30),
                         BackgroundTransparency = 0.15,
                     }):Play()
                     btnData.Text.Text = "Are you sure? (Will Rejoin)"
                     btnData.Text.TextColor3 = Color3.fromRGB(255, 255, 255)
-                    wmGejyarqad:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 150, 50),
+                    croPVBAjy:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 150, 50),
                         Transparency = 0.1,
                     }):Play()
-                elseif name == SPXKKwIyfOyq then
-                    wmGejyarqad:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(90, 50, 150),
+                elseif name == gxdyiSOVMmE then
+                    croPVBAjy:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(90, 50, 150),
                         BackgroundTransparency = 0.2,
                     }):Play()
                     btnData.Text.Text = name .. " [Active]"
                     btnData.Text.TextColor3 = Color3.fromRGB(230, 200, 255)
-                    wmGejyarqad:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(180, 130, 255),
+                    croPVBAjy:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(180, 130, 255),
                         Transparency = 0.1,
                     }):Play()
                 else
-                    wmGejyarqad:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
+                    croPVBAjy:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
                         BackgroundTransparency = 0.35,
                     }):Play()
                     btnData.Text.Text = name
                     btnData.Text.TextColor3 = Color3.fromRGB(210, 215, 225)
-                    wmGejyarqad:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 255, 255),
+                    croPVBAjy:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 255, 255),
                         Transparency = 0.88,
                     }):Play()
                 end
             end
         end
 
-        local function NqjXtQWON(name, order)
-            local LWABXRek = Instance.new("TextButton")
-            LWABXRek.Size = UDim2.new(1, 0, 0, 42)
-            LWABXRek.BackgroundColor3 = Color3.fromRGB(18, 20, 28)
-            LWABXRek.BackgroundTransparency = 0.35
-            LWABXRek.Text = ""
-            LWABXRek.AutoButtonColor = false
-            LWABXRek.LayoutOrder = order
-            LWABXRek.Parent = tHqFJeVP
+        local function jNHVYtTbBCr(name, order)
+            local tubGwCWGiG = Instance.new("TextButton")
+            tubGwCWGiG.Size = UDim2.new(1, 0, 0, 42)
+            tubGwCWGiG.BackgroundColor3 = Color3.fromRGB(18, 20, 28)
+            tubGwCWGiG.BackgroundTransparency = 0.35
+            tubGwCWGiG.Text = ""
+            tubGwCWGiG.AutoButtonColor = false
+            tubGwCWGiG.LayoutOrder = order
+            tubGwCWGiG.Parent = VFWYsMeH
 
-            local XrWocIJxvos = Instance.new("UICorner")
-            XrWocIJxvos.CornerRadius = UDim.new(0, 8)
-            XrWocIJxvos.Parent = LWABXRek
+            local rKzFZQWCyM = Instance.new("UICorner")
+            rKzFZQWCyM.CornerRadius = UDim.new(0, 8)
+            rKzFZQWCyM.Parent = tubGwCWGiG
 
-            local MwYsFrpZNN = Instance.new("UIStroke")
-            MwYsFrpZNN.Color = Color3.fromRGB(255, 255, 255)
-            MwYsFrpZNN.Transparency = 0.88
-            MwYsFrpZNN.Thickness = 1
-            MwYsFrpZNN.Parent = LWABXRek
+            local deoIUyuPw = Instance.new("UIStroke")
+            deoIUyuPw.Color = Color3.fromRGB(255, 255, 255)
+            deoIUyuPw.Transparency = 0.88
+            deoIUyuPw.Thickness = 1
+            deoIUyuPw.Parent = tubGwCWGiG
 
-            local zSBfJTwaQXJJ = Instance.new("TextLabel")
-            zSBfJTwaQXJJ.Size = UDim2.new(1, -20, 1, 0)
-            zSBfJTwaQXJJ.Position = UDim2.fromOffset(12, 0)
-            zSBfJTwaQXJJ.BackgroundTransparency = 1
-            zSBfJTwaQXJJ.Text = name
-            zSBfJTwaQXJJ.TextColor3 = Color3.fromRGB(210, 215, 225)
-            zSBfJTwaQXJJ.TextSize = 11
-            zSBfJTwaQXJJ.Font = Enum.Font.GothamMedium
-            zSBfJTwaQXJJ.TextXAlignment = Enum.TextXAlignment.Left
-            zSBfJTwaQXJJ.Parent = LWABXRek
+            local qpvyVuFc = Instance.new("TextLabel")
+            qpvyVuFc.Size = UDim2.new(1, -20, 1, 0)
+            qpvyVuFc.Position = UDim2.fromOffset(12, 0)
+            qpvyVuFc.BackgroundTransparency = 1
+            qpvyVuFc.Text = name
+            qpvyVuFc.TextColor3 = Color3.fromRGB(210, 215, 225)
+            qpvyVuFc.TextSize = 11
+            qpvyVuFc.Font = Enum.Font.GothamMedium
+            qpvyVuFc.TextXAlignment = Enum.TextXAlignment.Left
+            qpvyVuFc.Parent = tubGwCWGiG
 
-            XUlgahKDCmn[name] = {Btn= LWABXRek, Stroke = MwYsFrpZNN, Text = zSBfJTwaQXJJ }
+            aSBPyfibh[name] = {Btn= tubGwCWGiG, Stroke = deoIUyuPw, Text = qpvyVuFc }
 
-            LWABXRek.MouseEnter:Connect(function()
-                if qlJOBsCyK ~= name and SPXKKwIyfOyq ~= name then
-                    wmGejyarqad:Create(LWABXRek, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(32, 36, 50),
+            tubGwCWGiG.MouseEnter:Connect(function()
+                if clUFPbft ~= name and gxdyiSOVMmE ~= name then
+                    croPVBAjy:Create(tubGwCWGiG, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(32, 36, 50),
                         BackgroundTransparency = 0.2,
                     }):Play()
                 end
             end)
-            LWABXRek.MouseLeave:Connect(function()
-                if qlJOBsCyK ~= name and SPXKKwIyfOyq ~= name then
-                    wmGejyarqad:Create(LWABXRek, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
+            tubGwCWGiG.MouseLeave:Connect(function()
+                if clUFPbft ~= name and gxdyiSOVMmE ~= name then
+                    croPVBAjy:Create(tubGwCWGiG, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
                         BackgroundTransparency = 0.35,
                     }):Play()
                 end
             end)
 
-            LWABXRek.MouseButton1Click:Connect(function()
-                if SPXKKwIyfOyq == name then return end
-                if qlJOBsCyK == name then
-                    SPXKKwIyfOyq = name
-                    ahNleTRX(name)
-                    qlJOBsCyK = nil
+            tubGwCWGiG.MouseButton1Click:Connect(function()
+                if gxdyiSOVMmE == name then return end
+                if clUFPbft == name then
+                    gxdyiSOVMmE = name
+                    yGPecptX(name)
+                    clUFPbft = nil
                     if activeToken and activeExpiry then
-                        JTFLnHBgcYKc(activeToken, activeExpiry)
+                        VHKpUsHbthR(activeToken, activeExpiry)
                     end
-                    zSBfJTwaQXJJ.Text = "Rejoining..."
-                    oJRkqoWf()
-                    TMKqmCRLzZa()
+                    qpvyVuFc.Text = "Rejoining..."
+                    zpyrbDckdg()
+                    ulnjBQaE()
                     if queue_on_teleport then
                         queue_on_teleport("_G.TargetDevice = '" .. name .. "'")
                     end
                     task.wait(0.2)
                     game:GetService("TeleportService"):TeleportToPlaceInstance(
-                        game.PlaceId, game.JobId, FjCOadxMWVHn
+                        game.PlaceId, game.JobId, PxBxLZXezbuI
                     )
                     return
                 end
-                qlJOBsCyK = name
-                oJRkqoWf()
+                clUFPbft = name
+                zpyrbDckdg()
             end)
         end
 
-        for i, plat in VYwJbcJom(iiwwZyNcz) do
-            NqjXtQWON(plat, i)
+        for i, plat in pGeZzgRfIj(bMyqYOIE) do
+            jNHVYtTbBCr(plat, i)
         end
-        oJRkqoWf()
+        zpyrbDckdg()
 
-        local function uJLZlXKg()
-            NGRWGCoHzcbd = true
-            pZTKyvNP.Visible = true
-            pZTKyvNP.Position = UDim2.new(0.5, -125, 0.5, -97)
-            wmGejyarqad:Create(
-                pZTKyvNP,
+        local function iVpuloRu()
+            fwMJnBFEB = true
+            PWzcRmjqURsV.Visible = true
+            PWzcRmjqURsV.Position = UDim2.new(0.5, -125, 0.5, -97)
+            croPVBAjy:Create(
+                PWzcRmjqURsV,
                 TweenInfo.new(0.22, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
                 {Position= UDim2.new(0.5, -125, 0.5, -107) }
             ):Play()
-            wmGejyarqad:Create(mVYrSAhrQol, TweenInfo.new(0.22), {Transparency= 0.65,
+            croPVBAjy:Create(zrCpiSQGAw, TweenInfo.new(0.22), {Transparency= 0.65,
             }):Play()
         end
 
-        local function rhZGXqEb()
-            NGRWGCoHzcbd = false
-            qlJOBsCyK = nil
-            oJRkqoWf()
-            local SxNptoKDEMH = wmGejyarqad:Create(
-                pZTKyvNP,
+        local function bJKsIuQgdDLx()
+            fwMJnBFEB = false
+            clUFPbft = nil
+            zpyrbDckdg()
+            local xCGtPbEIyOtt = croPVBAjy:Create(
+                PWzcRmjqURsV,
                 TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
                 {Position= UDim2.new(0.5, -125, 0.5, -97) }
             )
-            wmGejyarqad:Create(mVYrSAhrQol, TweenInfo.new(0.15), {Transparency= 1,
+            croPVBAjy:Create(zrCpiSQGAw, TweenInfo.new(0.15), {Transparency= 1,
             }):Play()
-            SxNptoKDEMH:Play()
-            SxNptoKDEMH.Completed:Once(function()
-                if not NGRWGCoHzcbd then pZTKyvNP.Visible = false end
+            xCGtPbEIyOtt:Play()
+            xCGtPbEIyOtt.Completed:Once(function()
+                if not fwMJnBFEB then PWzcRmjqURsV.Visible = false end
             end)
         end
 
-        wMkLHgWLiH.MouseButton1Click:Connect(function()
-            if NGRWGCoHzcbd then rhZGXqEb() else uJLZlXKg() end
+        zvLfXlBrga.MouseButton1Click:Connect(function()
+            if fwMJnBFEB then bJKsIuQgdDLx() else iVpuloRu() end
         end)
-        JgdpmbuwaTF.MouseButton1Click:Connect(function() rhZGXqEb() end)
+        ADMlqFQRKYv.MouseButton1Click:Connect(function() bJKsIuQgdDLx() end)
 
-        wMkLHgWLiH.MouseEnter:Connect(function()
-            wmGejyarqad:Create(TrKvXJcvDh, TweenInfo.new(0.12), {Transparency= 0.1,
+        zvLfXlBrga.MouseEnter:Connect(function()
+            croPVBAjy:Create(jFJoXPqRJ, TweenInfo.new(0.12), {Transparency= 0.1,
             }):Play()
-            wmGejyarqad:Create(wMkLHgWLiH, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(22, 22, 28),
+            croPVBAjy:Create(zvLfXlBrga, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(22, 22, 28),
             }):Play()
         end)
-        wMkLHgWLiH.MouseLeave:Connect(function()
-            wmGejyarqad:Create(TrKvXJcvDh, TweenInfo.new(0.12), {Transparency= 0.3,
+        zvLfXlBrga.MouseLeave:Connect(function()
+            croPVBAjy:Create(jFJoXPqRJ, TweenInfo.new(0.12), {Transparency= 0.3,
             }):Play()
-            wmGejyarqad:Create(wMkLHgWLiH, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(12, 12, 15),
+            croPVBAjy:Create(zvLfXlBrga, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(12, 12, 15),
             }):Play()
         end)
     end
 
-    jzgdRpocogj()
+    GsRyikhW()
 
     task.spawn(function()
-        for jQjfYWqOhbVa = 1, 15 do
+        for cJaLYsJew = 1, 15 do
             if _G.__dm_killed then return end
-            TMKqmCRLzZa()
+            ulnjBQaE()
             task.wait(0.8)
         end
     end)
 
     task.spawn(function()
-        local FjCOadxMWVHn = game.Players.LocalPlayer
-        if not FjCOadxMWVHn then
+        local PxBxLZXezbuI = game.Players.LocalPlayer
+        if not PxBxLZXezbuI then
             game.Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
-            FjCOadxMWVHn = game.Players.LocalPlayer
+            PxBxLZXezbuI = game.Players.LocalPlayer
         end
-        FjCOadxMWVHn.CharacterAdded:Connect(function()
+        PxBxLZXezbuI.CharacterAdded:Connect(function()
             task.wait(1)
             if _G.__dm_killed then return end
-            TMKqmCRLzZa()
+            ulnjBQaE()
         end)
     end)
 
     task.spawn(function()
         while not _G.__dm_killed do task.wait(0.5) end
-        for jQjfYWqOhbVa, g in VYwJbcJom(gaUHhDuNP) do
-            bGZwfejQfml(function() g:Destroy() end)
+        for cJaLYsJew, g in pGeZzgRfIj(LLtPVGGRo) do
+            FpmUOlkiL(function() g:Destroy() end)
         end
     end)
 end
 
 -- ===== التفعيل =====
-local UfuWBkNshkqE, vBbwXoRbUpeL = uLknHihpozY()
-bCCSRisttjM(KvQGIrbxnfg())
-if #iiwwZyNcz == 0 then
-    jrCDYhRqPX("No compatible device option is enabled for this account", "NO_COMPATIBLE_PLATFORM")
+local gKJPLQAsycuJ, JFjjxXRDbeW = CPzhmQzPlYZ()
+dDZWYwogRKnN(zSqkkswSf())
+if #bMyqYOIE == 0 then
+    kazMWRwBPyhq("No compatible device option is enabled for this account", "NO_COMPATIBLE_PLATFORM")
     return
 end
 
-if UfuWBkNshkqE then
-    local jQjfYWqOhbVa, tFBJNiFogZ = bsQNUymxp("POST", "/api/license/heartbeat", {sessionToken= UfuWBkNshkqE,
-        scriptVariant = zshvjkCTS,
-        deviceFingerprint = OQvfYUvD,
-        robloxUserId = vMQUrsKdVTTA,
+if gKJPLQAsycuJ then
+    local cJaLYsJew, MpKKBXYDJhjb = sGgeZgzj("POST", "/api/license/heartbeat", {sessionToken= gKJPLQAsycuJ,
+        scriptVariant = enVkrlIqPJI,
+        deviceFingerprint = dCAArTWHdYq,
+        robloxUserId = tWyNBDTZgW,
     })
-    if not tFBJNiFogZ or tFBJNiFogZ.success ~= true then
+    if not MpKKBXYDJhjb or MpKKBXYDJhjb.success ~= true then
         _G.__dm_killed = true
-        RyIheXZM()
-        jrCDYhRqPX("License verification failed", tFBJNiFogZ and tFBJNiFogZ.error or "HEARTBEAT_FAILED")
+        PJLSKruHxH()
+        kazMWRwBPyhq("License verification failed", MpKKBXYDJhjb and MpKKBXYDJhjb.error or "HEARTBEAT_FAILED")
         return
     end
 
-    task.spawn(JZFgzfiC, UfuWBkNshkqE, vBbwXoRbUpeL)
+    task.spawn(nBuamglqUebg, gKJPLQAsycuJ, JFjjxXRDbeW)
     task.spawn(function()
-        while os.time() < vBbwXoRbUpeL do
+        while os.time() < JFjjxXRDbeW do
             task.wait(20)
-            if os.time() >= vBbwXoRbUpeL then
+            if os.time() >= JFjjxXRDbeW then
                 _G.__dm_killed = true
-                RyIheXZM()
+                PJLSKruHxH()
                 break
             end
-            local jQjfYWqOhbVa, dLPdKmAUv = bsQNUymxp("POST", "/api/license/heartbeat", {sessionToken= UfuWBkNshkqE,
-                scriptVariant = zshvjkCTS,
-                deviceFingerprint = OQvfYUvD,
-                robloxUserId = vMQUrsKdVTTA,
+            local cJaLYsJew, NoGoPToRMQ = sGgeZgzj("POST", "/api/license/heartbeat", {sessionToken= gKJPLQAsycuJ,
+                scriptVariant = enVkrlIqPJI,
+                deviceFingerprint = dCAArTWHdYq,
+                robloxUserId = tWyNBDTZgW,
             })
-            if not dLPdKmAUv or dLPdKmAUv.success ~= true then
+            if not NoGoPToRMQ or NoGoPToRMQ.success ~= true then
                 _G.__dm_killed = true
-                RyIheXZM()
+                PJLSKruHxH()
                 break
             end
         end
     end)
-    RjHcPSjpFE("done")
+    xrAmOWuea("done")
     return
 end
 
-NFzBJKkIGpk("Connecting to secure license service...", Color3.fromRGB(151, 112, 255), 5)
+EDSyQgNJBl("Connecting to secure license service...", Color3.fromRGB(151, 112, 255), 5)
 
-local jQjfYWqOhbVa, SIzFnSyvK, mnRtLPWIJo = bsQNUymxp("GET", "/api/license/product")
-if not SIzFnSyvK then jrCDYhRqPX("Service unavailable", mnRtLPWIJo) return end
-if SIzFnSyvK.enabled ~= true then
-    jrCDYhRqPX("DeviceMode is currently disabled", "PRODUCT_DISABLED")
+local cJaLYsJew, CYCuneeD, xIkAnUGueMQ = sGgeZgzj("GET", "/api/license/product")
+if not CYCuneeD then kazMWRwBPyhq("Service unavailable", xIkAnUGueMQ) return end
+if CYCuneeD.enabled ~= true then
+    kazMWRwBPyhq("DeviceMode is currently disabled", "PRODUCT_DISABLED")
     return
 end
-if SIzFnSyvK.minimumSupportedVersion and wbTUdIZLDHM < SIzFnSyvK.minimumSupportedVersion then
-    jrCDYhRqPX("Please update your DeviceMode script", "CLIENT_UPDATE_REQUIRED")
+if CYCuneeD.minimumSupportedVersion and iNZlznCkZZX < CYCuneeD.minimumSupportedVersion then
+    kazMWRwBPyhq("Please update your DeviceMode script", "CLIENT_UPDATE_REQUIRED")
     return
 end
 
-local YrJLRmTi = {licenseKey= YPbwXhSn,
-    clientVersion = wbTUdIZLDHM,
-    scriptVariant = zshvjkCTS,
-    deviceFingerprint = OQvfYUvD,
-    robloxUserId = vMQUrsKdVTTA,
+local pkYPqwTINu = {licenseKey= gcptLSWXtIB,
+    clientVersion = iNZlznCkZZX,
+    scriptVariant = enVkrlIqPJI,
+    deviceFingerprint = dCAArTWHdYq,
+    robloxUserId = tWyNBDTZgW,
 }
 
-local jQjfYWqOhbVa, CpeBkcCYi, YQSRzRVyg = bsQNUymxp("POST", "/api/license/activate", YrJLRmTi)
-if not CpeBkcCYi or CpeBkcCYi.success ~= true then
-    local jGXEesiIVpj = CpeBkcCYi and CpeBkcCYi.error or YQSRzRVyg or "ACTIVATION_FAILED"
-    if jGXEesiIVpj == "LICENSE_EXPIRED" then
-        jrCDYhRqPX("License expired", jGXEesiIVpj)
-    elseif jGXEesiIVpj == "USER_NOT_ALLOWED" then
-        jrCDYhRqPX("This Roblox account is not authorized", jGXEesiIVpj)
-    elseif jGXEesiIVpj == "DEVICE_MISMATCH" then
-        jrCDYhRqPX("This device is not bound to the license", jGXEesiIVpj)
-    elseif jGXEesiIVpj == "INVALID_LICENSE" then
-        jrCDYhRqPX("License key was not found", jGXEesiIVpj)
+local cJaLYsJew, lZyunuDdbz, NkakZAZd = sGgeZgzj("POST", "/api/license/activate", pkYPqwTINu)
+if not lZyunuDdbz or lZyunuDdbz.success ~= true then
+    local LqQBzaxMfj = lZyunuDdbz and lZyunuDdbz.error or NkakZAZd or "ACTIVATION_FAILED"
+    if LqQBzaxMfj == "LICENSE_EXPIRED" then
+        kazMWRwBPyhq("License expired", LqQBzaxMfj)
+    elseif LqQBzaxMfj == "USER_NOT_ALLOWED" then
+        kazMWRwBPyhq("This Roblox account is not authorized", LqQBzaxMfj)
+    elseif LqQBzaxMfj == "DEVICE_MISMATCH" then
+        kazMWRwBPyhq("This device is not bound to the license", LqQBzaxMfj)
+    elseif LqQBzaxMfj == "INVALID_LICENSE" then
+        kazMWRwBPyhq("License key was not found", LqQBzaxMfj)
     else
-        jrCDYhRqPX("License verification failed", jGXEesiIVpj)
+        kazMWRwBPyhq("License verification failed", LqQBzaxMfj)
     end
     return
 end
 
-local sVDWBfYaOS = CpeBkcCYi.sessionToken
-local DIYUqHkRUmhQ = CpeBkcCYi.license and ogXZJUWm(CpeBkcCYi.license.expiresAt)
-if type(sVDWBfYaOS) ~= "string" or sVDWBfYaOS == "" or not DIYUqHkRUmhQ then
-    jrCDYhRqPX("Server returned an incomplete license response", "INVALID_ACTIVATION")
+local CymvzpBjviy = lZyunuDdbz.sessionToken
+local zmYIKeiFlv = lZyunuDdbz.license and iiGCpVuFjd(lZyunuDdbz.license.expiresAt)
+if type(CymvzpBjviy) ~= "string" or CymvzpBjviy == "" or not zmYIKeiFlv then
+    kazMWRwBPyhq("Server returned an incomplete license response", "INVALID_ACTIVATION")
     return
 end
 
-NUVlQispi(CpeBkcCYi.allowedPlatforms)
-bCCSRisttjM(KvQGIrbxnfg())
-if #iiwwZyNcz == 0 then
-    jrCDYhRqPX("No compatible device option is enabled for this account", "NO_COMPATIBLE_PLATFORM")
+MxgzNzZRU(lZyunuDdbz.allowedPlatforms)
+dDZWYwogRKnN(zSqkkswSf())
+if #bMyqYOIE == 0 then
+    kazMWRwBPyhq("No compatible device option is enabled for this account", "NO_COMPATIBLE_PLATFORM")
     return
 end
-if os.time() >= DIYUqHkRUmhQ then
-    jrCDYhRqPX("License expired", "LICENSE_EXPIRED")
+if os.time() >= zmYIKeiFlv then
+    kazMWRwBPyhq("License expired", "LICENSE_EXPIRED")
     return
 end
 
-NFzBJKkIGpk(
-    "License verified · " .. kkockaBt(DIYUqHkRUmhQ - os.time()) .. " remaining",
+EDSyQgNJBl(
+    "License verified · " .. GkyKooff(zmYIKeiFlv - os.time()) .. " remaining",
     Color3.fromRGB(85, 215, 164),
     8
 )
 
-JTFLnHBgcYKc(sVDWBfYaOS, DIYUqHkRUmhQ)
-task.spawn(JZFgzfiC, sVDWBfYaOS, DIYUqHkRUmhQ)
+VHKpUsHbthR(CymvzpBjviy, zmYIKeiFlv)
+task.spawn(nBuamglqUebg, CymvzpBjviy, zmYIKeiFlv)
 
-local OEirstZTeI = true
-while OEirstZTeI do
+local hEkWlGcCb = true
+while hEkWlGcCb do
     task.wait(30)
-    if os.time() >= DIYUqHkRUmhQ then
-        OEirstZTeI = false
-        RyIheXZM()
-        jrCDYhRqPX("License expired", "LICENSE_EXPIRED")
+    if os.time() >= zmYIKeiFlv then
+        hEkWlGcCb = false
+        PJLSKruHxH()
+        kazMWRwBPyhq("License expired", "LICENSE_EXPIRED")
         break
     end
-    local jQjfYWqOhbVa, tFBJNiFogZ = bsQNUymxp("POST", "/api/license/heartbeat", {sessionToken= sVDWBfYaOS,
-        scriptVariant = zshvjkCTS,
-        deviceFingerprint = OQvfYUvD,
-        robloxUserId = vMQUrsKdVTTA,
+    local cJaLYsJew, MpKKBXYDJhjb = sGgeZgzj("POST", "/api/license/heartbeat", {sessionToken= CymvzpBjviy,
+        scriptVariant = enVkrlIqPJI,
+        deviceFingerprint = dCAArTWHdYq,
+        robloxUserId = tWyNBDTZgW,
     })
-    if not tFBJNiFogZ or tFBJNiFogZ.success ~= true then
-        local jGXEesiIVpj = tFBJNiFogZ and tFBJNiFogZ.error or "HEARTBEAT_FAILED"
-        OEirstZTeI = false
-        RyIheXZM()
-        if jGXEesiIVpj == "LICENSE_EXPIRED" then
-            jrCDYhRqPX("License expired", jGXEesiIVpj)
-        elseif jGXEesiIVpj == "LICENSE_REVOKED" then
-            jrCDYhRqPX("License revoked by administrator", jGXEesiIVpj)
-        elseif jGXEesiIVpj == "SESSION_INVALID" then
-            jrCDYhRqPX("License session is no longer valid", jGXEesiIVpj)
+    if not MpKKBXYDJhjb or MpKKBXYDJhjb.success ~= true then
+        local LqQBzaxMfj = MpKKBXYDJhjb and MpKKBXYDJhjb.error or "HEARTBEAT_FAILED"
+        hEkWlGcCb = false
+        PJLSKruHxH()
+        if LqQBzaxMfj == "LICENSE_EXPIRED" then
+            kazMWRwBPyhq("License expired", LqQBzaxMfj)
+        elseif LqQBzaxMfj == "LICENSE_REVOKED" then
+            kazMWRwBPyhq("License revoked by administrator", LqQBzaxMfj)
+        elseif LqQBzaxMfj == "SESSION_INVALID" then
+            kazMWRwBPyhq("License session is no longer valid", LqQBzaxMfj)
         else
-            jrCDYhRqPX("License session ended", jGXEesiIVpj)
+            kazMWRwBPyhq("License session ended", LqQBzaxMfj)
         end
         break
     end
 end
 
-if EzaDvRYmh and EzaDvRYmh.Parent then
+if kTPezDSsY and kTPezDSsY.Parent then
     task.delay(12, function()
-        if EzaDvRYmh and EzaDvRYmh.Parent then EzaDvRYmh:Destroy() end
+        if kTPezDSsY and kTPezDSsY.Parent then kTPezDSsY:Destroy() end
     end)
 end
-RjHcPSjpFE("done")
+xrAmOWuea("done")
         end
         break
     end
 end
+local dummy = 1; dummy = dummy + 8;
 
-local cxtccv = 37
-if true then local _ = 84 end
-local yhljbz = 7
-if false then local _ = 33 end
-local vtbpma = 2
-if true then local _ = 85 end
-local function azgitx(ataqdk) local _ = 43 end
-if true then local _ = 83 end
-local zouwfe = 57
-local schnty = 31
-if true then local _ = 25 end
-local function fbxlsx(ijclif) local _ = 35 end
-local hclccv = 68
-while false do local _ = 19 break end
-local function zlqnbu(rlrlpn) local _ = 59 end
-local function iunmlj(qpllrz) local _ = 35 end
+local function vydtpm(wdrnlb) local _ = 79 end
+while false do local _ = 85 break end
+if false then local _ = 81 end
+local lpcykj = 20
+if false then local _ = 86 end
+local tqxwrv = 9
+local taojnx = 99
+while false do local _ = 34 break end
+if false then local _ = 6 end
+while false do local _ = 33 break end
+if false then local _ = 54 end
+local function dacgqb(wjbcfr) local _ = 28 end
+local function qmcxvg(jqmdvh) local _ = 44 end
+local function bvayha(pssvxp) local _ = 22 end
