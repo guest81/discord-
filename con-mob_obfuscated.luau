@@ -10,945 +10,1100 @@ if not loadstring and load then loadstring = load end
 if not loadstring then loadstring = function(s) return load(s) end end
 
 --[Obfuscated by Hercules v2.0.0 | hercules-obfuscator.xyz/discord | hercules-obfuscator.xyz/source]
-local function anwjme(ygismj) local _ = 72 end
-local function haedeg(wydior) local _ = 64 end
-local function nikbox(aaiucd) local _ = 83 end
-if true then local _ = 20 end
-local aqerxt = 34
-local chssyd = 68
-if true then local _ = 93 end
-local fktifz = 23
+(function(...) local function pmviss(qjwfvy) local _ = 92 end
+while false do local _ = 47 break end
+local function wmocjb(eavpuo) local _ = 82 end
+if true then local _ = 15 end
+local function tltqdz(qcpbiw) local _ = 79 end
+local mrmhoe = 98
+if false then local _ = 47 end
+local zvfcce = 30
+if true then local _ = 86 end
+while false do local _ = 63 break end
+local lvdmpp = 100
+local function tuxyac(eqqoiw) local _ = 7 end
+while false do local _ = 68 break end
+local zzapen = 3
+local function ogvjij(kqnzjr) local _ = 8 end
+local function bscfkb(bhrzln) local _ = 42 end
+local vcryrx = 19
+local function cknxil(jkzrgz) local _ = 25 end
+while false do local _ = 11 break end
+local function iuqmzi(ebrylz) local _ = 53 end
+local function juaxub(jnixav) local _ = 78 end
+while false do local _ = 57 break end
+local function gbsixk(zjedtb) local _ = 80 end
+local elztia = 17
+local function aokydn(cyuivm) local _ = 78 end
+while false do local _ = 59 break end
+while false do local _ = 98 break end
+local aopyrb = 34
+while false do local _ = 55 break end
+if false then local _ = 40 end
+local function gwlrui(cikzxi) local _ = 84 end
+local edeynw = 12
+if true then local _ = 71 end
+if false then local _ = 55 end
+local jvdtly = 56
+local function brcgly(lwhjlp) local _ = 75 end
+local function fwqfjv(kuxzok) local _ = 36 end
+if true then local _ = 23 end
+local tkafyi = 26
+local function sxphtp(xujiqt) local _ = 45 end
+local function erwjhg(aqsnbg) local _ = 58 end
+local zvorba = 38
+if false then local _ = 1 end
+if true then local _ = 37 end
+local function xlikcz(sokosc) local _ = 87 end
+local function mvqica(dezikh) local _ = 28 end
+while false do local _ = 14 break end
+local function wgofmf(qwqnaf) local _ = 7 end
+while false do local _ = 61 break end
+local nkmoak = 87
+if false then local _ = 78 end
+if false then local _ = 74 end
+local function axhqgv(wwabsd) local _ = 26 end
+local nnoily = 35
+if false then local _ = 40 end
+if false then local _ = 35 end
+local function jihpka(jkzgdv) local _ = 59 end
+local fkpilx = 33
+while false do local _ = 41 break end
+local noviks = 24
+local gpbchx = 25
+local function cvcgwc(aulqfp) local _ = 72 end
+local swccxu = 43
+if true then local _ = 100 end
+if true then local _ = 79 end
+local function zqeinb(cpkdvw) local _ = 11 end
 while false do local _ = 32 break end
-while false do local _ = 44 break end
-local function clwxwe(wsbilv) local _ = 77 end
-while false do local _ = 96 break end
+if false then local _ = 97 end
+if true then local _ = 83 end
+local oolqzf = 42
+local function wsgona(nayzmy) local _ = 3 end
+local itziam = 78
+while false do local _ = 74 break end
+local rtbikg = 23
+local qecxbt = 27
 while false do local _ = 86 break end
-local sknpaj = 87
-local thing = 1694;
-local thing2 = 1694;
+if true then local _ = 74 end
+local sjicke = 54
+if false then local _ = 80 end
+local function rtfbrs(srbhxz) local _ = 63 end
+local spprpw = 72
+local function ixwluy(eaejgz) local _ = 37 end
+local thing = 4892;
+local thing2 = 4892;
 local counter = 0;
 while thing == thing2 and counter < 1 do
     thing = thing + 1;
     counter = counter + 1;
     if thing == thing2 then
-        local temp = 44; temp = temp * 2;
+        local temp = 75; temp = temp * 2;
     else
         do
-            local PKJczLjiIK,GpednOqVWyU,oSYfEazxL,VWWnQQEQnsY,nZqCFhHuCA,HVgBETgU,zbocotfgJj,jjaBToRGQbH,opZJKZkgt,EirFAdoA,GWpmyiEqHj,qdUcTfPgZmzS,HGfqfOoSC,ZUOxImnP,luWRWSGkF,lKPWWSgK,OZmxfewMOWn,lgwoJRJkJ
-PKJczLjiIK=error;GpednOqVWyU=ipairs;oSYfEazxL=pairs;VWWnQQEQnsY=pcall;nZqCFhHuCA=print;HVgBETgU=rawget;zbocotfgJj=rawset;jjaBToRGQbH=select;opZJKZkgt=tonumber;EirFAdoA=tostring;GWpmyiEqHj=math.floor;qdUcTfPgZmzS=math.max;HGfqfOoSC=math.random;ZUOxImnP=string.char;luWRWSGkF=string.format;lKPWWSgK=table.concat;OZmxfewMOWn=table.insert;lgwoJRJkJ=os.time;
-local tEPlrbDZPBS = game:GetService("HttpService")
-local cuHFhqbMKjtj = game:GetService("Players")
-local dcxVyAvapxP = game:GetService("TweenService")
+            local yVSjeJpSyRnTvkYDCzhJ,ejlOOQQfErJaYNBJibJfztiEOPI,niFTNldGeYtHaLroTzbXODsyhRvWdHF,fieQswhHbYswCpFYhktKuvgqdKli,iyfeYiuABQflzzcNXaRh,ePmOOrRZrTLgHLrjsQwfAmSEgdUufB,EmzETFZfmugMEusyCkyjQVZNHGObi,iNyPObWwkbvbNhrvxLXDhTborZqjSI,vOozQnqEkgDTbJbkgACuJKmh,JaaefPLrnHMyGpQUzSwaffjy,cwzlbGUwMXWxJyhzjXNhqsZycKno,yNIoWFLLsfTJXXkZWGyuYXGvoEN,ljSrjanmYueVSnoePqSaXEgb,gzQvzSXXwtlaPybEkahFnsInCdU,sQnvGpqiMeiCCNJhPtEyGaxffYV,UziQVrDNWMOnzPnKFaBtFNVdIBDt,BZiThGJJQaNegBmPDyHGbLGA,wxAacBSDBztFWUYQDNnngbUJ
+yVSjeJpSyRnTvkYDCzhJ=error;ejlOOQQfErJaYNBJibJfztiEOPI=ipairs;niFTNldGeYtHaLroTzbXODsyhRvWdHF=pairs;fieQswhHbYswCpFYhktKuvgqdKli=pcall;iyfeYiuABQflzzcNXaRh=print;ePmOOrRZrTLgHLrjsQwfAmSEgdUufB=rawget;EmzETFZfmugMEusyCkyjQVZNHGObi=rawset;iNyPObWwkbvbNhrvxLXDhTborZqjSI=select;vOozQnqEkgDTbJbkgACuJKmh=tonumber;JaaefPLrnHMyGpQUzSwaffjy=tostring;cwzlbGUwMXWxJyhzjXNhqsZycKno=math.floor;yNIoWFLLsfTJXXkZWGyuYXGvoEN=math.max;ljSrjanmYueVSnoePqSaXEgb=math.random;gzQvzSXXwtlaPybEkahFnsInCdU=string.char;sQnvGpqiMeiCCNJhPtEyGaxffYV=string.format;UziQVrDNWMOnzPnKFaBtFNVdIBDt=table.concat;BZiThGJJQaNegBmPDyHGbLGA=table.insert;wxAacBSDBztFWUYQDNnngbUJ=os.time;
+local function yqFQnwfpgJUEuWcSJSwkLBpVUUZi(rvinFTRQgUhKzyZXqzNJnbn)
+    return (rvinFTRQgUhKzyZXqzNJnbn >= 48 and rvinFTRQgUhKzyZXqzNJnbn <= 57) or (rvinFTRQgUhKzyZXqzNJnbn >= 65 and rvinFTRQgUhKzyZXqzNJnbn <= 90) or (rvinFTRQgUhKzyZXqzNJnbn >= 97 and rvinFTRQgUhKzyZXqzNJnbn <= 122)
+end
+
+local function VVOCViJKJhiHhHideiDZ(UbIoGsxZhXc, EsHIRIWuqfA)
+    local acEBmOFySClfCyJNrJETkPUWfutHv = {}
+    for i = 1, #UbIoGsxZhXc do
+        local rvinFTRQgUhKzyZXqzNJnbn = UbIoGsxZhXc:byte(i)
+        if yqFQnwfpgJUEuWcSJSwkLBpVUUZi(rvinFTRQgUhKzyZXqzNJnbn) then
+            local zhGaViSNRxslhoPnbNkcfCSZYkz            if rvinFTRQgUhKzyZXqzNJnbn >= 48 and rvinFTRQgUhKzyZXqzNJnbn <= 57 then
+                zhGaViSNRxslhoPnbNkcfCSZYkz = ((rvinFTRQgUhKzyZXqzNJnbn - 48 - EsHIRIWuqfA + 10) % 10) + 48
+            elseif rvinFTRQgUhKzyZXqzNJnbn >= 65 and rvinFTRQgUhKzyZXqzNJnbn <= 90 then
+                zhGaViSNRxslhoPnbNkcfCSZYkz = ((rvinFTRQgUhKzyZXqzNJnbn - 65 - EsHIRIWuqfA + 26) % 26) + 65
+            elseif rvinFTRQgUhKzyZXqzNJnbn >= 97 and rvinFTRQgUhKzyZXqzNJnbn <= 122 then
+                zhGaViSNRxslhoPnbNkcfCSZYkz = ((rvinFTRQgUhKzyZXqzNJnbn - 97 - EsHIRIWuqfA + 26) % 26) + 97
+            end
+            table.insert(acEBmOFySClfCyJNrJETkPUWfutHv, string.char(zhGaViSNRxslhoPnbNkcfCSZYkz))
+        else
+            table.insert(acEBmOFySClfCyJNrJETkPUWfutHv, string.char(rvinFTRQgUhKzyZXqzNJnbn))
+        end
+    end
+    return table.concat(acEBmOFySClfCyJNrJETkPUWfutHv)
+end
+
+local sCISzrDjiHfPwJnStrpBGKO = game:GetService(VVOCViJKJhiHhHideiDZ("DpplOanreya", 22))
+local VoDtZZUoAcMkgENMDsmFInUeSjM = game:GetService(VVOCViJKJhiHhHideiDZ("Okzxdqr", 25))
+local pWAQCqRwzCzKMUnLYVvSMIOuIwzyei = game:GetService(VVOCViJKJhiHhHideiDZ("SvddmRdquhbd", 25))
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
 -- المنصات المتاحة
-local JSYuZczF = {"Console", "Mobile"}
+local GjgRQGOMaixRSwXNKDQgOyxYnTm = {VVOCViJKJhiHhHideiDZ("Rdchdat", 15), VVOCViJKJhiHhHideiDZ("Lnahkd", 25)}
 
-local BUBwHJMhY = "https://devicemode-cctgi3ma.manus.space"
-local VMSkAFKal = "1.0.0"
-local EVULeHyrD = "CONSOLE_MOBILE"
-local kIQgLpBnOUiO = 300
+local DKLaIIJCDZuXMWnQrBbCjduOPc = VVOCViJKJhiHhHideiDZ("gssor://cduhbdlncd-bbsfh8lz.lzmtr.rozbd", 25)
+local crnrAfdNGEBPUEblMGEsGjyklHhwSCx = VVOCViJKJhiHhHideiDZ("2.1.1", 1)
+local rEUdGiOAtgpWxWGIrkzQAmfi = VVOCViJKJhiHhHideiDZ("BNMRNKD_LNAHKD", 25)
+local iAwgLUldhRHVjTBbNvCoYfoutQFnnSO = 300
 
-local MkAvWTPpj = {
+local tVtxngzwypysceeaSkivxPZCsDAL = {
     [11379739543]    = true,
     [98752102030179] = true,
 }
 
-if not MkAvWTPpj[game.PlaceId] then return end
+if not tVtxngzwypysceeaSkivxPZCsDAL[game.PlaceId] then return end
 
-local cjHXUTUe = table.concat(JSYuZczF, "_")
-local SAouAtfYOm = "sys_sess_v4_" .. cjHXUTUe .. ".bin"
-local igYlzkUu  = "sys_cfg_v5_cache.bin"
-local feWdQxDAloe = "sys_allowed_v5_" .. cjHXUTUe .. ".bin"
+local pgHQwUETQjYRLZmukUslXvcZMl = table.concat(GjgRQGOMaixRSwXNKDQgOyxYnTm, VVOCViJKJhiHhHideiDZ("_", 1))
+local LXgXTqawwhGmqkJNWZdwywxC = VVOCViJKJhiHhHideiDZ("lrl_lxll_o3_", 19) .. pgHQwUETQjYRLZmukUslXvcZMl .. VVOCViJKJhiHhHideiDZ(".taf", 18)
+local jTuQHoRoROoxNnvFdcXbkS  = VVOCViJKJhiHhHideiDZ("qwq_ade_t9_ayafc.zgl", 24)
+local HFAObAxTHCncOQjBQPptjqJODzeWww = VVOCViJKJhiHhHideiDZ("ouo_whhksaz_r7_", 22) .. pgHQwUETQjYRLZmukUslXvcZMl .. VVOCViJKJhiHhHideiDZ(".wdi", 21)
 
-local RhlWQefH = getgenv and getgenv() or _G
-local bzDirNSCnAvd = RhlWQefH.DeviceModeKey
-if type(bzDirNSCnAvd) ~= "string" or bzDirNSCnAvd == "" then return end
+local GoImVGZyOiREFReYbqSLxQZ = getgenv and getgenv() or _G
+local SAjGuoFWLIjtuGJkojbxkFBNnqtGuIGG = GoImVGZyOiREFReYbqSLxQZ.DeviceModeKey
+if type(SAjGuoFWLIjtuGJkojbxkFBNnqtGuIGG) ~= VVOCViJKJhiHhHideiDZ("lmkbgz", 19) or SAjGuoFWLIjtuGJkojbxkFBNnqtGuIGG == VVOCViJKJhiHhHideiDZ("", 1) then return end
 
-local PCSQZLiw = cuHFhqbMKjtj.LocalPlayer
-if not PCSQZLiw then
-    cuHFhqbMKjtj:GetPropertyChangedSignal("LocalPlayer"):Wait()
-    PCSQZLiw = cuHFhqbMKjtj.LocalPlayer
+local VCpoNPNQgiszzzriyRTfutYcDCmCx = VoDtZZUoAcMkgENMDsmFInUeSjM.LocalPlayer
+if not VCpoNPNQgiszzzriyRTfutYcDCmCx then
+    VoDtZZUoAcMkgENMDsmFInUeSjM:GetPropertyChangedSignal(VVOCViJKJhiHhHideiDZ("GjxvgKgvtzm", 21)):Wait()
+    VCpoNPNQgiszzzriyRTfutYcDCmCx = VoDtZZUoAcMkgENMDsmFInUeSjM.LocalPlayer
 end
-if not PCSQZLiw then return end
+if not VCpoNPNQgiszzzriyRTfutYcDCmCx then return end
 
-local VYrnwagjF = EirFAdoA(PCSQZLiw.UserId)
+local FiVIlGiJlpSrAGrZFXWAOf = JaaefPLrnHMyGpQUzSwaffjy(VCpoNPNQgiszzzriyRTfutYcDCmCx.UserId)
 
-local function RxyQMFuqdpz()
-    local AaVTHNpf = {
-        function() return type(gethwid) == "function" and gethwid() end,
-        function() return type(get_hwid) == "function" and get_hwid() end,
-        function() return type(getHWID) == "function" and getHWID() end,
-        function() return syn and type(syn.gethwid) == "function" and syn.gethwid() end,
+local function pHRzgADwcvxBPlBoXGjXBTbJhWiBlbE()
+    local QcfBHvBtqMjnjemLqpvACYkhYYXYkUy = {
+        function() return type(gethwid) == VVOCViJKJhiHhHideiDZ("crkzqflk", 23) and gethwid() end,
+        function() return type(get_hwid) == VVOCViJKJhiHhHideiDZ("zohwncih", 20) and get_hwid() end,
+        function() return type(getHWID) == VVOCViJKJhiHhHideiDZ("crkzqflk", 23) and getHWID() end,
+        function() return syn and type(syn.gethwid) == VVOCViJKJhiHhHideiDZ("dslargml", 24) and syn.gethwid() end,
     }
-    for imGKCVeeINXF, getter in GpednOqVWyU(AaVTHNpf) do
-        local UNUgXUiHeEsz, bkfDttayD = VWWnQQEQnsY(getter)
-        if UNUgXUiHeEsz and type(bkfDttayD) == "string" then
-            bkfDttayD = bkfDttayD:gsub("%s+", "")
-            if #bkfDttayD >= 8 and #bkfDttayD <= 256 then return bkfDttayD end
+    for lOawyXKyUlblZEldPAlgwF, getter in ejlOOQQfErJaYNBJibJfztiEOPI(QcfBHvBtqMjnjemLqpvACYkhYYXYkUy) do
+        local oqTHfDOGmMEHxOREIFnunjrzEIBsp, GuptBBtUIvSgYZFcorxnGiilQHr = fieQswhHbYswCpFYhktKuvgqdKli(getter)
+        if oqTHfDOGmMEHxOREIFnunjrzEIBsp and type(GuptBBtUIvSgYZFcorxnGiilQHr) == VVOCViJKJhiHhHideiDZ("qrpgle", 24) then
+            GuptBBtUIvSgYZFcorxnGiilQHr = GuptBBtUIvSgYZFcorxnGiilQHr:gsub(VVOCViJKJhiHhHideiDZ("%w+", 4), VVOCViJKJhiHhHideiDZ("", 1))
+            if #GuptBBtUIvSgYZFcorxnGiilQHr >= 8 and #GuptBBtUIvSgYZFcorxnGiilQHr <= 256 then return GuptBBtUIvSgYZFcorxnGiilQHr end
         end
     end
     return nil
 end
 
-local hqymzZfvALaO = RxyQMFuqdpz()
-local NIWXuBvXrxA = hqymzZfvALaO and ("EXECUTOR-HWID-" .. hqymzZfvALaO)
-    or ("ROBLOX-USER-" .. VYrnwagjF)
+local DXcvQOrInhGTVUXsJKGKhrCKnlgoUpbg = pHRzgADwcvxBPlBoXGjXBTbJhWiBlbE()
+local oBQGpPKDFJTaQOyCncSojUHpLPoEB = DXcvQOrInhGTVUXsJKGKhrCKnlgoUpbg and (VVOCViJKJhiHhHideiDZ("DWDBTSNQ-GVHC-", 25) .. DXcvQOrInhGTVUXsJKGKhrCKnlgoUpbg)
+    or (VVOCViJKJhiHhHideiDZ("NKXHKT-QOAN-", 22) .. FiVIlGiJlpSrAGrZFXWAOf)
 
-local rMhJsJxFmR = _G.request or request or http_request or (syn and syn.request)
-if type(rMhJsJxFmR) ~= "function" then return end
+local InLLTdNtufmYQYnfIlJkMkyrpOo = _G.request or request or http_request or (syn and syn.request)
+if type(InLLTdNtufmYQYnfIlJkMkyrpOo) ~= VVOCViJKJhiHhHideiDZ("crkzqflk", 23) then return end
 
-local function fdDeHTtIbG(method, path, body)
-    local UNUgXUiHeEsz, GcXDOgsJbrp = VWWnQQEQnsY(function()
-        return rMhJsJxFmR({Url= BUBwHJMhY .. path,
+local function UaRLMubCNlVcyGawHZWXWZnqf(method, path, body)
+    local oqTHfDOGmMEHxOREIFnunjrzEIBsp, GYEMbcnDcCLpRpkWkviKgxGAxMz = fieQswhHbYswCpFYhktKuvgqdKli(function()
+        return InLLTdNtufmYQYnfIlJkMkyrpOo({Url= DKLaIIJCDZuXMWnQrBbCjduOPc .. path,
             Method = method,
             Headers = {
-                ["Content-Type"] = "application/json",
-                ["Accept"] = "application/json",
+                [VVOCViJKJhiHhHideiDZ("Bnmsdms-Sxod", 25)] = VVOCViJKJhiHhHideiDZ("zookhbzshnm/irnm", 25),
+                [VVOCViJKJhiHhHideiDZ("Zbbdos", 25)] = VVOCViJKJhiHhHideiDZ("vkkgdxvodji/enji", 21),
             },
-            Body = body and tEPlrbDZPBS:JSONEncode(body) or nil,
+            Body = body and sCISzrDjiHfPwJnStrpBGKO:JSONEncode(body) or nil,
         })
     end)
-    if not UNUgXUiHeEsz or type(GcXDOgsJbrp) ~= "table" then
-        return nil, nil, "HTTP_REQUEST_FAILED"
+    if not oqTHfDOGmMEHxOREIFnunjrzEIBsp or type(GYEMbcnDcCLpRpkWkviKgxGAxMz) ~= VVOCViJKJhiHhHideiDZ("szakd", 25) then
+        return nil, nil, VVOCViJKJhiHhHideiDZ("GSSO_QDPTDRS_EZHKDC", 25)
     end
-    if type(GcXDOgsJbrp.Body) ~= "string" or GcXDOgsJbrp.Body == "" then
-        return GcXDOgsJbrp, nil, "EMPTY_RESPONSE"
+    if type(GYEMbcnDcCLpRpkWkviKgxGAxMz.Body) ~= VVOCViJKJhiHhHideiDZ("rsqhmf", 25) or GYEMbcnDcCLpRpkWkviKgxGAxMz.Body == VVOCViJKJhiHhHideiDZ("", 1) then
+        return GYEMbcnDcCLpRpkWkviKgxGAxMz, nil, VVOCViJKJhiHhHideiDZ("ZHKOT_MZNKJINZ", 21)
     end
-    local msUWUgsqRlA, BVAGiZfMRcK = VWWnQQEQnsY(function()
-        return tEPlrbDZPBS:JSONDecode(GcXDOgsJbrp.Body)
+    local HHvBJIfaELlquIkqWOSIvmIQINJg, nTJCIQpcsrxDjGZjwbCVPWHcGLrScfg = fieQswhHbYswCpFYhktKuvgqdKli(function()
+        return sCISzrDjiHfPwJnStrpBGKO:JSONDecode(GYEMbcnDcCLpRpkWkviKgxGAxMz.Body)
     end)
-    if not msUWUgsqRlA or type(BVAGiZfMRcK) ~= "table" then
-        return GcXDOgsJbrp, nil, "INVALID_JSON"
+    if not HHvBJIfaELlquIkqWOSIvmIQINJg or type(nTJCIQpcsrxDjGZjwbCVPWHcGLrScfg) ~= VVOCViJKJhiHhHideiDZ("pwxha", 22) then
+        return GYEMbcnDcCLpRpkWkviKgxGAxMz, nil, VVOCViJKJhiHhHideiDZ("CHPUFCX_DMIH", 20)
     end
-    return GcXDOgsJbrp, BVAGiZfMRcK, nil
+    return GYEMbcnDcCLpRpkWkviKgxGAxMz, nTJCIQpcsrxDjGZjwbCVPWHcGLrScfg, nil
 end
 
-local function goiZVsWOHrdH(iso)
-    if type(iso) ~= "string" then return nil end
-    local UNUgXUiHeEsz, vCQwTumKpEk = VWWnQQEQnsY(function() return DateTime.fromIsoDate(iso) end)
-    if not UNUgXUiHeEsz or not vCQwTumKpEk then return nil end
-    return vCQwTumKpEk.UnixTimestamp
+local function FqZVPxKqtdyclwQLMpusc(iso)
+    if type(iso) ~= VVOCViJKJhiHhHideiDZ("pqofkd", 23) then return nil end
+    local oqTHfDOGmMEHxOREIFnunjrzEIBsp, XicQYRVQghEjQThjkcyztD = fieQswhHbYswCpFYhktKuvgqdKli(function() return DateTime.fromIsoDate(iso) end)
+    if not oqTHfDOGmMEHxOREIFnunjrzEIBsp or not XicQYRVQghEjQThjkcyztD then return nil end
+    return XicQYRVQghEjQThjkcyztD.UnixTimestamp
 end
 
-local function wfqtIozM(seconds)
+local function sgUyKqdSvcYFJnEVTXtMdgTZdKGIl(seconds)
     seconds = math.max(0, math.floor(seconds))
-    local kQbRggkGL = math.floor(seconds / 86400)
-    local IKDTkSKCwq = math.floor((seconds % 86400) / 3600)
-    local cZcNshJK = math.floor((seconds % 3600) / 60)
-    local ssrcrAkIdq = seconds % 60
-    if kQbRggkGL > 0 then
-        return string.format("%dd %02dh %02dm", kQbRggkGL, IKDTkSKCwq, cZcNshJK)
+    local rOHEHiAPtvTpLbdIkMpcuubYu = math.floor(seconds / 86400)
+    local NvVSLkpzvwfDRqmptqKxspJoe = math.floor((seconds % 86400) / 3600)
+    local AyEfqZaSJoaSsgrRfvUqlirZ = math.floor((seconds % 3600) / 60)
+    local CJICEozTSQtrCRqQWdOFAzWWhSxEZu = seconds % 60
+    if rOHEHiAPtvTpLbdIkMpcuubYu > 0 then
+        return string.format(VVOCViJKJhiHhHideiDZ("%cc %57cg %57cl", 25), rOHEHiAPtvTpLbdIkMpcuubYu, NvVSLkpzvwfDRqmptqKxspJoe, AyEfqZaSJoaSsgrRfvUqlirZ)
     end
-    if IKDTkSKCwq > 0 then
-        return string.format("%dh %02dm %02ds", IKDTkSKCwq, cZcNshJK, ssrcrAkIdq)
+    if NvVSLkpzvwfDRqmptqKxspJoe > 0 then
+        return string.format(VVOCViJKJhiHhHideiDZ("%sw %57sb %57sh", 15), NvVSLkpzvwfDRqmptqKxspJoe, AyEfqZaSJoaSsgrRfvUqlirZ, CJICEozTSQtrCRqQWdOFAzWWhSxEZu)
     end
-    return string.format("%02dm %02ds", cZcNshJK, ssrcrAkIdq)
+    return string.format(VVOCViJKJhiHhHideiDZ("%68js %68jy", 6), AyEfqZaSJoaSsgrRfvUqlirZ, CJICEozTSQtrCRqQWdOFAzWWhSxEZu)
 end
 
 -- ===== الجلسة (بدون تشفير) =====
-local function XdVdssCsmtzS(hdvEmndtQrg, WWeyaRyy)
+local function MENSYothWarZrSzgdXhwXRmYoclV(uGDegpdPZicDRVwEEembIEht, mHdNQjruAZMNwWpUIzHlmekLq)
     if not writefile then return end
-    VWWnQQEQnsY(writefile, SAouAtfYOm,
-        hdvEmndtQrg .. "|" .. EirFAdoA(WWeyaRyy) .. "|" .. EirFAdoA(os.time()))
+    fieQswhHbYswCpFYhktKuvgqdKli(writefile, LXgXTqawwhGmqkJNWZdwywxC,
+        uGDegpdPZicDRVwEEembIEht .. VVOCViJKJhiHhHideiDZ("|", 1) .. JaaefPLrnHMyGpQUzSwaffjy(mHdNQjruAZMNwWpUIzHlmekLq) .. VVOCViJKJhiHhHideiDZ("|", 1) .. JaaefPLrnHMyGpQUzSwaffjy(os.time()))
 end
 
-local function kdhDNDbO()
-    if not (readfile and isfile and isfile(SAouAtfYOm)) then return nil, nil end
-    local UNUgXUiHeEsz, BVAGiZfMRcK = VWWnQQEQnsY(readfile, SAouAtfYOm)
-    if not UNUgXUiHeEsz or type(BVAGiZfMRcK) ~= "string" or BVAGiZfMRcK == "" then return nil, nil end
-    local hdvEmndtQrg, WWeyaRyy, ofYzLXFews = BVAGiZfMRcK:match("^([^|]+)|(%d+)|(%d+)$")
-    if not (hdvEmndtQrg and WWeyaRyy and ofYzLXFews) then return nil, nil end
-    WWeyaRyy, ofYzLXFews = opZJKZkgt(WWeyaRyy), opZJKZkgt(ofYzLXFews)
-    if not (WWeyaRyy and ofYzLXFews) then return nil, nil end
-    local dpmQtRgLY = os.time()
-    if dpmQtRgLY >= WWeyaRyy or (dpmQtRgLY - ofYzLXFews) >= kIQgLpBnOUiO then
+local function tqKKiSskKIFWmZbaHRLEHaoPLTExl()
+    if not (readfile and isfile and isfile(LXgXTqawwhGmqkJNWZdwywxC)) then return nil, nil end
+    local oqTHfDOGmMEHxOREIFnunjrzEIBsp, nTJCIQpcsrxDjGZjwbCVPWHcGLrScfg = fieQswhHbYswCpFYhktKuvgqdKli(readfile, LXgXTqawwhGmqkJNWZdwywxC)
+    if not oqTHfDOGmMEHxOREIFnunjrzEIBsp or type(nTJCIQpcsrxDjGZjwbCVPWHcGLrScfg) ~= VVOCViJKJhiHhHideiDZ("pqofkd", 23) or nTJCIQpcsrxDjGZjwbCVPWHcGLrScfg == VVOCViJKJhiHhHideiDZ("", 1) then return nil, nil end
+    local uGDegpdPZicDRVwEEembIEht, mHdNQjruAZMNwWpUIzHlmekLq, tlPfmMeDANHFEfXLEGMXVFDNrZeS = nTJCIQpcsrxDjGZjwbCVPWHcGLrScfg:match(VVOCViJKJhiHhHideiDZ("^([^|]+)|(%p+)|(%p+)$", 12))
+    if not (uGDegpdPZicDRVwEEembIEht and mHdNQjruAZMNwWpUIzHlmekLq and tlPfmMeDANHFEfXLEGMXVFDNrZeS) then return nil, nil end
+    mHdNQjruAZMNwWpUIzHlmekLq, tlPfmMeDANHFEfXLEGMXVFDNrZeS = vOozQnqEkgDTbJbkgACuJKmh(mHdNQjruAZMNwWpUIzHlmekLq), vOozQnqEkgDTbJbkgACuJKmh(tlPfmMeDANHFEfXLEGMXVFDNrZeS)
+    if not (mHdNQjruAZMNwWpUIzHlmekLq and tlPfmMeDANHFEfXLEGMXVFDNrZeS) then return nil, nil end
+    local ptTZcfrPYjMDrooGwYTsPTPUgE = os.time()
+    if ptTZcfrPYjMDrooGwYTsPTPUgE >= mHdNQjruAZMNwWpUIzHlmekLq or (ptTZcfrPYjMDrooGwYTsPTPUgE - tlPfmMeDANHFEfXLEGMXVFDNrZeS) >= iAwgLUldhRHVjTBbNvCoYfoutQFnnSO then
         return nil, nil
     end
-    return hdvEmndtQrg, WWeyaRyy
+    return uGDegpdPZicDRVwEEembIEht, mHdNQjruAZMNwWpUIzHlmekLq
 end
 
-local function GDMWKewnck()
+local function FnvCMSvEuPNHICRhtKDxxm()
     if delfile then
-        VWWnQQEQnsY(delfile, SAouAtfYOm)
+        fieQswhHbYswCpFYhktKuvgqdKli(delfile, LXgXTqawwhGmqkJNWZdwywxC)
     elseif writefile then
-        VWWnQQEQnsY(writefile, SAouAtfYOm, "")
+        fieQswhHbYswCpFYhktKuvgqdKli(writefile, LXgXTqawwhGmqkJNWZdwywxC, VVOCViJKJhiHhHideiDZ("", 1))
     end
 end
 
 -- ===== المنصات المسموحة =====
-local function XbVxivKyYOry(platforms)
-    if not writefile or type(platforms) ~= "table" then return end
-    local LdfpmUMqgciJ = {}
-    for imGKCVeeINXF, platform in GpednOqVWyU(platforms) do
-        local yPmNMvoNrN = platform == "pc" and "PC"
-            or platform == "mobile" and "Mobile"
-            or platform == "console" and "Console"
+local function nVvXBrgHgSZzkdcBIDnC(platforms)
+    if not writefile or type(platforms) ~= VVOCViJKJhiHhHideiDZ("jqrbu", 16) then return end
+    local JtLzVxCsOMCejrspanZurLkERvyroWF = {}
+    for lOawyXKyUlblZEldPAlgwF, platform in ejlOOQQfErJaYNBJibJfztiEOPI(platforms) do
+        local FagPsfNYIfxWPDlYAkDefJewCLSQXUM = platform == VVOCViJKJhiHhHideiDZ("wj", 7) and VVOCViJKJhiHhHideiDZ("UH", 5)
+            or platform == VVOCViJKJhiHhHideiDZ("lnahkd", 25) and VVOCViJKJhiHhHideiDZ("Lnahkd", 25)
+            or platform == VVOCViJKJhiHhHideiDZ("bnmrnkd", 25) and VVOCViJKJhiHhHideiDZ("Xjinjgz", 21)
             or platform
-        if yPmNMvoNrN == "PC" or yPmNMvoNrN == "Mobile" or yPmNMvoNrN == "Console" then
-            table.insert(LdfpmUMqgciJ, yPmNMvoNrN)
+        if FagPsfNYIfxWPDlYAkDefJewCLSQXUM == VVOCViJKJhiHhHideiDZ("HU", 18) or FagPsfNYIfxWPDlYAkDefJewCLSQXUM == VVOCViJKJhiHhHideiDZ("Jlyfib", 23) or FagPsfNYIfxWPDlYAkDefJewCLSQXUM == VVOCViJKJhiHhHideiDZ("Bnmrnkd", 25) then
+            table.insert(JtLzVxCsOMCejrspanZurLkERvyroWF, FagPsfNYIfxWPDlYAkDefJewCLSQXUM)
         end
     end
-    if #LdfpmUMqgciJ > 0 then
-        VWWnQQEQnsY(writefile, feWdQxDAloe, table.concat(LdfpmUMqgciJ, "|"))
+    if #JtLzVxCsOMCejrspanZurLkERvyroWF > 0 then
+        fieQswhHbYswCpFYhktKuvgqdKli(writefile, HFAObAxTHCncOQjBQPptjqJODzeWww, table.concat(JtLzVxCsOMCejrspanZurLkERvyroWF, VVOCViJKJhiHhHideiDZ("|", 1)))
     end
 end
 
-local function MhTEpmoNb()
-    if not (readfile and isfile and isfile(feWdQxDAloe)) then return nil end
-    local UNUgXUiHeEsz, UJXLxiGnn = VWWnQQEQnsY(readfile, feWdQxDAloe)
-    if not UNUgXUiHeEsz or type(UJXLxiGnn) ~= "string" or UJXLxiGnn == "" then return nil end
-    local BrUzvTJQaFAv = {}
-    for bkfDttayD in UJXLxiGnn:gmatch("[^|]+") do BrUzvTJQaFAv[bkfDttayD] = true end
-    return BrUzvTJQaFAv
+local function OVLsrQdLVWrdThUNxymxMqNUY()
+    if not (readfile and isfile and isfile(HFAObAxTHCncOQjBQPptjqJODzeWww)) then return nil end
+    local oqTHfDOGmMEHxOREIFnunjrzEIBsp, PPonKQGwHgbhuDWODvHeFnHwHFRuzb = fieQswhHbYswCpFYhktKuvgqdKli(readfile, HFAObAxTHCncOQjBQPptjqJODzeWww)
+    if not oqTHfDOGmMEHxOREIFnunjrzEIBsp or type(PPonKQGwHgbhuDWODvHeFnHwHFRuzb) ~= VVOCViJKJhiHhHideiDZ("rsqhmf", 25) or PPonKQGwHgbhuDWODvHeFnHwHFRuzb == VVOCViJKJhiHhHideiDZ("", 1) then return nil end
+    local XezDdvEPqOldKrrdUNsuvMRvQ = {}
+    for GuptBBtUIvSgYZFcorxnGiilQHr in PPonKQGwHgbhuDWODvHeFnHwHFRuzb:gmatch(VVOCViJKJhiHhHideiDZ("[^|]+", 1)) do XezDdvEPqOldKrrdUNsuvMRvQ[GuptBBtUIvSgYZFcorxnGiilQHr] = true end
+    return XezDdvEPqOldKrrdUNsuvMRvQ
 end
 
-local function upcwTZTxUo(BrUzvTJQaFAv)
-    if not BrUzvTJQaFAv then return end
-    local WiKYHJlX = {}
-    for imGKCVeeINXF, platform in GpednOqVWyU(JSYuZczF) do
-        if BrUzvTJQaFAv[platform] then table.insert(WiKYHJlX, platform) end
+local function BgqkmzhnRVToRDGEbiWtTsH(XezDdvEPqOldKrrdUNsuvMRvQ)
+    if not XezDdvEPqOldKrrdUNsuvMRvQ then return end
+    local RMONrdUKukqSaJZYtRjf = {}
+    for lOawyXKyUlblZEldPAlgwF, platform in ejlOOQQfErJaYNBJibJfztiEOPI(GjgRQGOMaixRSwXNKDQgOyxYnTm) do
+        if XezDdvEPqOldKrrdUNsuvMRvQ[platform] then table.insert(RMONrdUKukqSaJZYtRjf, platform) end
     end
-    JSYuZczF = WiKYHJlX
+    GjgRQGOMaixRSwXNKDQgOyxYnTm = RMONrdUKukqSaJZYtRjf
 end
 
 -- ===== UI =====
-local csoMukcp = Instance.new("ScreenGui")
-csoMukcp.Name = "DeviceModeGlass"
-csoMukcp.ResetOnSpawn = false
-csoMukcp.IgnoreGuiInset = true
-csoMukcp.Parent = PCSQZLiw:WaitForChild("PlayerGui")
+local vooparOuOUdSLrRacixpr = Instance.new(VVOCViJKJhiHhHideiDZ("RbqddmFth", 25))
+vooparOuOUdSLrRacixpr.Name = VVOCViJKJhiHhHideiDZ("CduhbdLncdFkzrr", 25)
+vooparOuOUdSLrRacixpr.ResetOnSpawn = false
+vooparOuOUdSLrRacixpr.IgnoreGuiInset = true
+vooparOuOUdSLrRacixpr.Parent = VCpoNPNQgiszzzriyRTfutYcDCmCx:WaitForChild(VVOCViJKJhiHhHideiDZ("KgvtzmBpd", 21))
 
-local ZHxDeOludatU = Instance.new("Frame")
-ZHxDeOludatU.Name = "LicenseToast"
-ZHxDeOludatU.AnchorPoint = Vector2.new(1, 0)
-ZHxDeOludatU.Position = UDim2.new(1, 360, 0, 80)
-ZHxDeOludatU.Size = UDim2.new(0, 310, 0, 86)
-ZHxDeOludatU.BackgroundColor3 = Color3.fromRGB(13, 16, 26)
-ZHxDeOludatU.BackgroundTransparency = 0.12
-ZHxDeOludatU.Visible = false
-ZHxDeOludatU.Parent = csoMukcp
+local FeYKzhlsnHcJUqosdWqqokTZsSfPHs = Instance.new(VVOCViJKJhiHhHideiDZ("Bnwia", 22))
+FeYKzhlsnHcJUqosdWqqokTZsSfPHs.Name = VVOCViJKJhiHhHideiDZ("KhbdmrdSnzrs", 25)
+FeYKzhlsnHcJUqosdWqqokTZsSfPHs.AnchorPoint = Vector2.new(1, 0)
+FeYKzhlsnHcJUqosdWqqokTZsSfPHs.Position = UDim2.new(1, 360, 0, 80)
+FeYKzhlsnHcJUqosdWqqokTZsSfPHs.Size = UDim2.new(0, 310, 0, 86)
+FeYKzhlsnHcJUqosdWqqokTZsSfPHs.BackgroundColor3 = Color3.fromRGB(13, 16, 26)
+FeYKzhlsnHcJUqosdWqqokTZsSfPHs.BackgroundTransparency = 0.12
+FeYKzhlsnHcJUqosdWqqokTZsSfPHs.Visible = false
+FeYKzhlsnHcJUqosdWqqokTZsSfPHs.Parent = vooparOuOUdSLrRacixpr
 
-local JQGHpCZA = Instance.new("UICorner")
-JQGHpCZA.CornerRadius = UDim.new(0, 16)
-JQGHpCZA.Parent = ZHxDeOludatU
+local NFmmrgVvWnVulJaPAvrhVITD = Instance.new(VVOCViJKJhiHhHideiDZ("NBVhkgxk", 19))
+NFmmrgVvWnVulJaPAvrhVITD.CornerRadius = UDim.new(0, 16)
+NFmmrgVvWnVulJaPAvrhVITD.Parent = FeYKzhlsnHcJUqosdWqqokTZsSfPHs
 
-local lIGHpbIvlpwc = Instance.new("UIStroke")
-lIGHpbIvlpwc.Color = Color3.fromRGB(150, 115, 255)
-lIGHpbIvlpwc.Transparency = 0.25
-lIGHpbIvlpwc.Thickness = 1
-lIGHpbIvlpwc.Parent = ZHxDeOludatU
+local eCOkLIibUOFSzCeKqdPxEType = Instance.new(VVOCViJKJhiHhHideiDZ("KYIjheau", 16))
+eCOkLIibUOFSzCeKqdPxEType.Color = Color3.fromRGB(150, 115, 255)
+eCOkLIibUOFSzCeKqdPxEType.Transparency = 0.25
+eCOkLIibUOFSzCeKqdPxEType.Thickness = 1
+eCOkLIibUOFSzCeKqdPxEType.Parent = FeYKzhlsnHcJUqosdWqqokTZsSfPHs
 
-local eKjeiIhIWRDG = Instance.new("UIGradient")
-eKjeiIhIWRDG.Color = ColorSequence.new({
+local YLsxRcRFtKzMbhxZhEUufjqfYtK = Instance.new(VVOCViJKJhiHhHideiDZ("THFqzchdms", 25))
+YLsxRcRFtKzMbhxZhEUufjqfYtK.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(30, 25, 57)),
     ColorSequenceKeypoint.new(1, Color3.fromRGB(10, 14, 22)),
 })
-eKjeiIhIWRDG.Rotation = 18
-eKjeiIhIWRDG.Parent = ZHxDeOludatU
+YLsxRcRFtKzMbhxZhEUufjqfYtK.Rotation = 18
+YLsxRcRFtKzMbhxZhEUufjqfYtK.Parent = FeYKzhlsnHcJUqosdWqqokTZsSfPHs
 
-local PpURUrMUb = Instance.new("Frame")
-PpURUrMUb.Size = UDim2.new(0, 4, 1, -24)
-PpURUrMUb.Position = UDim2.new(0, 12, 0, 12)
-PpURUrMUb.BackgroundColor3 = Color3.fromRGB(151, 112, 255)
-PpURUrMUb.BorderSizePixel = 0
-PpURUrMUb.Parent = ZHxDeOludatU
+local lCblwnaoecXygjWUBSUQvJ = Instance.new(VVOCViJKJhiHhHideiDZ("Coxjb", 23))
+lCblwnaoecXygjWUBSUQvJ.Size = UDim2.new(0, 4, 1, -24)
+lCblwnaoecXygjWUBSUQvJ.Position = UDim2.new(0, 12, 0, 12)
+lCblwnaoecXygjWUBSUQvJ.BackgroundColor3 = Color3.fromRGB(151, 112, 255)
+lCblwnaoecXygjWUBSUQvJ.BorderSizePixel = 0
+lCblwnaoecXygjWUBSUQvJ.Parent = FeYKzhlsnHcJUqosdWqqokTZsSfPHs
 
-local COqJWFeNl = Instance.new("UICorner")
-COqJWFeNl.CornerRadius = UDim.new(1, 0)
-COqJWFeNl.Parent = PpURUrMUb
+local JdazsYtMFhBwTftDAxemIcm = Instance.new(VVOCViJKJhiHhHideiDZ("QEYknjan", 22))
+JdazsYtMFhBwTftDAxemIcm.CornerRadius = UDim.new(1, 0)
+JdazsYtMFhBwTftDAxemIcm.Parent = lCblwnaoecXygjWUBSUQvJ
 
-local KRMkBxUirrBI = Instance.new("TextLabel")
-KRMkBxUirrBI.BackgroundTransparency = 1
-KRMkBxUirrBI.Position = UDim2.new(0, 29, 0, 14)
-KRMkBxUirrBI.Size = UDim2.new(1, -45, 0, 22)
-KRMkBxUirrBI.Font = Enum.Font.GothamBold
-KRMkBxUirrBI.TextSize = 14
-KRMkBxUirrBI.TextColor3 = Color3.fromRGB(244, 241, 255)
-KRMkBxUirrBI.TextXAlignment = Enum.TextXAlignment.Left
-KRMkBxUirrBI.Text = "DeviceMode"
-KRMkBxUirrBI.Parent = ZHxDeOludatU
+local ipDqgWUQLuUMNVlFVzJyBAsCCGOY = Instance.new(VVOCViJKJhiHhHideiDZ("FqjfXmnqx", 12))
+ipDqgWUQLuUMNVlFVzJyBAsCCGOY.BackgroundTransparency = 1
+ipDqgWUQLuUMNVlFVzJyBAsCCGOY.Position = UDim2.new(0, 29, 0, 14)
+ipDqgWUQLuUMNVlFVzJyBAsCCGOY.Size = UDim2.new(1, -45, 0, 22)
+ipDqgWUQLuUMNVlFVzJyBAsCCGOY.Font = Enum.Font.GothamBold
+ipDqgWUQLuUMNVlFVzJyBAsCCGOY.TextSize = 14
+ipDqgWUQLuUMNVlFVzJyBAsCCGOY.TextColor3 = Color3.fromRGB(244, 241, 255)
+ipDqgWUQLuUMNVlFVzJyBAsCCGOY.TextXAlignment = Enum.TextXAlignment.Left
+ipDqgWUQLuUMNVlFVzJyBAsCCGOY.Text = VVOCViJKJhiHhHideiDZ("XypcwyGixy", 20)
+ipDqgWUQLuUMNVlFVzJyBAsCCGOY.Parent = FeYKzhlsnHcJUqosdWqqokTZsSfPHs
 
-local wRVIzoNotRW = Instance.new("TextLabel")
-wRVIzoNotRW.BackgroundTransparency = 1
-wRVIzoNotRW.Position = UDim2.new(0, 29, 0, 39)
-wRVIzoNotRW.Size = UDim2.new(1, -45, 0, 30)
-wRVIzoNotRW.Font = Enum.Font.Gotham
-wRVIzoNotRW.TextSize = 12
-wRVIzoNotRW.TextColor3 = Color3.fromRGB(192, 187, 218)
-wRVIzoNotRW.TextXAlignment = Enum.TextXAlignment.Left
-wRVIzoNotRW.TextWrapped = true
-wRVIzoNotRW.Text = "Checking license..."
-wRVIzoNotRW.Parent = ZHxDeOludatU
+local AOjEhHIOPPrblVWHNnVX = Instance.new(VVOCViJKJhiHhHideiDZ("SdwsKzadk", 25))
+AOjEhHIOPPrblVWHNnVX.BackgroundTransparency = 1
+AOjEhHIOPPrblVWHNnVX.Position = UDim2.new(0, 29, 0, 39)
+AOjEhHIOPPrblVWHNnVX.Size = UDim2.new(1, -45, 0, 30)
+AOjEhHIOPPrblVWHNnVX.Font = Enum.Font.Gotham
+AOjEhHIOPPrblVWHNnVX.TextSize = 12
+AOjEhHIOPPrblVWHNnVX.TextColor3 = Color3.fromRGB(192, 187, 218)
+AOjEhHIOPPrblVWHNnVX.TextXAlignment = Enum.TextXAlignment.Left
+AOjEhHIOPPrblVWHNnVX.TextWrapped = true
+AOjEhHIOPPrblVWHNnVX.Text = VVOCViJKJhiHhHideiDZ("Zebzhfkd ifzbkpb...", 23)
+AOjEhHIOPPrblVWHNnVX.Parent = FeYKzhlsnHcJUqosdWqqokTZsSfPHs
 
-local FQQdDQzsg = 0
+local zJjyZVzfHpYtHTSJUXmiVhzRF = 0
 
-local function eylSjhgxW(message, color, seconds)
-    FQQdDQzsg += 1
-    local hdvEmndtQrg = FQQdDQzsg
-    local fAcjLPQp = color or Color3.fromRGB(151, 112, 255)
-    PpURUrMUb.BackgroundColor3 = fAcjLPQp
-    lIGHpbIvlpwc.Color = fAcjLPQp
-    wRVIzoNotRW.TextColor3 = color or Color3.fromRGB(216, 209, 246)
-    wRVIzoNotRW.Text = EirFAdoA(message)
-    ZHxDeOludatU.Visible = true
-    ZHxDeOludatU.Position = UDim2.new(1, 360, 0, 80)
-    dcxVyAvapxP:Create(
-        ZHxDeOludatU,
+local function IGjboTcMDlMElYusOxBz(message, color, seconds)
+    zJjyZVzfHpYtHTSJUXmiVhzRF += 1
+    local uGDegpdPZicDRVwEEembIEht = zJjyZVzfHpYtHTSJUXmiVhzRF
+    local UeamGDqqXtBScSlUJiODReJJG = color or Color3.fromRGB(151, 112, 255)
+    lCblwnaoecXygjWUBSUQvJ.BackgroundColor3 = UeamGDqqXtBScSlUJiODReJJG
+    eCOkLIibUOFSzCeKqdPxEType.Color = UeamGDqqXtBScSlUJiODReJJG
+    AOjEhHIOPPrblVWHNnVX.TextColor3 = color or Color3.fromRGB(216, 209, 246)
+    AOjEhHIOPPrblVWHNnVX.Text = JaaefPLrnHMyGpQUzSwaffjy(message)
+    FeYKzhlsnHcJUqosdWqqokTZsSfPHs.Visible = true
+    FeYKzhlsnHcJUqosdWqqokTZsSfPHs.Position = UDim2.new(1, 360, 0, 80)
+    pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(
+        FeYKzhlsnHcJUqosdWqqokTZsSfPHs,
         TweenInfo.new(0.45, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
         {Position= UDim2.new(1, -24, 0, 80) }
     ):Play()
     task.delay(seconds or 8, function()
-        if hdvEmndtQrg ~= FQQdDQzsg then return end
-        local PVkgwVJsFep = dcxVyAvapxP:Create(
-            ZHxDeOludatU,
+        if uGDegpdPZicDRVwEEembIEht ~= zJjyZVzfHpYtHTSJUXmiVhzRF then return end
+        local qjSpypDvDFbVrjMRtLMPulKdFNtaO = pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(
+            FeYKzhlsnHcJUqosdWqqokTZsSfPHs,
             TweenInfo.new(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
             {Position= UDim2.new(1, 360, 0, 80) }
         )
-        PVkgwVJsFep:Play()
-        local gvvbECoYGq = VWWnQQEQnsY(function() PVkgwVJsFep.Completed:Wait() end)
-        if gvvbECoYGq and hdvEmndtQrg == FQQdDQzsg then ZHxDeOludatU.Visible = false end
+        qjSpypDvDFbVrjMRtLMPulKdFNtaO:Play()
+        local JHLViOnmVzQgBMBomqinsKam = fieQswhHbYswCpFYhktKuvgqdKli(function() qjSpypDvDFbVrjMRtLMPulKdFNtaO.Completed:Wait() end)
+        if JHLViOnmVzQgBMBomqinsKam and uGDegpdPZicDRVwEEembIEht == zJjyZVzfHpYtHTSJUXmiVhzRF then FeYKzhlsnHcJUqosdWqqokTZsSfPHs.Visible = false end
     end)
 end
 
-local function KyltqbquE(message, GZesvTkFlC)
-    if GZesvTkFlC then message = message .. "\nCode: " .. EirFAdoA(GZesvTkFlC) end
-    eylSjhgxW(message, Color3.fromRGB(255, 104, 126), 12)
+local function mOWTunDIBPnCIVFVyDAQgEMgOERjH(message, RoEjmwupcFtShPZDAPfW)
+    if RoEjmwupcFtShPZDAPfW then message = message .. VVOCViJKJhiHhHideiDZ("\nVhwx: ", 19) .. JaaefPLrnHMyGpQUzSwaffjy(RoEjmwupcFtShPZDAPfW) end
+    IGjboTcMDlMElYusOxBz(message, Color3.fromRGB(255, 104, 126), 12)
 end
 
 _G.__dm_killed = false
 
 -- ===== السبوفر =====
-local function HVZpKyoH(activeToken, activeExpiry)
+local function lmLANXMIOfoogZViPmIRsy(activeToken, activeExpiry)
     if not game:IsLoaded() then game.Loaded:Wait() end
 
-    local function JZBDeMDv(dev)
-        if writefile then VWWnQQEQnsY(writefile, igYlzkUu, dev) end
+    local function wwgtkAjzpRBTfIPvCbrZatTzVAv(dev)
+        if writefile then fieQswhHbYswCpFYhktKuvgqdKli(writefile, jTuQHoRoROoxNnvFdcXbkS, dev) end
         _G.TargetDevice = dev
     end
 
-    local function vCTtCfGe()
+    local function NmLYZuMxwEenblXaPGAaOuI()
         return _G.TargetDevice
     end
 
-    local function AbbhqwZzeq()
+    local function qCSqXDyoHnYWvRhTEikolPY()
         if not debug or not debug.getinfo then return true end
-        local ICrkGKduq = {zbocotfgJj, HVgBETgU, VWWnQQEQnsY}
-        if getgc then table.insert(ICrkGKduq, getgc) end
-        for imGKCVeeINXF, func in GpednOqVWyU(ICrkGKduq) do
-            local JTZuUteD = debug.getinfo(func)
-            if not JTZuUteD or JTZuUteD.what ~= "C" or JTZuUteD.source ~= "=[C]" then
+        local rNXduUTnfYokHXEhIBxLwXPLqP = {EmzETFZfmugMEusyCkyjQVZNHGObi, ePmOOrRZrTLgHLrjsQwfAmSEgdUufB, fieQswhHbYswCpFYhktKuvgqdKli}
+        if getgc then table.insert(rNXduUTnfYokHXEhIBxLwXPLqP, getgc) end
+        for lOawyXKyUlblZEldPAlgwF, func in ejlOOQQfErJaYNBJibJfztiEOPI(rNXduUTnfYokHXEhIBxLwXPLqP) do
+            local gbuaLXlTRzpkuFMKRCzDirSRrblJs = debug.getinfo(func)
+            if not gbuaLXlTRzpkuFMKRCzDirSRrblJs or gbuaLXlTRzpkuFMKRCzDirSRrblJs.what ~= VVOCViJKJhiHhHideiDZ("T", 17) or gbuaLXlTRzpkuFMKRCzDirSRrblJs.source ~= VVOCViJKJhiHhHideiDZ("=[E]", 2) then
                 return false
             end
         end
         return true
     end
 
-    if not AbbhqwZzeq() then return end
+    if not qCSqXDyoHnYWvRhTEikolPY() then return end
 
     -- أسماء المفاتيح
-    local tOxgRxMVpKPr      = "Device"
-    local LNNevqVVDmst  = "FixXCoordinateAspectRate"
-    local mAsOwueX  = "PreferredInput"
-    local vozhPIIUDHFT     = "Gamepad"
-    local usXJThAP    = "Keyboard"
+    local GFoCinOkbTuvDbXdUCurIsFQfZXQw      = VVOCViJKJhiHhHideiDZ("Cduhbd", 25)
+    local uIcfwWhVOGaDMOTNSpcfx  = VVOCViJKJhiHhHideiDZ("EhwWBnnqchmzsdZrodbsQzsd", 25)
+    local edjUIlMVAfWUUASTXlCuMPTvJNWg  = VVOCViJKJhiHhHideiDZ("NpcdcppcbGlnsr", 24)
+    local CgWAiEeEJSkveUeYJbgfMHIFozesuxJ     = VVOCViJKJhiHhHideiDZ("Eykcnyb", 24)
+    local eVEmRQoGOxwUFOJzMkASZrLf    = VVOCViJKJhiHhHideiDZ("Dxruhtkw", 19)
 
-    local function ITDvDhqHKr()
-        local QQuyhuUxb = ""
-        for imGKCVeeINXF = 1, math.random(10, 16) do
-            QQuyhuUxb = QQuyhuUxb .. string.char(math.random(97, 122))
+    local function HGWheaoSwHzWcRkSHhJyRWKezOmOteA()
+        local CRFUMOsidIJFmdXIkMvapXKBKkYgmV = VVOCViJKJhiHhHideiDZ("", 1)
+        for lOawyXKyUlblZEldPAlgwF = 1, math.random(10, 16) do
+            CRFUMOsidIJFmdXIkMvapXKBKkYgmV = CRFUMOsidIJFmdXIkMvapXKBKkYgmV .. string.char(math.random(97, 122))
         end
-        return QQuyhuUxb
+        return CRFUMOsidIJFmdXIkMvapXKBKkYgmV
     end
 
-    local function LKbWmMtexRNu()
-        local VkDZfYmWBZV = game.Players.LocalPlayer
-        if not VkDZfYmWBZV then return end
-        local iSoeHFOU = VkDZfYmWBZV:FindFirstChild("PlayerGui") or VkDZfYmWBZV:WaitForChild("PlayerGui", 10)
-        if not iSoeHFOU then return end
-        local qmehjQcnthx = iSoeHFOU:FindFirstChild("Screen") or iSoeHFOU:WaitForChild("Screen", 10)
-        if not qmehjQcnthx then return end
-        qmehjQcnthx.Enabled = true
-        local vsZlbsOTwY = qmehjQcnthx:FindFirstChild("ConsoleButton", true)
-        if vsZlbsOTwY and vsZlbsOTwY:IsA("GuiObject") then vsZlbsOTwY.Visible = false end
-        local SUfKqOnUnLu = qmehjQcnthx:FindFirstChild("ShiftLockArea")
-            or qmehjQcnthx:WaitForChild("ShiftLockArea", 10)
-        if not (SUfKqOnUnLu and SUfKqOnUnLu:IsA("GuiObject")) then return end
-        SUfKqOnUnLu.Visible = true
-        local EllKIjedvQVx = SUfKqOnUnLu:FindFirstChild("Toggle")
-            or SUfKqOnUnLu:WaitForChild("Toggle", 10)
-        local TgxcXBQbdfFA = qmehjQcnthx:FindFirstChild("MouseLockedCursor")
-            or qmehjQcnthx:WaitForChild("MouseLockedCursor", 10)
-        if not (EllKIjedvQVx and EllKIjedvQVx:IsA("GuiObject")) then return end
-        EllKIjedvQVx.Visible = true
-        if not (TgxcXBQbdfFA and TgxcXBQbdfFA:IsA("GuiObject")) then return end
+    local function dGVNEBGXBvBxbAElZjcJvIEzb()
+        local bIGMgvRNwoklSVFlgrlupAx = game.Players.LocalPlayer
+        if not bIGMgvRNwoklSVFlgrlupAx then return end
+        local CBjEbnxychOAXcPpXdLLaaFAaIXlnIl = bIGMgvRNwoklSVFlgrlupAx:FindFirstChild(VVOCViJKJhiHhHideiDZ("OkzxdqFth", 25)) or bIGMgvRNwoklSVFlgrlupAx:WaitForChild(VVOCViJKJhiHhHideiDZ("OkzxdqFth", 25), 10)
+        if not CBjEbnxychOAXcPpXdLLaaFAaIXlnIl then return end
+        local KDSdFglSgSzLexdfASJLEqHAvFv = CBjEbnxychOAXcPpXdLLaaFAaIXlnIl:FindFirstChild(VVOCViJKJhiHhHideiDZ("Rbqddm", 25)) or CBjEbnxychOAXcPpXdLLaaFAaIXlnIl:WaitForChild(VVOCViJKJhiHhHideiDZ("Pzobbk", 23), 10)
+        if not KDSdFglSgSzLexdfASJLEqHAvFv then return end
+        KDSdFglSgSzLexdfASJLEqHAvFv.Enabled = true
+        local IYBEjggzvhVABDRKQMbTDNYfhFIwVV = KDSdFglSgSzLexdfASJLEqHAvFv:FindFirstChild(VVOCViJKJhiHhHideiDZ("AmlqmjcZsrrml", 24), true)
+        if IYBEjggzvhVABDRKQMbTDNYfhFIwVV and IYBEjggzvhVABDRKQMbTDNYfhFIwVV:IsA(VVOCViJKJhiHhHideiDZ("FthNaidbs", 25)) then IYBEjggzvhVABDRKQMbTDNYfhFIwVV.Visible = false end
+        local AhTLZzwZKCGwduRaetldoUEau = KDSdFglSgSzLexdfASJLEqHAvFv:FindFirstChild(VVOCViJKJhiHhHideiDZ("PefcqIlzhXobx", 23))
+            or KDSdFglSgSzLexdfASJLEqHAvFv:WaitForChild(VVOCViJKJhiHhHideiDZ("PefcqIlzhXobx", 23), 10)
+        if not (AhTLZzwZKCGwduRaetldoUEau and AhTLZzwZKCGwduRaetldoUEau:IsA(VVOCViJKJhiHhHideiDZ("EsgMzhcar", 24))) then return end
+        AhTLZzwZKCGwduRaetldoUEau.Visible = true
+        local oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt = AhTLZzwZKCGwduRaetldoUEau:FindFirstChild(VVOCViJKJhiHhHideiDZ("Snffkd", 25))
+            or AhTLZzwZKCGwduRaetldoUEau:WaitForChild(VVOCViJKJhiHhHideiDZ("Pkccha", 22), 10)
+        local meyvdFkvWeEStSWcEtBrA = KDSdFglSgSzLexdfASJLEqHAvFv:FindFirstChild(VVOCViJKJhiHhHideiDZ("IkqoaHkygazYqnokn", 22))
+            or KDSdFglSgSzLexdfASJLEqHAvFv:WaitForChild(VVOCViJKJhiHhHideiDZ("JlrpbIlzhbaZroplo", 23), 10)
+        if not (oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt and oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt:IsA(VVOCViJKJhiHhHideiDZ("CqeKxfayp", 22))) then return end
+        oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt.Visible = true
+        if not (meyvdFkvWeEStSWcEtBrA and meyvdFkvWeEStSWcEtBrA:IsA(VVOCViJKJhiHhHideiDZ("AocIvdywn", 20))) then return end
 
-        local function nqaUsSgtsCe()
-            local uUKYjyfKjZAh = EllKIjedvQVx.Active or EllKIjedvQVx.Selected
-                or (EllKIjedvQVx:IsA("ImageButton") and EllKIjedvQVx.ImageRectOffset.X > 0)
-            TgxcXBQbdfFA.Visible = uUKYjyfKjZAh
+        local function dcVvfcWPnwYqJXggACMkGRMFLJLcDOoS()
+            local vidTwuxWVWayHgZShvOFxiytTAEqPpR = oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt.Active or oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt.Selected
+                or (oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt:IsA(VVOCViJKJhiHhHideiDZ("EiwcaXqppkj", 22)) and oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt.ImageRectOffset.X > 0)
+            meyvdFkvWeEStSWcEtBrA.Visible = vidTwuxWVWayHgZShvOFxiytTAEqPpR
         end
-        nqaUsSgtsCe()
+        dcVvfcWPnwYqJXggACMkGRMFLJLcDOoS()
 
-        if not EllKIjedvQVx:GetAttribute("CursorBound") then
-            EllKIjedvQVx:SetAttribute("CursorBound", true)
-            EllKIjedvQVx:GetPropertyChangedSignal("Active"):Connect(nqaUsSgtsCe)
-            EllKIjedvQVx:GetPropertyChangedSignal("Selected"):Connect(nqaUsSgtsCe)
-            if EllKIjedvQVx:IsA("GuiButton") then
-                EllKIjedvQVx.MouseButton1Click:Connect(function()
+        if not oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt:GetAttribute(VVOCViJKJhiHhHideiDZ("BtqrnqAntmc", 25)) then
+            oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt:SetAttribute(VVOCViJKJhiHhHideiDZ("AspqmpZmslb", 24), true)
+            oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt:GetPropertyChangedSignal(VVOCViJKJhiHhHideiDZ("Tvmbox", 19)):Connect(dcVvfcWPnwYqJXggACMkGRMFLJLcDOoS)
+            oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt:GetPropertyChangedSignal(VVOCViJKJhiHhHideiDZ("Oahaypaz", 22)):Connect(dcVvfcWPnwYqJXggACMkGRMFLJLcDOoS)
+            if oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt:IsA(VVOCViJKJhiHhHideiDZ("YmaTmllgf", 18)) then
+                oDfKeAaIojCaZmrAnSJdBNEvRsaCbFwt.MouseButton1Click:Connect(function()
                     task.wait(0.05)
-                    nqaUsSgtsCe()
+                    dcVvfcWPnwYqJXggACMkGRMFLJLcDOoS()
                 end)
             end
         end
     end
 
-    local function zuomZDjCrn(targetDevice)
+    local function XdPheVmKpakRGTsQQzgRpQCPTztVb(targetDevice)
         if not targetDevice or not getgc then return 0, 0 end
-        local UNUgXUiHeEsz, cvUVeumXdV = VWWnQQEQnsY(getgc, true)
-        if not UNUgXUiHeEsz or not cvUVeumXdV then return 0, 0 end
-        local INpXavHQ, EPpBEucNZhDK = 0, 0
-        for imGKCVeeINXF, obj in GpednOqVWyU(cvUVeumXdV) do
-            EPpBEucNZhDK += 1
-            if EPpBEucNZhDK > 150000 then break end
-            if type(obj) == "table" then
-                local YgRnIjiHYJ, FxCnqPaxQDP = VWWnQQEQnsY(HVgBETgU, obj, tOxgRxMVpKPr)
-                if YgRnIjiHYJ and (FxCnqPaxQDP == "Mobile" or FxCnqPaxQDP == "PC" or FxCnqPaxQDP == "Console") then
-                    VWWnQQEQnsY(function()
-                        zbocotfgJj(obj, tOxgRxMVpKPr, targetDevice)
+        local oqTHfDOGmMEHxOREIFnunjrzEIBsp, eskvtdNxVUrTKxdokskC = fieQswhHbYswCpFYhktKuvgqdKli(getgc, true)
+        if not oqTHfDOGmMEHxOREIFnunjrzEIBsp or not eskvtdNxVUrTKxdokskC then return 0, 0 end
+        local HpCSURfVWTbGJzsiLgZOGDhzwAgT, xHXraVQGFEmScXsKxfzhhHe = 0, 0
+        local ziddpopjUtCXKWOHDjjktCBONJcNT, AxbmTLGgWljqySykTlxD, cKcvVCHMBTqnQjPWAzBLVFWAw, gKdiPYFeReTZziLAKykliHacDmgBdX = VVOCViJKJhiHhHideiDZ("szakd", 25), VVOCViJKJhiHhHideiDZ("Hjwdgz", 21), VVOCViJKJhiHhHideiDZ("BO", 12), VVOCViJKJhiHhHideiDZ("Amlqmjc", 24)
+        for lOawyXKyUlblZEldPAlgwF, obj in ejlOOQQfErJaYNBJibJfztiEOPI(eskvtdNxVUrTKxdokskC) do
+            xHXraVQGFEmScXsKxfzhhHe += 1
+            if xHXraVQGFEmScXsKxfzhhHe > 150000 then break end
+            if type(obj) == ziddpopjUtCXKWOHDjjktCBONJcNT then
+                local qwOLIOfrNYDRcJZgbUXraLoivfR, LfrEnQFlTeWbPyFmilJb = fieQswhHbYswCpFYhktKuvgqdKli(ePmOOrRZrTLgHLrjsQwfAmSEgdUufB, obj, GFoCinOkbTuvDbXdUCurIsFQfZXQw)
+                if qwOLIOfrNYDRcJZgbUXraLoivfR and (LfrEnQFlTeWbPyFmilJb == AxbmTLGgWljqySykTlxD or LfrEnQFlTeWbPyFmilJb == cKcvVCHMBTqnQjPWAzBLVFWAw or LfrEnQFlTeWbPyFmilJb == gKdiPYFeReTZziLAKykliHacDmgBdX) then
+                    fieQswhHbYswCpFYhktKuvgqdKli(function()
+                        EmzETFZfmugMEusyCkyjQVZNHGObi(obj, GFoCinOkbTuvDbXdUCurIsFQfZXQw, targetDevice)
                         -- SmallScreen ما نلمسه
-                        local bDCJagGhtktQ = HVgBETgU(obj, LNNevqVVDmst)
-                        if type(bDCJagGhtktQ) == "function" then VWWnQQEQnsY(bDCJagGhtktQ, obj) end
-                        INpXavHQ += 1
+                        local fdqEtQMEdGmUTDBWXWiO = ePmOOrRZrTLgHLrjsQwfAmSEgdUufB(obj, uIcfwWhVOGaDMOTNSpcfx)
+                        if type(fdqEtQMEdGmUTDBWXWiO) == VVOCViJKJhiHhHideiDZ("xmfulagf", 18) then fieQswhHbYswCpFYhktKuvgqdKli(fdqEtQMEdGmUTDBWXWiO, obj) end
+                        HpCSURfVWTbGJzsiLgZOGDhzwAgT += 1
                     end)
                 end
-                local ggiLaOlm, NynwfEtdN = VWWnQQEQnsY(HVgBETgU, obj, mAsOwueX)
-                if ggiLaOlm and type(NynwfEtdN) == "table" then
-                    local RqCoiKRQbBaY = (targetDevice == "Console")
-                        and HVgBETgU(obj, vozhPIIUDHFT)
-                        or HVgBETgU(obj, usXJThAP)
-                    if type(RqCoiKRQbBaY) == "table" and NynwfEtdN ~= RqCoiKRQbBaY then
-                        VWWnQQEQnsY(function()
-                            zbocotfgJj(obj, mAsOwueX, RqCoiKRQbBaY)
-                            INpXavHQ += 1
+                local YBRLqTiOeNoDutXhrysGCWxNQAMIj, UudHSORqMcfiKkzCdRxVsT = fieQswhHbYswCpFYhktKuvgqdKli(ePmOOrRZrTLgHLrjsQwfAmSEgdUufB, obj, edjUIlMVAfWUUASTXlCuMPTvJNWg)
+                if YBRLqTiOeNoDutXhrysGCWxNQAMIj and type(UudHSORqMcfiKkzCdRxVsT) == ziddpopjUtCXKWOHDjjktCBONJcNT then
+                    local CRbXdnuouuMzFJUWSIHGP = (targetDevice == gKdiPYFeReTZziLAKykliHacDmgBdX)
+                        and ePmOOrRZrTLgHLrjsQwfAmSEgdUufB(obj, CgWAiEeEJSkveUeYJbgfMHIFozesuxJ)
+                        or ePmOOrRZrTLgHLrjsQwfAmSEgdUufB(obj, eVEmRQoGOxwUFOJzMkASZrLf)
+                    if type(CRbXdnuouuMzFJUWSIHGP) == ziddpopjUtCXKWOHDjjktCBONJcNT and UudHSORqMcfiKkzCdRxVsT ~= CRbXdnuouuMzFJUWSIHGP then
+                        fieQswhHbYswCpFYhktKuvgqdKli(function()
+                            EmzETFZfmugMEusyCkyjQVZNHGObi(obj, edjUIlMVAfWUUASTXlCuMPTvJNWg, CRbXdnuouuMzFJUWSIHGP)
+                            HpCSURfVWTbGJzsiLgZOGDhzwAgT += 1
                         end)
                     end
                 end
             end
         end
-        return INpXavHQ, EPpBEucNZhDK
+        return HpCSURfVWTbGJzsiLgZOGDhzwAgT, xHXraVQGFEmScXsKxfzhhHe
     end
 
-    local function CSstUDGAvmg()
+    local function PDHxWuDSHVBdTOhaVeYYgAyYZnYH()
         if _G.__dm_killed then return end
-        local yXhkeukpBE = vCTtCfGe()
-        if yXhkeukpBE then
-            VWWnQQEQnsY(LKbWmMtexRNu)
-            VWWnQQEQnsY(zuomZDjCrn, yXhkeukpBE)
+        local lLZDhSYzgvbHufeaKWhTQCjzXUw = NmLYZuMxwEenblXaPGAaOuI()
+        if lLZDhSYzgvbHufeaKWhTQCjzXUw then
+            fieQswhHbYswCpFYhktKuvgqdKli(dGVNEBGXBvBxbAElZjcJvIEzb)
+            fieQswhHbYswCpFYhktKuvgqdKli(XdPheVmKpakRGTsQQzgRpQCPTztVb, lLZDhSYzgvbHufeaKWhTQCjzXUw)
         end
     end
 
-    local function lURrbbKFkeR()
-        if typeof(gethui) == "function" then
-            local cmcuJibPQ, WJteZutagq = VWWnQQEQnsY(gethui)
-            if cmcuJibPQ and WJteZutagq then return WJteZutagq end
+    local function gCsrRwCVjgxuJgoJOvdm()
+        if typeof(gethui) == VVOCViJKJhiHhHideiDZ("crkzqflk", 23) then
+            local QWfPyNpTruPChaUKNGskwQEKXbqzEY, grRbunKLEUYKgajRfpifeEnghhAQm = fieQswhHbYswCpFYhktKuvgqdKli(gethui)
+            if QWfPyNpTruPChaUKNGskwQEKXbqzEY and grRbunKLEUYKgajRfpifeEnghhAQm then return grRbunKLEUYKgajRfpifeEnghhAQm end
         end
-        if typeof(get_hidden_gui) == "function" then
-            local cmcuJibPQ, WJteZutagq = VWWnQQEQnsY(get_hidden_gui)
-            if cmcuJibPQ and WJteZutagq then return WJteZutagq end
+        if typeof(get_hidden_gui) == VVOCViJKJhiHhHideiDZ("crkzqflk", 23) then
+            local QWfPyNpTruPChaUKNGskwQEKXbqzEY, grRbunKLEUYKgajRfpifeEnghhAQm = fieQswhHbYswCpFYhktKuvgqdKli(get_hidden_gui)
+            if QWfPyNpTruPChaUKNGskwQEKXbqzEY and grRbunKLEUYKgajRfpifeEnghhAQm then return grRbunKLEUYKgajRfpifeEnghhAQm end
         end
-        local byrHVQLkh = game:GetService("CoreGui")
-        if syn and typeof(syn.protect_gui) == "function" then return byrHVQLkh end
-        local VkDZfYmWBZV = game:GetService("Players").LocalPlayer
-        return byrHVQLkh:FindFirstChild("RobloxGui") or (VkDZfYmWBZV and VkDZfYmWBZV:WaitForChild("PlayerGui"))
+        local OUvhvhIIQLDwDjdUatiHofRsQXWaZO = game:GetService(VVOCViJKJhiHhHideiDZ("TfivXlz", 17))
+        if syn and typeof(syn.protect_gui) == VVOCViJKJhiHhHideiDZ("apixodji", 21) then return OUvhvhIIQLDwDjdUatiHofRsQXWaZO end
+        local bIGMgvRNwoklSVFlgrlupAx = game:GetService(VVOCViJKJhiHhHideiDZ("Njywcpq", 24)).LocalPlayer
+        return OUvhvhIIQLDwDjdUatiHofRsQXWaZO:FindFirstChild(VVOCViJKJhiHhHideiDZ("LivfirAoc", 20)) or (bIGMgvRNwoklSVFlgrlupAx and bIGMgvRNwoklSVFlgrlupAx:WaitForChild(VVOCViJKJhiHhHideiDZ("KgvtzmBpd", 21)))
     end
 
-    local sDowmxeBLDnH = {}
+    local ZoIbsjLvjXDNkbVukQqCAqFHh = {}
 
-    local function jfTOkfaH()
-        local dcxVyAvapxP = game:GetService("TweenService")
-        local VkDZfYmWBZV = game.Players.LocalPlayer
-        local NqzhBpNWv = lURrbbKFkeR()
-        local EndPZGGzIUUh = vCTtCfGe()
-        local IDojpJnTYOdL  = nil
-        local QNwepXAwBW = false
+    local function eFzgtzCamoipCheVxZFTtc()
+        local pWAQCqRwzCzKMUnLYVvSMIOuIwzyei = game:GetService(VVOCViJKJhiHhHideiDZ("QtbbkPbosfzb", 23))
+        local bIGMgvRNwoklSVFlgrlupAx = game.Players.LocalPlayer
+        local btACSRoIeliUsdRkuHHbvIPRYVMbE = gCsrRwCVjgxuJgoJOvdm()
+        local JSvlQuNhLbYaIZBbtXigqNKcDNK = NmLYZuMxwEenblXaPGAaOuI()
+        local ZWXLXPhZRwQteYaVncJDPc  = nil
+        local loAqhqnBMkQDlwOvymtRDasjST = false
 
-        local qFKjeZTMydw = Instance.new("ScreenGui")
-        qFKjeZTMydw.Name = ITDvDhqHKr()
-        qFKjeZTMydw.ResetOnSpawn = false
-        qFKjeZTMydw.IgnoreGuiInset = true
-        qFKjeZTMydw.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-        if syn and typeof(syn.protect_gui) == "function" then
-            VWWnQQEQnsY(syn.protect_gui, qFKjeZTMydw)
+        local edwmPXBqQHBvIkXOUlWHTcLElRiq = Instance.new(VVOCViJKJhiHhHideiDZ("RbqddmFth", 25))
+        edwmPXBqQHBvIkXOUlWHTcLElRiq.Name = HGWheaoSwHzWcRkSHhJyRWKezOmOteA()
+        edwmPXBqQHBvIkXOUlWHTcLElRiq.ResetOnSpawn = false
+        edwmPXBqQHBvIkXOUlWHTcLElRiq.IgnoreGuiInset = true
+        edwmPXBqQHBvIkXOUlWHTcLElRiq.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        if syn and typeof(syn.protect_gui) == VVOCViJKJhiHhHideiDZ("etmbshnm", 25) then
+            fieQswhHbYswCpFYhktKuvgqdKli(syn.protect_gui, edwmPXBqQHBvIkXOUlWHTcLElRiq)
         end
-        qFKjeZTMydw.Parent = NqzhBpNWv
-        table.insert(sDowmxeBLDnH, qFKjeZTMydw)
+        edwmPXBqQHBvIkXOUlWHTcLElRiq.Parent = btACSRoIeliUsdRkuHHbvIPRYVMbE
+        table.insert(ZoIbsjLvjXDNkbVukQqCAqFHh, edwmPXBqQHBvIkXOUlWHTcLElRiq)
 
-        local IezJALpI = Instance.new("TextButton")
-        IezJALpI.Name = ITDvDhqHKr()
-        IezJALpI.Size = UDim2.fromOffset(36, 36)
-        IezJALpI.Position = UDim2.new(0, 16, 0.5, -18)
-        IezJALpI.BackgroundColor3 = Color3.fromRGB(12, 12, 15)
-        IezJALpI.BackgroundTransparency = 0.05
-        IezJALpI.Text = "PX"
-        IezJALpI.TextColor3 = Color3.fromRGB(255, 255, 255)
-        IezJALpI.TextSize = 13
-        IezJALpI.Font = Enum.Font.GothamBold
-        IezJALpI.AutoButtonColor = false
-        IezJALpI.Active = true
-        IezJALpI.Draggable = true
-        IezJALpI.Parent = qFKjeZTMydw
+        local BFrhceOPkzIhELFxftINbfrnfwe = Instance.new(VVOCViJKJhiHhHideiDZ("SdwsAtssnm", 25))
+        BFrhceOPkzIhELFxftINbfrnfwe.Name = HGWheaoSwHzWcRkSHhJyRWKezOmOteA()
+        BFrhceOPkzIhELFxftINbfrnfwe.Size = UDim2.fromOffset(36, 36)
+        BFrhceOPkzIhELFxftINbfrnfwe.Position = UDim2.new(0, 16, 0.5, -18)
+        BFrhceOPkzIhELFxftINbfrnfwe.BackgroundColor3 = Color3.fromRGB(12, 12, 15)
+        BFrhceOPkzIhELFxftINbfrnfwe.BackgroundTransparency = 0.05
+        BFrhceOPkzIhELFxftINbfrnfwe.Text = VVOCViJKJhiHhHideiDZ("DL", 14)
+        BFrhceOPkzIhELFxftINbfrnfwe.TextColor3 = Color3.fromRGB(255, 255, 255)
+        BFrhceOPkzIhELFxftINbfrnfwe.TextSize = 13
+        BFrhceOPkzIhELFxftINbfrnfwe.Font = Enum.Font.GothamBold
+        BFrhceOPkzIhELFxftINbfrnfwe.AutoButtonColor = false
+        BFrhceOPkzIhELFxftINbfrnfwe.Active = true
+        BFrhceOPkzIhELFxftINbfrnfwe.Draggable = true
+        BFrhceOPkzIhELFxftINbfrnfwe.Parent = edwmPXBqQHBvIkXOUlWHTcLElRiq
 
-        local hsyemANojTCC = Instance.new("UICorner")
-        hsyemANojTCC.CornerRadius = UDim.new(0, 7)
-        hsyemANojTCC.Parent = IezJALpI
+        local IiHgDHZwmoErboezoujQemulSEvfE = Instance.new(VVOCViJKJhiHhHideiDZ("QEYknjan", 22))
+        IiHgDHZwmoErboezoujQemulSEvfE.CornerRadius = UDim.new(0, 7)
+        IiHgDHZwmoErboezoujQemulSEvfE.Parent = BFrhceOPkzIhELFxftINbfrnfwe
 
-        local AwYPrSDmDun = Instance.new("UIStroke")
-        AwYPrSDmDun.Color = Color3.fromRGB(60, 60, 75)
-        AwYPrSDmDun.Transparency = 0.3
-        AwYPrSDmDun.Thickness = 1
-        AwYPrSDmDun.Parent = IezJALpI
+        local aHojBAwlCingvKmtPbvEvLk = Instance.new(VVOCViJKJhiHhHideiDZ("NBLmkhdx", 19))
+        aHojBAwlCingvKmtPbvEvLk.Color = Color3.fromRGB(60, 60, 75)
+        aHojBAwlCingvKmtPbvEvLk.Transparency = 0.3
+        aHojBAwlCingvKmtPbvEvLk.Thickness = 1
+        aHojBAwlCingvKmtPbvEvLk.Parent = BFrhceOPkzIhELFxftINbfrnfwe
 
-        local kqVLFTIFjF = Instance.new("Frame")
-        kqVLFTIFjF.Name = ITDvDhqHKr()
-        kqVLFTIFjF.Size = UDim2.fromOffset(250, 215)
-        kqVLFTIFjF.Position = UDim2.new(0.5, -125, 0.5, -107)
-        kqVLFTIFjF.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        kqVLFTIFjF.BackgroundTransparency = 0.05
-        kqVLFTIFjF.BorderSizePixel = 0
-        kqVLFTIFjF.Visible = false
-        kqVLFTIFjF.ClipsDescendants = true
-        kqVLFTIFjF.Parent = qFKjeZTMydw
+        local FIGFDSZlWlPWibYHdRLgkT = Instance.new(VVOCViJKJhiHhHideiDZ("Amvhz", 21))
+        FIGFDSZlWlPWibYHdRLgkT.Name = HGWheaoSwHzWcRkSHhJyRWKezOmOteA()
+        FIGFDSZlWlPWibYHdRLgkT.Size = UDim2.fromOffset(250, 215)
+        FIGFDSZlWlPWibYHdRLgkT.Position = UDim2.new(0.5, -125, 0.5, -107)
+        FIGFDSZlWlPWibYHdRLgkT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        FIGFDSZlWlPWibYHdRLgkT.BackgroundTransparency = 0.05
+        FIGFDSZlWlPWibYHdRLgkT.BorderSizePixel = 0
+        FIGFDSZlWlPWibYHdRLgkT.Visible = false
+        FIGFDSZlWlPWibYHdRLgkT.ClipsDescendants = true
+        FIGFDSZlWlPWibYHdRLgkT.Parent = edwmPXBqQHBvIkXOUlWHTcLElRiq
 
-        local guYxFLpESUP = Instance.new("UIGradient")
-        guYxFLpESUP.Rotation = 90
-        guYxFLpESUP.Color = ColorSequence.new({
+        local bXAHjDloVpFGRttIkooIrUyousorMq = Instance.new(VVOCViJKJhiHhHideiDZ("THFqzchdms", 25))
+        bXAHjDloVpFGRttIkooIrUyousorMq.Rotation = 90
+        bXAHjDloVpFGRttIkooIrUyousorMq.Color = ColorSequence.new({
             ColorSequenceKeypoint.new(0, Color3.fromRGB(80, 90, 115)),
             ColorSequenceKeypoint.new(0.35, Color3.fromRGB(15, 16, 22)),
             ColorSequenceKeypoint.new(1, Color3.fromRGB(5, 5, 8)),
         })
-        guYxFLpESUP.Transparency = NumberSequence.new({
+        bXAHjDloVpFGRttIkooIrUyousorMq.Transparency = NumberSequence.new({
             NumberSequenceKeypoint.new(0, 0.45),
             NumberSequenceKeypoint.new(0.35, 0.05),
             NumberSequenceKeypoint.new(1, 0.0),
         })
-        guYxFLpESUP.Parent = kqVLFTIFjF
+        bXAHjDloVpFGRttIkooIrUyousorMq.Parent = FIGFDSZlWlPWibYHdRLgkT
 
-        local upPoOgbv = Instance.new("UICorner")
-        upPoOgbv.CornerRadius = UDim.new(0, 12)
-        upPoOgbv.Parent = kqVLFTIFjF
+        local nRyRjhTZAYxCiAoHfSxgZoB = Instance.new(VVOCViJKJhiHhHideiDZ("THBnqmdq", 25))
+        nRyRjhTZAYxCiAoHfSxgZoB.CornerRadius = UDim.new(0, 12)
+        nRyRjhTZAYxCiAoHfSxgZoB.Parent = FIGFDSZlWlPWibYHdRLgkT
 
-        local UWZkCGMbO = Instance.new("UIStroke")
-        UWZkCGMbO.Color = Color3.fromRGB(255, 255, 255)
-        UWZkCGMbO.Transparency = 0.8
-        UWZkCGMbO.Thickness = 1
-        UWZkCGMbO.Parent = kqVLFTIFjF
+        local WfTHhLWsdHPekUZfQbPZncRW = Instance.new(VVOCViJKJhiHhHideiDZ("SGQrpmic", 24))
+        WfTHhLWsdHPekUZfQbPZncRW.Color = Color3.fromRGB(255, 255, 255)
+        WfTHhLWsdHPekUZfQbPZncRW.Transparency = 0.8
+        WfTHhLWsdHPekUZfQbPZncRW.Thickness = 1
+        WfTHhLWsdHPekUZfQbPZncRW.Parent = FIGFDSZlWlPWibYHdRLgkT
 
-        local jfSVfyFdHDQ = Instance.new("Frame")
-        jfSVfyFdHDQ.Size = UDim2.new(1, 0, 0, 42)
-        jfSVfyFdHDQ.BackgroundTransparency = 1
-        jfSVfyFdHDQ.Parent = kqVLFTIFjF
+        local AlRVKevDmKmDEoVIrlvP = Instance.new(VVOCViJKJhiHhHideiDZ("Coxjb", 23))
+        AlRVKevDmKmDEoVIrlvP.Size = UDim2.new(1, 0, 0, 42)
+        AlRVKevDmKmDEoVIrlvP.BackgroundTransparency = 1
+        AlRVKevDmKmDEoVIrlvP.Parent = FIGFDSZlWlPWibYHdRLgkT
 
-        local LVkBstslRX = Instance.new("TextLabel")
-        LVkBstslRX.Size = UDim2.new(1, -40, 1, 0)
-        LVkBstslRX.Position = UDim2.fromOffset(14, 0)
-        LVkBstslRX.BackgroundTransparency = 1
-        LVkBstslRX.Text = "PhantomX Device Spoofer"
-        LVkBstslRX.TextColor3 = Color3.fromRGB(255, 255, 255)
-        LVkBstslRX.TextSize = 12
-        LVkBstslRX.Font = Enum.Font.GothamBold
-        LVkBstslRX.TextXAlignment = Enum.TextXAlignment.Left
-        LVkBstslRX.Parent = jfSVfyFdHDQ
+        local JvbxjvVEKeGrsgfHSjXLa = Instance.new(VVOCViJKJhiHhHideiDZ("RcvrJyzcj", 24))
+        JvbxjvVEKeGrsgfHSjXLa.Size = UDim2.new(1, -40, 1, 0)
+        JvbxjvVEKeGrsgfHSjXLa.Position = UDim2.fromOffset(14, 0)
+        JvbxjvVEKeGrsgfHSjXLa.BackgroundTransparency = 1
+        JvbxjvVEKeGrsgfHSjXLa.Text = VVOCViJKJhiHhHideiDZ("NfylrmkV Bctgac Qnmmdcp", 24)
+        JvbxjvVEKeGrsgfHSjXLa.TextColor3 = Color3.fromRGB(255, 255, 255)
+        JvbxjvVEKeGrsgfHSjXLa.TextSize = 12
+        JvbxjvVEKeGrsgfHSjXLa.Font = Enum.Font.GothamBold
+        JvbxjvVEKeGrsgfHSjXLa.TextXAlignment = Enum.TextXAlignment.Left
+        JvbxjvVEKeGrsgfHSjXLa.Parent = AlRVKevDmKmDEoVIrlvP
 
-        local tRJlSMcQI = Instance.new("TextButton")
-        tRJlSMcQI.Size = UDim2.fromOffset(26, 26)
-        tRJlSMcQI.Position = UDim2.new(1, -32, 0.5, -13)
-        tRJlSMcQI.BackgroundTransparency = 1
-        tRJlSMcQI.Text = "×"
-        tRJlSMcQI.TextColor3 = Color3.fromRGB(200, 200, 210)
-        tRJlSMcQI.TextSize = 18
-        tRJlSMcQI.Font = Enum.Font.GothamMedium
-        tRJlSMcQI.Parent = jfSVfyFdHDQ
+        local nQJjRZeXXAJakCdlduAZv = Instance.new(VVOCViJKJhiHhHideiDZ("SdwsAtssnm", 25))
+        nQJjRZeXXAJakCdlduAZv.Size = UDim2.fromOffset(26, 26)
+        nQJjRZeXXAJakCdlduAZv.Position = UDim2.new(1, -32, 0.5, -13)
+        nQJjRZeXXAJakCdlduAZv.BackgroundTransparency = 1
+        nQJjRZeXXAJakCdlduAZv.Text = VVOCViJKJhiHhHideiDZ("×", 1)
+        nQJjRZeXXAJakCdlduAZv.TextColor3 = Color3.fromRGB(200, 200, 210)
+        nQJjRZeXXAJakCdlduAZv.TextSize = 18
+        nQJjRZeXXAJakCdlduAZv.Font = Enum.Font.GothamMedium
+        nQJjRZeXXAJakCdlduAZv.Parent = AlRVKevDmKmDEoVIrlvP
 
-        local mfmXopiEFDMl = Instance.new("Frame")
-        mfmXopiEFDMl.Size = UDim2.new(1, -28, 0, 1)
-        mfmXopiEFDMl.Position = UDim2.fromOffset(14, 42)
-        mfmXopiEFDMl.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        mfmXopiEFDMl.BackgroundTransparency = 0.88
-        mfmXopiEFDMl.BorderSizePixel = 0
-        mfmXopiEFDMl.Parent = kqVLFTIFjF
+        local XbhtDMPopecfSOWIhTYpvAxurSuc = Instance.new(VVOCViJKJhiHhHideiDZ("Bnwia", 22))
+        XbhtDMPopecfSOWIhTYpvAxurSuc.Size = UDim2.new(1, -28, 0, 1)
+        XbhtDMPopecfSOWIhTYpvAxurSuc.Position = UDim2.fromOffset(14, 42)
+        XbhtDMPopecfSOWIhTYpvAxurSuc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        XbhtDMPopecfSOWIhTYpvAxurSuc.BackgroundTransparency = 0.88
+        XbhtDMPopecfSOWIhTYpvAxurSuc.BorderSizePixel = 0
+        XbhtDMPopecfSOWIhTYpvAxurSuc.Parent = FIGFDSZlWlPWibYHdRLgkT
 
-        local qtysXpZXv = Instance.new("Frame")
-        qtysXpZXv.Size = UDim2.new(1, -28, 0, 150)
-        qtysXpZXv.Position = UDim2.fromOffset(14, 52)
-        qtysXpZXv.BackgroundTransparency = 1
-        qtysXpZXv.Parent = kqVLFTIFjF
+        local KmTMRlHZIFfXykoteEHWfGQnQCGJk = Instance.new(VVOCViJKJhiHhHideiDZ("Amvhz", 21))
+        KmTMRlHZIFfXykoteEHWfGQnQCGJk.Size = UDim2.new(1, -28, 0, 150)
+        KmTMRlHZIFfXykoteEHWfGQnQCGJk.Position = UDim2.fromOffset(14, 52)
+        KmTMRlHZIFfXykoteEHWfGQnQCGJk.BackgroundTransparency = 1
+        KmTMRlHZIFfXykoteEHWfGQnQCGJk.Parent = FIGFDSZlWlPWibYHdRLgkT
 
-        local fQPVWTUJeL = Instance.new("UIListLayout")
-        fQPVWTUJeL.Padding = UDim.new(0, 6)
-        fQPVWTUJeL.SortOrder = Enum.SortOrder.LayoutOrder
-        fQPVWTUJeL.Parent = qtysXpZXv
+        local pWjxjoLBpwxTgrpHdVLZZdWgIbtXgGn = Instance.new(VVOCViJKJhiHhHideiDZ("QEHeopHwukqp", 22))
+        pWjxjoLBpwxTgrpHdVLZZdWgIbtXgGn.Padding = UDim.new(0, 6)
+        pWjxjoLBpwxTgrpHdVLZZdWgIbtXgGn.SortOrder = Enum.SortOrder.LayoutOrder
+        pWjxjoLBpwxTgrpHdVLZZdWgIbtXgGn.Parent = KmTMRlHZIFfXykoteEHWfGQnQCGJk
 
-        local FRbRaeHbesa = {}
+        local MoteMRiYFxVKZvDENfDHJrtuvdXGgxj = {}
 
-        local function LJnPxWHZ()
-            for name, btnData in oSYfEazxL(FRbRaeHbesa) do
-                if name == IDojpJnTYOdL then
-                    dcxVyAvapxP:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(210, 110, 30),
+        local function vOAbbSnwlkhwfTsanqmIctGoMt()
+            for name, btnData in niFTNldGeYtHaLroTzbXODsyhRvWdHF(MoteMRiYFxVKZvDENfDHJrtuvdXGgxj) do
+                if name == ZWXLXPhZRwQteYaVncJDPc then
+                    pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(210, 110, 30),
                         BackgroundTransparency = 0.15,
                     }):Play()
-                    btnData.Text.Text = "Are you sure? (Will Rejoin)"
+                    btnData.Text.Text = VVOCViJKJhiHhHideiDZ("Zqd xnt rtqd? (Vhkk Qdinhm)", 25)
                     btnData.Text.TextColor3 = Color3.fromRGB(255, 255, 255)
-                    dcxVyAvapxP:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 150, 50),
+                    pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 150, 50),
                         Transparency = 0.1,
                     }):Play()
-                elseif name == EndPZGGzIUUh then
-                    dcxVyAvapxP:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(90, 50, 150),
+                elseif name == JSvlQuNhLbYaIZBbtXigqNKcDNK then
+                    pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(90, 50, 150),
                         BackgroundTransparency = 0.2,
                     }):Play()
-                    btnData.Text.Text = name .. " [Active]"
+                    btnData.Text.Text = name .. VVOCViJKJhiHhHideiDZ(" [Xzqfsb]", 23)
                     btnData.Text.TextColor3 = Color3.fromRGB(230, 200, 255)
-                    dcxVyAvapxP:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(180, 130, 255),
+                    pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(180, 130, 255),
                         Transparency = 0.1,
                     }):Play()
                 else
-                    dcxVyAvapxP:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
+                    pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(btnData.Btn, TweenInfo.new(0.15), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
                         BackgroundTransparency = 0.35,
                     }):Play()
                     btnData.Text.Text = name
                     btnData.Text.TextColor3 = Color3.fromRGB(210, 215, 225)
-                    dcxVyAvapxP:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 255, 255),
+                    pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(btnData.Stroke, TweenInfo.new(0.15), {Color= Color3.fromRGB(255, 255, 255),
                         Transparency = 0.88,
                     }):Play()
                 end
             end
         end
 
-        local function YCpogZQGqz(name, order)
-            local ABpprtUEK = Instance.new("TextButton")
-            ABpprtUEK.Size = UDim2.new(1, 0, 0, 42)
-            ABpprtUEK.BackgroundColor3 = Color3.fromRGB(18, 20, 28)
-            ABpprtUEK.BackgroundTransparency = 0.35
-            ABpprtUEK.Text = ""
-            ABpprtUEK.AutoButtonColor = false
-            ABpprtUEK.LayoutOrder = order
-            ABpprtUEK.Parent = qtysXpZXv
+        local function BCMWnlXxsrHnacQYScEEfxQwa(name, order)
+            local CCMejfnxSvupoWcsQwWIUAGcRsnLkiV = Instance.new(VVOCViJKJhiHhHideiDZ("QbuqYrqqlk", 23))
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.Size = UDim2.new(1, 0, 0, 42)
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.BackgroundColor3 = Color3.fromRGB(18, 20, 28)
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.BackgroundTransparency = 0.35
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.Text = VVOCViJKJhiHhHideiDZ("", 1)
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.AutoButtonColor = false
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.LayoutOrder = order
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.Parent = KmTMRlHZIFfXykoteEHWfGQnQCGJk
 
-            local ImsAgTqlHy = Instance.new("UICorner")
-            ImsAgTqlHy.CornerRadius = UDim.new(0, 8)
-            ImsAgTqlHy.Parent = ABpprtUEK
+            local MFpqkjuUnvVXFwfvRmDdyJ = Instance.new(VVOCViJKJhiHhHideiDZ("OCWilhyl", 20))
+            MFpqkjuUnvVXFwfvRmDdyJ.CornerRadius = UDim.new(0, 8)
+            MFpqkjuUnvVXFwfvRmDdyJ.Parent = CCMejfnxSvupoWcsQwWIUAGcRsnLkiV
 
-            local CsocvJQCKGf = Instance.new("UIStroke")
-            CsocvJQCKGf.Color = Color3.fromRGB(255, 255, 255)
-            CsocvJQCKGf.Transparency = 0.88
-            CsocvJQCKGf.Thickness = 1
-            CsocvJQCKGf.Parent = ABpprtUEK
+            local xlXEPGiAdhGDGuXUavWNHL = Instance.new(VVOCViJKJhiHhHideiDZ("RFPqolhb", 23))
+            xlXEPGiAdhGDGuXUavWNHL.Color = Color3.fromRGB(255, 255, 255)
+            xlXEPGiAdhGDGuXUavWNHL.Transparency = 0.88
+            xlXEPGiAdhGDGuXUavWNHL.Thickness = 1
+            xlXEPGiAdhGDGuXUavWNHL.Parent = CCMejfnxSvupoWcsQwWIUAGcRsnLkiV
 
-            local XwcSQvMaai = Instance.new("TextLabel")
-            XwcSQvMaai.Size = UDim2.new(1, -20, 1, 0)
-            XwcSQvMaai.Position = UDim2.fromOffset(12, 0)
-            XwcSQvMaai.BackgroundTransparency = 1
-            XwcSQvMaai.Text = name
-            XwcSQvMaai.TextColor3 = Color3.fromRGB(210, 215, 225)
-            XwcSQvMaai.TextSize = 11
-            XwcSQvMaai.Font = Enum.Font.GothamMedium
-            XwcSQvMaai.TextXAlignment = Enum.TextXAlignment.Left
-            XwcSQvMaai.Parent = ABpprtUEK
+            local dCcUxPXqWzJxpVElByipD = Instance.new(VVOCViJKJhiHhHideiDZ("SdwsKzadk", 25))
+            dCcUxPXqWzJxpVElByipD.Size = UDim2.new(1, -20, 1, 0)
+            dCcUxPXqWzJxpVElByipD.Position = UDim2.fromOffset(12, 0)
+            dCcUxPXqWzJxpVElByipD.BackgroundTransparency = 1
+            dCcUxPXqWzJxpVElByipD.Text = name
+            dCcUxPXqWzJxpVElByipD.TextColor3 = Color3.fromRGB(210, 215, 225)
+            dCcUxPXqWzJxpVElByipD.TextSize = 11
+            dCcUxPXqWzJxpVElByipD.Font = Enum.Font.GothamMedium
+            dCcUxPXqWzJxpVElByipD.TextXAlignment = Enum.TextXAlignment.Left
+            dCcUxPXqWzJxpVElByipD.Parent = CCMejfnxSvupoWcsQwWIUAGcRsnLkiV
 
-            FRbRaeHbesa[name] = {Btn= ABpprtUEK, Stroke = CsocvJQCKGf, Text = XwcSQvMaai }
+            MoteMRiYFxVKZvDENfDHJrtuvdXGgxj[name] = {Btn= CCMejfnxSvupoWcsQwWIUAGcRsnLkiV, Stroke = xlXEPGiAdhGDGuXUavWNHL, Text = dCcUxPXqWzJxpVElByipD }
 
-            ABpprtUEK.MouseEnter:Connect(function()
-                if IDojpJnTYOdL ~= name and EndPZGGzIUUh ~= name then
-                    dcxVyAvapxP:Create(ABpprtUEK, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(32, 36, 50),
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.MouseEnter:Connect(function()
+                if ZWXLXPhZRwQteYaVncJDPc ~= name and JSvlQuNhLbYaIZBbtXigqNKcDNK ~= name then
+                    pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(CCMejfnxSvupoWcsQwWIUAGcRsnLkiV, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(32, 36, 50),
                         BackgroundTransparency = 0.2,
                     }):Play()
                 end
             end)
-            ABpprtUEK.MouseLeave:Connect(function()
-                if IDojpJnTYOdL ~= name and EndPZGGzIUUh ~= name then
-                    dcxVyAvapxP:Create(ABpprtUEK, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.MouseLeave:Connect(function()
+                if ZWXLXPhZRwQteYaVncJDPc ~= name and JSvlQuNhLbYaIZBbtXigqNKcDNK ~= name then
+                    pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(CCMejfnxSvupoWcsQwWIUAGcRsnLkiV, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(18, 20, 28),
                         BackgroundTransparency = 0.35,
                     }):Play()
                 end
             end)
 
-            ABpprtUEK.MouseButton1Click:Connect(function()
-                if EndPZGGzIUUh == name then return end
-                if IDojpJnTYOdL == name then
-                    EndPZGGzIUUh = name
-                    JZBDeMDv(name)
-                    IDojpJnTYOdL = nil
+            CCMejfnxSvupoWcsQwWIUAGcRsnLkiV.MouseButton1Click:Connect(function()
+                if JSvlQuNhLbYaIZBbtXigqNKcDNK == name then return end
+                if ZWXLXPhZRwQteYaVncJDPc == name then
+                    JSvlQuNhLbYaIZBbtXigqNKcDNK = name
+                    wwgtkAjzpRBTfIPvCbrZatTzVAv(name)
+                    ZWXLXPhZRwQteYaVncJDPc = nil
                     if activeToken and activeExpiry then
-                        XdVdssCsmtzS(activeToken, activeExpiry)
+                        MENSYothWarZrSzgdXhwXRmYoclV(activeToken, activeExpiry)
                     end
-                    XwcSQvMaai.Text = "Rejoining..."
-                    LJnPxWHZ()
-                    CSstUDGAvmg()
+                    dCcUxPXqWzJxpVElByipD.Text = VVOCViJKJhiHhHideiDZ("Kxchbgbgz...", 19)
+                    vOAbbSnwlkhwfTsanqmIctGoMt()
+                    PDHxWuDSHVBdTOhaVeYYgAyYZnYH()
                     if queue_on_teleport then
-                        queue_on_teleport("_G.TargetDevice = '" .. name .. "'")
+                        queue_on_teleport(VVOCViJKJhiHhHideiDZ("_F.SzqfdsCduhbd = '", 25) .. name .. VVOCViJKJhiHhHideiDZ("'", 1))
                     end
                     task.wait(0.2)
-                    game:GetService("TeleportService"):TeleportToPlaceInstance(
-                        game.PlaceId, game.JobId, VkDZfYmWBZV
+                    game:GetService(VVOCViJKJhiHhHideiDZ("SdkdonqsRdquhbd", 25)):TeleportToPlaceInstance(
+                        game.PlaceId, game.JobId, bIGMgvRNwoklSVFlgrlupAx
                     )
                     return
                 end
-                IDojpJnTYOdL = name
-                LJnPxWHZ()
+                ZWXLXPhZRwQteYaVncJDPc = name
+                vOAbbSnwlkhwfTsanqmIctGoMt()
             end)
         end
 
-        for i, plat in GpednOqVWyU(JSYuZczF) do
-            YCpogZQGqz(plat, i)
+        for i, plat in ejlOOQQfErJaYNBJibJfztiEOPI(GjgRQGOMaixRSwXNKDQgOyxYnTm) do
+            BCMWnlXxsrHnacQYScEEfxQwa(plat, i)
         end
-        LJnPxWHZ()
+        vOAbbSnwlkhwfTsanqmIctGoMt()
 
-        local function FUOwDWADa()
-            QNwepXAwBW = true
-            kqVLFTIFjF.Visible = true
-            kqVLFTIFjF.Position = UDim2.new(0.5, -125, 0.5, -97)
-            dcxVyAvapxP:Create(
-                kqVLFTIFjF,
+        local function aTsYHewfayDdifXXkSfoWkJDmdExwE()
+            loAqhqnBMkQDlwOvymtRDasjST = true
+            FIGFDSZlWlPWibYHdRLgkT.Visible = true
+            FIGFDSZlWlPWibYHdRLgkT.Position = UDim2.new(0.5, -125, 0.5, -97)
+            pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(
+                FIGFDSZlWlPWibYHdRLgkT,
                 TweenInfo.new(0.22, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
                 {Position= UDim2.new(0.5, -125, 0.5, -107) }
             ):Play()
-            dcxVyAvapxP:Create(UWZkCGMbO, TweenInfo.new(0.22), {Transparency= 0.65,
+            pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(WfTHhLWsdHPekUZfQbPZncRW, TweenInfo.new(0.22), {Transparency= 0.65,
             }):Play()
         end
 
-        local function MtEXKCXso()
-            QNwepXAwBW = false
-            IDojpJnTYOdL = nil
-            LJnPxWHZ()
-            local WxhxvxCb = dcxVyAvapxP:Create(
-                kqVLFTIFjF,
+        local function DtEgDGcxJaUDeeuvWtRHplrOSs()
+            loAqhqnBMkQDlwOvymtRDasjST = false
+            ZWXLXPhZRwQteYaVncJDPc = nil
+            vOAbbSnwlkhwfTsanqmIctGoMt()
+            local ZRgzEMYZyscuifPDAxnQh = pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(
+                FIGFDSZlWlPWibYHdRLgkT,
                 TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
                 {Position= UDim2.new(0.5, -125, 0.5, -97) }
             )
-            dcxVyAvapxP:Create(UWZkCGMbO, TweenInfo.new(0.15), {Transparency= 1,
+            pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(WfTHhLWsdHPekUZfQbPZncRW, TweenInfo.new(0.15), {Transparency= 1,
             }):Play()
-            WxhxvxCb:Play()
-            WxhxvxCb.Completed:Once(function()
-                if not QNwepXAwBW then kqVLFTIFjF.Visible = false end
+            ZRgzEMYZyscuifPDAxnQh:Play()
+            ZRgzEMYZyscuifPDAxnQh.Completed:Once(function()
+                if not loAqhqnBMkQDlwOvymtRDasjST then FIGFDSZlWlPWibYHdRLgkT.Visible = false end
             end)
         end
 
-        IezJALpI.MouseButton1Click:Connect(function()
-            if QNwepXAwBW then MtEXKCXso() else FUOwDWADa() end
+        BFrhceOPkzIhELFxftINbfrnfwe.MouseButton1Click:Connect(function()
+            if loAqhqnBMkQDlwOvymtRDasjST then DtEgDGcxJaUDeeuvWtRHplrOSs() else aTsYHewfayDdifXXkSfoWkJDmdExwE() end
         end)
-        tRJlSMcQI.MouseButton1Click:Connect(function() MtEXKCXso() end)
+        nQJjRZeXXAJakCdlduAZv.MouseButton1Click:Connect(function() DtEgDGcxJaUDeeuvWtRHplrOSs() end)
 
-        IezJALpI.MouseEnter:Connect(function()
-            dcxVyAvapxP:Create(AwYPrSDmDun, TweenInfo.new(0.12), {Transparency= 0.1,
+        BFrhceOPkzIhELFxftINbfrnfwe.MouseEnter:Connect(function()
+            pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(aHojBAwlCingvKmtPbvEvLk, TweenInfo.new(0.12), {Transparency= 0.1,
             }):Play()
-            dcxVyAvapxP:Create(IezJALpI, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(22, 22, 28),
+            pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(BFrhceOPkzIhELFxftINbfrnfwe, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(22, 22, 28),
             }):Play()
         end)
-        IezJALpI.MouseLeave:Connect(function()
-            dcxVyAvapxP:Create(AwYPrSDmDun, TweenInfo.new(0.12), {Transparency= 0.3,
+        BFrhceOPkzIhELFxftINbfrnfwe.MouseLeave:Connect(function()
+            pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(aHojBAwlCingvKmtPbvEvLk, TweenInfo.new(0.12), {Transparency= 0.3,
             }):Play()
-            dcxVyAvapxP:Create(IezJALpI, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(12, 12, 15),
+            pWAQCqRwzCzKMUnLYVvSMIOuIwzyei:Create(BFrhceOPkzIhELFxftINbfrnfwe, TweenInfo.new(0.12), {BackgroundColor3= Color3.fromRGB(12, 12, 15),
             }):Play()
         end)
     end
 
-    jfTOkfaH()
+    eFzgtzCamoipCheVxZFTtc()
 
     task.spawn(function()
-        for imGKCVeeINXF = 1, 15 do
+        for lOawyXKyUlblZEldPAlgwF = 1, 15 do
             if _G.__dm_killed then return end
-            CSstUDGAvmg()
+            PDHxWuDSHVBdTOhaVeYYgAyYZnYH()
             task.wait(0.8)
         end
     end)
 
     task.spawn(function()
-        local VkDZfYmWBZV = game.Players.LocalPlayer
-        if not VkDZfYmWBZV then
-            game.Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
-            VkDZfYmWBZV = game.Players.LocalPlayer
+        local bIGMgvRNwoklSVFlgrlupAx = game.Players.LocalPlayer
+        if not bIGMgvRNwoklSVFlgrlupAx then
+            game.Players:GetPropertyChangedSignal(VVOCViJKJhiHhHideiDZ("KnbzkOkzxdq", 25)):Wait()
+            bIGMgvRNwoklSVFlgrlupAx = game.Players.LocalPlayer
         end
-        VkDZfYmWBZV.CharacterAdded:Connect(function()
+        bIGMgvRNwoklSVFlgrlupAx.CharacterAdded:Connect(function()
             task.wait(1)
             if _G.__dm_killed then return end
-            CSstUDGAvmg()
+            PDHxWuDSHVBdTOhaVeYYgAyYZnYH()
         end)
     end)
 
     task.spawn(function()
         while not _G.__dm_killed do task.wait(0.5) end
-        for imGKCVeeINXF, g in GpednOqVWyU(sDowmxeBLDnH) do
-            VWWnQQEQnsY(function() g:Destroy() end)
+        for lOawyXKyUlblZEldPAlgwF, g in ejlOOQQfErJaYNBJibJfztiEOPI(ZoIbsjLvjXDNkbVukQqCAqFHh) do
+            fieQswhHbYswCpFYhktKuvgqdKli(function() g:Destroy() end)
         end
     end)
 end
 
 -- ===== التفعيل =====
-local VlgzJRZFXbGN, svgMPWGePbcZ = kdhDNDbO()
-upcwTZTxUo(MhTEpmoNb())
-if #JSYuZczF == 0 then
-    KyltqbquE("No compatible device option is enabled for this account", "NO_COMPATIBLE_PLATFORM")
+local xDkhWxUtRXuWdzbNgAzymLTpBnMz, RbgdxygfrUXTdGBKqxQLTIHJgiEmGsvJ = tqKKiSskKIFWmZbaHRLEHaoPLTExl()
+BgqkmzhnRVToRDGEbiWtTsH(OVLsrQdLVWrdThUNxymxMqNUY())
+if #GjgRQGOMaixRSwXNKDQgOyxYnTm == 0 then
+    mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Mn bnlozshakd cduhbd noshnm hr dmzakdc enq sghr zbbntms", 25), VVOCViJKJhiHhHideiDZ("MN_BNLOZSHAKD_OKZSENQL", 25))
     return
 end
 
-if VlgzJRZFXbGN then
-    local imGKCVeeINXF, QFpdpovlZ = fdDeHTtIbG("POST", "/api/license/heartbeat", {sessionToken= VlgzJRZFXbGN,
-        scriptVariant = EVULeHyrD,
-        deviceFingerprint = NIWXuBvXrxA,
-        robloxUserId = VYrnwagjF,
+if xDkhWxUtRXuWdzbNgAzymLTpBnMz then
+    local lOawyXKyUlblZEldPAlgwF, koxbFYyCsRfUbdaWvFiKRtHDzYfh = UaRLMubCNlVcyGawHZWXWZnqf(VVOCViJKJhiHhHideiDZ("LKOP", 22), VVOCViJKJhiHhHideiDZ("/zoh/khbdmrd/gdzqsadzs", 25), {sessionToken= xDkhWxUtRXuWdzbNgAzymLTpBnMz,
+        scriptVariant = rEUdGiOAtgpWxWGIrkzQAmfi,
+        deviceFingerprint = oBQGpPKDFJTaQOyCncSojUHpLPoEB,
+        robloxUserId = FiVIlGiJlpSrAGrZFXWAOf,
     })
-    if not QFpdpovlZ or QFpdpovlZ.success ~= true then
+    if not koxbFYyCsRfUbdaWvFiKRtHDzYfh or koxbFYyCsRfUbdaWvFiKRtHDzYfh.success ~= true then
         _G.__dm_killed = true
-        GDMWKewnck()
-        KyltqbquE("License verification failed", QFpdpovlZ and QFpdpovlZ.error or "HEARTBEAT_FAILED")
+        FnvCMSvEuPNHICRhtKDxxm()
+        mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Ifzbkpb sbofcfzxqflk cxfiba", 23), koxbFYyCsRfUbdaWvFiKRtHDzYfh and koxbFYyCsRfUbdaWvFiKRtHDzYfh.error or VVOCViJKJhiHhHideiDZ("FCYPRZCYR_DYGJCB", 24))
         return
     end
 
-    task.spawn(HVZpKyoH, VlgzJRZFXbGN, svgMPWGePbcZ)
+    task.spawn(lmLANXMIOfoogZViPmIRsy, xDkhWxUtRXuWdzbNgAzymLTpBnMz, RbgdxygfrUXTdGBKqxQLTIHJgiEmGsvJ)
     task.spawn(function()
-        while os.time() < svgMPWGePbcZ do
+        while os.time() < RbgdxygfrUXTdGBKqxQLTIHJgiEmGsvJ do
             task.wait(20)
-            if os.time() >= svgMPWGePbcZ then
+            if os.time() >= RbgdxygfrUXTdGBKqxQLTIHJgiEmGsvJ then
                 _G.__dm_killed = true
-                GDMWKewnck()
+                FnvCMSvEuPNHICRhtKDxxm()
                 break
             end
-            local imGKCVeeINXF, ZSYJdZPLwiT = fdDeHTtIbG("POST", "/api/license/heartbeat", {sessionToken= VlgzJRZFXbGN,
-                scriptVariant = EVULeHyrD,
-                deviceFingerprint = NIWXuBvXrxA,
-                robloxUserId = VYrnwagjF,
+            local lOawyXKyUlblZEldPAlgwF, ktEihWWMlqGPRPfjqxpgzd = UaRLMubCNlVcyGawHZWXWZnqf(VVOCViJKJhiHhHideiDZ("ONRS", 25), VVOCViJKJhiHhHideiDZ("/zoh/khbdmrd/gdzqsadzs", 25), {sessionToken= xDkhWxUtRXuWdzbNgAzymLTpBnMz,
+                scriptVariant = rEUdGiOAtgpWxWGIrkzQAmfi,
+                deviceFingerprint = oBQGpPKDFJTaQOyCncSojUHpLPoEB,
+                robloxUserId = FiVIlGiJlpSrAGrZFXWAOf,
             })
-            if not ZSYJdZPLwiT or ZSYJdZPLwiT.success ~= true then
+            if not ktEihWWMlqGPRPfjqxpgzd or ktEihWWMlqGPRPfjqxpgzd.success ~= true then
                 _G.__dm_killed = true
-                GDMWKewnck()
+                FnvCMSvEuPNHICRhtKDxxm()
                 break
             end
         end
     end)
-    nZqCFhHuCA("done")
+    iyfeYiuABQflzzcNXaRh(VVOCViJKJhiHhHideiDZ("vgfw", 18))
     return
 end
 
-eylSjhgxW("Connecting to secure license service...", Color3.fromRGB(151, 112, 255), 5)
+IGjboTcMDlMElYusOxBz(VVOCViJKJhiHhHideiDZ("Amllcargle rm qcaspc jgaclqc qcptgac...", 24), Color3.fromRGB(151, 112, 255), 5)
 
-local imGKCVeeINXF, QxcmmZQkzMS, tCfZIsyPoz = fdDeHTtIbG("GET", "/api/license/product")
-if not QxcmmZQkzMS then KyltqbquE("Service unavailable", tCfZIsyPoz) return end
-if QxcmmZQkzMS.enabled ~= true then
-    KyltqbquE("DeviceMode is currently disabled", "PRODUCT_DISABLED")
+local lOawyXKyUlblZEldPAlgwF, VrhKyaxisWGjLgcunyPlPLlr, qDnFiifIZHvVdqNwrlcJKLAwBCDFH = UaRLMubCNlVcyGawHZWXWZnqf(VVOCViJKJhiHhHideiDZ("AYN", 20), VVOCViJKJhiHhHideiDZ("/zoh/khbdmrd/oqnctbs", 25))
+if not VrhKyaxisWGjLgcunyPlPLlr then mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Rdquhbd tmzuzhkzakd", 25), qDnFiifIZHvVdqNwrlcJKLAwBCDFH) return end
+if VrhKyaxisWGjLgcunyPlPLlr.enabled ~= true then
+    mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("CduhbdLncd hr btqqdmskx chrzakdc", 25), VVOCViJKJhiHhHideiDZ("NPMBSAR_BGQYZJCB", 24))
     return
 end
-if QxcmmZQkzMS.minimumSupportedVersion and VMSkAFKal < QxcmmZQkzMS.minimumSupportedVersion then
-    KyltqbquE("Please update your DeviceMode script", "CLIENT_UPDATE_REQUIRED")
+if VrhKyaxisWGjLgcunyPlPLlr.minimumSupportedVersion and crnrAfdNGEBPUEblMGEsGjyklHhwSCx < VrhKyaxisWGjLgcunyPlPLlr.minimumSupportedVersion then
+    mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Okdzrd toczsd xntq CduhbdLncd rbqhos", 25), VVOCViJKJhiHhHideiDZ("BKHDMS_TOCZSD_QDPTHQDC", 25))
     return
 end
 
-local sRwgFIqyFmtt = {licenseKey= bzDirNSCnAvd,
-    clientVersion = VMSkAFKal,
-    scriptVariant = EVULeHyrD,
-    deviceFingerprint = NIWXuBvXrxA,
-    robloxUserId = VYrnwagjF,
+local CCLvsZBMTkpkPLcFNcEuTmvUlbWcA = {licenseKey= SAjGuoFWLIjtuGJkojbxkFBNnqtGuIGG,
+    clientVersion = crnrAfdNGEBPUEblMGEsGjyklHhwSCx,
+    scriptVariant = rEUdGiOAtgpWxWGIrkzQAmfi,
+    deviceFingerprint = oBQGpPKDFJTaQOyCncSojUHpLPoEB,
+    robloxUserId = FiVIlGiJlpSrAGrZFXWAOf,
 }
 
-local imGKCVeeINXF, DMVezOuGvGRv, CaXSROiUFpy = fdDeHTtIbG("POST", "/api/license/activate", sRwgFIqyFmtt)
-if not DMVezOuGvGRv or DMVezOuGvGRv.success ~= true then
-    local GZesvTkFlC = DMVezOuGvGRv and DMVezOuGvGRv.error or CaXSROiUFpy or "ACTIVATION_FAILED"
-    if GZesvTkFlC == "LICENSE_EXPIRED" then
-        KyltqbquE("License expired", GZesvTkFlC)
-    elseif GZesvTkFlC == "USER_NOT_ALLOWED" then
-        KyltqbquE("This Roblox account is not authorized", GZesvTkFlC)
-    elseif GZesvTkFlC == "DEVICE_MISMATCH" then
-        KyltqbquE("This device is not bound to the license", GZesvTkFlC)
-    elseif GZesvTkFlC == "INVALID_LICENSE" then
-        KyltqbquE("License key was not found", GZesvTkFlC)
+local lOawyXKyUlblZEldPAlgwF, DkxQDRlmMEJXiwEDIvNwAQp, KaTmFmRySAhBIfmaVTsdIqzpXgR = UaRLMubCNlVcyGawHZWXWZnqf(VVOCViJKJhiHhHideiDZ("NMQR", 24), VVOCViJKJhiHhHideiDZ("/zoh/khbdmrd/zbshuzsd", 25), CCLvsZBMTkpkPLcFNcEuTmvUlbWcA)
+if not DkxQDRlmMEJXiwEDIvNwAQp or DkxQDRlmMEJXiwEDIvNwAQp.success ~= true then
+    local RoEjmwupcFtShPZDAPfW = DkxQDRlmMEJXiwEDIvNwAQp and DkxQDRlmMEJXiwEDIvNwAQp.error or KaTmFmRySAhBIfmaVTsdIqzpXgR or VVOCViJKJhiHhHideiDZ("ZBSHUZSHNM_EZHKDC", 25)
+    if RoEjmwupcFtShPZDAPfW == VVOCViJKJhiHhHideiDZ("KHBDMRD_DWOHQDC", 25) then
+        mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Khbdmrd dwohqdc", 25), RoEjmwupcFtShPZDAPfW)
+    elseif RoEjmwupcFtShPZDAPfW == VVOCViJKJhiHhHideiDZ("TRDQ_MNS_ZKKNVDC", 25) then
+        mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Qefp Olyilu xzzlrkq fp klq xrqelofwba", 23), RoEjmwupcFtShPZDAPfW)
+    elseif RoEjmwupcFtShPZDAPfW == VVOCViJKJhiHhHideiDZ("CDUHBD_LHRLZSBG", 25) then
+        mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Sghr cduhbd hr mns antmc sn sgd khbdmrd", 25), RoEjmwupcFtShPZDAPfW)
+    elseif RoEjmwupcFtShPZDAPfW == VVOCViJKJhiHhHideiDZ("HMUZKHC_KHBDMRD", 25) then
+        mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Khbdmrd jdx vzr mns entmc", 25), RoEjmwupcFtShPZDAPfW)
     else
-        KyltqbquE("License verification failed", GZesvTkFlC)
+        mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Khbdmrd udqhehbzshnm ezhkdc", 25), RoEjmwupcFtShPZDAPfW)
     end
     return
 end
 
-local JfAVfTlLWki = DMVezOuGvGRv.sessionToken
-local BDGPuLEMnQLR = DMVezOuGvGRv.license and goiZVsWOHrdH(DMVezOuGvGRv.license.expiresAt)
-if type(JfAVfTlLWki) ~= "string" or JfAVfTlLWki == "" or not BDGPuLEMnQLR then
-    KyltqbquE("Server returned an incomplete license response", "INVALID_ACTIVATION")
+local iJvMxFvoVvynUTplbglksQL = DkxQDRlmMEJXiwEDIvNwAQp.sessionToken
+local WfYdiASNBjSeELvWrGjBRY = DkxQDRlmMEJXiwEDIvNwAQp.license and FqZVPxKqtdyclwQLMpusc(DkxQDRlmMEJXiwEDIvNwAQp.license.expiresAt)
+if type(iJvMxFvoVvynUTplbglksQL) ~= VVOCViJKJhiHhHideiDZ("nomdib", 21) or iJvMxFvoVvynUTplbglksQL == VVOCViJKJhiHhHideiDZ("", 1) or not WfYdiASNBjSeELvWrGjBRY then
+    mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Rdqudq qdstqmdc zm hmbnlokdsd khbdmrd qdronmrd", 25), VVOCViJKJhiHhHideiDZ("HMUZKHC_ZBSHUZSHNM", 25))
     return
 end
 
-XbVxivKyYOry(DMVezOuGvGRv.allowedPlatforms)
-upcwTZTxUo(MhTEpmoNb())
-if #JSYuZczF == 0 then
-    KyltqbquE("No compatible device option is enabled for this account", "NO_COMPATIBLE_PLATFORM")
+nVvXBrgHgSZzkdcBIDnC(DkxQDRlmMEJXiwEDIvNwAQp.allowedPlatforms)
+BgqkmzhnRVToRDGEbiWtTsH(OVLsrQdLVWrdThUNxymxMqNUY())
+if #GjgRQGOMaixRSwXNKDQgOyxYnTm == 0 then
+    mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Mn bnlozshakd cduhbd noshnm hr dmzakdc enq sghr zbbntms", 25), VVOCViJKJhiHhHideiDZ("KL_ZLJMXQFYIB_MIXQCLOJ", 23))
     return
 end
-if os.time() >= BDGPuLEMnQLR then
-    KyltqbquE("License expired", "LICENSE_EXPIRED")
+if os.time() >= WfYdiASNBjSeELvWrGjBRY then
+    mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Jgaclqc cvngpcb", 24), VVOCViJKJhiHhHideiDZ("JGACLQC_CVNGPCB", 24))
     return
 end
 
-eylSjhgxW(
-    "License verified · " .. wfqtIozM(BDGPuLEMnQLR - os.time()) .. " remaining",
+IGjboTcMDlMElYusOxBz(
+    VVOCViJKJhiHhHideiDZ("Jgaclqc tcpgdgcb · ", 24) .. sgUyKqdSvcYFJnEVTXtMdgTZdKGIl(WfYdiASNBjSeELvWrGjBRY - os.time()) .. VVOCViJKJhiHhHideiDZ(" qdlzhmhmf", 25),
     Color3.fromRGB(85, 215, 164),
     8
 )
 
-XdVdssCsmtzS(JfAVfTlLWki, BDGPuLEMnQLR)
-task.spawn(HVZpKyoH, JfAVfTlLWki, BDGPuLEMnQLR)
+MENSYothWarZrSzgdXhwXRmYoclV(iJvMxFvoVvynUTplbglksQL, WfYdiASNBjSeELvWrGjBRY)
+task.spawn(lmLANXMIOfoogZViPmIRsy, iJvMxFvoVvynUTplbglksQL, WfYdiASNBjSeELvWrGjBRY)
 
-local JljyeMMaHii = true
-while JljyeMMaHii do
+local lGqwulJqrFVOMidhkUgBEME = true
+while lGqwulJqrFVOMidhkUgBEME do
     task.wait(30)
-    if os.time() >= BDGPuLEMnQLR then
-        JljyeMMaHii = false
-        GDMWKewnck()
-        KyltqbquE("License expired", "LICENSE_EXPIRED")
+    if os.time() >= WfYdiASNBjSeELvWrGjBRY then
+        lGqwulJqrFVOMidhkUgBEME = false
+        FnvCMSvEuPNHICRhtKDxxm()
+        mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Ifzbkpb bumfoba", 23), VVOCViJKJhiHhHideiDZ("JGACLQC_CVNGPCB", 24))
         break
     end
-    local imGKCVeeINXF, QFpdpovlZ = fdDeHTtIbG("POST", "/api/license/heartbeat", {sessionToken= JfAVfTlLWki,
-        scriptVariant = EVULeHyrD,
-        deviceFingerprint = NIWXuBvXrxA,
-        robloxUserId = VYrnwagjF,
+    local lOawyXKyUlblZEldPAlgwF, koxbFYyCsRfUbdaWvFiKRtHDzYfh = UaRLMubCNlVcyGawHZWXWZnqf(VVOCViJKJhiHhHideiDZ("LKOP", 22), VVOCViJKJhiHhHideiDZ("/zoh/khbdmrd/gdzqsadzs", 25), {sessionToken= iJvMxFvoVvynUTplbglksQL,
+        scriptVariant = rEUdGiOAtgpWxWGIrkzQAmfi,
+        deviceFingerprint = oBQGpPKDFJTaQOyCncSojUHpLPoEB,
+        robloxUserId = FiVIlGiJlpSrAGrZFXWAOf,
     })
-    if not QFpdpovlZ or QFpdpovlZ.success ~= true then
-        local GZesvTkFlC = QFpdpovlZ and QFpdpovlZ.error or "HEARTBEAT_FAILED"
-        JljyeMMaHii = false
-        GDMWKewnck()
-        if GZesvTkFlC == "LICENSE_EXPIRED" then
-            KyltqbquE("License expired", GZesvTkFlC)
-        elseif GZesvTkFlC == "LICENSE_REVOKED" then
-            KyltqbquE("License revoked by administrator", GZesvTkFlC)
-        elseif GZesvTkFlC == "SESSION_INVALID" then
-            KyltqbquE("License session is no longer valid", GZesvTkFlC)
+    if not koxbFYyCsRfUbdaWvFiKRtHDzYfh or koxbFYyCsRfUbdaWvFiKRtHDzYfh.success ~= true then
+        local RoEjmwupcFtShPZDAPfW = koxbFYyCsRfUbdaWvFiKRtHDzYfh and koxbFYyCsRfUbdaWvFiKRtHDzYfh.error or VVOCViJKJhiHhHideiDZ("GDZQSADZS_EZHKDC", 25)
+        lGqwulJqrFVOMidhkUgBEME = false
+        FnvCMSvEuPNHICRhtKDxxm()
+        if RoEjmwupcFtShPZDAPfW == VVOCViJKJhiHhHideiDZ("KHBDMRD_DWOHQDC", 25) then
+            mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Khbdmrd dwohqdc", 25), RoEjmwupcFtShPZDAPfW)
+        elseif RoEjmwupcFtShPZDAPfW == VVOCViJKJhiHhHideiDZ("FCWYHMY_LYPIEYX", 20) then
+            mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Khbdmrd qdunjdc ax zclhmhrsqzsnq", 25), RoEjmwupcFtShPZDAPfW)
+        elseif RoEjmwupcFtShPZDAPfW == VVOCViJKJhiHhHideiDZ("QCQQGML_GLTYJGB", 24) then
+            mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Khbdmrd rdrrhnm hr mn knmfdq uzkhc", 25), RoEjmwupcFtShPZDAPfW)
         else
-            KyltqbquE("License session ended", GZesvTkFlC)
+            mOWTunDIBPnCIVFVyDAQgEMgOERjH(VVOCViJKJhiHhHideiDZ("Jgaclqc qcqqgml clbcb", 24), RoEjmwupcFtShPZDAPfW)
         end
         break
     end
 end
 
-if csoMukcp and csoMukcp.Parent then
+if vooparOuOUdSLrRacixpr and vooparOuOUdSLrRacixpr.Parent then
     task.delay(12, function()
-        if csoMukcp and csoMukcp.Parent then csoMukcp:Destroy() end
+        if vooparOuOUdSLrRacixpr and vooparOuOUdSLrRacixpr.Parent then vooparOuOUdSLrRacixpr:Destroy() end
     end)
 end
-nZqCFhHuCA("done")
+iyfeYiuABQflzzcNXaRh(VVOCViJKJhiHhHideiDZ("cnmd", 25))
         end
         break
     end
 end
-local dummy = 1; dummy = dummy + 0;
+local dummy = 1; dummy = dummy + 2;
 
-while false do local _ = 33 break end
-if false then local _ = 44 end
-local cqxvoi = 59
-local function cbfsjl(hhoopp) local _ = 48 end
-local osnwym = 22
-while false do local _ = 32 break end
-if false then local _ = 2 end
-if false then local _ = 39 end
-local function czkymn(hzzwym) local _ = 67 end
-local mulbvg = 61
-local function msryug(mmtldp) local _ = 97 end
-local bsqomy = 68
-local wvofmf = 87
-while false do local _ = 16 break end
-local function lthuvv(eipqoa) local _ = 82 end
+while false do local _ = 15 break end
+local function hcdzse(pnipqa) local _ = 1 end
+if true then local _ = 19 end
+local xkrguv = 32
+local function ychbsf(ruxgbw) local _ = 21 end
+if true then local _ = 77 end
+local mmekzp = 8
+local khsqid = 25
+while false do local _ = 25 break end
+if false then local _ = 60 end
+local bpezuo = 3
+local xirwdh = 56
+if false then local _ = 27 end
+local ddhkgw = 85
+if false then local _ = 6 end
+local rcgoie = 23
+local function cmjmzh(lgyznu) local _ = 60 end
+local bocwcn = 89
+if true then local _ = 20 end
+while false do local _ = 3 break end
+local function rpvujr(brqdts) local _ = 29 end
+local gpfnix = 15
+local function actgkk(ioohle) local _ = 64 end
+local wuzunq = 94
+local bvxjkg = 21
+if false then local _ = 76 end
+local function xnuoym(vllbip) local _ = 46 end
+if true then local _ = 31 end
+local alhboo = 43
+if false then local _ = 10 end
+if true then local _ = 96 end
+if true then local _ = 92 end
+local ythtjy = 74
+local qrhqki = 78
+local niapxk = 73
+if true then local _ = 92 end
+local sxdyrk = 96
+local usfqtq = 74
+local function ngtcjf(vwlotc) local _ = 20 end
+if false then local _ = 56 end
+local function defdsc(mtijob) local _ = 4 end
+local irrlum = 26
+if true then local _ = 65 end
+local function gvoivj(qyithn) local _ = 39 end
+while false do local _ = 68 break end
+if false then local _ = 68 end
+if true then local _ = 24 end
+local pgqudm = 52
+if true then local _ = 63 end
+local function siyecv(mbgtcf) local _ = 70 end
+if false then local _ = 52 end
+local mngukx = 29
+if true then local _ = 92 end
+local function svyngq(cqneue) local _ = 29 end
+if false then local _ = 55 end
+if true then local _ = 12 end
+local hgbyur = 44
+local function wbeysf(mokvml) local _ = 68 end
+local function retxao(sljnrk) local _ = 22 end
+local okrgit = 100
+local xpiiec = 98
+local function hirdup(ypsgcd) local _ = 90 end
+if false then local _ = 63 end
+local function vjkbzy(csiwmq) local _ = 54 end
+if false then local _ = 78 end
+local function fxrmob(erdfuv) local _ = 14 end
+local function zxqxfx(sjbpzf) local _ = 51 end
+local function moeukw(fgvezl) local _ = 93 end
+if true then local _ = 59 end
+local function oblzfl(fdutqm) local _ = 51 end
+if false then local _ = 30 end
+local toxxbn = 91
+while false do local _ = 95 break end
+local function uberre(dqtmxk) local _ = 99 end
+if false then local _ = 100 end
+local function jfdwxq(onbgfi) local _ = 16 end
+while false do local _ = 73 break end end)()
