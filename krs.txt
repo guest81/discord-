@@ -1,0 +1,2554 @@
+-- ═══════════════════════════════════════════════════════════
+--  PhantomX All-in-One (Compact)
+-- ═══════════════════════════════════════════════════════════
+
+P = {}
+
+P.Players = game:GetService("Players")
+P.RunService = game:GetService("RunService")
+P.UIS = game:GetService("UserInputService")
+P.Lighting = game:GetService("Lighting")
+P.TS = game:GetService("TweenService")
+P.Debris = game:GetService("Debris")
+P.lp = P.Players.LocalPlayer
+P.pg = P.lp:WaitForChild("PlayerGui")
+
+for _, g in pairs(game:GetService("CoreGui"):GetChildren()) do
+    if g.Name == "PhantomX" then pcall(function() g:Destroy() end) end
+end
+do
+    local old = workspace:FindFirstChild("PX_KFX")
+    if old then old:Destroy() end
+end
+
+P.BG = Color3.fromRGB(24, 26, 32)
+P.BG2 = Color3.fromRGB(34, 37, 45)
+P.BG3 = Color3.fromRGB(46, 50, 60)
+P.ACC = Color3.fromRGB(94, 234, 212)
+P.TXT = Color3.fromRGB(240, 242, 248)
+P.DIM = Color3.fromRGB(130, 138, 155)
+
+-- ✅ حجم أصغر بكثير
+P.W = 360
+P.H = 380
+
+P.ui = {}
+
+-- ═══════════════════════════════════════════════════════════
+--  BUILD GUI
+-- ═══════════════════════════════════════════════════════════
+do
+    local sg = Instance.new("ScreenGui")
+    sg.Name = "PhantomX"
+    sg.ResetOnSpawn = false
+    sg.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    sg.IgnoreGuiInset = true
+    sg.Parent = P.pg
+    P.ui.sg = sg
+
+    local main = Instance.new("Frame")
+    main.Size = UDim2.new(0, P.W, 0, P.H)
+    -- موضع آمن حسب حجم الشاشة
+    local cam = workspace.CurrentCamera
+    local vp = cam and cam.ViewportSize or Vector2.new(800, 600)
+    local posX = math.max(10, math.min(vp.X - P.W - 10, (vp.X - P.W) / 2))
+    local posY = math.max(50, math.min(vp.Y - P.H - 10, (vp.Y - P.H) / 2))
+    main.Position = UDim2.new(0, posX, 0, posY)
+    main.BackgroundColor3 = P.BG
+    main.BorderSizePixel = 0
+    main.Active = true
+    main.Parent = sg
+    Instance.new("UICorner", main).CornerRadius = UDim.new(0, 10)
+    local ms = Instance.new("UIStroke", main)
+    ms.Color = P.BG3
+    ms.Thickness = 1
+    P.ui.main = main
+
+    local tb = Instance.new("Frame")
+    tb.Size = UDim2.new(1, 0, 0, 30)
+    tb.BackgroundTransparency = 1
+    tb.Parent = main
+    P.ui.titleBar = tb
+
+    local dt = Instance.new("Frame")
+    dt.Size = UDim2.new(0, 5, 0, 5)
+    dt.Position = UDim2.new(0, 10, 0.5, -2)
+    dt.BackgroundColor3 = P.ACC
+    dt.BorderSizePixel = 0
+    dt.Parent = tb
+    Instance.new("UICorner", dt).CornerRadius = UDim.new(1, 0)
+
+    local ttl = Instance.new("TextLabel")
+    ttl.Size = UDim2.new(1, -70, 1, 0)
+    ttl.Position = UDim2.new(0, 22, 0, 0)
+    ttl.BackgroundTransparency = 1
+    ttl.Text = "PhantomX"
+    ttl.TextColor3 = P.TXT
+    ttl.Font = Enum.Font.GothamBold
+    ttl.TextSize = 13
+    ttl.TextXAlignment = Enum.TextXAlignment.Left
+    ttl.Parent = tb
+
+    local mn = Instance.new("TextButton")
+    mn.Size = UDim2.new(0, 22, 0, 20)
+    mn.Position = UDim2.new(1, -28, 0.5, -10)
+    mn.BackgroundColor3 = P.BG3
+    mn.Text = "—"
+    mn.TextColor3 = P.TXT
+    mn.Font = Enum.Font.GothamBold
+    mn.TextSize = 11
+    mn.BorderSizePixel = 0
+    mn.AutoButtonColor = false
+    mn.Parent = tb
+    Instance.new("UICorner", mn).CornerRadius = UDim.new(0, 5)
+    P.ui.minimize = mn
+
+    local ct = Instance.new("ScrollingFrame")
+    ct.Size = UDim2.new(1, -12, 1, -38)
+    ct.Position = UDim2.new(0, 6, 0, 34)
+    ct.BackgroundTransparency = 1
+    ct.BorderSizePixel = 0
+    ct.ScrollBarThickness = 3
+    ct.ScrollBarImageColor3 = P.BG3
+    ct.CanvasSize = UDim2.new(0, 0, 0, 0)
+    ct.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    ct.Parent = main
+    P.ui.container = ct
+
+    local LC = Instance.new("Frame")
+    LC.Size = UDim2.new(0.5, -3, 0, 0)
+    LC.BackgroundTransparency = 1
+    LC.AutomaticSize = Enum.AutomaticSize.Y
+    LC.Parent = ct
+    local LL = Instance.new("UIListLayout", LC)
+    LL.Padding = UDim.new(0, 4)
+    LL.SortOrder = Enum.SortOrder.LayoutOrder
+    P.ui.leftCol = LC
+
+    local RC = Instance.new("Frame")
+    RC.Size = UDim2.new(0.5, -3, 0, 0)
+    RC.Position = UDim2.new(0.5, 3, 0, 0)
+    RC.BackgroundTransparency = 1
+    RC.AutomaticSize = Enum.AutomaticSize.Y
+    RC.Parent = ct
+    local RL = Instance.new("UIListLayout", RC)
+    RL.Padding = UDim.new(0, 4)
+    RL.SortOrder = Enum.SortOrder.LayoutOrder
+    P.ui.rightCol = RC
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  HELPERS
+-- ═══════════════════════════════════════════════════════════
+do
+    P.fn = {}
+
+    P.fn.makeDraggable = function(handle, frame)
+        local dragging = false
+        local dragStart = nil
+        local startPos = nil
+        local lastInput = nil
+        handle.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = true
+                dragStart = input.Position
+                startPos = frame.Position
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then dragging = false end
+                end)
+            end
+        end)
+        handle.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+                lastInput = input
+            end
+        end)
+        P.UIS.InputChanged:Connect(function(input)
+            if input == lastInput and dragging then
+                local delta = input.Position - dragStart
+                frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            end
+        end)
+    end
+
+    P.fn.sectionLabel = function(parent, text, order)
+        local l = Instance.new("TextLabel")
+        l.LayoutOrder = order
+        l.Size = UDim2.new(1, 0, 0, 12)
+        l.BackgroundTransparency = 1
+        l.Text = string.upper(text)
+        l.TextColor3 = P.DIM
+        l.Font = Enum.Font.GothamBold
+        l.TextSize = 9
+        l.TextXAlignment = Enum.TextXAlignment.Left
+        l.Parent = parent
+    end
+
+    P.fn.styleButton = function(b, on)
+        b.BackgroundColor3 = on and Color3.fromRGB(40, 70, 66) or P.BG2
+        b.TextColor3 = on and P.ACC or P.TXT
+    end
+
+    P.fn.makeButton = function(parent, order, height, text)
+        local b = Instance.new("TextButton")
+        b.LayoutOrder = order
+        b.Size = UDim2.new(1, 0, 0, height)
+        b.BackgroundColor3 = P.BG2
+        b.TextColor3 = P.TXT
+        b.Text = text
+        b.Font = Enum.Font.GothamMedium
+        b.TextSize = 10
+        b.BorderSizePixel = 0
+        b.AutoButtonColor = false
+        b.Parent = parent
+        Instance.new("UICorner", b).CornerRadius = UDim.new(0, 6)
+        return b
+    end
+
+    P.fn.makeInput = function(parent, order, placeholder)
+        local box = Instance.new("TextBox")
+        box.LayoutOrder = order
+        box.Size = UDim2.new(1, 0, 0, 26)
+        box.BackgroundColor3 = P.BG2
+        box.TextColor3 = P.TXT
+        box.PlaceholderText = placeholder
+        box.PlaceholderColor3 = P.DIM
+        box.Text = ""
+        box.Font = Enum.Font.GothamMedium
+        box.TextSize = 10
+        box.BorderSizePixel = 0
+        box.ClearTextOnFocus = false
+        box.Parent = parent
+        Instance.new("UICorner", box).CornerRadius = UDim.new(0, 6)
+        return box
+    end
+
+    P.fn.makeRow = function(parent, order, height)
+        local r = Instance.new("Frame")
+        r.LayoutOrder = order
+        r.Size = UDim2.new(1, 0, 0, height)
+        r.BackgroundTransparency = 1
+        r.Parent = parent
+        local rl = Instance.new("UIListLayout", r)
+        rl.FillDirection = Enum.FillDirection.Horizontal
+        rl.Padding = UDim.new(0, 4)
+        rl.SortOrder = Enum.SortOrder.LayoutOrder
+        return r
+    end
+
+    P.fn.makeStatus = function(parent, order)
+        local l = Instance.new("TextLabel")
+        l.LayoutOrder = order
+        l.Size = UDim2.new(1, 0, 0, 12)
+        l.BackgroundTransparency = 1
+        l.Text = ""
+        l.TextColor3 = P.DIM
+        l.Font = Enum.Font.GothamMedium
+        l.TextSize = 9
+        l.TextXAlignment = Enum.TextXAlignment.Left
+        l.Parent = parent
+        return l
+    end
+end
+
+-- ✅ السحب من كل الواجهة (مو بس من الشريط)
+P.fn.makeDraggable(P.ui.main, P.ui.main)
+
+-- ═══════════════════════════════════════════════════════════
+--  BUILD UI ELEMENTS
+-- ═══════════════════════════════════════════════════════════
+do
+    local LC = P.ui.leftCol
+    local RC = P.ui.rightCol
+    local fn = P.fn
+
+    -- LEFT
+    fn.sectionLabel(LC, "Movement", 1)
+    local tbr = fn.makeRow(LC, 2, 26)
+    P.ui.turnBoostBtn = fn.makeButton(tbr, 1, 26, "Turn Boost · OFF")
+    P.ui.turnBoostBtn.Size = UDim2.new(0.7, 0, 1, 0)
+    P.ui.turnSpeedBtn = fn.makeButton(tbr, 2, 26, "12")
+    P.ui.turnSpeedBtn.Size = UDim2.new(0.3, -4, 1, 0)
+    P.ui.wallSlideBtn = fn.makeButton(LC, 3, 26, "Wall Slide · OFF")
+
+    fn.sectionLabel(LC, "Camera Speed", 4)
+    local cr = fn.makeRow(LC, 5, 26)
+    P.ui.camBoostBtn = fn.makeButton(cr, 1, 26, "Boost · OFF")
+    P.ui.camBoostBtn.Size = UDim2.new(0.55, 0, 1, 0)
+    P.ui.camMultBtn = fn.makeButton(cr, 2, 26, "2x")
+    P.ui.camMultBtn.Size = UDim2.new(0.45, -4, 1, 0)
+
+    fn.sectionLabel(LC, "Movement Assist", 6)
+    local ar = fn.makeRow(LC, 7, 26)
+    P.ui.assistBtn = fn.makeButton(ar, 1, 26, "OFF")
+    P.ui.assistBtn.Size = UDim2.new(0.4, 0, 1, 0)
+    P.ui.powerBtn = fn.makeButton(ar, 2, 26, "35%")
+    P.ui.powerBtn.Size = UDim2.new(0.3, 0, 1, 0)
+    P.ui.rangeBtn = fn.makeButton(ar, 3, 26, "10m")
+    P.ui.rangeBtn.Size = UDim2.new(0.3, -8, 1, 0)
+    P.ui.assistTargetLabel = fn.makeStatus(LC, 8)
+    P.ui.assistTargetLabel.Text = "target · none"
+
+    fn.sectionLabel(LC, "Camera Shake", 9)
+    local sr = fn.makeRow(LC, 10, 26)
+    P.ui.shakeBtn = fn.makeButton(sr, 1, 26, "Shake · OFF")
+    P.ui.shakeBtn.Size = UDim2.new(0.7, 0, 1, 0)
+    P.ui.shakeSpeedBtn = fn.makeButton(sr, 2, 26, "1x")
+    P.ui.shakeSpeedBtn.Size = UDim2.new(0.3, -4, 1, 0)
+    P.ui.shakeStatus = fn.makeStatus(LC, 11)
+    P.ui.shakeStatus.Text = "waiting..."
+
+    local barBg = Instance.new("Frame")
+    barBg.LayoutOrder = 12
+    barBg.Size = UDim2.new(1, 0, 0, 4)
+    barBg.BackgroundColor3 = P.BG2
+    barBg.BorderSizePixel = 0
+    barBg.Parent = LC
+    Instance.new("UICorner", barBg).CornerRadius = UDim.new(1, 0)
+    local barFill = Instance.new("Frame")
+    barFill.Size = UDim2.new(0, 0, 1, 0)
+    barFill.BackgroundColor3 = P.ACC
+    barFill.BorderSizePixel = 0
+    barFill.Parent = barBg
+    Instance.new("UICorner", barFill).CornerRadius = UDim.new(1, 0)
+    P.ui.barFill = barFill
+
+    fn.sectionLabel(LC, "Stretch Res", 13)
+    local stRow = fn.makeRow(LC, 14, 24)
+    P.ui.stretchMinus = fn.makeButton(stRow, 1, 24, "-")
+    P.ui.stretchMinus.Size = UDim2.new(0.22, -2, 1, 0)
+    P.ui.stretchValue = fn.makeButton(stRow, 2, 24, "1.00")
+    P.ui.stretchValue.Size = UDim2.new(0.36, -2, 1, 0)
+    P.ui.stretchValue.TextColor3 = P.ACC
+    P.ui.stretchPlus = fn.makeButton(stRow, 3, 24, "+")
+    P.ui.stretchPlus.Size = UDim2.new(0.22, -2, 1, 0)
+    P.ui.stretchReset = fn.makeButton(stRow, 4, 24, "R")
+    P.ui.stretchReset.Size = UDim2.new(0.2, -2, 1, 0)
+
+    fn.sectionLabel(LC, "Grab Bomb", 15)
+    P.ui.grabBombBtn = fn.makeButton(LC, 16, 26, "Grab Bomb · OFF")
+    P.ui.grabBombStatus = fn.makeStatus(LC, 17)
+    P.ui.grabBombStatus.Text = "status · idle"
+
+    fn.sectionLabel(LC, "Auto Hold", 18)
+    P.ui.autoHoldBtn = fn.makeButton(LC, 19, 26, "Auto Hold · OFF")
+    P.ui.autoHoldStatus = fn.makeStatus(LC, 20)
+    P.ui.autoHoldStatus.Text = "status · idle"
+    local ahRow = fn.makeRow(LC, 21, 24)
+    P.ui.ahDistBtn = fn.makeButton(ahRow, 1, 24, "9m")
+    P.ui.ahDistBtn.Size = UDim2.new(0.25, -2, 1, 0)
+    P.ui.ahRushBtn = fn.makeButton(ahRow, 2, 24, "2.0s")
+    P.ui.ahRushBtn.Size = UDim2.new(0.25, -2, 1, 0)
+    P.ui.ahOrbitBtn = fn.makeButton(ahRow, 3, 24, "4x")
+    P.ui.ahOrbitBtn.Size = UDim2.new(0.25, -2, 1, 0)
+    P.ui.ahSmoothBtn = fn.makeButton(ahRow, 4, 24, "0.25")
+    P.ui.ahSmoothBtn.Size = UDim2.new(0.25, -2, 1, 0)
+
+    -- RIGHT
+    fn.sectionLabel(RC, "Appearance", 1)
+    P.ui.skinInput = fn.makeInput(RC, 2, "Username")
+    P.ui.applySkinBtn = fn.makeButton(RC, 3, 24, "Apply Skin")
+    P.ui.resetSkinBtn = fn.makeButton(RC, 4, 24, "Reset to Original")
+    P.ui.randomSkinBtn = fn.makeButton(RC, 5, 24, "Random Avatar")
+    local appRow = fn.makeRow(RC, 6, 26)
+    P.ui.headlessBtn = fn.makeButton(appRow, 1, 26, "Headless · OFF")
+    P.ui.headlessBtn.Size = UDim2.new(0.5, -2, 1, 0)
+    P.ui.korbloxBtn = fn.makeButton(appRow, 2, 26, "Korblox · OFF")
+    P.ui.korbloxBtn.Size = UDim2.new(0.5, -2, 1, 0)
+
+    fn.sectionLabel(RC, "Visuals", 7)
+    local vr = fn.makeRow(RC, 8, 26)
+    P.ui.lightingBtn = fn.makeButton(vr, 1, 26, "Lighting · OFF")
+    P.ui.lightingBtn.Size = UDim2.new(0.5, -2, 1, 0)
+    P.ui.antiLagBtn = fn.makeButton(vr, 2, 26, "Anti-Lag · OFF")
+    P.ui.antiLagBtn.Size = UDim2.new(0.5, -2, 1, 0)
+
+    fn.sectionLabel(RC, "Kill Effects", 9)
+    local kr = fn.makeRow(RC, 10, 26)
+    P.ui.kfxPrevBtn = fn.makeButton(kr, 1, 26, "‹")
+    P.ui.kfxPrevBtn.Size = UDim2.new(0.15, -2, 1, 0)
+    P.ui.kfxLabel = fn.makeButton(kr, 2, 26, "None")
+    P.ui.kfxLabel.Size = UDim2.new(0.7, -4, 1, 0)
+    P.ui.kfxLabel.TextColor3 = P.ACC
+    P.ui.kfxNextBtn = fn.makeButton(kr, 3, 26, "›")
+    P.ui.kfxNextBtn.Size = UDim2.new(0.15, -2, 1, 0)
+
+    fn.sectionLabel(RC, "Recording", 11)
+    P.ui.recBtn = fn.makeButton(RC, 12, 26, "Recording Mode · OFF")
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  STATE
+-- ═══════════════════════════════════════════════════════════
+P.s = {
+    turnBoost = false,
+    wallSlideEnabled = false,
+    camBoostEnabled = false,
+    assistEnabled = false,
+    assistHasTarget = false,
+    grabBombActive = false,
+    autoHoldActive = false,
+    headlessA = false,
+    korbloxA = false,
+    lightingActive = false,
+    antiLagActive = false,
+    recActive = false,
+    collapsed = false,
+    currentStretch = 1.0,
+    powerIndex = 1,
+    rangeIndex = 1,
+    turnBoostSpeedIndex = 2,
+    camMultIndex = 2,
+    shakeSpeedIndex = 2,
+    shakeEnabled = false,
+    shakeActive = false,
+    shakeTime = 0,
+    shakeIndex = 1,
+    lastDir = 0,
+    lastChangeTime = 0,
+}
+
+P.vals = {
+    turnBoostSpeeds = {8, 12, 18, 25, 35, 50},
+    camMultValues = {1.5, 2, 2.5, 3, 4, 6, 8},
+    powerValues = {0.35, 0.4, 0.45, 0.5, 0.55},
+    rangeValues = {10, 20, 30, 40},
+    shakeSpeedValues = {0.5, 1, 1.5, 2, 3, 5},
+    recentChanges = {},
+}
+
+-- ═══════════════════════════════════════════════════════════
+--  TURN BOOST
+-- ═══════════════════════════════════════════════════════════
+do
+    local function refresh()
+        P.ui.turnBoostBtn.Text = P.s.turnBoost and "Turn Boost · ON" or "Turn Boost · OFF"
+        P.ui.turnSpeedBtn.Text = tostring(P.vals.turnBoostSpeeds[P.s.turnBoostSpeedIndex])
+        P.fn.styleButton(P.ui.turnBoostBtn, P.s.turnBoost)
+    end
+    P.fn.refreshTurnUI = refresh
+    refresh()
+
+    P.RunService.Heartbeat:Connect(function(delta)
+        if not P.s.turnBoost then return end
+        if P.s.assistEnabled and P.s.assistHasTarget then return end
+        local c = P.lp.Character
+        local hrp = c and c:FindFirstChild("HumanoidRootPart")
+        local hum = c and c:FindFirstChild("Humanoid")
+        if hrp and hum and hum.MoveDirection.Magnitude > 0.1 then
+            local factor = P.vals.turnBoostSpeeds[P.s.turnBoostSpeedIndex]
+            local lerp = hrp.CFrame.LookVector:Lerp(hum.MoveDirection, factor * delta)
+            hrp.CFrame = CFrame.lookAt(hrp.Position, hrp.Position + lerp)
+        end
+    end)
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  WALL SLIDE
+-- ═══════════════════════════════════════════════════════════
+do
+    local wsCharacter = nil
+    local wsHumanoid = nil
+    local wsHRP = nil
+    local wsAttachment = nil
+    local wsVelocity = nil
+    local wsCharConn = nil
+    local wsLoopConn = nil
+    local rayParams = RaycastParams.new()
+    pcall(function() rayParams.FilterType = Enum.RaycastFilterType.Exclude end)
+    rayParams.IgnoreWater = true
+
+    local function flatUnit(v)
+        local f = Vector3.new(v.X, 0, v.Z)
+        return f.Magnitude > 0.001 and f.Unit or Vector3.new(0, 0, 0)
+    end
+
+    local function safeUnit(v, fallback)
+        return v.Magnitude > 0.001 and v.Unit or fallback
+    end
+
+    local function destroySlideVelocity()
+        if wsVelocity then pcall(function() wsVelocity:Destroy() end) wsVelocity = nil end
+    end
+
+    local function restoreWallSlide()
+        destroySlideVelocity()
+        if wsHumanoid and wsHumanoid.Parent then wsHumanoid.AutoRotate = true end
+    end
+
+    local function createSlideVelocity()
+        if not wsHRP or not wsAttachment then return nil end
+        local ok, vel = pcall(function()
+            local lv = Instance.new("LinearVelocity")
+            lv.Name = "SuiteSlideVel"
+            lv.Attachment0 = wsAttachment
+            lv.RelativeTo = Enum.ActuatorRelativeTo.World
+            lv.VelocityConstraintMode = Enum.VelocityConstraintMode.Vector
+            lv.MaxForce = 100000
+            pcall(function()
+                lv.ForceLimitsEnabled = true
+                lv.ForceLimitMode = Enum.ForceLimitMode.PerAxis
+                lv.MaxAxesForce = Vector3.new(100000, 0, 100000)
+            end)
+            lv.Parent = wsHRP
+            return lv
+        end)
+        if ok and vel then return vel end
+        local ok2, bv = pcall(function()
+            local b = Instance.new("BodyVelocity")
+            b.Name = "SuiteSlideVel"
+            b.MaxForce = Vector3.new(100000, 0, 100000)
+            b.P = 1250
+            b.Parent = wsHRP
+            return b
+        end)
+        return ok2 and bv or nil
+    end
+
+    local function getWallNormal(moveDir)
+        if not wsHRP then return nil end
+        local normals = {}
+        local side = Vector3.new(-moveDir.Z, 0, moveDir.X)
+        local pos = wsHRP.Position
+        local origins = {pos, pos + side * 0.25, pos - side * 0.25}
+        local dirs = {moveDir, safeUnit(moveDir + side * 0.25, moveDir), safeUnit(moveDir - side * 0.25, moveDir)}
+        for i = 1, 3 do
+            local result = workspace:Raycast(origins[i], dirs[i] * 1.35, rayParams)
+            if result and result.Instance and result.Instance:IsA("BasePart") and result.Instance.CanCollide and math.abs(result.Normal.Y) <= 0.3 then
+                local n = flatUnit(result.Normal)
+                if n.Magnitude > 0.001 and moveDir:Dot(n) < -0.01 then
+                    table.insert(normals, n)
+                end
+            end
+        end
+        if #normals == 0 then return nil end
+        local sum = Vector3.new(0, 0, 0)
+        for _, n in ipairs(normals) do sum = sum + n end
+        return safeUnit(sum, normals[1])
+    end
+
+    local function onChar(char)
+        restoreWallSlide()
+        if wsAttachment then pcall(function() wsAttachment:Destroy() end) wsAttachment = nil end
+        wsCharacter = char
+        wsHumanoid = char:WaitForChild("Humanoid", 5)
+        wsHRP = char:WaitForChild("HumanoidRootPart", 5)
+        if not wsHumanoid or not wsHRP then return end
+        for _, n in ipairs({"SuiteSlideVel", "SuiteSlideAtt"}) do
+            local old = wsHRP:FindFirstChild(n)
+            if old then pcall(function() old:Destroy() end) end
+        end
+        wsAttachment = Instance.new("Attachment")
+        wsAttachment.Name = "SuiteSlideAtt"
+        wsAttachment.Parent = wsHRP
+    end
+
+    local function step()
+        if not P.s.wallSlideEnabled then return end
+        if not wsCharacter or not wsCharacter.Parent or not wsHumanoid or wsHumanoid.Health <= 0 or not wsHRP or not wsHRP.Parent then
+            restoreWallSlide() return
+        end
+        local chars = {}
+        for _, p in ipairs(P.Players:GetPlayers()) do
+            if p.Character then table.insert(chars, p.Character) end
+        end
+        rayParams.FilterDescendantsInstances = chars
+        local moveDir = flatUnit(wsHumanoid.MoveDirection)
+        if moveDir.Magnitude < 0.08 then restoreWallSlide() return end
+        local normal = getWallNormal(moveDir)
+        if not normal then restoreWallSlide() return end
+        local vel = wsHRP.Velocity
+        local yT = wsHumanoid.FloorMaterial ~= Enum.Material.Air and 0 or math.min(vel.Y, 1.5)
+        if math.abs(yT - vel.Y) > 0.01 then
+            wsHRP.Velocity = Vector3.new(vel.X, yT, vel.Z)
+        end
+        if not wsVelocity or not wsVelocity.Parent then wsVelocity = createSlideVelocity() end
+        if not wsVelocity then return end
+        local slideDir = flatUnit(moveDir - normal * moveDir:Dot(normal))
+        local finalDir = slideDir.Magnitude > 0.05 and slideDir or safeUnit(Vector3.new(-normal.Z, 0, normal.X), Vector3.new(1, 0, 0))
+        local target = finalDir * wsHumanoid.WalkSpeed + normal * 0.01
+        local vv = Vector3.new(target.X, 0, target.Z)
+        if wsVelocity:IsA("LinearVelocity") then
+            wsVelocity.VectorVelocity = vv
+        elseif wsVelocity:IsA("BodyVelocity") then
+            wsVelocity.Velocity = vv
+        end
+        wsHumanoid.AutoRotate = true
+    end
+
+    P.fn.stopWallSlide = function()
+        P.s.wallSlideEnabled = false
+        if wsCharConn then pcall(function() wsCharConn:Disconnect() end) wsCharConn = nil end
+        if wsLoopConn then pcall(function() wsLoopConn:Disconnect() end) wsLoopConn = nil end
+        restoreWallSlide()
+        if wsAttachment then pcall(function() wsAttachment:Destroy() end) wsAttachment = nil end
+        wsCharacter, wsHumanoid, wsHRP = nil, nil, nil
+    end
+
+    P.fn.startWallSlide = function()
+        P.s.wallSlideEnabled = true
+        if P.lp.Character then onChar(P.lp.Character) end
+        wsCharConn = P.lp.CharacterAdded:Connect(function(char)
+            pcall(function()
+                task.wait(0.15)
+                if P.s.wallSlideEnabled then onChar(char) end
+            end)
+        end)
+        wsLoopConn = P.RunService.Heartbeat:Connect(function()
+            local ok, err = pcall(step)
+            if not ok then
+                P.fn.stopWallSlide()
+                warn("[Wall Slide] stopped safely: " .. tostring(err))
+            end
+        end)
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  CAMERA SPEED
+-- ═══════════════════════════════════════════════════════════
+do
+    P.fn.applyCamSensitivity = function()
+        if P.s.camBoostEnabled then
+            P.UIS.MouseDeltaSensitivity = P.vals.camMultValues[P.s.camMultIndex]
+        else
+            P.UIS.MouseDeltaSensitivity = 1
+        end
+    end
+
+    P.fn.refreshCamUI = function()
+        P.ui.camBoostBtn.Text = P.s.camBoostEnabled and "Boost · ON" or "Boost · OFF"
+        P.ui.camMultBtn.Text = tostring(P.vals.camMultValues[P.s.camMultIndex]) .. "x"
+        P.fn.styleButton(P.ui.camBoostBtn, P.s.camBoostEnabled)
+        P.fn.applyCamSensitivity()
+    end
+    P.fn.refreshCamUI()
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  ENEMY DETECTION + ASSIST
+-- ═══════════════════════════════════════════════════════════
+do
+    local enemyCache = {enemies = {}, arena = nil, mySide = nil, time = 0}
+
+    local function detectEnemies()
+        local now = tick()
+        if now - enemyCache.time < 0.1 then
+            return enemyCache.enemies, enemyCache.arena, enemyCache.mySide
+        end
+        local enemies = {}
+        local myTeam, myArena = nil, nil
+        if workspace:FindFirstChild("Arenas") then
+            for aName, arena in pairs(workspace.Arenas:GetChildren()) do
+                if aName == "Arena5" or aName == "Arena5ICED" then continue end
+                if arena:FindFirstChild("Slots") then
+                    if arena.Slots:FindFirstChild("Left") then
+                        for i = 1, 4 do
+                            local slot = arena.Slots.Left:FindFirstChild(tostring(i))
+                            if slot and slot:FindFirstChild("Data") and slot.Data:FindFirstChild("Player") then
+                                if slot.Data.Player.Value == P.lp then myTeam = "Left" myArena = arena break end
+                            end
+                        end
+                    end
+                    if not myArena and arena.Slots:FindFirstChild("Right") then
+                        for i = 1, 4 do
+                            local slot = arena.Slots.Right:FindFirstChild(tostring(i))
+                            if slot and slot:FindFirstChild("Data") and slot.Data:FindFirstChild("Player") then
+                                if slot.Data.Player.Value == P.lp then myTeam = "Right" myArena = arena break end
+                            end
+                        end
+                    end
+                    if myTeam and myArena then
+                        local et = (myTeam == "Left") and "Right" or "Left"
+                        if myArena.Slots:FindFirstChild(et) then
+                            for i = 1, 4 do
+                                local slot = myArena.Slots[et]:FindFirstChild(tostring(i))
+                                if slot and slot:FindFirstChild("Data") and slot.Data:FindFirstChild("Player") then
+                                    local e = slot.Data.Player.Value
+                                    if e and e ~= P.lp then table.insert(enemies, e) end
+                                end
+                            end
+                        end
+                        break
+                    end
+                end
+            end
+        end
+        enemyCache.enemies, enemyCache.arena, enemyCache.mySide, enemyCache.time = enemies, myArena, myTeam, now
+        return enemies, myArena, myTeam
+    end
+    P.fn.detectEnemies = detectEnemies
+
+    local function isPlayerAlive(plr)
+        if plr and plr.Character and plr.Character:FindFirstChild("Humanoid") then
+            return plr.Character.Humanoid.Health > 0
+        end
+        return false
+    end
+    P.fn.isPlayerAlive = isPlayerAlive
+
+    local function isPlayerOnFloor(plr, arena)
+        if not plr or not arena then return false end
+        if arena:FindFirstChild("Slots") then
+            for _, side in pairs({"Left", "Right"}) do
+                if arena.Slots:FindFirstChild(side) then
+                    for i = 1, 4 do
+                        local s = arena.Slots[side]:FindFirstChild(tostring(i))
+                        if s and s:FindFirstChild("Data") and s.Data:FindFirstChild("Player") then
+                            if s.Data.Player.Value == plr then
+                                if s:FindFirstChild("Pad") then
+                                    local pad = s.Pad
+                                    local c = pad.Color
+                                    if math.abs(c.R - 1) < 0.01 and math.abs(c.G - 89/255) < 0.01 and math.abs(c.B - 89/255) < 0.01 then
+                                        return false
+                                    else
+                                        return true
+                                    end
+                                end
+                                return true
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        return false
+    end
+    P.fn.isPlayerOnFloor = isPlayerOnFloor
+
+    local function hasTargetLOS(hrp, character, targetHRP)
+        local params = RaycastParams.new()
+        params.FilterType = Enum.RaycastFilterType.Exclude
+        params.FilterDescendantsInstances = {P.lp.Character}
+        params.IgnoreWater = true
+        local origin = hrp.Position + Vector3.new(0, 1.5, 0)
+        local points = {targetHRP.Position, targetHRP.Position + Vector3.new(0, 1.5, 0), targetHRP.Position + Vector3.new(0, -1.5, 0)}
+        local head = character:FindFirstChild("Head")
+        if head then table.insert(points, head.Position) end
+        for _, point in ipairs(points) do
+            local result = workspace:Raycast(origin, point - origin, params)
+            if result and result.Instance and result.Instance:IsDescendantOf(character) then return true end
+        end
+        return false
+    end
+
+    local function getAssistTarget(hrp, maxDist)
+        local enemies, arena = detectEnemies()
+        local bestDist = maxDist
+        local best = nil
+        for _, plr in ipairs(enemies) do
+            if plr.Character then
+                local char = plr.Character
+                local targetHRP = char:FindFirstChild("HumanoidRootPart")
+                if targetHRP and isPlayerAlive(plr) and isPlayerOnFloor(plr, arena) then
+                    local dist = (targetHRP.Position - hrp.Position).Magnitude
+                    if dist < bestDist and hasTargetLOS(hrp, char, targetHRP) then
+                        bestDist = dist
+                        best = plr
+                    end
+                end
+            end
+        end
+        return best, bestDist
+    end
+
+    local function getPredictedPosition(targetHrp, myHrp)
+        local targetPos = targetHrp.Position
+        local velocity = targetHrp.AssemblyLinearVelocity
+        velocity = Vector3.new(velocity.X, 0, velocity.Z)
+        local speed = velocity.Magnitude
+        if speed > 50 then
+            velocity = velocity.Unit * 50
+        elseif speed < 1.5 then
+            return targetPos
+        end
+        local dist = (targetPos - myHrp.Position).Magnitude
+        local predTime = math.clamp(dist / 42, 0.12, 0.42)
+        local predictedPos = targetPos + (velocity * predTime)
+        local params = RaycastParams.new()
+        params.FilterDescendantsInstances = {targetHrp.Parent, P.lp.Character}
+        params.FilterType = Enum.RaycastFilterType.Exclude
+        local res = workspace:Raycast(targetPos, predictedPos - targetPos, params)
+        if res then return res.Position - (velocity.Unit * 1.2) end
+        return predictedPos
+    end
+
+    local fastTouchBusy = false
+    local function fastTouch(targetChar, tool)
+        if fastTouchBusy then return end
+        if not targetChar or not tool then return end
+        local handle = tool:FindFirstChild("Handle") or tool:FindFirstChildOfClass("Part")
+        if not handle then return end
+        local targetHRP = targetChar:FindFirstChild("HumanoidRootPart")
+        if not targetHRP then return end
+        local myHRP = P.lp.Character and P.lp.Character:FindFirstChild("HumanoidRootPart")
+        if not myHRP then return end
+        local dist = (myHRP.Position - targetHRP.Position).Magnitude
+        if dist < 4.5 then
+            fastTouchBusy = true
+            task.spawn(function()
+                for _ = 1, 15 do
+                    pcall(function()
+                        firetouchinterest(targetHRP, handle, 0)
+                        firetouchinterest(targetHRP, handle, 1)
+                    end)
+                end
+                fastTouchBusy = false
+            end)
+        end
+    end
+
+    P.fn.refreshAssistUI = function()
+        local pp = math.floor(P.vals.powerValues[P.s.powerIndex] * 1000 + 0.5) / 10
+        P.ui.powerBtn.Text = tostring(pp) .. "%"
+        P.ui.rangeBtn.Text = tostring(P.vals.rangeValues[P.s.rangeIndex]) .. "m"
+        P.ui.assistBtn.Text = P.s.assistEnabled and "ON" or "OFF"
+        if not P.s.assistEnabled then P.ui.assistTargetLabel.Text = "target · none" end
+        P.fn.styleButton(P.ui.assistBtn, P.s.assistEnabled)
+    end
+
+    local function smoothLookAt(hrp, targetPos, delta)
+        if P.UIS.MouseBehavior == Enum.MouseBehavior.LockCenter then return end
+        local flatTarget = Vector3.new(targetPos.X, hrp.Position.Y, targetPos.Z)
+        local dir = flatTarget - hrp.Position
+        if dir.Magnitude < 0.5 then return end
+        local targetCF = CFrame.lookAt(hrp.Position, flatTarget)
+        hrp.CFrame = hrp.CFrame:Lerp(targetCF, math.clamp(delta * 10, 0, 1))
+    end
+
+    P.RunService.RenderStepped:Connect(function(delta)
+        if not P.s.assistEnabled then P.s.assistHasTarget = false return end
+        if P.s.grabBombActive or P.s.autoHoldActive then return end
+        local character = P.lp.Character
+        if not character then P.s.assistHasTarget = false return end
+        local tool = character:FindFirstChildOfClass("Tool")
+        if not tool then
+            P.ui.assistTargetLabel.Text = "target · waiting tool"
+            P.s.assistHasTarget = false
+            return
+        end
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        local hrp = character:FindFirstChild("HumanoidRootPart")
+        if not humanoid or not hrp or humanoid.Health <= 0 then P.s.assistHasTarget = false return end
+        local target, dist = getAssistTarget(hrp, P.vals.rangeValues[P.s.rangeIndex])
+        if not target or not target.Character then
+            P.ui.assistTargetLabel.Text = "target · none (0-" .. P.vals.rangeValues[P.s.rangeIndex] .. "m)"
+            P.s.assistHasTarget = false
+            return
+        end
+        local targetHRP = target.Character:FindFirstChild("HumanoidRootPart")
+        if not targetHRP then P.s.assistHasTarget = false return end
+        P.ui.assistTargetLabel.Text = string.format("target · %s · %dm", target.Name, math.floor(dist + 0.5))
+        P.s.assistHasTarget = true
+        local predictedPos = getPredictedPosition(targetHRP, hrp)
+        if humanoid.MoveDirection.Magnitude > 0 then
+            local diff = predictedPos - hrp.Position
+            local flat = Vector3.new(diff.X, 0, diff.Z)
+            if flat.Magnitude > 0.1 then
+                local power = P.vals.powerValues[P.s.powerIndex]
+                local blend = humanoid.MoveDirection.Unit * (1 - power) + flat.Unit * power
+                if blend.Magnitude > 0 then humanoid:Move(blend.Unit, false) end
+            end
+        end
+        smoothLookAt(hrp, predictedPos, delta)
+        if dist < 4.5 then fastTouch(target.Character, tool) end
+    end)
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  CAMERA SHAKE
+-- ═══════════════════════════════════════════════════════════
+do
+    local shakeOffsets = {}
+    for value in ("-433,-1247,-1362,-789,-1128,-756,-683,371,949,1488,1049,365,-865,-1529,-1627,-1199,-927,-735,-213,829,2108,2198,1141,4,-1266,-2034,-1353,-811,-732,-374,748,2096,2863,1610,687,-476,-1413,-1596,-1158,-842,-917,316,1333,2232,1665,1132,-593,-1265,-1422,-937,-1020,-381,-21,547,2311,2871,753,147,-596,-1403,-1110,-889,-514,-159,0,819,2337,1511,910,-700,-1611,-1585,-768,-719,-410,-75,-1,1219,1248,538,-1,-1141,-1084,-1135,-840,-496,-77,-1,1669,2519,1747,384,-1132,-1769,-1526,-1251,-874,-874,262,1156,2514,2803,1727,352,-1,-2698,-1773,-1172,-739,-774,101,431,77,-238,-745,-706,-609,-342,651,1160,2161,3306,2362,546,-1,-2269,-2316,-1575,-1003,-571,-301,0,435,912,398,0,-567,-1218,-1162,-850,-897,94,1076,1498,2391,868,145,-752,-2286,-2065,-1277,-878,-348,-1,1246,3095,2718,741,-1,-1303,-2180,-1849,-1146,-692,-857,1111,1862,3438,1603,244,-1330,-2259,-1900,-1443,-1019,-497,-106,892,2945,3263,1518,193,-1543,-2228,-2274,-1373,-1261,-695,199,1403,2642,2438,856,69,-940,-1652,-1532,-1125,-764,-345,988,2016,2861,2128,647,-954,-1746,-1924,-1205,-1130,-570,-632,1393,1825,2915,503,73,-899,-1745,-1532,-1194,-641,-204,-1,1279,2991,1845,676,0,-1333,-1988,-1681,-1283,-758,-309,-1,1162,3010,3523,1190"):gmatch("([^,]+)") do
+        local n = tonumber(value)
+        if n then table.insert(shakeOffsets, n / 10000 * 0.5) end
+    end
+
+    local shakeConn = nil
+    local lastCamYaw = nil
+    local shakeThreshold = 0.04
+    local shakeWindow = 0.4
+
+    local function hasTool()
+        local c = P.lp.Character
+        local bp = P.lp:FindFirstChildOfClass("Backpack")
+        return (c and c:FindFirstChildOfClass("Tool") ~= nil) or (bp and bp:FindFirstChildOfClass("Tool") ~= nil)
+    end
+
+    P.fn.refreshShakeUI = function()
+        P.ui.shakeBtn.Text = P.s.shakeEnabled and "Shake · ON" or "Shake · OFF"
+        P.ui.shakeSpeedBtn.Text = tostring(P.vals.shakeSpeedValues[P.s.shakeSpeedIndex]) .. "x"
+        P.fn.styleButton(P.ui.shakeBtn, P.s.shakeEnabled)
+        if not P.s.shakeEnabled then
+            P.ui.shakeStatus.Text = "disabled"
+            P.ui.shakeStatus.TextColor3 = P.DIM
+        end
+    end
+
+    local function stopShake()
+        if not P.s.shakeActive then return end
+        P.s.shakeActive = false
+        if shakeConn then shakeConn:Disconnect() shakeConn = nil end
+        if P.s.shakeEnabled then
+            P.ui.shakeStatus.Text = "waiting..."
+            P.ui.shakeStatus.TextColor3 = P.DIM
+        end
+        P.s.shakeTime = 0
+        P.s.shakeIndex = 1
+    end
+
+    local function startShake()
+        if P.s.shakeActive then return end
+        P.s.shakeActive = true
+        P.ui.shakeStatus.Text = "active"
+        P.ui.shakeStatus.TextColor3 = P.ACC
+        shakeConn = P.RunService.RenderStepped:Connect(function(delta)
+            if not hasTool() then stopShake() return end
+            local c = P.lp.Character
+            local hrp = c and c:FindFirstChild("HumanoidRootPart")
+            if not hrp or P.UIS.MouseBehavior ~= Enum.MouseBehavior.LockCenter then return end
+            local intensity = P.vals.shakeSpeedValues[P.s.shakeSpeedIndex]
+            P.s.shakeTime = P.s.shakeTime + delta * 2 * intensity
+            P.s.shakeIndex = math.floor(P.s.shakeTime * 60) + 1
+            if P.s.shakeIndex > #shakeOffsets then
+                P.s.shakeIndex = 1
+                P.s.shakeTime = 0
+            end
+            local pos = hrp.CFrame.Position
+            workspace.CurrentCamera.CFrame = CFrame.new(pos) * CFrame.Angles(0, shakeOffsets[P.s.shakeIndex] * 3, 0) * CFrame.new(-pos) * workspace.CurrentCamera.CFrame
+        end)
+    end
+
+    P.RunService.RenderStepped:Connect(function()
+        if not P.s.shakeEnabled then return end
+        local cam = workspace.CurrentCamera
+        if not cam then return end
+        local _, yaw = cam.CFrame:ToEulerAnglesYXZ()
+        if not hasTool() then
+            if P.s.shakeActive then stopShake() end
+            P.vals.recentChanges = {}
+            P.s.lastDir = 0
+            P.ui.barFill.Size = UDim2.new(0, 0, 1, 0)
+            P.ui.shakeStatus.Text = "waiting tool..."
+            P.ui.shakeStatus.TextColor3 = P.DIM
+            lastCamYaw = yaw
+            return
+        end
+        if lastCamYaw == nil then lastCamYaw = yaw return end
+        local diff = yaw - lastCamYaw
+        if diff > math.pi then diff = diff - 2 * math.pi end
+        if diff < -math.pi then diff = diff + 2 * math.pi end
+        if math.abs(diff) > shakeThreshold then
+            P.s.lastChangeTime = tick()
+            if P.s.lastDir ~= 0 and diff * P.s.lastDir < 0 then
+                table.insert(P.vals.recentChanges, tick())
+            end
+            P.s.lastDir = diff
+            local now = tick()
+            local filtered = {}
+            local count = 0
+            for _, t in ipairs(P.vals.recentChanges) do
+                if now - t <= shakeWindow then
+                    count = count + 1
+                    table.insert(filtered, t)
+                end
+            end
+            P.vals.recentChanges = filtered
+            P.ui.barFill.Size = UDim2.new(math.min(count / 3, 1), 0, 1, 0)
+            if count >= 3 and not P.s.shakeActive then startShake() end
+        elseif P.s.shakeActive and tick() - P.s.lastChangeTime >= 0.5 then
+            stopShake()
+            P.vals.recentChanges = {}
+            P.ui.barFill.Size = UDim2.new(0, 0, 1, 0)
+        end
+        lastCamYaw = yaw
+    end)
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  STRETCH RES
+-- ═══════════════════════════════════════════════════════════
+do
+    P.RunService.RenderStepped:Connect(function()
+        if P.s.currentStretch ~= 1.0 then
+            local cam = workspace.CurrentCamera
+            if cam then
+                cam.CFrame = cam.CFrame * CFrame.new(0, 0, 0, 1, 0, 0, 0, P.s.currentStretch, 0, 0, 0, 1)
+            end
+        end
+    end)
+
+    P.fn.updateStretchUI = function()
+        P.ui.stretchValue.Text = string.format("%.2f", P.s.currentStretch)
+    end
+    P.fn.updateStretchUI()
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  GRAB BOMB
+-- ═══════════════════════════════════════════════════════════
+do
+    local function hasBomb(ch)
+        return ch and ch:FindFirstChild("Bomb") ~= nil
+    end
+
+    local function getBombHolder()
+        local enemies, arena = P.fn.detectEnemies()
+        local best = nil
+        local bestDist = math.huge
+        local myHRP = P.lp.Character and P.lp.Character:FindFirstChild("HumanoidRootPart")
+        if not myHRP then return nil end
+        for _, p in ipairs(enemies) do
+            if p.Character and P.fn.isPlayerAlive(p) and P.fn.isPlayerOnFloor(p, arena) and hasBomb(p.Character) then
+                local hrp = p.Character:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    local d = (myHRP.Position - hrp.Position).Magnitude
+                    if d < bestDist then
+                        bestDist = d
+                        best = p
+                    end
+                end
+            end
+        end
+        return best
+    end
+
+    P.RunService.Heartbeat:Connect(function()
+        if not P.s.grabBombActive then
+            P.ui.grabBombStatus.Text = "status · idle"
+            return
+        end
+        local ch = P.lp.Character
+        if not ch then P.ui.grabBombStatus.Text = "status · no char" return end
+        if hasBomb(ch) then P.ui.grabBombStatus.Text = "status · holding bomb" return end
+        local t = getBombHolder()
+        if t then P.ui.grabBombStatus.Text = "status · chasing " .. t.Name
+        else P.ui.grabBombStatus.Text = "status · no bomb holder" end
+    end)
+
+    P.RunService.Heartbeat:Connect(function()
+        if not P.s.grabBombActive then return end
+        if P.s.assistEnabled and P.s.assistHasTarget then return end
+        local myChar = P.lp.Character
+        local myHum = myChar and myChar:FindFirstChildOfClass("Humanoid")
+        local myHRP = myChar and myChar:FindFirstChild("HumanoidRootPart")
+        if not myChar or not myHum or not myHRP or myHum.Health <= 0 then return end
+        if hasBomb(myChar) then return end
+        local target = getBombHolder()
+        if not target or not target.Character then return end
+        local tHRP = target.Character:FindFirstChild("HumanoidRootPart")
+        if not tHRP then return end
+        local chest = target.Character:FindFirstChild("UpperTorso") or target.Character:FindFirstChild("Torso")
+        if chest then
+            local cf = chest.CFrame.LookVector
+            local cr = chest.CFrame.RightVector
+            local bp = chest.Position + (cf * 2.5) + (cr * 0.3)
+            local d = (myHRP.Position - bp).Magnitude
+            local fw = bp
+            if d < 1.5 then fw = bp + (cf * 0.5) end
+            myHum:MoveTo(fw)
+        else
+            myHum:MoveTo(tHRP.Position)
+        end
+    end)
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  AUTO HOLD
+-- ═══════════════════════════════════════════════════════════
+do
+    local ahTargetDistance = 9
+    local ahRushAtTime = 2.0
+    local ahOrbitSpeed = 4
+    local ahSmoothTurn = 0.25
+    local ahOrbitAngle = 0
+    local ahOrbitDirection = 1
+    local ahLastEnemyPos = Vector3.new(0, 0, 0)
+    local ahDistValues = {6, 8, 9, 11, 13, 15}
+    local ahRushValues = {1.0, 1.5, 2.0, 2.5, 3.0, 4.0}
+    local ahOrbitValues = {2, 3, 4, 5, 6, 8}
+    local ahSmoothValues = {0.15, 0.2, 0.25, 0.35, 0.5}
+    local ahDistIndex = 3
+    local ahRushIndex = 3
+    local ahOrbitIndex = 3
+    local ahSmoothIndex = 3
+
+    local function ahGetBombTime(tool)
+        if not tool then return nil end
+        for _, obj in ipairs(tool:GetDescendants()) do
+            if obj:IsA("TextLabel") or obj:IsA("TextBox") then
+                local n = tonumber(string.match(obj.Text or "", "%d+%.?%d*"))
+                if n then return n end
+            end
+        end
+        for _, obj in ipairs(tool:GetDescendants()) do
+            if (obj:IsA("NumberValue") or obj:IsA("IntValue")) and string.lower(obj.Name):find("time") then
+                return obj.Value
+            end
+        end
+        return nil
+    end
+
+    local function ahGetClosestEnemy()
+        local enemies, arena = P.fn.detectEnemies()
+        local myHRP = P.lp.Character and P.lp.Character:FindFirstChild("HumanoidRootPart")
+        if not myHRP then return nil, math.huge end
+        local best = nil
+        local bestDist = math.huge
+        for _, p in ipairs(enemies) do
+            if p.Character and P.fn.isPlayerAlive(p) and P.fn.isPlayerOnFloor(p, arena) then
+                local hrp = p.Character:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    local d = (myHRP.Position - hrp.Position).Magnitude
+                    if d < bestDist then
+                        bestDist = d
+                        best = p
+                    end
+                end
+            end
+        end
+        return best, bestDist
+    end
+
+    P.fn.refreshAutoHoldUI = function()
+        P.ui.autoHoldBtn.Text = P.s.autoHoldActive and "Auto Hold · ON" or "Auto Hold · OFF"
+        P.fn.styleButton(P.ui.autoHoldBtn, P.s.autoHoldActive)
+        P.ui.ahDistBtn.Text = tostring(ahTargetDistance) .. "m"
+        P.ui.ahRushBtn.Text = string.format("%.1fs", ahRushAtTime)
+        P.ui.ahOrbitBtn.Text = tostring(ahOrbitSpeed) .. "x"
+        P.ui.ahSmoothBtn.Text = string.format("%.2f", ahSmoothTurn)
+    end
+
+    P.RunService.Heartbeat:Connect(function(dt)
+        if not P.s.autoHoldActive then return end
+        local myChar = P.lp.Character
+        if not myChar then return end
+        local myHRP = myChar:FindFirstChild("HumanoidRootPart")
+        local myHum = myChar:FindFirstChildOfClass("Humanoid")
+        if not myHRP or not myHum or myHum.Health <= 0 then return end
+        local tool = myChar:FindFirstChildOfClass("Tool")
+        if not tool then
+            P.ui.autoHoldStatus.Text = "status · no bomb"
+            return
+        end
+        local rt = ahGetBombTime(tool) or 99
+        if rt <= ahRushAtTime then
+            P.ui.autoHoldStatus.Text = string.format("status · RUSH %.1fs", rt)
+            local t = ahGetClosestEnemy()
+            if t and t.Character then
+                local th = t.Character:FindFirstChild("HumanoidRootPart")
+                if th then
+                    local targetCF = CFrame.new(myHRP.Position, Vector3.new(th.Position.X, myHRP.Position.Y, th.Position.Z)) * CFrame.Angles(0, math.rad(35), 0)
+                    myHRP.CFrame = myHRP.CFrame:Lerp(targetCF, ahSmoothTurn)
+                    myHum:MoveTo(th.Position)
+                    pcall(function() tool:Activate() end)
+                end
+            end
+            return
+        end
+        local t = ahGetClosestEnemy()
+        if not t or not t.Character then
+            P.ui.autoHoldStatus.Text = "status · no target"
+            return
+        end
+        P.ui.autoHoldStatus.Text = string.format("status · orbit %s · %.1fs", t.Name, rt)
+        local th = t.Character:FindFirstChild("HumanoidRootPart")
+        if not th then return end
+        local ev = th.Position - ahLastEnemyPos
+        local mr = myHRP.CFrame.RightVector
+        local dot = ev:Dot(mr)
+        if dot > 0.05 then ahOrbitDirection = -1
+        elseif dot < -0.05 then ahOrbitDirection = 1 end
+        ahLastEnemyPos = th.Position
+        ahOrbitAngle = ahOrbitAngle + (dt * ahOrbitSpeed * ahOrbitDirection)
+        local of = Vector3.new(math.sin(ahOrbitAngle), 0, math.cos(ahOrbitAngle)) * ahTargetDistance
+        local gp = th.Position + of
+        local ld = (myHRP.Position - th.Position).Unit
+        myHRP.CFrame = CFrame.new(myHRP.Position, myHRP.Position + Vector3.new(ld.X, 0, ld.Z))
+        myHum:MoveTo(gp)
+    end)
+
+    P.fn.ahSetDist = function(idx) ahDistIndex = idx; ahTargetDistance = ahDistValues[idx] end
+    P.fn.ahSetRush = function(idx) ahRushIndex = idx; ahRushAtTime = ahRushValues[idx] end
+    P.fn.ahSetOrbit = function(idx) ahOrbitIndex = idx; ahOrbitSpeed = ahOrbitValues[idx] end
+    P.fn.ahSetSmooth = function(idx) ahSmoothIndex = idx; ahSmoothTurn = ahSmoothValues[idx] end
+    P.fn.ahNextDist = function() return ahDistIndex % #ahDistValues + 1 end
+    P.fn.ahNextRush = function() return ahRushIndex % #ahRushValues + 1 end
+    P.fn.ahNextOrbit = function() return ahOrbitIndex % #ahOrbitValues + 1 end
+    P.fn.ahNextSmooth = function() return ahSmoothIndex % #ahSmoothValues + 1 end
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  HEADLESS
+-- ═══════════════════════════════════════════════════════════
+do
+    local HEADLESS_MESH_ID = "rbxassetid://1095708"
+    local origHeadTrans = nil
+    local origFaceParent = nil
+
+    local function removeFace(head)
+        local face = head:FindFirstChild("face")
+        if face then
+            origFaceParent = face.Parent
+            face:Destroy()
+        end
+    end
+
+    local function restoreFace(head)
+        if origFaceParent and not head:FindFirstChild("face") then
+            local nf = Instance.new("Decal")
+            nf.Name = "face"
+            nf.Texture = "rbxasset://textures/face.png"
+            nf.Parent = head
+        end
+    end
+
+    P.fn.applyHeadless = function(head)
+        if not head then return end
+        origHeadTrans = head.Transparency
+        head.Transparency = 1
+        head.CanCollide = false
+        removeFace(head)
+        if not head:FindFirstChild("HeadlessMesh") then
+            local m = Instance.new("SpecialMesh")
+            m.Name = "HeadlessMesh"
+            m.MeshType = Enum.MeshType.FileMesh
+            m.MeshId = HEADLESS_MESH_ID
+            m.Scale = Vector3.new(0.001, 0.001, 0.001)
+            m.Parent = head
+        end
+    end
+
+    P.fn.removeHeadless = function(head)
+        if not head then return end
+        if origHeadTrans then head.Transparency = origHeadTrans end
+        head.CanCollide = true
+        restoreFace(head)
+        local m = head:FindFirstChild("HeadlessMesh")
+        if m then m:Destroy() end
+    end
+
+    P.lp.CharacterAdded:Connect(function(ch)
+        ch:WaitForChild("Head")
+        task.wait(0.2)
+        local head = ch:FindFirstChild("Head")
+        if head then
+            if P.s.headlessA then P.fn.applyHeadless(head)
+            else P.fn.removeHeadless(head) end
+        end
+    end)
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  KORBLOX
+-- ═══════════════════════════════════════════════════════════
+do
+    local KORBLOX_MESH_ID = "rbxassetid://101851696"
+    local KORBLOX_TEXTURE_ID = "rbxassetid://101851254"
+    local korbloxObs = {}
+
+    local function applyR6(ch)
+        local rightLeg = ch:FindFirstChild("Right Leg")
+        if not rightLeg then return end
+        for _, child in ipairs(rightLeg:GetChildren()) do
+            if child:IsA("SpecialMesh") or child:IsA("CharacterMesh") then
+                table.insert(korbloxObs, child)
+            end
+        end
+        local m = Instance.new("SpecialMesh")
+        m.MeshType = Enum.MeshType.FileMesh
+        m.MeshId = KORBLOX_MESH_ID
+        m.TextureId = KORBLOX_TEXTURE_ID
+        m.Scale = Vector3.new(1, 1, 1)
+        m.Parent = rightLeg
+        table.insert(korbloxObs, m)
+    end
+
+    local function applyR15(ch)
+        local rUpper = ch:FindFirstChild("RightUpperLeg")
+        if not rUpper then return end
+        rUpper.Transparency = 1
+        table.insert(korbloxObs, rUpper)
+        local rLower = ch:FindFirstChild("RightLowerLeg")
+        local rFoot = ch:FindFirstChild("RightFoot")
+        if rLower then rLower.Transparency = 1 table.insert(korbloxObs, rLower) end
+        if rFoot then rFoot.Transparency = 1 table.insert(korbloxObs, rFoot) end
+        local kLeg = Instance.new("Part")
+        kLeg.Size = Vector3.new(1, 2, 1)
+        kLeg.Anchored = false
+        kLeg.CanCollide = false
+        kLeg.Parent = ch
+        table.insert(korbloxObs, kLeg)
+        local m = Instance.new("SpecialMesh")
+        m.MeshType = Enum.MeshType.FileMesh
+        m.MeshId = KORBLOX_MESH_ID
+        m.TextureId = KORBLOX_TEXTURE_ID
+        m.Parent = kLeg
+        table.insert(korbloxObs, m)
+        local w = Instance.new("Weld")
+        w.Part0 = rUpper
+        w.Part1 = kLeg
+        w.C0 = CFrame.new(0, -0.8, 0)
+        w.Parent = kLeg
+        table.insert(korbloxObs, w)
+    end
+
+    P.fn.removeKorblox = function(ch)
+        for _, obj in pairs(korbloxObs) do
+            if obj and obj.Parent then pcall(function() obj:Destroy() end) end
+        end
+        korbloxObs = {}
+        local rUpper = ch:FindFirstChild("RightUpperLeg")
+        if rUpper then rUpper.Transparency = 0 end
+        local rLower = ch:FindFirstChild("RightLowerLeg")
+        if rLower then rLower.Transparency = 0 end
+        local rFoot = ch:FindFirstChild("RightFoot")
+        if rFoot then rFoot.Transparency = 0 end
+        local rLeg = ch:FindFirstChild("Right Leg")
+        if rLeg then
+            for _, child in ipairs(rLeg:GetChildren()) do
+                if child:IsA("SpecialMesh") and child.MeshId == KORBLOX_MESH_ID then child:Destroy() end
+            end
+        end
+    end
+
+    P.fn.applyKorblox = function(ch)
+        task.wait(0.2)
+        local hum = ch:FindFirstChildOfClass("Humanoid")
+        if not hum then return end
+        if P.s.korbloxA then
+            if hum.RigType == Enum.HumanoidRigType.R6 then applyR6(ch)
+            else applyR15(ch) end
+        else
+            P.fn.removeKorblox(ch)
+        end
+    end
+
+    P.lp.CharacterAdded:Connect(function(ch)
+        ch:WaitForChild("Humanoid")
+        P.fn.applyKorblox(ch)
+    end)
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  SKIN CHANGER
+-- ═══════════════════════════════════════════════════════════
+do
+    local skinBusy = false
+    local originalSkinUser = P.lp.Name
+    local currentSkinUser = nil
+
+    local function getUserId(n)
+        local s, i = pcall(function() return P.Players:GetUserIdFromNameAsync(n) end)
+        return s and i or nil
+    end
+
+    local function clearAppearance(c)
+        for _, v in ipairs(c:GetChildren()) do
+            if v:IsA("Accessory") or v:IsA("Shirt") or v:IsA("Pants") or v:IsA("ShirtGraphic")
+               or v:IsA("BodyColors") or v:IsA("CharacterMesh") or v:IsA("TShirt") then
+                v:Destroy()
+            end
+        end
+        local h = c:FindFirstChild("Head")
+        if h then
+            for _, v in ipairs(h:GetChildren()) do
+                if v:IsA("Decal") or v:IsA("SurfaceAppearance") then v:Destroy() end
+            end
+        end
+    end
+
+    local function findAttachment(c, n)
+        for _, p in ipairs(c:GetChildren()) do
+            if p:IsA("BasePart") then
+                local a = p:FindFirstChild(n)
+                if a and a:IsA("Attachment") then return p, a end
+            end
+        end
+    end
+
+    local function addAccessory(c, a)
+        local h = a:FindFirstChild("Handle")
+        if not h or not h:IsA("BasePart") then a:Destroy() return end
+        local aa
+        for _, v in ipairs(h:GetChildren()) do
+            if v:IsA("Attachment") then aa = v break end
+        end
+        if not aa then a:Destroy() return end
+        local p, ta = findAttachment(c, aa.Name)
+        if p and ta then
+            h.CFrame = p.CFrame * ta.CFrame * aa.CFrame:Inverse()
+        else
+            p = c:FindFirstChild("Head")
+            if not p then a:Destroy() return end
+            h.CFrame = p.CFrame * CFrame.new(0, 0.5, 0)
+        end
+        a.Parent = c
+        h.CanCollide = false
+        h.CanTouch = false
+        h.CanQuery = false
+        h.Massless = true
+        local w = Instance.new("WeldConstraint")
+        w.Part0 = p w.Part1 = h w.Parent = h
+    end
+
+    local function applyFace(c, id)
+        local th = c:FindFirstChild("Head")
+        if not th then return end
+        for _, v in ipairs(th:GetChildren()) do
+            if v:IsA("Decal") then v:Destroy() end
+        end
+        local f = Instance.new("Decal")
+        f.Name = "face"
+        f.Texture = "rbxthumb://type=AvatarHeadShot&id=" .. id .. "&w=420&h=420"
+        f.Parent = th
+    end
+
+    P.fn.skinApply = function(n, silent)
+        if skinBusy or not n or n == "" then return false end
+        skinBusy = true
+        local id = getUserId(n)
+        if not id then skinBusy = false return false end
+        local c = P.lp.Character
+        if not c then skinBusy = false return false end
+        local ok, m = pcall(function() return P.Players:CreateHumanoidModelFromUserId(id) end)
+        if not ok or not m then skinBusy = false return false end
+        clearAppearance(c)
+        for _, v in ipairs(m:GetChildren()) do
+            if v:IsA("Shirt") or v:IsA("Pants") or v:IsA("ShirtGraphic")
+               or v:IsA("BodyColors") or v:IsA("CharacterMesh") or v:IsA("TShirt") then
+                v:Clone().Parent = c
+            end
+        end
+        applyFace(c, id)
+        for _, v in ipairs(m:GetChildren()) do
+            if v:IsA("Accessory") then
+                local x = v:Clone()
+                pcall(function() addAccessory(c, x) end)
+            end
+        end
+        m:Destroy()
+        currentSkinUser = n
+        skinBusy = false
+        return true
+    end
+
+    P.fn.skinReset = function()
+        currentSkinUser = nil
+        P.fn.skinApply(originalSkinUser, true)
+    end
+
+    P.fn.RANDOM_SKIN_POOL = {
+        "Linkmon99", "Stickmasterluke", "SonOfSevenless", "Simoon68", "EarlGrey",
+        "zlib", "CV10K", "rip_indra", "Merely", "davidweiss2", "deadx_u",
+        "Teknobytez", "Bourgist", "PolarisxProject", "systask", "kenami",
+        "nutcase123", "Saturniidae", "TigerCode", "InceptionTime", "Murteenee",
+        "Commissioner_Bane", "bIazies", "NirkZarek", "Scoobysnacks1", "GodzGalaxy",
+        "kniryah", "ErmCDH", "Holla4Dolla", "Ieango", "TheMule101", "SuperTrader",
+        "TheSliceOfLife", "NoOneMcNoob", "FP_Nation", "Blizzei", "Woof67",
+        "calwina", "EverythingHurtsx_x", "alphasponge", "ConsiderPhlebas", "Tap_Works",
+        "SirRogerPembleton", "fl8mey", "S1ZE", "Builder_Boy", "Preston_Username",
+        "inkwaves", "mightybaseplate", "DarkenedLord", "TaleOfScripting", "Aken_Aten",
+        "Kilo16820", "00lionn", "Azarth", "Quatos", "Bluecage", "iDiablo",
+        "FF_071", "TLLWP", "ASOOXLI", "UB1ER", "ZXCFFWX", "xk8sq", "44j",
+        "Soulcrxck", "H_XRU", "silentcrimer",
+        "Builderman", "Shedletsky", "Telamon", "ReeseMcBlox", "Sharkbyte",
+        "Quenty", "Crazyblox", "Coeptus", "Seranok", "Loleris",
+        "KreekCraft", "Tofuu", "Denis", "Alexnewtron", "Cindering",
+        "Zeuxcg", "Bobbyjoe", "Isaac",
+    }
+
+    P.lp.CharacterAdded:Connect(function(char)
+        if currentSkinUser then
+            task.spawn(function()
+                char:WaitForChild("Humanoid")
+                task.wait(0.1)
+                P.fn.skinApply(currentSkinUser, true)
+            end)
+        end
+    end)
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  LIGHTING
+-- ═══════════════════════════════════════════════════════════
+do
+    local origLight = {
+        Brightness = P.Lighting.Brightness,
+        ColorShift_Bottom = P.Lighting.ColorShift_Bottom,
+        ColorShift_Top = P.Lighting.ColorShift_Top,
+        OutdoorAmbient = P.Lighting.OutdoorAmbient,
+        GeographicLatitude = P.Lighting.GeographicLatitude,
+    }
+    local lightFx = {}
+
+    P.fn.applyLighting = function(st)
+        P.s.lightingActive = st
+        if st then
+            P.Lighting.Brightness = 2
+            P.Lighting.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
+            P.Lighting.ColorShift_Top = Color3.fromRGB(255, 245, 230)
+            P.Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+            P.Lighting.GeographicLatitude = 45
+            for _, fx in pairs(lightFx) do
+                if fx and fx.Parent then fx:Destroy() end
+            end
+            lightFx = {}
+            local bloom = Instance.new("BloomEffect", P.Lighting)
+            bloom.Name = "PX_Bloom" bloom.Intensity = 0.5 bloom.Size = 24 bloom.Threshold = 0.9
+            table.insert(lightFx, bloom)
+            local cc = Instance.new("ColorCorrectionEffect", P.Lighting)
+            cc.Name = "PX_CC" cc.Brightness = 0.05 cc.Contrast = 0.1 cc.Saturation = 0.15
+            table.insert(lightFx, cc)
+            local sr = Instance.new("SunRaysEffect", P.Lighting)
+            sr.Name = "PX_SunRays" sr.Intensity = 0.1 sr.Spread = 1
+            table.insert(lightFx, sr)
+        else
+            P.Lighting.Brightness = origLight.Brightness
+            P.Lighting.ColorShift_Bottom = origLight.ColorShift_Bottom
+            P.Lighting.ColorShift_Top = origLight.ColorShift_Top
+            P.Lighting.OutdoorAmbient = origLight.OutdoorAmbient
+            P.Lighting.GeographicLatitude = origLight.GeographicLatitude
+            for _, fx in pairs(lightFx) do
+                if fx and fx.Parent then fx:Destroy() end
+            end
+            lightFx = {}
+        end
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  ANTI-LAG
+-- ═══════════════════════════════════════════════════════════
+do
+    local antiLagConns = {}
+    local antiLagSaved = {}
+    local antiLagSavedCount = 0
+    local ANTI_LAG_MAX = 80000
+    local antiLagDetached = {}
+    local antiLagLightingSaved = nil
+    local antiLagTerrainSaved = nil
+
+    local function saveAndSet(inst, prop, value)
+        if antiLagSavedCount >= ANTI_LAG_MAX then return end
+        local ok, orig = pcall(function() return inst[prop] end)
+        if not ok then return end
+        if not antiLagSaved[inst] then
+            antiLagSaved[inst] = {}
+            antiLagSavedCount = antiLagSavedCount + 1
+        end
+        if antiLagSaved[inst][prop] == nil then
+            antiLagSaved[inst][prop] = orig
+        end
+        pcall(function() inst[prop] = value end)
+    end
+
+    local function detachTemp(inst)
+        if antiLagDetached[inst] then return end
+        antiLagDetached[inst] = inst.Parent
+        pcall(function() inst.Parent = nil end)
+    end
+
+    local function process(v)
+        if v.Name and v.Name:sub(1, 3) == "PX_" then return end
+        pcall(function()
+            if v:IsA("Model") then
+                saveAndSet(v, "LevelOfDetail", "Disabled")
+                saveAndSet(v, "ModelStreamingMode", "Nonatomic")
+            elseif v:IsA("MeshPart") then
+                saveAndSet(v, "CastShadow", false)
+                saveAndSet(v, "DoubleSided", false)
+                saveAndSet(v, "RenderFidelity", Enum.RenderFidelity.Performance)
+            elseif v:IsA("BasePart") then
+                saveAndSet(v, "CastShadow", false)
+                saveAndSet(v, "Material", Enum.Material.Plastic)
+                saveAndSet(v, "Reflectance", 0)
+                saveAndSet(v, "MaterialVariant", "")
+            elseif v:IsA("Decal") or v:IsA("Texture") then
+                saveAndSet(v, "Transparency", 1)
+            elseif v:IsA("SpecialMesh") then
+                saveAndSet(v, "TextureId", 0)
+            elseif v:IsA("Fire") or v:IsA("Smoke") or v:IsA("Sparkles") or v:IsA("SpotLight") then
+                saveAndSet(v, "Enabled", false)
+            elseif v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Beam") then
+                saveAndSet(v, "Enabled", false)
+            elseif v:IsA("Attachment") then
+                saveAndSet(v, "Visible", false)
+            elseif v:IsA("Explosion") then
+                saveAndSet(v, "BlastPressure", 1)
+                saveAndSet(v, "BlastRadius", 1)
+            elseif v:IsA("Sky") then
+                detachTemp(v)
+            elseif v:IsA("Atmosphere") then
+                saveAndSet(v, "Density", 0)
+                saveAndSet(v, "Haze", 0)
+            elseif v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("SunRaysEffect")
+                or v:IsA("DepthOfFieldEffect") or v:IsA("ColorCorrectionEffect") then
+                saveAndSet(v, "Enabled", false)
+            end
+        end)
+    end
+
+    P.fn.applyAntiLag = function(st)
+        P.s.antiLagActive = st
+        if st then
+            pcall(function() setfpscap(999999999) end)
+            for _, v in next, workspace:GetDescendants() do process(v) end
+            for _, v in next, P.Lighting:GetDescendants() do process(v) end
+            antiLagLightingSaved = {
+                GlobalShadows = P.Lighting.GlobalShadows,
+                FogEnd = P.Lighting.FogEnd,
+                Brightness = P.Lighting.Brightness,
+                Ambient = P.Lighting.Ambient,
+                OutdoorAmbient = P.Lighting.OutdoorAmbient,
+            }
+            P.Lighting.GlobalShadows = false
+            P.Lighting.FogEnd = 9e9
+            P.Lighting.Brightness = 0
+            local terrain = workspace:FindFirstChildOfClass("Terrain")
+            if terrain then
+                antiLagTerrainSaved = {
+                    WaterReflectance = terrain.WaterReflectance,
+                    WaterTransparency = terrain.WaterTransparency,
+                    WaterWaveSize = terrain.WaterWaveSize,
+                    WaterWaveSpeed = terrain.WaterWaveSpeed,
+                }
+                pcall(function()
+                    terrain.WaterReflectance = 0
+                    terrain.WaterTransparency = 0.7
+                    terrain.WaterWaveSize = 0
+                    terrain.WaterWaveSpeed = 0
+                end)
+            end
+            local wConn = workspace.DescendantAdded:Connect(function(v)
+                if P.s.antiLagActive then process(v) end
+            end)
+            table.insert(antiLagConns, wConn)
+            local lConn = P.Lighting.ChildAdded:Connect(function(v)
+                if P.s.antiLagActive then process(v) end
+            end)
+            table.insert(antiLagConns, lConn)
+        else
+            for _, conn in pairs(antiLagConns) do if conn then conn:Disconnect() end end
+            antiLagConns = {}
+            for inst, props in pairs(antiLagSaved) do
+                if typeof(inst) == "Instance" and inst.Parent then
+                    for prop, value in pairs(props) do pcall(function() inst[prop] = value end) end
+                end
+            end
+            antiLagSaved = {}
+            antiLagSavedCount = 0
+            for inst, parent in pairs(antiLagDetached) do
+                if typeof(inst) == "Instance" and parent then pcall(function() inst.Parent = parent end) end
+            end
+            antiLagDetached = {}
+            if antiLagLightingSaved then
+                P.Lighting.GlobalShadows = antiLagLightingSaved.GlobalShadows
+                P.Lighting.FogEnd = antiLagLightingSaved.FogEnd
+                P.Lighting.Brightness = antiLagLightingSaved.Brightness
+                P.Lighting.Ambient = antiLagLightingSaved.Ambient
+                P.Lighting.OutdoorAmbient = antiLagLightingSaved.OutdoorAmbient
+                antiLagLightingSaved = nil
+            end
+            local terrain = workspace:FindFirstChildOfClass("Terrain")
+            if terrain and antiLagTerrainSaved then
+                pcall(function()
+                    terrain.WaterReflectance = antiLagTerrainSaved.WaterReflectance
+                    terrain.WaterTransparency = antiLagTerrainSaved.WaterTransparency
+                    terrain.WaterWaveSize = antiLagTerrainSaved.WaterWaveSize
+                    terrain.WaterWaveSpeed = antiLagTerrainSaved.WaterWaveSpeed
+                end)
+                antiLagTerrainSaved = nil
+            end
+            pcall(function() setfpscap(60) end)
+        end
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  RECORDING MODE
+-- ═══════════════════════════════════════════════════════════
+do
+    local origRecTransparency = {}
+
+    local function setObjHidden(obj, hidden)
+        pcall(function()
+            if obj:IsA("GuiObject") then
+                local key = obj
+                if hidden then
+                    if origRecTransparency[key] == nil then
+                        origRecTransparency[key] = {
+                            bg = obj.BackgroundTransparency,
+                            txt = (obj:IsA("TextLabel") or obj:IsA("TextButton") or obj:IsA("TextBox")) and obj.TextTransparency or nil,
+                            img = (obj:IsA("ImageLabel") or obj:IsA("ImageButton")) and obj.ImageTransparency or nil,
+                        }
+                    end
+                    obj.BackgroundTransparency = 1
+                    if obj:IsA("TextLabel") or obj:IsA("TextButton") or obj:IsA("TextBox") then
+                        obj.TextTransparency = 1
+                    end
+                    if obj:IsA("ImageLabel") or obj:IsA("ImageButton") then
+                        obj.ImageTransparency = 1
+                    end
+                else
+                    local d = origRecTransparency[key]
+                    if d then
+                        obj.BackgroundTransparency = d.bg
+                        if d.txt then obj.TextTransparency = d.txt end
+                        if d.img then obj.ImageTransparency = d.img end
+                    end
+                end
+            elseif obj:IsA("UIStroke") then
+                local key = obj
+                if hidden then
+                    if origRecTransparency[key] == nil then origRecTransparency[key] = obj.Transparency end
+                    obj.Transparency = 1
+                else
+                    if origRecTransparency[key] then obj.Transparency = origRecTransparency[key] end
+                end
+            end
+        end)
+    end
+
+    P.fn.setRecording = function(hidden)
+        local cg = game.CoreGui
+        for _, g in pairs(cg:GetChildren()) do
+            if g:IsA("ScreenGui") and (g.Name:find("Phantom") or g.Name:find("Wind") or g.Name:find("Dance") or g.Name:find("InvisibleGhost") or g.Name:find("Kaito")) then
+                for _, d in ipairs(g:GetDescendants()) do setObjHidden(d, hidden) end
+            end
+        end
+        if not hidden then origRecTransparency = {} end
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  KILL EFFECTS
+-- ═══════════════════════════════════════════════════════════
+P.kfx = {current = 1, range = 55}
+P.kfx.list = {
+    {id = "none",       en = "None",         ar = "بدون"},
+    {id = "specter",    en = "Specter",      ar = "طيف"},
+    {id = "combustion", en = "Combustion",   ar = "احتراق"},
+    {id = "zerog",      en = "Zero-G",       ar = "انعدام الوزن"},
+    {id = "helium",     en = "Helium",       ar = "هيليوم"},
+    {id = "shadow",     en = "Shadow Heart", ar = "قلب الظل"},
+    {id = "cryo",       en = "Cryo",         ar = "تجميد"},
+    {id = "gilded",     en = "Gilded",       ar = "مذهّب"},
+    {id = "voltage",    en = "Voltage",      ar = "تفريغ"},
+    {id = "chrome",     en = "Chrome",       ar = "كروم"},
+    {id = "starburst",  en = "Starburst",    ar = "انفجار"},
+}
+
+do
+    local FX = {}
+    local Folder = Instance.new("Folder")
+    Folder.Name = "PX_KFX"
+    Folder.Parent = workspace
+    local rng = Random.new()
+    local H = {}
+
+    H.parts = function(m)
+        local l = {}
+        for _, d in ipairs(m:GetDescendants()) do
+            if d:IsA("BasePart") then table.insert(l, d) end
+        end
+        return l
+    end
+
+    H.spawn = function(props)
+        local p = Instance.new("Part")
+        for k, v in pairs(props) do p[k] = v end
+        p.Anchored = true p.CanCollide = false p.CanQuery = false p.CanTouch = false
+        p.Parent = Folder
+        return p
+    end
+
+    H.anim = function(dur, step)
+        local t0 = os.clock()
+        local conn
+        conn = P.RunService.Heartbeat:Connect(function(dt)
+            local a = (os.clock() - t0) / dur
+            if a >= 1 then conn:Disconnect() pcall(step, 1, dt) return end
+            pcall(step, a, dt)
+        end)
+        return conn
+    end
+
+    H.fade = function(m, dur)
+        for _, d in ipairs(m:GetDescendants()) do
+            if d:IsA("BasePart") then
+                P.TS:Create(d, TweenInfo.new(dur), {Transparency = 1}):Play()
+            elseif d:IsA("Decal") or d:IsA("Texture") then
+                P.TS:Create(d, TweenInfo.new(dur), {Transparency = 1}):Play()
+            elseif d:IsA("Highlight") then
+                P.TS:Create(d, TweenInfo.new(dur), {FillTransparency = 1, OutlineTransparency = 1}):Play()
+            elseif d:IsA("PointLight") then
+                P.TS:Create(d, TweenInfo.new(dur), {Brightness = 0}):Play()
+            elseif d:IsA("ParticleEmitter") or d:IsA("Fire") or d:IsA("Smoke") then
+                d.Enabled = false
+            end
+        end
+    end
+
+    H.strip = function(m)
+        for _, d in ipairs(m:GetDescendants()) do
+            pcall(function()
+                if d:IsA("Shirt") or d:IsA("Pants") or d:IsA("ShirtGraphic") or d:IsA("BodyColors")
+                    or d:IsA("SurfaceAppearance") or d:IsA("Decal") or d:IsA("Texture") or d:IsA("CharacterMesh") then
+                    d:Destroy()
+                elseif d:IsA("MeshPart") then d.TextureID = ""
+                elseif d:IsA("SpecialMesh") then d.TextureId = "" end
+            end)
+        end
+    end
+
+    H.paint = function(parts, color, mat, reflect, dur)
+        for _, p in ipairs(parts) do
+            if p.Name ~= "HumanoidRootPart" then
+                p.Material = mat
+                p.Reflectance = reflect or 0
+                if dur then P.TS:Create(p, TweenInfo.new(dur), {Color = color}):Play()
+                else p.Color = color end
+            end
+        end
+    end
+
+    H.particles = function(parts, props)
+        for _, p in ipairs(parts) do
+            if p.Name == "Torso" or p.Name == "UpperTorso" or p.Name == "Head" then
+                local e = Instance.new("ParticleEmitter")
+                for k, v in pairs(props) do e[k] = v end
+                e.Parent = p
+            end
+        end
+    end
+
+    H.shards = function(pos, color, mat, count, speed, life)
+        local list = {}
+        for i = 1, count do
+            local s = rng:NextNumber(0.3, 0.9)
+            local p = H.spawn({
+                Size = Vector3.new(s, s * rng:NextNumber(0.6, 1.4), s * rng:NextNumber(0.6, 1.4)),
+                Color = color, Material = mat,
+                CFrame = CFrame.new(pos + Vector3.new(rng:NextNumber(-1.2, 1.2), rng:NextNumber(-2, 2), rng:NextNumber(-1.2, 1.2)))
+                    * CFrame.Angles(rng:NextNumber(0, 6), rng:NextNumber(0, 6), rng:NextNumber(0, 6)),
+            })
+            local dir = Vector3.new(rng:NextNumber(-1, 1), rng:NextNumber(0.2, 1.2), rng:NextNumber(-1, 1)).Unit
+            list[i] = {p = p, v = dir * rng:NextNumber(0.5, 1) * speed,
+                w = Vector3.new(rng:NextNumber(-6, 6), rng:NextNumber(-6, 6), rng:NextNumber(-6, 6))}
+            P.Debris:AddItem(p, life + 0.5)
+        end
+        H.anim(life, function(a, dt)
+            for _, s in ipairs(list) do
+                if s.p.Parent then
+                    s.v = s.v + Vector3.new(0, -60 * dt, 0)
+                    s.p.CFrame = CFrame.new(s.p.Position + s.v * dt) * (s.p.CFrame - s.p.Position)
+                        * CFrame.Angles(s.w.X * dt, s.w.Y * dt, s.w.Z * dt)
+                    if a > 0.6 then s.p.Transparency = (a - 0.6) / 0.4 end
+                end
+            end
+        end)
+    end
+
+    H.ring = function(pos, color, size)
+        local r = H.spawn({Shape = Enum.PartType.Cylinder, Size = Vector3.new(0.3, 2, 2), Color = color,
+            Material = Enum.Material.Neon, CFrame = CFrame.new(pos - Vector3.new(0, 2.5, 0)) * CFrame.Angles(0, 0, math.pi/2)})
+        P.TS:Create(r, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+            {Size = Vector3.new(0.3, size or 22, size or 22), Transparency = 1}):Play()
+        P.Debris:AddItem(r, 1.1)
+    end
+
+    H.bolt = function(top, bottom, color, thick)
+        local pts = {top}
+        for i = 1, 8 do
+            table.insert(pts, top:Lerp(bottom, i / 9) + Vector3.new(rng:NextNumber(-3, 3), 0, rng:NextNumber(-3, 3)))
+        end
+        table.insert(pts, bottom)
+        local made = {}
+        for i = 1, #pts - 1 do
+            local a, b = pts[i], pts[i + 1]
+            local len = (b - a).Magnitude
+            local p = H.spawn({Size = Vector3.new(thick, thick, len), Color = color, Material = Enum.Material.Neon,
+                CFrame = CFrame.lookAt(a, b) * CFrame.new(0, 0, -len/2)})
+            P.Debris:AddItem(p, 0.6)
+            table.insert(made, p)
+        end
+        return made
+    end
+
+    FX.specter = function(m, hrp)
+        H.strip(m)
+        local parts = H.parts(m)
+        H.paint(parts, Color3.fromRGB(180, 130, 240), Enum.Material.ForceField, 0)
+        local hl = Instance.new("Highlight", m)
+        hl.FillColor = Color3.fromRGB(150, 100, 220)
+        hl.OutlineColor = Color3.fromRGB(230, 200, 255)
+        hl.FillTransparency = 0.65
+        hl.OutlineTransparency = 0.35
+        local base = m:GetPivot()
+        H.anim(3.2, function(a)
+            local wave = math.sin(a * 9) * 0.85
+            local y = 15 * a
+            m:PivotTo(base * CFrame.new(wave, y, math.cos(a * 6) * 0.5) * CFrame.Angles(0, a * math.pi * 3, 0))
+            local tr = 0.3 + 0.7 * math.max(0, (a - 0.5) / 0.5)
+            for _, p in ipairs(parts) do
+                if p.Name ~= "HumanoidRootPart" then p.Transparency = tr end
+            end
+        end)
+    end
+
+    FX.combustion = function(m, hrp)
+        H.strip(m)
+        local parts = H.parts(m)
+        H.paint(parts, Color3.fromRGB(20, 16, 14), Enum.Material.Slate, 0, 1.2)
+        for _, p in ipairs(parts) do
+            if p.Name ~= "HumanoidRootPart" and p.Size.Magnitude > 1 then
+                local f = Instance.new("Fire", p)
+                f.Size = 7 f.Heat = 10 f.Color = Color3.fromRGB(255, 90, 15) f.SecondaryColor = Color3.fromRGB(255, 20, 60)
+            end
+        end
+        local sm = Instance.new("Smoke", hrp)
+        sm.Size = 7 sm.Opacity = 0.4 sm.RiseVelocity = 6 sm.Color = Color3.fromRGB(35, 32, 30)
+        local lt = Instance.new("PointLight", hrp)
+        lt.Color = Color3.fromRGB(255, 100, 30) lt.Range = 16 lt.Brightness = 2.5
+        local pos = hrp.Position
+        task.delay(1.4, function()
+            H.ring(pos, Color3.fromRGB(255, 90, 15), 26)
+            H.shards(pos, Color3.fromRGB(50, 40, 35), Enum.Material.Slate, 14, 22, 1.2)
+        end)
+        task.delay(2.5, function() H.fade(m, 0.8) end)
+    end
+
+    FX.zerog = function(m, hrp)
+        local parts = H.parts(m)
+        local head = m:FindFirstChild("Head")
+        local owner = {}
+        local vel = {}
+        local spin = {}
+        for _, p in ipairs(parts) do
+            local o = p
+            if head and p:FindFirstAncestorOfClass("Accessory") then o = head end
+            owner[p] = o
+            if not vel[o] then
+                vel[o] = Vector3.new(rng:NextNumber(-4, 4), rng:NextNumber(5, 9), rng:NextNumber(-4, 4))
+                spin[o] = Vector3.new(rng:NextNumber(-4, 4), rng:NextNumber(-4, 4), rng:NextNumber(-4, 4))
+            end
+        end
+        H.anim(3.4, function(a, dt)
+            local centers = {}
+            for o in pairs(vel) do centers[o] = o.Position end
+            for _, p in ipairs(parts) do
+                local o = owner[p]
+                local c = centers[o]
+                local s = spin[o]
+                p.CFrame = CFrame.new(vel[o] * dt) * (CFrame.new(c) * CFrame.Angles(s.X * dt, s.Y * dt, s.Z * dt) * CFrame.new(-c) * p.CFrame)
+            end
+        end)
+        task.delay(2.4, function() H.fade(m, 0.8) end)
+    end
+
+    FX.helium = function(m, hrp)
+        local base = m:GetPivot()
+        local bpos = hrp.Position
+        local bl = H.spawn({Shape = Enum.PartType.Ball, Size = Vector3.new(0.5, 0.5, 0.5),
+            Color = Color3.fromRGB(190, 140, 255), Material = Enum.Material.SmoothPlastic, Reflectance = 0.15,
+            CFrame = CFrame.new(bpos + Vector3.new(0, 9, 0))})
+        local st = H.spawn({Size = Vector3.new(0.1, 3.2, 0.1), Color = Color3.fromRGB(240, 240, 240),
+            Material = Enum.Material.SmoothPlastic, CFrame = CFrame.new(bpos + Vector3.new(0, 4, 0))})
+        P.Debris:AddItem(bl, 7) P.Debris:AddItem(st, 7)
+        task.delay(4.4, function()
+            for _, o in ipairs({bl, st}) do
+                P.TS:Create(o, TweenInfo.new(0.7), {Transparency = 1}):Play()
+            end
+            H.fade(m, 0.7)
+        end)
+        H.anim(5.2, function(a)
+            local grow = math.min(1, a / 0.06)
+            local h = (a < 0.06) and 0 or (((a - 0.06) / 0.94) ^ 1.85) * 95
+            local of = Vector3.new(math.sin(a * 16) * 1.3, h, 0)
+            local sway = math.sin(a * 8) * 0.14
+            m:PivotTo((base + of) * CFrame.Angles(0, a * 2.5, sway))
+            local r = 0.5 + 5.5 * (1 - (1 - grow) ^ 3)
+            bl.Size = Vector3.new(r, r * 1.15, r)
+            bl.CFrame = CFrame.new(bpos + of + Vector3.new(0, 6 + r * 0.55, 0)) * CFrame.Angles(0, 0, sway)
+            st.CFrame = CFrame.new(bpos + of + Vector3.new(0, 4, 0))
+        end)
+    end
+
+    FX.shadow = function(m, hrp)
+        H.strip(m)
+        local parts = H.parts(m)
+        H.paint(parts, Color3.fromRGB(10, 8, 14), Enum.Material.Slate, 0, 0.7)
+        local pos = hrp.Position
+        task.delay(1.0, function()
+            H.fade(m, 0.5)
+            H.shards(pos, Color3.fromRGB(20, 12, 30), Enum.Material.Slate, 24, 30, 1.7)
+        end)
+        for i = 1, 7 do
+            task.delay(0.13 * i, function()
+                local st = pos + Vector3.new(rng:NextNumber(-2.2, 2.2), 1 + i * 0.32, rng:NextNumber(-2.2, 2.2))
+                local hp = H.spawn({Size = Vector3.new(0.35, 0.35, 0.35), Transparency = 1, CFrame = CFrame.new(st)})
+                local bb = Instance.new("BillboardGui", hp)
+                bb.Size = UDim2.new(0, 60, 0, 60)
+                bb.LightInfluence = 0
+                local lb = Instance.new("TextLabel", bb)
+                lb.BackgroundTransparency = 1
+                lb.Size = UDim2.new(1, 0, 1, 0)
+                lb.Text = "♥" lb.TextScaled = true lb.Font = Enum.Font.GothamBlack
+                lb.TextColor3 = Color3.fromRGB(140, 60, 200)
+                local sk = Instance.new("UIStroke", lb)
+                sk.Color = Color3.fromRGB(60, 20, 100) sk.Thickness = 2
+                P.Debris:AddItem(hp, 3)
+                H.anim(2.4, function(a)
+                    hp.Position = st + Vector3.new(0, a * 10, 0)
+                    local tr = math.max(0, (a - 0.35) / 0.65)
+                    lb.TextTransparency = tr sk.Transparency = tr
+                end)
+            end)
+        end
+    end
+
+    FX.cryo = function(m, hrp)
+        H.strip(m)
+        local parts = H.parts(m)
+        H.paint(parts, Color3.fromRGB(150, 210, 250), Enum.Material.Ice, 0.15, 0.45)
+        local pos = hrp.Position
+        local bl = H.spawn({Size = Vector3.new(0.5, 0.5, 0.5), CFrame = CFrame.new(pos),
+            Color = Color3.fromRGB(180, 230, 255), Material = Enum.Material.Glass, Transparency = 0.5, Reflectance = 0.25})
+        P.Debris:AddItem(bl, 4)
+        P.TS:Create(bl, TweenInfo.new(0.35, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+            {Size = Vector3.new(5.8, 7.4, 5.2)}):Play()
+        task.delay(2.3, function()
+            bl:Destroy()
+            H.shards(pos, Color3.fromRGB(180, 230, 255), Enum.Material.Ice, 28, 24, 1.7)
+            H.fade(m, 0.25)
+        end)
+    end
+
+    FX.gilded = function(m, hrp)
+        H.strip(m)
+        local parts = H.parts(m)
+        H.paint(parts, Color3.fromRGB(255, 200, 50), Enum.Material.Metal, 0.4, 0.5)
+        local pl = Instance.new("PointLight", hrp)
+        pl.Color = Color3.fromRGB(255, 210, 70) pl.Range = 18 pl.Brightness = 2.5
+        H.particles(parts, {
+            Color = ColorSequence.new(Color3.fromRGB(255, 230, 120), Color3.fromRGB(255, 180, 30)),
+            Size = NumberSequence.new(0.7, 0), Lifetime = NumberRange.new(1.0, 1.6),
+            Rate = 40, Speed = NumberRange.new(4, 8), SpreadAngle = Vector2.new(180, 180),
+            LightEmission = 1, Transparency = NumberSequence.new(0, 1),
+        })
+        task.spawn(function()
+            for _ = 1, 14 do
+                local c = H.spawn({Shape = Enum.PartType.Cylinder, Size = Vector3.new(0.1, 0.5, 0.5),
+                    Color = Color3.fromRGB(255, 210, 60), Material = Enum.Material.Metal, Reflectance = 0.5,
+                    CFrame = CFrame.new(hrp.Position + Vector3.new(rng:NextNumber(-2, 2), 6, rng:NextNumber(-2, 2)))
+                        * CFrame.Angles(math.pi/2, rng:NextNumber(0, 6), 0)})
+                P.Debris:AddItem(c, 2)
+                P.TS:Create(c, TweenInfo.new(1.4, Enum.EasingStyle.Linear),
+                    {Position = c.Position - Vector3.new(0, 8, 0), Transparency = 1}):Play()
+                task.wait(0.08)
+            end
+        end)
+        local base = m:GetPivot()
+        H.anim(3, function(a)
+            m:PivotTo(base * CFrame.new(0, 1.4 * a, 0) * CFrame.Angles(0, a * math.pi * 5, 0))
+        end)
+        task.delay(2.4, function() H.fade(m, 0.6) end)
+    end
+
+    FX.voltage = function(m, hrp)
+        H.strip(m)
+        local parts = H.parts(m)
+        local pos = hrp.Position
+        local gpos = pos - Vector3.new(0, 2.8, 0)
+        local em = H.spawn({Size = Vector3.new(1, 1, 1), Transparency = 1, CFrame = CFrame.new(pos)})
+        P.Debris:AddItem(em, 12)
+        local lt = Instance.new("PointLight", hrp)
+        lt.Color = Color3.fromRGB(200, 150, 255) lt.Range = 50 lt.Brightness = 0
+        local top = pos + Vector3.new(rng:NextNumber(-6, 6), 90, rng:NextNumber(-6, 6))
+        local strk = {{0, 1.0}, {0.09, 0.6}, {0.22, 0.85}}
+        for k, st in ipairs(strk) do
+            task.delay(st[1], function()
+                H.bolt(top + Vector3.new(rng:NextNumber(-1, 1), 0, rng:NextNumber(-1, 1)), pos, Color3.fromRGB(180, 120, 255), 0.4 + 0.15 * st[2])
+                lt.Brightness = 16 * st[2]
+                P.TS:Create(lt, TweenInfo.new(0.3), {Brightness = 0}):Play()
+                H.paint(parts, Color3.fromRGB(240, 230, 255), Enum.Material.Neon, 0)
+                local cc = Instance.new("ColorCorrectionEffect", P.Lighting)
+                cc.Brightness = 0.4 * st[2] cc.Saturation = -0.4 * st[2]
+                P.TS:Create(cc, TweenInfo.new(0.35), {Brightness = 0, Saturation = 0}):Play()
+                P.Debris:AddItem(cc, 0.5)
+                if k == 1 then
+                    H.ring(pos, Color3.fromRGB(160, 100, 255), 26)
+                    local snd = Instance.new("Sound", em)
+                    snd.SoundId = "rbxasset://sounds/impact_explosion_03.mp3"
+                    snd.Volume = 2.5 snd.PlaybackSpeed = 1.3 snd:Play()
+                    P.Debris:AddItem(snd, 5)
+                    H.shards(gpos + Vector3.new(0, 1, 0), Color3.fromRGB(220, 180, 255), Enum.Material.Neon, 14, 26, 0.6)
+                    local sc = H.spawn({Shape = Enum.PartType.Cylinder, Size = Vector3.new(0.12, 6, 6),
+                        Color = Color3.fromRGB(25, 15, 40), Material = Enum.Material.Slate, Transparency = 0.2,
+                        CFrame = CFrame.new(gpos) * CFrame.Angles(0, 0, math.pi/2)})
+                    task.delay(4, function()
+                        P.TS:Create(sc, TweenInfo.new(3), {Transparency = 1}):Play()
+                    end)
+                    P.Debris:AddItem(sc, 8)
+                end
+                task.delay(0.07, function()
+                    H.paint(parts, Color3.fromRGB(18, 14, 22), Enum.Material.Slate, 0)
+                end)
+            end)
+        end
+        task.delay(0.3, function()
+            for _, p in ipairs(parts) do
+                if p.Name == "Torso" or p.Name == "UpperTorso" or p.Name == "Head" then
+                    local s1 = Instance.new("ParticleEmitter", p)
+                    s1.Color = ColorSequence.new(Color3.fromRGB(60, 40, 80))
+                    s1.Size = NumberSequence.new(0.8, 2.6) s1.Lifetime = NumberRange.new(1.3, 2.3)
+                    s1.Rate = 22 s1.Speed = NumberRange.new(2, 4) s1.Acceleration = Vector3.new(0, 5, 0)
+                    s1.SpreadAngle = Vector2.new(25, 25) s1.Transparency = NumberSequence.new(0.4, 1)
+                    local s2 = Instance.new("ParticleEmitter", p)
+                    s2.Color = ColorSequence.new(Color3.fromRGB(200, 150, 255))
+                    s2.Size = NumberSequence.new(0.25, 0) s2.Lifetime = NumberRange.new(0.5, 1.1)
+                    s2.Rate = 20 s2.Speed = NumberRange.new(3, 8) s2.LightEmission = 1 s2.SpreadAngle = Vector2.new(60, 60)
+                end
+            end
+        end)
+        task.delay(2.8, function() H.fade(m, 0.8) end)
+    end
+
+    FX.chrome = function(m, hrp)
+        H.strip(m)
+        local parts = H.parts(m)
+        H.paint(parts, Color3.fromRGB(210, 215, 230), Enum.Material.Metal, 0.65, 0.4)
+        H.particles(parts, {
+            Color = ColorSequence.new(Color3.fromRGB(220, 225, 245)),
+            Size = NumberSequence.new(0.5, 0), Lifetime = NumberRange.new(0.6, 1.2),
+            Rate = 32, Speed = NumberRange.new(4, 9), LightEmission = 1,
+            SpreadAngle = Vector2.new(180, 180), Transparency = NumberSequence.new(0, 1),
+        })
+        local pos = hrp.Position
+        task.delay(2.0, function()
+            H.shards(pos, Color3.fromRGB(200, 205, 220), Enum.Material.Metal, 26, 24, 1.6)
+            H.fade(m, 0.2)
+        end)
+    end
+
+    FX.starburst = function(m, hrp)
+        local parts = H.parts(m)
+        local pos = hrp.Position
+        local gY = pos.Y - 2.6
+        local BT = 0.9
+        local orb = H.spawn({Shape = Enum.PartType.Ball, Size = Vector3.one * 1.5,
+            Color = Color3.fromRGB(255, 190, 60), Material = Enum.Material.Neon, CFrame = CFrame.new(pos + Vector3.new(0, 1, 0))})
+        local ol = Instance.new("PointLight", orb)
+        ol.Color = Color3.fromRGB(255, 180, 60) ol.Range = 18 ol.Brightness = 8
+        local ph = 0
+        H.anim(BT, function(a, dt)
+            ph = ph + dt * (12 + a * 25)
+            local pu = 1 + math.sin(ph) * 0.15 + a * 0.4
+            orb.Size = Vector3.one * (1.5 * pu)
+            orb.Color = (math.sin(ph) > 0) and Color3.fromRGB(255, 190, 60) or Color3.fromRGB(255, 255, 255)
+            ol.Brightness = 8 + a * 22
+        end)
+        task.delay(BT, function()
+            if orb then orb:Destroy() end
+            local ep = H.spawn({Size = Vector3.one, Transparency = 1, CFrame = CFrame.new(pos + Vector3.new(0, 1, 0))})
+            P.Debris:AddItem(ep, 8)
+            local snd = Instance.new("Sound", ep)
+            snd.SoundId = "rbxasset://sounds/impact_explosion_03.mp3"
+            snd.Volume = 4 snd:Play()
+            P.Debris:AddItem(snd, 5)
+            local function sphere(c, s0, s1, t, tr)
+                local s = H.spawn({Shape = Enum.PartType.Ball, Size = Vector3.one * s0,
+                    Color = c, Material = Enum.Material.Neon, Transparency = tr,
+                    CFrame = CFrame.new(pos + Vector3.new(0, 1, 0))})
+                P.TS:Create(s, TweenInfo.new(t, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+                    {Size = Vector3.one * s1, Transparency = 1}):Play()
+                P.Debris:AddItem(s, t + 0.2)
+            end
+            sphere(Color3.fromRGB(255, 255, 255), 4, 34, 0.22, 0)
+            sphere(Color3.fromRGB(255, 200, 60), 3, 28, 0.55, 0.15)
+            sphere(Color3.fromRGB(255, 100, 20), 2, 20, 0.75, 0.3)
+            local core = H.spawn({Shape = Enum.PartType.Ball, Size = Vector3.one * 2, Color = Color3.fromRGB(20, 16, 12),
+                Material = Enum.Material.SmoothPlastic, Transparency = 0.1, CFrame = CFrame.new(pos + Vector3.new(0, 1, 0))})
+            P.TS:Create(core, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                {Size = Vector3.one * 16, Transparency = 1}):Play()
+            P.Debris:AddItem(core, 1.7)
+            H.ring(Vector3.new(pos.X, gY + 2.5, pos.Z), Color3.fromRGB(255, 200, 60), 28)
+            local fr = Instance.new("ParticleEmitter", ep)
+            fr.Texture = "rbxasset://textures/particles/fire_main.dds" fr.Rate = 0
+            fr.Color = ColorSequence.new({
+                ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+                ColorSequenceKeypoint.new(0.4, Color3.fromRGB(255, 160, 40)),
+                ColorSequenceKeypoint.new(1, Color3.fromRGB(120, 40, 20)),
+            })
+            fr.Size = NumberSequence.new({NumberSequenceKeypoint.new(0, 4), NumberSequenceKeypoint.new(0.4, 9), NumberSequenceKeypoint.new(1, 13)})
+            fr.Lifetime = NumberRange.new(0.5, 1.1) fr.Speed = NumberRange.new(25, 55) fr.Drag = 3
+            fr.Acceleration = Vector3.new(0, 12, 0) fr.SpreadAngle = Vector2.new(180, 180) fr.LightEmission = 1
+            fr.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(0.7, 0.4), NumberSequenceKeypoint.new(1, 1)})
+            local sp = Instance.new("ParticleEmitter", ep)
+            sp.Texture = "rbxasset://textures/particles/sparkles_main.dds" sp.Rate = 0
+            sp.Color = ColorSequence.new(Color3.fromRGB(255, 255, 255), Color3.fromRGB(255, 180, 60))
+            sp.Size = NumberSequence.new(0.8, 0) sp.Lifetime = NumberRange.new(0.6, 1.6)
+            sp.Speed = NumberRange.new(40, 90) sp.Drag = 1.5 sp.Acceleration = Vector3.new(0, -50, 0)
+            sp.SpreadAngle = Vector2.new(180, 180) sp.LightEmission = 1
+            local sm = Instance.new("ParticleEmitter", ep)
+            sm.Texture = "rbxasset://textures/particles/smoke_main.dds" sm.Rate = 0
+            sm.Color = ColorSequence.new(Color3.fromRGB(40, 36, 32), Color3.fromRGB(110, 100, 90))
+            sm.Size = NumberSequence.new({NumberSequenceKeypoint.new(0, 5), NumberSequenceKeypoint.new(1, 20)})
+            sm.Lifetime = NumberRange.new(2, 3.6) sm.Speed = NumberRange.new(6, 16) sm.Drag = 2
+            sm.Acceleration = Vector3.new(0, 8, 0) sm.SpreadAngle = Vector2.new(180, 180)
+            sm.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0.35), NumberSequenceKeypoint.new(1, 1)})
+            fr:Emit(80) sp:Emit(50)
+            task.delay(0.15, function() sm:Emit(40) end)
+            H.shards(pos, Color3.fromRGB(40, 30, 20), Enum.Material.Slate, 20, 42, 1.5)
+            local lt = Instance.new("PointLight", ep)
+            lt.Color = Color3.fromRGB(255, 120, 30) lt.Range = 65 lt.Brightness = 30
+            P.TS:Create(lt, TweenInfo.new(1.1), {Brightness = 0}):Play()
+            local cc = Instance.new("ColorCorrectionEffect", P.Lighting)
+            cc.Brightness = 0.55 cc.Saturation = -0.3
+            P.TS:Create(cc, TweenInfo.new(0.4), {Brightness = 0, Saturation = 0}):Play()
+            P.Debris:AddItem(cc, 0.5)
+            local hum = P.lp.Character and P.lp.Character:FindFirstChildOfClass("Humanoid")
+            if hum then
+                H.anim(0.8, function(a)
+                    local k = (1 - a) * 0.75
+                    hum.CameraOffset = Vector3.new(rng:NextNumber(-k, k), rng:NextNumber(-k, k), 0)
+                    if a >= 1 then hum.CameraOffset = Vector3.zero end
+                end)
+            end
+            for _, p in ipairs(parts) do
+                if p.Name ~= "HumanoidRootPart" then
+                    P.TS:Create(p, TweenInfo.new(0.4), {Color = Color3.fromRGB(30, 24, 20)}):Play()
+                end
+            end
+            local v = Vector3.new(rng:NextNumber(-1, 1) * 36, 44, rng:NextNumber(-1, 1) * 36)
+            local w = Vector3.new(rng:NextNumber(-9, 9), rng:NextNumber(-9, 9), rng:NextNumber(-9, 9))
+            local cf = m:GetPivot()
+            H.anim(1.8, function(a, dt)
+                v = v + Vector3.new(0, -80 * dt, 0)
+                local p = cf.Position + v * dt
+                if p.Y < gY then
+                    p = Vector3.new(p.X, gY, p.Z)
+                    v = Vector3.new(v.X * 0.55, math.abs(v.Y) * 0.3, v.Z * 0.55)
+                    w = w * 0.6
+                end
+                cf = CFrame.new(p) * (cf - cf.Position) * CFrame.Angles(w.X * dt, w.Y * dt, w.Z * dt)
+                m:PivotTo(cf)
+            end)
+            task.delay(2.2, function() H.fade(m, 0.8) end)
+        end)
+    end
+
+    local hooked = setmetatable({}, {__mode = "k"})
+    local played = setmetatable({}, {__mode = "k"})
+
+    local function snapshot(char, cf)
+        local clone
+        pcall(function()
+            local old = char.Archivable
+            char.Archivable = true
+            clone = char:Clone()
+            char.Archivable = old
+        end)
+        if not clone then return nil end
+        for _, d in ipairs(clone:GetDescendants()) do
+            pcall(function()
+                if d:IsA("Script") or d:IsA("LocalScript") or d:IsA("Humanoid")
+                    or d:IsA("Sound") or d:IsA("BillboardGui") or d:IsA("ForceField")
+                    or d:IsA("Tool") or d:IsA("Highlight") or d:IsA("ParticleEmitter")
+                    or d:IsA("Fire") or d:IsA("Smoke") or d:IsA("Sparkles") then
+                    d:Destroy()
+                end
+            end)
+        end
+        for _, p in ipairs(H.parts(clone)) do
+            p.Anchored = true p.CanCollide = false p.CanTouch = false p.CanQuery = false p.Massless = true
+        end
+        if cf then clone:PivotTo(cf) end
+        clone.Parent = Folder
+        P.Debris:AddItem(clone, 12)
+        return clone
+    end
+
+    local function hideOriginal(char)
+        local function hide()
+            for _, d in ipairs(char:GetDescendants()) do
+                if d:IsA("BasePart") then d.LocalTransparencyModifier = 1 d.Transparency = 1
+                elseif d:IsA("Decal") or d:IsA("Texture") then d.Transparency = 1
+                elseif d:IsA("BillboardGui") then d.Enabled = false end
+            end
+        end
+        hide()
+        task.spawn(function()
+            local t = os.clock()
+            while os.clock() - t < 8 and char.Parent do
+                hide() P.RunService.Heartbeat:Wait()
+            end
+        end)
+    end
+
+    local function play(id, char, cf)
+        local fn = FX[id]
+        if not fn or not char then return end
+        local m = snapshot(char, cf)
+        if not m then return end
+        if not cf then hideOriginal(char) end
+        local hrp = m:FindFirstChild("HumanoidRootPart") or m.PrimaryPart or m:FindFirstChildWhichIsA("BasePart")
+        if not hrp then m:Destroy() return end
+        local ok = pcall(fn, m, hrp)
+        if not ok then m:Destroy() end
+    end
+
+    local function onDeath(char)
+        if played[char] then return end
+        played[char] = true
+        if P.kfx.current <= 1 then return end
+        local mR = P.lp.Character and P.lp.Character:FindFirstChild("HumanoidRootPart")
+        local rt = char:FindFirstChild("HumanoidRootPart")
+        if not (mR and rt) then return end
+        if (rt.Position - mR.Position).Magnitude > P.kfx.range then return end
+        play(P.kfx.list[P.kfx.current].id, char)
+    end
+
+    local function watchChar(char)
+        if hooked[char] then return end
+        hooked[char] = true
+        local hum = char:WaitForChild("Humanoid", 5)
+        if not hum then return end
+        local fired = false
+        local function died()
+            if fired then return end
+            fired = true
+            pcall(onDeath, char)
+        end
+        hum.Died:Connect(died)
+        hum.HealthChanged:Connect(function(h)
+            if h <= 0 then died() end
+        end)
+    end
+
+    local function watchPlayer(p)
+        if p == P.lp then return end
+        if p.Character then task.spawn(watchChar, p.Character) end
+        p.CharacterAdded:Connect(watchChar)
+    end
+
+    for _, p in ipairs(P.Players:GetPlayers()) do watchPlayer(p) end
+    P.Players.PlayerAdded:Connect(watchPlayer)
+
+    P.fn.refreshKFX = function()
+        local e = P.kfx.list[P.kfx.current]
+        P.ui.kfxLabel.Text = e and (e.en .. " · " .. e.ar) or "None"
+        P.fn.styleButton(P.ui.kfxLabel, P.kfx.current > 1)
+    end
+    P.fn.refreshKFX()
+end
+
+-- ═══════════════════════════════════════════════════════════
+--  EVENTS
+-- ═══════════════════════════════════════════════════════════
+P.ui.turnBoostBtn.MouseButton1Click:Connect(function()
+    P.s.turnBoost = not P.s.turnBoost
+    P.fn.refreshTurnUI()
+end)
+P.ui.turnSpeedBtn.MouseButton1Click:Connect(function()
+    P.s.turnBoostSpeedIndex = P.s.turnBoostSpeedIndex % #P.vals.turnBoostSpeeds + 1
+    P.fn.refreshTurnUI()
+end)
+P.ui.wallSlideBtn.MouseButton1Click:Connect(function()
+    local ok, err = pcall(function()
+        if P.s.wallSlideEnabled then P.fn.stopWallSlide() else P.fn.startWallSlide() end
+    end)
+    if not ok then
+        P.fn.stopWallSlide()
+        warn("[Wall Slide] failed safely: " .. tostring(err))
+    end
+    P.ui.wallSlideBtn.Text = P.s.wallSlideEnabled and "Wall Slide · ON" or "Wall Slide · OFF"
+    P.fn.styleButton(P.ui.wallSlideBtn, P.s.wallSlideEnabled)
+end)
+P.ui.camBoostBtn.MouseButton1Click:Connect(function()
+    P.s.camBoostEnabled = not P.s.camBoostEnabled
+    P.fn.refreshCamUI()
+end)
+P.ui.camMultBtn.MouseButton1Click:Connect(function()
+    P.s.camMultIndex = P.s.camMultIndex % #P.vals.camMultValues + 1
+    P.fn.refreshCamUI()
+end)
+P.ui.assistBtn.MouseButton1Click:Connect(function()
+    P.s.assistEnabled = not P.s.assistEnabled
+    if not P.s.assistEnabled then P.s.assistHasTarget = false end
+    P.fn.refreshAssistUI()
+end)
+P.ui.powerBtn.MouseButton1Click:Connect(function()
+    P.s.powerIndex = P.s.powerIndex % #P.vals.powerValues + 1
+    P.fn.refreshAssistUI()
+end)
+P.ui.rangeBtn.MouseButton1Click:Connect(function()
+    P.s.rangeIndex = P.s.rangeIndex % #P.vals.rangeValues + 1
+    P.fn.refreshAssistUI()
+end)
+P.ui.shakeBtn.MouseButton1Click:Connect(function()
+    P.s.shakeEnabled = not P.s.shakeEnabled
+    if not P.s.shakeEnabled then
+        P.ui.shakeStatus.Text = "disabled"
+        P.ui.shakeStatus.TextColor3 = P.DIM
+    else
+        P.ui.shakeStatus.Text = "waiting..."
+        P.ui.shakeStatus.TextColor3 = P.DIM
+    end
+    P.fn.refreshShakeUI()
+end)
+P.ui.shakeSpeedBtn.MouseButton1Click:Connect(function()
+    P.s.shakeSpeedIndex = P.s.shakeSpeedIndex % #P.vals.shakeSpeedValues + 1
+    P.fn.refreshShakeUI()
+end)
+P.ui.stretchMinus.MouseButton1Click:Connect(function()
+    if P.s.currentStretch > 0.35 then
+        P.s.currentStretch = P.s.currentStretch - 0.05
+        P.fn.updateStretchUI()
+    end
+end)
+P.ui.stretchPlus.MouseButton1Click:Connect(function()
+    if P.s.currentStretch < 1.8 then
+        P.s.currentStretch = P.s.currentStretch + 0.05
+        P.fn.updateStretchUI()
+    end
+end)
+P.ui.stretchReset.MouseButton1Click:Connect(function()
+    P.s.currentStretch = 1.0
+    P.fn.updateStretchUI()
+end)
+P.ui.grabBombBtn.MouseButton1Click:Connect(function()
+    P.s.grabBombActive = not P.s.grabBombActive
+    P.ui.grabBombBtn.Text = P.s.grabBombActive and "Grab Bomb · ON" or "Grab Bomb · OFF"
+    P.fn.styleButton(P.ui.grabBombBtn, P.s.grabBombActive)
+    if not P.s.grabBombActive then
+        local ch = P.lp.Character
+        if ch then
+            local hum = ch:FindFirstChildOfClass("Humanoid")
+            if hum then hum:Move(Vector3.new(0, 0, 0)) end
+        end
+        P.ui.grabBombStatus.Text = "status · idle"
+    end
+end)
+P.ui.autoHoldBtn.MouseButton1Click:Connect(function()
+    P.s.autoHoldActive = not P.s.autoHoldActive
+    if not P.s.autoHoldActive then
+        P.ui.autoHoldStatus.Text = "status · idle"
+        local ch = P.lp.Character
+        if ch then
+            local hum = ch:FindFirstChildOfClass("Humanoid")
+            if hum then hum:Move(Vector3.new(0, 0, 0)) end
+        end
+    end
+    P.fn.refreshAutoHoldUI()
+end)
+P.ui.ahDistBtn.MouseButton1Click:Connect(function()
+    P.fn.ahSetDist(P.fn.ahNextDist())
+    P.fn.refreshAutoHoldUI()
+end)
+P.ui.ahRushBtn.MouseButton1Click:Connect(function()
+    P.fn.ahSetRush(P.fn.ahNextRush())
+    P.fn.refreshAutoHoldUI()
+end)
+P.ui.ahOrbitBtn.MouseButton1Click:Connect(function()
+    P.fn.ahSetOrbit(P.fn.ahNextOrbit())
+    P.fn.refreshAutoHoldUI()
+end)
+P.ui.ahSmoothBtn.MouseButton1Click:Connect(function()
+    P.fn.ahSetSmooth(P.fn.ahNextSmooth())
+    P.fn.refreshAutoHoldUI()
+end)
+P.ui.applySkinBtn.MouseButton1Click:Connect(function()
+    local n = P.ui.skinInput.Text:gsub("^%s+", ""):gsub("%s+$", "")
+    if n ~= "" then
+        task.spawn(function() P.fn.skinApply(n, false) end)
+    end
+end)
+P.ui.resetSkinBtn.MouseButton1Click:Connect(function()
+    task.spawn(function() P.fn.skinReset() end)
+end)
+P.ui.randomSkinBtn.MouseButton1Click:Connect(function()
+    task.spawn(function()
+        local pool = {}
+        for i = 1, #P.fn.RANDOM_SKIN_POOL do pool[i] = i end
+        for i = #pool, 2, -1 do
+            local j = math.random(1, i)
+            pool[i], pool[j] = pool[j], pool[i]
+        end
+        for _, idx in ipairs(pool) do
+            if P.fn.skinApply(P.fn.RANDOM_SKIN_POOL[idx], true) then break end
+            task.wait(0.15)
+        end
+    end)
+end)
+P.ui.headlessBtn.MouseButton1Click:Connect(function()
+    P.s.headlessA = not P.s.headlessA
+    P.ui.headlessBtn.Text = P.s.headlessA and "Headless · ON" or "Headless · OFF"
+    P.fn.styleButton(P.ui.headlessBtn, P.s.headlessA)
+    local ch = P.lp.Character
+    if ch then
+        local head = ch:FindFirstChild("Head")
+        if head then
+            if P.s.headlessA then P.fn.applyHeadless(head)
+            else P.fn.removeHeadless(head) end
+        end
+    end
+end)
+P.ui.korbloxBtn.MouseButton1Click:Connect(function()
+    P.s.korbloxA = not P.s.korbloxA
+    P.ui.korbloxBtn.Text = P.s.korbloxA and "Korblox · ON" or "Korblox · OFF"
+    P.fn.styleButton(P.ui.korbloxBtn, P.s.korbloxA)
+    local ch = P.lp.Character
+    if ch then
+        if P.s.korbloxA then P.fn.applyKorblox(ch)
+        else P.fn.removeKorblox(ch) end
+    end
+end)
+P.ui.lightingBtn.MouseButton1Click:Connect(function()
+    P.fn.applyLighting(not P.s.lightingActive)
+    P.ui.lightingBtn.Text = P.s.lightingActive and "Lighting · ON" or "Lighting · OFF"
+    P.fn.styleButton(P.ui.lightingBtn, P.s.lightingActive)
+end)
+P.ui.antiLagBtn.MouseButton1Click:Connect(function()
+    P.fn.applyAntiLag(not P.s.antiLagActive)
+    P.ui.antiLagBtn.Text = P.s.antiLagActive and "Anti-Lag · ON" or "Anti-Lag · OFF"
+    P.fn.styleButton(P.ui.antiLagBtn, P.s.antiLagActive)
+end)
+P.ui.kfxPrevBtn.MouseButton1Click:Connect(function()
+    P.kfx.current = P.kfx.current - 1
+    if P.kfx.current < 1 then P.kfx.current = #P.kfx.list end
+    P.fn.refreshKFX()
+end)
+P.ui.kfxNextBtn.MouseButton1Click:Connect(function()
+    P.kfx.current = P.kfx.current + 1
+    if P.kfx.current > #P.kfx.list then P.kfx.current = 1 end
+    P.fn.refreshKFX()
+end)
+P.ui.recBtn.MouseButton1Click:Connect(function()
+    P.s.recActive = not P.s.recActive
+    P.ui.recBtn.Text = P.s.recActive and "Recording Mode · ON" or "Recording Mode · OFF"
+    P.fn.styleButton(P.ui.recBtn, P.s.recActive)
+    P.fn.setRecording(P.s.recActive)
+end)
+P.ui.minimize.MouseButton1Click:Connect(function()
+    P.s.collapsed = not P.s.collapsed
+    P.ui.container.Visible = not P.s.collapsed
+    P.ui.main:TweenSize(P.s.collapsed and UDim2.new(0, P.W, 0, 30) or UDim2.new(0, P.W, 0, P.H), "Out", "Quad", 0.2, true)
+end)
+
+-- Init visuals
+P.fn.refreshTurnUI()
+P.fn.refreshAssistUI()
+P.fn.refreshShakeUI()
+P.fn.refreshCamUI()
+P.fn.styleButton(P.ui.recBtn, false)
+P.fn.styleButton(P.ui.lightingBtn, false)
+P.fn.styleButton(P.ui.antiLagBtn, false)
+P.fn.styleButton(P.ui.headlessBtn, false)
+P.fn.styleButton(P.ui.korbloxBtn, false)
+P.fn.styleButton(P.ui.grabBombBtn, false)
+P.fn.styleButton(P.ui.autoHoldBtn, false)
+
+print("[PhantomX] Loaded — Compact mode 360x380")
