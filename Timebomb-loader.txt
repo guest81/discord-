@@ -1,0 +1,1517 @@
+--[[
+	Timebomb KHUB Public
+	No key system
+	Credits: Yvaine & Kyiel · UI by Khub
+	Discord: https://discord.gg/EKPb7BRDH8
+]]
+
+
+repeat task.wait() until game:IsLoaded()
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Lighting = game:GetService("Lighting")
+local CoreGui = game:GetService("CoreGui")
+local Stats = game:GetService("Stats")
+local Workspace = game:GetService("Workspace")
+local HttpService = game:GetService("HttpService")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+player.CharacterAdded:Connect(function(newChar)
+	character = newChar
+end)
+
+local LOGO_ID = "rbxassetid://140466936910510"
+local DISCORD_INVITE = "https://discord.gg/EKPb7BRDH8"
+
+local ParentTarget = gethui and gethui() or player:WaitForChild("PlayerGui")
+
+-- Clean old status GUIs
+for _, name in ipairs({"FollowStatusGui", "WallhopStatusGui", "AutoFlickStatusGui", "FpsPingGui", "LuxuryKeySystem"}) do
+	if ParentTarget:FindFirstChild(name) then
+		ParentTarget[name]:Destroy()
+	end
+end
+
+
+-- (Key system removed · Public)
+
+--====================================================
+-- SCREEN GUI + IMPROVED LOADING (with SKIP)
+--====================================================
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "KHUB_PUBLIC"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.IgnoreGuiInset = true
+pcall(function() ScreenGui.Parent = CoreGui end)
+if not ScreenGui.Parent then
+	ScreenGui.Parent = player:WaitForChild("PlayerGui")
+end
+
+--====================================================
+-- LOADING SCREEN (longer + Skip button)
+--====================================================
+local Intro = Instance.new("Frame")
+Intro.Size = UDim2.new(1, 0, 1, 0)
+Intro.BackgroundColor3 = Color3.fromRGB(8, 5, 14)
+Intro.BorderSizePixel = 0
+Intro.Parent = ScreenGui
+Intro.ZIndex = 100
+
+local bigLogo = Instance.new("ImageLabel", Intro)
+bigLogo.Size = UDim2.new(0, 130, 0, 130)
+bigLogo.Position = UDim2.new(0.5, -65, 0.25, -65)
+bigLogo.BackgroundTransparency = 1
+bigLogo.Image = LOGO_ID
+bigLogo.ImageTransparency = 1
+bigLogo.ScaleType = Enum.ScaleType.Fit
+bigLogo.ZIndex = 101
+
+local title = Instance.new("TextLabel", Intro)
+title.Size = UDim2.new(1, 0, 0, 45)
+title.Position = UDim2.new(0, 0, 0.45, 0)
+title.BackgroundTransparency = 1
+title.Text = "KHUB PUBLIC"
+title.Font = Enum.Font.GothamBlack
+title.TextSize = 40
+title.TextColor3 = Color3.fromRGB(255, 160, 255)
+title.TextTransparency = 1
+title.ZIndex = 101
+
+local statusText = Instance.new("TextLabel", Intro)
+statusText.Size = UDim2.new(1, 0, 0, 28)
+statusText.Position = UDim2.new(0, 0, 0.55, 0)
+statusText.BackgroundTransparency = 1
+statusText.Text = ""
+statusText.Font = Enum.Font.Gotham
+statusText.TextSize = 15
+statusText.TextColor3 = Color3.fromRGB(200, 140, 255)
+statusText.ZIndex = 101
+
+local barBg = Instance.new("Frame", Intro)
+barBg.Size = UDim2.new(0, 280, 0, 6)
+barBg.Position = UDim2.new(0.5, -140, 0.65, 0)
+barBg.BackgroundColor3 = Color3.fromRGB(30, 18, 45)
+barBg.BorderSizePixel = 0
+barBg.ZIndex = 101
+Instance.new("UICorner", barBg).CornerRadius = UDim.new(1, 0)
+
+local barFill = Instance.new("Frame", barBg)
+barFill.Size = UDim2.new(0, 0, 1, 0)
+barFill.BackgroundColor3 = Color3.fromRGB(220, 100, 255)
+barFill.ZIndex = 102
+Instance.new("UICorner", barFill).CornerRadius = UDim.new(1, 0)
+
+-- SKIP BUTTON
+local SkipBtn = Instance.new("TextButton", Intro)
+SkipBtn.Size = UDim2.new(0, 120, 0, 36)
+SkipBtn.Position = UDim2.new(0.5, -60, 0.78, 0)
+SkipBtn.BackgroundColor3 = Color3.fromRGB(40, 25, 60)
+SkipBtn.Text = "â­ SKIP"
+SkipBtn.Font = Enum.Font.GothamBold
+SkipBtn.TextSize = 14
+SkipBtn.TextColor3 = Color3.fromRGB(255, 180, 255)
+SkipBtn.ZIndex = 103
+SkipBtn.Visible = false
+Instance.new("UICorner", SkipBtn).CornerRadius = UDim.new(0, 8)
+Instance.new("UIStroke", SkipBtn).Color = Color3.fromRGB(180, 80, 255)
+
+local skipRequested = false
+SkipBtn.MouseButton1Click:Connect(function()
+	skipRequested = true
+end)
+
+-- Loading sequence (longer + skippable)
+task.spawn(function()
+	TweenService:Create(bigLogo, TweenInfo.new(1.0, Enum.EasingStyle.Quart), {ImageTransparency = 0}):Play()
+	task.wait(0.4)
+	TweenService:Create(title, TweenInfo.new(0.7), {TextTransparency = 0}):Play()
+	task.wait(0.5)
+
+	SkipBtn.Visible = true
+
+	statusText.Text = "Loading script..."
+	for i = 0, 0.25, 0.015 do
+		if skipRequested then break end
+		barFill.Size = UDim2.new(i, 0, 1, 0)
+		task.wait(0.07)
+	end
+	task.wait(0.4)
+
+	if not skipRequested then
+		statusText.Text = "Checking script..."
+		for i = 0.25, 0.50, 0.015 do
+			if skipRequested then break end
+			barFill.Size = UDim2.new(i, 0, 1, 0)
+			task.wait(0.07)
+		end
+		task.wait(0.4)
+	end
+
+	if not skipRequested then
+		statusText.Text = "Checking anti ban..."
+		for i = 0.50, 0.75, 0.012 do
+			if skipRequested then break end
+			barFill.Size = UDim2.new(i, 0, 1, 0)
+			task.wait(0.08)
+		end
+		task.wait(0.4)
+	end
+
+	if not skipRequested then
+		statusText.Text = "Preparing features..."
+		for i = 0.75, 1, 0.012 do
+			if skipRequested then break end
+			barFill.Size = UDim2.new(i, 0, 1, 0)
+			task.wait(0.07)
+		end
+		task.wait(0.5)
+	end
+
+	statusText.Text = skipRequested and "Skipped!" or "Ready!"
+	barFill.Size = UDim2.new(1, 0, 1, 0)
+	task.wait(0.4)
+
+	TweenService:Create(Intro, TweenInfo.new(0.5), {BackgroundTransparency = 1}):Play()
+	TweenService:Create(bigLogo, TweenInfo.new(0.4), {ImageTransparency = 1}):Play()
+	TweenService:Create(title, TweenInfo.new(0.4), {TextTransparency = 1}):Play()
+	TweenService:Create(statusText, TweenInfo.new(0.4), {TextTransparency = 1}):Play()
+	TweenService:Create(barBg, TweenInfo.new(0.35), {BackgroundTransparency = 1}):Play()
+	TweenService:Create(barFill, TweenInfo.new(0.35), {BackgroundTransparency = 1}):Play()
+	TweenService:Create(SkipBtn, TweenInfo.new(0.3), {BackgroundTransparency = 1, TextTransparency = 1}):Play()
+	task.wait(0.55)
+	Intro.Visible = false
+	Intro:Destroy()
+end)
+
+-- Wait until intro is done
+repeat task.wait(0.1) until not Intro.Parent or not Intro.Visible
+
+--====================================================
+-- MAIN UI
+--====================================================
+local Main = Instance.new("Frame")
+Main.Size = UDim2.new(0, 520, 0, 380)
+Main.Position = UDim2.new(0.5, -260, 0.5, -190)
+Main.BackgroundColor3 = Color3.fromRGB(14, 10, 22)
+Main.BorderSizePixel = 0
+Main.Visible = true
+Main.ClipsDescendants = true
+Main.Parent = ScreenGui
+Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 12)
+
+local mainStroke = Instance.new("UIStroke", Main)
+mainStroke.Thickness = 2
+local strokeGrad = Instance.new("UIGradient", mainStroke)
+strokeGrad.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 100, 255)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(180, 50, 230)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(90, 20, 160))
+})
+strokeGrad.Rotation = 45
+
+local Top = Instance.new("Frame", Main)
+Top.Size = UDim2.new(1, 0, 0, 42)
+Top.BackgroundColor3 = Color3.fromRGB(18, 12, 28)
+Top.BorderSizePixel = 0
+
+local titleBg = Instance.new("Frame", Top)
+titleBg.Size = UDim2.new(0, 160, 0, 26)
+titleBg.Position = UDim2.new(0, 12, 0.5, -13)
+titleBg.BackgroundColor3 = Color3.fromRGB(50, 18, 85)
+Instance.new("UICorner", titleBg).CornerRadius = UDim.new(0, 6)
+
+local titleLabel = Instance.new("TextLabel", titleBg)
+titleLabel.Size = UDim2.new(1, 0, 1, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "[â™¡ KHUB PUBLIC â™¡]"
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextSize = 12
+titleLabel.TextColor3 = Color3.fromRGB(255, 180, 255)
+
+local badge = Instance.new("TextLabel", Top)
+badge.Size = UDim2.new(0, 90, 0, 20)
+badge.Position = UDim2.new(0, 185, 0.5, -10)
+badge.BackgroundColor3 = Color3.fromRGB(35, 15, 55)
+badge.Text = "PUBLIC"
+badge.Font = Enum.Font.GothamBold
+badge.TextSize = 11
+badge.TextColor3 = Color3.fromRGB(210, 140, 255)
+Instance.new("UICorner", badge).CornerRadius = UDim.new(0, 4)
+
+local Close = Instance.new("TextButton", Top)
+Close.Size = UDim2.new(0, 34, 0, 26)
+Close.Position = UDim2.new(1, -42, 0.5, -13)
+Close.BackgroundColor3 = Color3.fromRGB(50, 15, 70)
+Close.Text = "âœ•"
+Close.Font = Enum.Font.GothamBold
+Close.TextSize = 14
+Close.TextColor3 = Color3.fromRGB(255, 160, 255)
+Instance.new("UICorner", Close).CornerRadius = UDim.new(0, 6)
+
+local Sidebar = Instance.new("Frame", Main)
+Sidebar.Size = UDim2.new(0, 70, 1, -42)
+Sidebar.Position = UDim2.new(0, 0, 0, 42)
+Sidebar.BackgroundColor3 = Color3.fromRGB(10, 7, 16)
+Sidebar.BorderSizePixel = 0
+
+local sideLogo = Instance.new("ImageLabel", Sidebar)
+sideLogo.Size = UDim2.new(0, 44, 0, 44)
+sideLogo.Position = UDim2.new(0.5, -22, 0, 10)
+sideLogo.BackgroundTransparency = 1
+sideLogo.Image = LOGO_ID
+sideLogo.ScaleType = Enum.ScaleType.Fit
+
+local Content = Instance.new("Frame", Main)
+Content.Size = UDim2.new(1, -78, 1, -50)
+Content.Position = UDim2.new(0, 74, 0, 46)
+Content.BackgroundTransparency = 1
+
+local Pages = {}
+
+local function CreatePage(name)
+	local page = Instance.new("ScrollingFrame", Content)
+	page.Size = UDim2.new(1, 0, 1, 0)
+	page.BackgroundTransparency = 1
+	page.BorderSizePixel = 0
+	page.ScrollBarThickness = 3
+	page.ScrollBarImageColor3 = Color3.fromRGB(180, 80, 255)
+	page.Visible = false
+	page.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	page.CanvasSize = UDim2.new(0, 0, 0, 0)
+	local layout = Instance.new("UIListLayout", page)
+	layout.Padding = UDim.new(0, 8)
+	layout.SortOrder = Enum.SortOrder.LayoutOrder
+	local pad = Instance.new("UIPadding", page)
+	pad.PaddingTop = UDim.new(0, 6)
+	pad.PaddingLeft = UDim.new(0, 6)
+	pad.PaddingRight = UDim.new(0, 6)
+	pad.PaddingBottom = UDim.new(0, 8)
+	Pages[name] = page
+	return page
+end
+
+local function CreateToggle(parent, text, callback, default)
+	local frame = Instance.new("Frame", parent)
+	frame.Size = UDim2.new(1, 0, 0, 42)
+	frame.BackgroundColor3 = Color3.fromRGB(22, 14, 34)
+	Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 8)
+	local stroke = Instance.new("UIStroke", frame)
+	stroke.Color = Color3.fromRGB(80, 30, 120)
+	stroke.Thickness = 1
+
+	local label = Instance.new("TextLabel", frame)
+	label.Size = UDim2.new(1, -70, 1, 0)
+	label.Position = UDim2.new(0, 12, 0, 0)
+	label.BackgroundTransparency = 1
+	label.Text = text
+	label.Font = Enum.Font.GothamBold
+	label.TextSize = 13
+	label.TextColor3 = Color3.fromRGB(230, 170, 255)
+	label.TextXAlignment = Enum.TextXAlignment.Left
+
+	local toggleBg = Instance.new("Frame", frame)
+	toggleBg.Size = UDim2.new(0, 44, 0, 22)
+	toggleBg.Position = UDim2.new(1, -54, 0.5, -11)
+	toggleBg.BackgroundColor3 = Color3.fromRGB(35, 20, 55)
+	Instance.new("UICorner", toggleBg).CornerRadius = UDim.new(1, 0)
+
+	local knob = Instance.new("Frame", toggleBg)
+	knob.Size = UDim2.new(0, 16, 0, 16)
+	knob.Position = UDim2.new(0, 3, 0.5, -8)
+	knob.BackgroundColor3 = Color3.fromRGB(160, 80, 230)
+	Instance.new("UICorner", knob).CornerRadius = UDim.new(1, 0)
+
+	local btn = Instance.new("TextButton", toggleBg)
+	btn.Size = UDim2.new(1, 0, 1, 0)
+	btn.BackgroundTransparency = 1
+	btn.Text = ""
+
+	local state = default or false
+	if state then
+		knob.Position = UDim2.new(1, -19, 0.5, -8)
+		knob.BackgroundColor3 = Color3.fromRGB(255, 180, 255)
+		toggleBg.BackgroundColor3 = Color3.fromRGB(90, 30, 150)
+	end
+
+	btn.MouseButton1Click:Connect(function()
+		state = not state
+		TweenService:Create(knob, TweenInfo.new(0.2), {
+			Position = state and UDim2.new(1, -19, 0.5, -8) or UDim2.new(0, 3, 0.5, -8),
+			BackgroundColor3 = state and Color3.fromRGB(255, 180, 255) or Color3.fromRGB(160, 80, 230)
+		}):Play()
+		TweenService:Create(toggleBg, TweenInfo.new(0.2), {
+			BackgroundColor3 = state and Color3.fromRGB(90, 30, 150) or Color3.fromRGB(35, 20, 55)
+		}):Play()
+		callback(state)
+	end)
+end
+
+local function MakeDraggablePill(frame)
+	local dragging, dragInput, dragStart, startPos
+	frame.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	frame.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	UserInputService.InputChanged:Connect(function(input)
+		if dragging and input == dragInput then
+			local delta = input.Position - dragStart
+			frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		end
+	end)
+end
+
+--====================================================
+-- WELCOME (with Key Timer)
+--====================================================
+local WelcomePage = CreatePage("Welcome")
+
+local welcomeCard = Instance.new("Frame", WelcomePage)
+welcomeCard.Size = UDim2.new(1, 0, 0, 140)
+welcomeCard.BackgroundColor3 = Color3.fromRGB(22, 14, 34)
+Instance.new("UICorner", welcomeCard).CornerRadius = UDim.new(0, 10)
+
+local av = Instance.new("ImageLabel", welcomeCard)
+av.Size = UDim2.new(0, 60, 0, 60)
+av.Position = UDim2.new(0, 14, 0.5, -45)
+av.BackgroundColor3 = Color3.fromRGB(40, 25, 60)
+av.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "&width=150&height=150&format=png"
+Instance.new("UICorner", av).CornerRadius = UDim.new(1, 0)
+
+local w1 = Instance.new("TextLabel", welcomeCard)
+w1.Size = UDim2.new(1, -90, 0, 22)
+w1.Position = UDim2.new(0, 88, 0, 18)
+w1.BackgroundTransparency = 1
+w1.Text = "Welcome back,"
+w1.Font = Enum.Font.Gotham
+w1.TextSize = 13
+w1.TextColor3 = Color3.fromRGB(180, 140, 210)
+w1.TextXAlignment = Enum.TextXAlignment.Left
+
+local w2 = Instance.new("TextLabel", welcomeCard)
+w2.Size = UDim2.new(1, -90, 0, 24)
+w2.Position = UDim2.new(0, 88, 0, 40)
+w2.BackgroundTransparency = 1
+w2.Text = player.DisplayName
+w2.Font = Enum.Font.GothamBold
+w2.TextSize = 16
+w2.TextColor3 = Color3.new(1, 1, 1)
+w2.TextXAlignment = Enum.TextXAlignment.Left
+
+local w3 = Instance.new("TextLabel", welcomeCard)
+w3.Size = UDim2.new(1, -90, 0, 18)
+w3.Position = UDim2.new(0, 88, 0, 68)
+w3.BackgroundTransparency = 1
+w3.Text = "â— KHUB PUBLIC â€” Public Combat Suite"
+w3.Font = Enum.Font.Gotham
+w3.TextSize = 12
+w3.TextColor3 = Color3.fromRGB(180, 100, 255)
+w3.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Key Timer
+local keyTimerFrame = Instance.new("Frame", welcomeCard)
+keyTimerFrame.Size = UDim2.new(1, -20, 0, 28)
+keyTimerFrame.Position = UDim2.new(0, 10, 1, -38)
+keyTimerFrame.BackgroundColor3 = Color3.fromRGB(30, 20, 45)
+Instance.new("UICorner", keyTimerFrame).CornerRadius = UDim.new(0, 6)
+
+local keyTimerLabel = Instance.new("TextLabel", keyTimerFrame)
+keyTimerLabel.Size = UDim2.new(1, -10, 1, 0)
+keyTimerLabel.Position = UDim2.new(0, 8, 0, 0)
+keyTimerLabel.BackgroundTransparency = 1
+keyTimerLabel.Text = "Key: Loading..."
+keyTimerLabel.Font = Enum.Font.GothamBold
+keyTimerLabel.TextSize = 11
+keyTimerLabel.TextColor3 = Color3.fromRGB(200, 180, 255)
+keyTimerLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+task.spawn(function()
+	keyTimerLabel.Text = "KHUB Public · No key required"
+	keyTimerLabel.TextColor3 = Color3.fromRGB(100, 255, 150)
+end)
+
+--====================================================
+-- HITBOX
+--====================================================
+local function IsAlly(char)
+	if not char then return false end
+	for _, v in ipairs(char:GetChildren()) do
+		if v:IsA("Highlight") then
+			local oc = v.OutlineColor
+			if oc.G > 0.4 and oc.G > oc.R and oc.G > oc.B then return true end
+			local fc = v.FillColor
+			if fc.G > 0.4 and fc.G > fc.R and fc.G > fc.B then return true end
+		end
+		if v:IsA("SelectionBox") then
+			local c = v.Color3
+			if c.G > 0.4 and c.G > c.R and c.G > c.B then return true end
+		end
+	end
+	return false
+end
+
+local HitboxPage = CreatePage("Hitbox")
+
+local hitboxEnabled = false
+local hitboxSize = 7
+local transparentPlayers = true
+local espEnabled = true
+local hitboxData = {}
+local espData = {}
+
+local function clearChar(char)
+	local ownerPlr = Players:GetPlayerFromCharacter(char)
+	if ownerPlr == player then return end
+	if hitboxData[char] then
+		pcall(function() if hitboxData[char].box then hitboxData[char].box:Destroy() end end)
+		if hitboxData[char].orig then
+			for part, size in pairs(hitboxData[char].orig) do
+				pcall(function() if part and part.Parent then part.Size = size end end)
+			end
+		end
+		hitboxData[char] = nil
+	end
+	if espData[char] then
+		pcall(function() espData[char].bb:Destroy() end)
+		espData[char] = nil
+	end
+end
+
+local function applyHitbox(char, plr)
+	if plr == player then return end
+	if not char or not char.Parent then return end
+	if IsAlly(char) then clearChar(char) return end
+
+	local hrp = char:FindFirstChild("HumanoidRootPart")
+	if not hrp then return end
+
+	clearChar(char)
+	local origSizes = {}
+
+	if not hrp:GetAttribute("KHUB_OrigSize") then
+		hrp:SetAttribute("KHUB_OrigSize", hrp.Size)
+	end
+	origSizes[hrp] = hrp:GetAttribute("KHUB_OrigSize")
+	hrp.Size = Vector3.new(hitboxSize, hitboxSize * 1.15, hitboxSize)
+
+	local bodyParts = {
+		"UpperTorso","LowerTorso","Torso",
+		"Left Arm","Right Arm","Left Leg","Right Leg",
+		"LeftUpperArm","RightUpperArm","LeftLowerArm","RightLowerArm",
+		"LeftUpperLeg","RightUpperLeg","LeftLowerLeg","RightLowerLeg"
+	}
+	for _, name in ipairs(bodyParts) do
+		local p = char:FindFirstChild(name)
+		if p and p:IsA("BasePart") then
+			if not p:GetAttribute("KHUB_OrigSize") then
+				p:SetAttribute("KHUB_OrigSize", p.Size)
+			end
+			origSizes[p] = p:GetAttribute("KHUB_OrigSize")
+			local o = p:GetAttribute("KHUB_OrigSize")
+			p.Size = Vector3.new(
+				math.max(o.X, hitboxSize * 0.55),
+				math.max(o.Y, hitboxSize * 0.55),
+				math.max(o.Z, hitboxSize * 0.55)
+			)
+		end
+	end
+
+	if transparentPlayers then
+		for _, p in ipairs(char:GetDescendants()) do
+			if p:IsA("BasePart") then
+				p.Transparency = p.Name == "Head" and 0.08 or 0.96
+			end
+			if (p:IsA("Decal") or p:IsA("Texture")) and p.Parent and p.Parent.Name ~= "Head" then
+				p.Transparency = 0.95
+			end
+		end
+	end
+
+	local box = Instance.new("SelectionBox")
+	box.Adornee = hrp
+	box.Color3 = Color3.fromRGB(255, 120, 180)
+	box.LineThickness = 0.03
+	box.Transparency = 0.72
+	box.Parent = hrp
+	hitboxData[char] = {box = box, orig = origSizes}
+
+	if espEnabled then
+		local bb = Instance.new("BillboardGui")
+		bb.Name = "KHUB_ESP"
+		bb.Adornee = hrp
+		bb.Size = UDim2.new(0, 110, 0, 48)
+		bb.StudsOffset = Vector3.new(0, 3.5, 0)
+		bb.AlwaysOnTop = true
+		bb.Parent = hrp
+
+		local headshot = Instance.new("ImageLabel", bb)
+		headshot.Size = UDim2.new(0, 26, 0, 26)
+		headshot.Position = UDim2.new(0.5, -13, 0, 0)
+		headshot.BackgroundColor3 = Color3.fromRGB(30, 15, 45)
+		headshot.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. plr.UserId .. "&width=100&height=100&format=png"
+		Instance.new("UICorner", headshot).CornerRadius = UDim.new(1, 0)
+
+		local nameLbl = Instance.new("TextLabel", bb)
+		nameLbl.Size = UDim2.new(1, 0, 0, 16)
+		nameLbl.Position = UDim2.new(0, 0, 0, 28)
+		nameLbl.BackgroundTransparency = 1
+		nameLbl.Text = plr.DisplayName
+		nameLbl.Font = Enum.Font.GothamBold
+		nameLbl.TextSize = 11
+		nameLbl.TextColor3 = Color3.new(1, 1, 1)
+		nameLbl.TextStrokeTransparency = 0.4
+		espData[char] = {bb = bb}
+	end
+end
+
+local function updateAll()
+	for _, plr in ipairs(Players:GetPlayers()) do
+		if plr == player then continue end
+		if not plr.Character then continue end
+		local char = plr.Character
+
+		if hitboxEnabled then
+			if IsAlly(char) then
+				clearChar(char)
+			else
+				applyHitbox(char, plr)
+			end
+		else
+			for _, p in ipairs(char:GetDescendants()) do
+				if p:IsA("BasePart") then
+					if p:GetAttribute("KHUB_OrigSize") then
+						p.Size = p:GetAttribute("KHUB_OrigSize")
+					end
+					p.Transparency = 0
+				end
+				if p:IsA("Decal") or p:IsA("Texture") then
+					p.Transparency = 0
+				end
+			end
+			clearChar(char)
+		end
+	end
+end
+
+CreateToggle(HitboxPage, "Enable Hitbox (Enemies Only)", function(v)
+	hitboxEnabled = v
+	updateAll()
+end)
+
+CreateToggle(HitboxPage, "Transparent Body (Head Visible)", function(v)
+	transparentPlayers = v
+	if hitboxEnabled then updateAll() end
+end, true)
+
+CreateToggle(HitboxPage, "ESP (Avatar + Name)", function(v)
+	espEnabled = v
+	if hitboxEnabled then updateAll() end
+end, true)
+
+local sizeLbl = Instance.new("TextLabel", HitboxPage)
+sizeLbl.Size = UDim2.new(1, 0, 0, 18)
+sizeLbl.BackgroundTransparency = 1
+sizeLbl.Text = "Hitbox Size: 7.0"
+sizeLbl.Font = Enum.Font.GothamBold
+sizeLbl.TextSize = 12
+sizeLbl.TextColor3 = Color3.fromRGB(220, 180, 255)
+sizeLbl.TextXAlignment = Enum.TextXAlignment.Left
+
+local sliderBg = Instance.new("Frame", HitboxPage)
+sliderBg.Size = UDim2.new(1, 0, 0, 24)
+sliderBg.BackgroundColor3 = Color3.fromRGB(30, 18, 48)
+Instance.new("UICorner", sliderBg).CornerRadius = UDim.new(0, 6)
+
+local sliderFill = Instance.new("Frame", sliderBg)
+sliderFill.Size = UDim2.new(0.28, 0, 1, 0)
+sliderFill.BackgroundColor3 = Color3.fromRGB(220, 90, 255)
+Instance.new("UICorner", sliderFill).CornerRadius = UDim.new(0, 6)
+
+local sliderBtn = Instance.new("TextButton", sliderBg)
+sliderBtn.Size = UDim2.new(1, 0, 1, 0)
+sliderBtn.BackgroundTransparency = 1
+sliderBtn.Text = ""
+
+local draggingSlider = false
+local function setSize(val)
+	hitboxSize = math.clamp(val, 3, 18)
+	sizeLbl.Text = "Hitbox Size: " .. string.format("%.1f", hitboxSize)
+	sliderFill.Size = UDim2.new((hitboxSize - 3) / 15, 0, 1, 0)
+	if hitboxEnabled then updateAll() end
+end
+
+sliderBtn.MouseButton1Down:Connect(function() draggingSlider = true end)
+UserInputService.InputEnded:Connect(function(i)
+	if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+		draggingSlider = false
+	end
+end)
+UserInputService.InputChanged:Connect(function(i)
+	if draggingSlider and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+		local mouse = UserInputService:GetMouseLocation()
+		local abs = sliderBg.AbsolutePosition
+		local sz = sliderBg.AbsoluteSize
+		setSize(3 + math.clamp((mouse.X - abs.X) / sz.X, 0, 1) * 15)
+	end
+end)
+
+task.spawn(function()
+	while true do
+		task.wait(2)
+		if hitboxEnabled then updateAll() end
+	end
+end)
+
+--====================================================
+-- FEATURES
+--====================================================
+local FeaturesPage = CreatePage("Features")
+
+local isCurrentlyTouchingWall = false
+local wallRayParams = RaycastParams.new()
+wallRayParams.FilterType = Enum.RaycastFilterType.Exclude
+
+local function checkWallTouch()
+	local char = player.Character
+	local hrp = char and char:FindFirstChild("HumanoidRootPart")
+	if not hrp then return false end
+	wallRayParams.FilterDescendantsInstances = {char}
+	for _, dir in ipairs({hrp.CFrame.LookVector, -hrp.CFrame.LookVector, hrp.CFrame.RightVector, -hrp.CFrame.RightVector}) do
+		local result = workspace:Raycast(hrp.Position, dir * 3.2, wallRayParams)
+		if result and result.Instance and result.Instance.CanCollide then return true end
+	end
+	return false
+end
+
+local isAimbotEnabled = false
+CreateToggle(FeaturesPage, "â™¡ Auto Face Nearby", function(state) isAimbotEnabled = state end)
+
+local isAutoWallhopEnabled = false
+CreateToggle(FeaturesPage, "â™¡ Auto Wallhop", function(state) isAutoWallhopEnabled = state end)
+
+local isInfJumpEnabled = false
+CreateToggle(FeaturesPage, "â™¡ Infinite Jump", function(state) isInfJumpEnabled = state end)
+
+local isAntiDetectionEnabled = false
+CreateToggle(FeaturesPage, "â™¡ Anti Detection", function(state)
+	isAntiDetectionEnabled = state
+end)
+
+-- AUTO FLICK
+local AutoFlickEnabled = false
+local AutoFlickStatusGui = nil
+local isFlicking = false
+local lastTouchTimes = {}
+
+local function DestroyAutoFlickPillGui()
+	if AutoFlickStatusGui then AutoFlickStatusGui:Destroy(); AutoFlickStatusGui = nil end
+end
+
+local function CreateAutoFlickPillGui()
+	if AutoFlickStatusGui then return end
+	AutoFlickStatusGui = Instance.new("ScreenGui")
+	AutoFlickStatusGui.Name = "AutoFlickStatusGui"
+	AutoFlickStatusGui.ResetOnSpawn = false
+	AutoFlickStatusGui.Parent = ParentTarget
+
+	local StatusFrame = Instance.new("Frame")
+	StatusFrame.Name = "StatusFrame"
+	StatusFrame.Size = UDim2.new(0, 230, 0, 36)
+	StatusFrame.Position = UDim2.new(0.5, -115, 0.24, 0)
+	StatusFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	StatusFrame.BackgroundTransparency = 0.15
+	StatusFrame.BorderSizePixel = 0
+	StatusFrame.Parent = AutoFlickStatusGui
+	MakeDraggablePill(StatusFrame)
+	Instance.new("UICorner", StatusFrame).CornerRadius = UDim.new(1, 0)
+
+	local StatusLabel = Instance.new("TextLabel")
+	StatusLabel.Name = "StatusLabel"
+	StatusLabel.Size = UDim2.new(1, -55, 1, 0)
+	StatusLabel.Position = UDim2.new(0, 12, 0, 0)
+	StatusLabel.BackgroundTransparency = 1
+	StatusLabel.Text = "Auto Flick [on]"
+	StatusLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
+	StatusLabel.Font = Enum.Font.SourceSansBold
+	StatusLabel.TextSize = 14
+	StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+	StatusLabel.Parent = StatusFrame
+
+	local TogglePillBtn = Instance.new("TextButton")
+	TogglePillBtn.Size = UDim2.new(0, 45, 0, 24)
+	TogglePillBtn.Position = UDim2.new(1, -50, 0.5, -12)
+	TogglePillBtn.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+	TogglePillBtn.BorderSizePixel = 0
+	TogglePillBtn.Text = "ON"
+	TogglePillBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TogglePillBtn.Font = Enum.Font.SourceSansBold
+	TogglePillBtn.TextSize = 12
+	TogglePillBtn.Parent = StatusFrame
+	Instance.new("UICorner", TogglePillBtn).CornerRadius = UDim.new(1, 0)
+
+	TogglePillBtn.MouseButton1Click:Connect(function()
+		AutoFlickEnabled = not AutoFlickEnabled
+		if AutoFlickEnabled then
+			TogglePillBtn.Text = "ON"
+			StatusLabel.Text = "Auto Flick [on]"
+		else
+			TogglePillBtn.Text = "OFF"
+			StatusLabel.Text = "Auto Flick [off]"
+		end
+	end)
+end
+
+local function showFlickNotification(playerName)
+	if not AutoFlickStatusGui then return end
+	local NotifFrame = Instance.new("Frame")
+	NotifFrame.Size = UDim2.new(0, 230, 0, 28)
+	NotifFrame.Position = UDim2.new(0.5, -115, 0.18, 0)
+	NotifFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	NotifFrame.BackgroundTransparency = 0.2
+	NotifFrame.BorderSizePixel = 0
+	NotifFrame.Parent = AutoFlickStatusGui
+	Instance.new("UICorner", NotifFrame).CornerRadius = UDim.new(0, 6)
+
+	local NotifText = Instance.new("TextLabel")
+	NotifText.Size = UDim2.new(1, 0, 1, 0)
+	NotifText.BackgroundTransparency = 1
+	NotifText.Text = "Flicked: " .. playerName
+	NotifText.TextColor3 = Color3.fromRGB(240, 240, 240)
+	NotifText.Font = Enum.Font.SourceSansBold
+	NotifText.TextSize = 13
+	NotifText.Parent = NotifFrame
+
+	task.delay(1.5, function()
+		if NotifFrame and NotifFrame.Parent then NotifFrame:Destroy() end
+	end)
+end
+
+CreateToggle(FeaturesPage, "â™¡ Auto Flick", function(Value)
+	AutoFlickEnabled = Value
+	if Value then CreateAutoFlickPillGui() else DestroyAutoFlickPillGui() end
+end)
+
+-- AUTO FOLLOW
+local AutoFollowEnabled = false
+local FollowStatusGui = nil
+
+local function DestroyFollowPillGui()
+	if FollowStatusGui then FollowStatusGui:Destroy(); FollowStatusGui = nil end
+end
+
+local function CreateFollowPillGui()
+	if FollowStatusGui then return end
+	FollowStatusGui = Instance.new("ScreenGui")
+	FollowStatusGui.Name = "FollowStatusGui"
+	FollowStatusGui.ResetOnSpawn = false
+	FollowStatusGui.Parent = ParentTarget
+
+	local StatusFrame = Instance.new("Frame")
+	StatusFrame.Name = "StatusFrame"
+	StatusFrame.Size = UDim2.new(0, 260, 0, 36)
+	StatusFrame.Position = UDim2.new(0.5, -130, 0.12, 0)
+	StatusFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	StatusFrame.BackgroundTransparency = 0.15
+	StatusFrame.BorderSizePixel = 0
+	StatusFrame.Parent = FollowStatusGui
+	MakeDraggablePill(StatusFrame)
+	Instance.new("UICorner", StatusFrame).CornerRadius = UDim.new(1, 0)
+
+	local StatusLabel = Instance.new("TextLabel")
+	StatusLabel.Name = "StatusLabel"
+	StatusLabel.Size = UDim2.new(1, -95, 1, 0)
+	StatusLabel.Position = UDim2.new(0, 12, 0, 0)
+	StatusLabel.BackgroundTransparency = 1
+	StatusLabel.Text = "Auto Follow [on]"
+	StatusLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
+	StatusLabel.Font = Enum.Font.SourceSansBold
+	StatusLabel.TextSize = 14
+	StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+	StatusLabel.Parent = StatusFrame
+
+	local TogglePillBtn = Instance.new("TextButton")
+	TogglePillBtn.Size = UDim2.new(0, 45, 0, 24)
+	TogglePillBtn.Position = UDim2.new(1, -50, 0.5, -12)
+	TogglePillBtn.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+	TogglePillBtn.BorderSizePixel = 0
+	TogglePillBtn.Text = "ON"
+	TogglePillBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TogglePillBtn.Font = Enum.Font.SourceSansBold
+	TogglePillBtn.TextSize = 12
+	TogglePillBtn.Parent = StatusFrame
+	Instance.new("UICorner", TogglePillBtn).CornerRadius = UDim.new(1, 0)
+
+	TogglePillBtn.MouseButton1Click:Connect(function()
+		AutoFollowEnabled = not AutoFollowEnabled
+		if AutoFollowEnabled then
+			TogglePillBtn.Text = "ON"
+			StatusLabel.Text = "Auto Follow [on]"
+		else
+			TogglePillBtn.Text = "OFF"
+			StatusLabel.Text = "Auto Follow [off]"
+		end
+	end)
+end
+
+CreateToggle(FeaturesPage, "â™¡ Auto Follow & Touch", function(Value)
+	AutoFollowEnabled = Value
+	if Value then CreateFollowPillGui() else DestroyFollowPillGui() end
+end)
+
+RunService.RenderStepped:Connect(function()
+	isCurrentlyTouchingWall = checkWallTouch()
+
+	if isAimbotEnabled and not isCurrentlyTouchingWall then
+		local myChar = player.Character
+		local hrp = myChar and myChar:FindFirstChild("HumanoidRootPart")
+		if hrp then
+			local closest, dist = nil, math.huge
+			for _, p in ipairs(Players:GetPlayers()) do
+				if p ~= player and p.Character then
+					local tHRP = p.Character:FindFirstChild("HumanoidRootPart")
+					if tHRP then
+						local d = (hrp.Position - tHRP.Position).Magnitude
+						if d < dist then dist = d closest = tHRP end
+					end
+				end
+			end
+			if closest then
+				hrp.CFrame = CFrame.new(hrp.Position, Vector3.new(closest.Position.X, hrp.Position.Y, closest.Position.Z))
+			end
+		end
+	end
+
+	if AutoFollowEnabled and FollowStatusGui and FollowStatusGui:FindFirstChild("StatusFrame") then
+		local StatusLabel = FollowStatusGui.StatusFrame:FindFirstChild("StatusLabel")
+		local char = player.Character
+		if char then
+			local humanoid = char:FindFirstChildOfClass("Humanoid")
+			local hrp = char:FindFirstChild("HumanoidRootPart")
+			if humanoid and hrp then
+				if humanoid.MoveDirection.Magnitude > 0.05 then
+					if StatusLabel then StatusLabel.Text = "Follow: Paused (Input)" end
+				else
+					local targetPlr, shortestDist = nil, math.huge
+					for _, p in ipairs(Players:GetPlayers()) do
+						if p ~= player and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+							local dist = (hrp.Position - p.Character.HumanoidRootPart.Position).Magnitude
+							if dist < shortestDist then shortestDist = dist; targetPlr = p end
+						end
+					end
+					if targetPlr and targetPlr.Character then
+						local targetHrp = targetPlr.Character:FindFirstChild("HumanoidRootPart")
+						if targetHrp then
+							if StatusLabel then StatusLabel.Text = "Touching: " .. targetPlr.Name end
+							humanoid:MoveTo(targetHrp.Position)
+						end
+					end
+				end
+			end
+		end
+	end
+end)
+
+RunService.Stepped:Connect(function()
+	if not AutoFlickEnabled or isFlicking then return end
+	local char = player.Character
+	if not char then return end
+	local hrp = char:FindFirstChild("HumanoidRootPart")
+	if not hrp then return end
+
+	for _, p in ipairs(Players:GetPlayers()) do
+		if p ~= player and p.Character then
+			local pRoot = p.Character:FindFirstChild("HumanoidRootPart")
+			if pRoot and (hrp.Position - pRoot.Position).Magnitude <= 5 then
+				local currentTime = os.clock()
+				if not lastTouchTimes[p] or (currentTime - lastTouchTimes[p] > 1) then
+					lastTouchTimes[p] = currentTime
+					isFlicking = true
+					showFlickNotification(p.Name)
+					task.spawn(function()
+						local spinSpeed = 120
+						local accumulatedLeft = 0
+						while accumulatedLeft < 90 and AutoFlickEnabled do
+							local dt = RunService.RenderStepped:Wait()
+							local step = math.min(spinSpeed * dt * 60, 90 - accumulatedLeft)
+							hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(step), 0)
+							accumulatedLeft = accumulatedLeft + step
+						end
+						local accumulatedRight = 0
+						while accumulatedRight < 90 and AutoFlickEnabled do
+							local dt = RunService.RenderStepped:Wait()
+							local step = math.min(spinSpeed * dt * 60, 90 - accumulatedRight)
+							hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(-step), 0)
+							accumulatedRight = accumulatedRight + step
+						end
+						isFlicking = false
+					end)
+				end
+			end
+		end
+	end
+end)
+
+local mt = getrawmetatable and getrawmetatable(game)
+if mt then
+	pcall(function()
+		setreadonly(mt, false)
+		local oldNC = mt.__namecall
+		mt.__namecall = newcclosure(function(self, ...)
+			local method = getnamecallmethod()
+			if isAntiDetectionEnabled and self == player and (method == "Kick" or method == "kick") then
+				warn("[KHUB PUBLIC Anti-Detection]: Blocked kick attempt!")
+				return
+			end
+			return oldNC(self, ...)
+		end)
+		setreadonly(mt, true)
+	end)
+end
+
+local isWallhopCD = false
+local isInfJumpCD = false
+UserInputService.JumpRequest:Connect(function()
+	if isAutoWallhopEnabled and isCurrentlyTouchingWall and not isWallhopCD then
+		isWallhopCD = true
+		local char = player.Character
+		local hrp = char and char:FindFirstChild("HumanoidRootPart")
+		local hum = char and char:FindFirstChildOfClass("Humanoid")
+		if hrp and hum then
+			task.spawn(function()
+				hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(-90), 0)
+				hum:ChangeState(Enum.HumanoidStateType.Jumping)
+				task.wait(0.03)
+				hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(90), 0)
+			end)
+		end
+		task.wait(0.12)
+		isWallhopCD = false
+	end
+	if isInfJumpEnabled and not isInfJumpCD then
+		isInfJumpCD = true
+		local char = player.Character
+		local hum = char and char:FindFirstChildOfClass("Humanoid")
+		if hum then hum:ChangeState(Enum.HumanoidStateType.Jumping) end
+		task.wait(0.25)
+		isInfJumpCD = false
+	end
+end)
+
+--====================================================
+-- MOVEMENT
+--====================================================
+local MovementPage = CreatePage("Movement")
+
+local autoWalk = false
+local wallHop = false
+local jumpCount = 0
+local lastJump = 0
+local speedValue = 16
+
+local TPWalkEnabled = false
+local TPWalkSpeed = 0.001
+
+CreateToggle(MovementPage, "Enable TPWalk", function(Value) TPWalkEnabled = Value end)
+
+local tpSpeedLbl = Instance.new("TextLabel", MovementPage)
+tpSpeedLbl.Size = UDim2.new(1, 0, 0, 18)
+tpSpeedLbl.BackgroundTransparency = 1
+tpSpeedLbl.Text = "TPWalk Speed: 0.001"
+tpSpeedLbl.Font = Enum.Font.GothamBold
+tpSpeedLbl.TextSize = 12
+tpSpeedLbl.TextColor3 = Color3.fromRGB(220, 180, 255)
+tpSpeedLbl.TextXAlignment = Enum.TextXAlignment.Left
+
+local tpSpeedBg = Instance.new("Frame", MovementPage)
+tpSpeedBg.Size = UDim2.new(1, 0, 0, 24)
+tpSpeedBg.BackgroundColor3 = Color3.fromRGB(30, 18, 48)
+Instance.new("UICorner", tpSpeedBg).CornerRadius = UDim.new(0, 6)
+
+local tpSpeedFill = Instance.new("Frame", tpSpeedBg)
+tpSpeedFill.Size = UDim2.new(0.1, 0, 1, 0)
+tpSpeedFill.BackgroundColor3 = Color3.fromRGB(100, 220, 255)
+Instance.new("UICorner", tpSpeedFill).CornerRadius = UDim.new(0, 6)
+
+local tpSpeedBtn = Instance.new("TextButton", tpSpeedBg)
+tpSpeedBtn.Size = UDim2.new(1, 0, 1, 0)
+tpSpeedBtn.BackgroundTransparency = 1
+tpSpeedBtn.Text = ""
+
+local draggingTP = false
+local function setTPSpeed(val)
+	TPWalkSpeed = math.clamp(val, 0.0001, 0.01)
+	tpSpeedLbl.Text = "TPWalk Speed: " .. string.format("%.4f", TPWalkSpeed)
+	tpSpeedFill.Size = UDim2.new((TPWalkSpeed - 0.0001) / 0.0099, 0, 1, 0)
+end
+
+tpSpeedBtn.MouseButton1Down:Connect(function() draggingTP = true end)
+UserInputService.InputEnded:Connect(function(i)
+	if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+		draggingTP = false
+	end
+end)
+UserInputService.InputChanged:Connect(function(i)
+	if draggingTP and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+		local mouse = UserInputService:GetMouseLocation()
+		local abs = tpSpeedBg.AbsolutePosition
+		local sz = tpSpeedBg.AbsoluteSize
+		setTPSpeed(0.0001 + math.clamp((mouse.X - abs.X) / sz.X, 0, 1) * 0.0099)
+	end
+end)
+
+RunService.RenderStepped:Connect(function()
+	if not TPWalkEnabled then return end
+	local char = player.Character
+	if not char then return end
+	local humanoid = char:FindFirstChildOfClass("Humanoid")
+	local hrp = char:FindFirstChild("HumanoidRootPart")
+	if humanoid and hrp and humanoid.MoveDirection.Magnitude > 0 then
+		local delta = RunService.RenderStepped:Wait()
+		hrp.CFrame = hrp.CFrame + (humanoid.MoveDirection * (TPWalkSpeed * 1000) * (delta * 60))
+	end
+end)
+
+local originalLighting = {
+	GlobalShadows = Lighting.GlobalShadows,
+	FogEnd = Lighting.FogEnd,
+	Brightness = Lighting.Brightness,
+	EnvironmentDiffuseScale = Lighting.EnvironmentDiffuseScale,
+	EnvironmentSpecularScale = Lighting.EnvironmentSpecularScale,
+	Ambient = Lighting.Ambient,
+	OutdoorAmbient = Lighting.OutdoorAmbient,
+}
+pcall(function()
+	local atm = Lighting:FindFirstChildOfClass("Atmosphere")
+	if atm then
+		originalLighting.AtmDensity = atm.Density
+		originalLighting.AtmHaze = atm.Haze
+		originalLighting.AtmGlare = atm.Glare
+	end
+end)
+
+CreateToggle(MovementPage, "Auto Walk", function(v) autoWalk = v end)
+CreateToggle(MovementPage, "Wall Hop", function(v) wallHop = v jumpCount = 0 end)
+
+local speedLbl = Instance.new("TextLabel", MovementPage)
+speedLbl.Size = UDim2.new(1, 0, 0, 18)
+speedLbl.BackgroundTransparency = 1
+speedLbl.Text = "Walk Speed: 16"
+speedLbl.Font = Enum.Font.GothamBold
+speedLbl.TextSize = 12
+speedLbl.TextColor3 = Color3.fromRGB(220, 180, 255)
+speedLbl.TextXAlignment = Enum.TextXAlignment.Left
+
+local speedBg = Instance.new("Frame", MovementPage)
+speedBg.Size = UDim2.new(1, 0, 0, 24)
+speedBg.BackgroundColor3 = Color3.fromRGB(30, 18, 48)
+Instance.new("UICorner", speedBg).CornerRadius = UDim.new(0, 6)
+
+local speedFill = Instance.new("Frame", speedBg)
+speedFill.Size = UDim2.new(0, 0, 1, 0)
+speedFill.BackgroundColor3 = Color3.fromRGB(100, 220, 255)
+Instance.new("UICorner", speedFill).CornerRadius = UDim.new(0, 6)
+
+local speedBtn = Instance.new("TextButton", speedBg)
+speedBtn.Size = UDim2.new(1, 0, 1, 0)
+speedBtn.BackgroundTransparency = 1
+speedBtn.Text = ""
+
+local draggingSpeed = false
+local function setSpeed(val)
+	speedValue = math.clamp(val, 16, 200)
+	speedLbl.Text = "Walk Speed: " .. math.floor(speedValue)
+	speedFill.Size = UDim2.new((speedValue - 16) / 184, 0, 1, 0)
+	local char = player.Character
+	local hum = char and char:FindFirstChildOfClass("Humanoid")
+	if hum then hum.WalkSpeed = speedValue end
+end
+
+speedBtn.MouseButton1Down:Connect(function() draggingSpeed = true end)
+UserInputService.InputEnded:Connect(function(i)
+	if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+		draggingSpeed = false
+	end
+end)
+UserInputService.InputChanged:Connect(function(i)
+	if draggingSpeed and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+		local mouse = UserInputService:GetMouseLocation()
+		local abs = speedBg.AbsolutePosition
+		local sz = speedBg.AbsoluteSize
+		setSpeed(16 + math.clamp((mouse.X - abs.X) / sz.X, 0, 1) * 184)
+	end
+end)
+
+player.CharacterAdded:Connect(function(char)
+	task.wait(0.5)
+	local hum = char:FindFirstChildOfClass("Humanoid")
+	if hum and speedValue ~= 16 then hum.WalkSpeed = speedValue end
+end)
+
+local fpsBoostOn = false
+CreateToggle(MovementPage, "âš¡ FPS Boost (Recommended)", function(state)
+	fpsBoostOn = state
+	if state then
+		pcall(function() settings().Rendering.QualityLevel = Enum.QualityLevel.Level01 end)
+		Lighting.GlobalShadows = false
+		Lighting.FogEnd = 9e9
+		Lighting.Brightness = 1
+		Lighting.EnvironmentDiffuseScale = 0
+		Lighting.EnvironmentSpecularScale = 0
+		for _, v in ipairs(Lighting:GetChildren()) do
+			if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("BloomEffect")
+				or v:IsA("ColorCorrectionEffect") or v:IsA("DepthOfFieldEffect") then
+				v.Enabled = false
+			end
+		end
+		for _, obj in ipairs(workspace:GetDescendants()) do
+			if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Smoke") or obj:IsA("Fire") then
+				obj.Enabled = false
+			end
+		end
+		pcall(function()
+			local atm = Lighting:FindFirstChildOfClass("Atmosphere")
+			if atm then atm.Density = 0 atm.Haze = 0 atm.Glare = 0 end
+		end)
+		pcall(function()
+			Lighting.Ambient = Color3.fromRGB(180, 180, 180)
+			Lighting.OutdoorAmbient = Color3.fromRGB(180, 180, 180)
+		end)
+		print("[KHUB PUBLIC] âš¡ FPS Boost ON")
+	else
+		pcall(function() settings().Rendering.QualityLevel = Enum.QualityLevel.Automatic end)
+		Lighting.GlobalShadows = originalLighting.GlobalShadows
+		Lighting.FogEnd = originalLighting.FogEnd
+		Lighting.Brightness = originalLighting.Brightness
+		Lighting.EnvironmentDiffuseScale = originalLighting.EnvironmentDiffuseScale
+		Lighting.EnvironmentSpecularScale = originalLighting.EnvironmentSpecularScale
+		for _, v in ipairs(Lighting:GetChildren()) do
+			if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("BloomEffect")
+				or v:IsA("ColorCorrectionEffect") or v:IsA("DepthOfFieldEffect") then
+				v.Enabled = true
+			end
+		end
+		pcall(function()
+			local atm = Lighting:FindFirstChildOfClass("Atmosphere")
+			if atm then
+				atm.Density = originalLighting.AtmDensity or 0.3
+				atm.Haze = originalLighting.AtmHaze or 0
+				atm.Glare = originalLighting.AtmGlare or 0
+			end
+			Lighting.Ambient = originalLighting.Ambient or Color3.fromRGB(127,127,127)
+			Lighting.OutdoorAmbient = originalLighting.OutdoorAmbient or Color3.fromRGB(127,127,127)
+		end)
+		print("[KHUB PUBLIC] FPS Boost OFF")
+	end
+end)
+
+-- FPS & Ping
+local FpsPingGui = Instance.new("ScreenGui")
+FpsPingGui.Name = "FpsPingGui"
+FpsPingGui.ResetOnSpawn = false
+FpsPingGui.Enabled = false
+FpsPingGui.Parent = ParentTarget
+
+local PillFrame = Instance.new("Frame")
+PillFrame.Size = UDim2.new(0, 180, 0, 36)
+PillFrame.Position = UDim2.new(0, 20, 0, 20)
+PillFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+PillFrame.BackgroundTransparency = 0.15
+PillFrame.BorderSizePixel = 0
+PillFrame.Parent = FpsPingGui
+MakeDraggablePill(PillFrame)
+Instance.new("UICorner", PillFrame).CornerRadius = UDim.new(1, 0)
+
+local ThePillLabel = Instance.new("TextLabel")
+ThePillLabel.Size = UDim2.new(1, 0, 1, 0)
+ThePillLabel.BackgroundTransparency = 1
+ThePillLabel.Text = "FPS: -- | Ping: -- ms"
+ThePillLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
+ThePillLabel.Font = Enum.Font.SourceSansBold
+ThePillLabel.TextSize = 13
+ThePillLabel.Parent = PillFrame
+
+local frameCount, lastUpdate, currentFps = 0, os.clock(), 60
+RunService.RenderStepped:Connect(function()
+	frameCount = frameCount + 1
+	local now = os.clock()
+	if now - lastUpdate >= 1 then
+		currentFps = math.floor(frameCount / (now - lastUpdate))
+		frameCount, lastUpdate = 0, now
+		if FpsPingGui.Enabled then
+			local ping = 0
+			pcall(function() ping = math.floor(Stats.Network.ServerStatsItem["Data Ping"]:GetValue()) end)
+			ThePillLabel.Text = string.format("FPS: %d | Ping: %d ms", currentFps, ping)
+		end
+	end
+end)
+
+CreateToggle(MovementPage, "Show FPS & Ping", function(Value)
+	FpsPingGui.Enabled = Value
+end)
+
+local walkRayParams = RaycastParams.new()
+walkRayParams.FilterType = Enum.RaycastFilterType.Exclude
+RunService.Heartbeat:Connect(function()
+	local char = player.Character
+	if not char then return end
+	local hum = char:FindFirstChildOfClass("Humanoid")
+	local hrp = char:FindFirstChild("HumanoidRootPart")
+	if not hum or not hrp then return end
+
+	if autoWalk then
+		hum:Move(Vector3.new(0, 0, -1), true)
+	end
+
+	if wallHop then
+		walkRayParams.FilterDescendantsInstances = {char}
+		local result = workspace:Raycast(hrp.Position, hrp.CFrame.LookVector * 3.2, walkRayParams)
+		if result and result.Instance and result.Instance.CanCollide then
+			if tick() - lastJump > 0.32 and jumpCount < 2 then
+				hum:ChangeState(Enum.HumanoidStateType.Jumping)
+				jumpCount += 1
+				lastJump = tick()
+			end
+		elseif hum.FloorMaterial ~= Enum.Material.Air then
+			jumpCount = 0
+		end
+	end
+end)
+
+--====================================================
+-- SPOOF
+--====================================================
+local SpoofPage = CreatePage("Spoof")
+
+local spoofMode = "none"
+
+local spoofStatus = Instance.new("TextLabel", SpoofPage)
+spoofStatus.Size = UDim2.new(1, 0, 0, 50)
+spoofStatus.BackgroundTransparency = 1
+spoofStatus.Text = "Status: Not active\nPick a mode below then tap APPLY"
+spoofStatus.Font = Enum.Font.Gotham
+spoofStatus.TextSize = 12
+spoofStatus.TextColor3 = Color3.fromRGB(200, 160, 255)
+spoofStatus.TextWrapped = true
+spoofStatus.TextXAlignment = Enum.TextXAlignment.Left
+
+local function applySpoof(mode)
+	spoofMode = mode
+	pcall(function()
+		local UIS = game:GetService("UserInputService")
+		local mt = getrawmetatable and getrawmetatable(UIS)
+		if not mt then return end
+		setreadonly(mt, false)
+		local oldIndex = rawget(mt, "__index")
+		mt.__index = newcclosure(function(self, key)
+			if mode == "pc" then
+				if key == "TouchEnabled" then return false end
+				if key == "GamepadEnabled" then return false end
+				if key == "KeyboardEnabled" then return true end
+				if key == "MouseEnabled" then return true end
+			elseif mode == "xbox" then
+				if key == "TouchEnabled" then return false end
+				if key == "GamepadEnabled" then return true end
+				if key == "KeyboardEnabled" then return false end
+				if key == "MouseEnabled" then return false end
+			end
+			if type(oldIndex) == "function" then return oldIndex(self, key) end
+			return oldIndex[key]
+		end)
+		setreadonly(mt, true)
+	end)
+
+	pcall(function()
+		local GuiService = game:GetService("GuiService")
+		local gmt = getrawmetatable and getrawmetatable(GuiService)
+		if not gmt then return end
+		setreadonly(gmt, false)
+		local oldG = rawget(gmt, "__index")
+		gmt.__index = newcclosure(function(self, key)
+			if key == "IsTenFootInterface" then return mode == "xbox" end
+			if type(oldG) == "function" then return oldG(self, key) end
+			return oldG[key]
+		end)
+		setreadonly(gmt, true)
+	end)
+
+	pcall(function()
+		if setfflag then
+			setfflag("CountryCode", mode == "pc" and "KR" or mode == "xbox" and "CA" or "US")
+			if mode == "pc" then
+				setfflag("DFIntTaskSchedulerTargetFps", "60")
+				setfflag("FFlagDebugGraphicsPreferD3D11", "True")
+			end
+		end
+	end)
+
+	pcall(function()
+		if getgenv then
+			local g = getgenv()
+			g.KHUB_SPOOF = mode
+			g.IsMobile = false
+			g.IsConsole = mode == "xbox"
+			g.IsPC = mode == "pc"
+			g.IsXbox = mode == "xbox"
+		end
+	end)
+
+	if mode == "pc" then
+		spoofStatus.Text = "âœ… FAKE PC active\nCountry: KOREA ðŸ‡°ðŸ‡·"
+		spoofStatus.TextColor3 = Color3.fromRGB(100, 255, 150)
+	elseif mode == "xbox" then
+		spoofStatus.Text = "âœ… FAKE XBOX active\nCountry: CANADA ðŸ‡¨ðŸ‡¦"
+		spoofStatus.TextColor3 = Color3.fromRGB(100, 200, 255)
+	else
+		spoofStatus.Text = "Status: Not active"
+		spoofStatus.TextColor3 = Color3.fromRGB(200, 160, 255)
+	end
+end
+
+CreateToggle(SpoofPage, "Fake PC (Country: Korea ðŸ‡°ðŸ‡·)", function(state)
+	if state then spoofMode = "pc" else if spoofMode == "pc" then spoofMode = "none" end end
+end)
+
+CreateToggle(SpoofPage, "Fake Xbox (Country: Canada ðŸ‡¨ðŸ‡¦)", function(state)
+	if state then spoofMode = "xbox" else if spoofMode == "xbox" then spoofMode = "none" end end
+end)
+
+local applyBtn = Instance.new("TextButton", SpoofPage)
+applyBtn.Size = UDim2.new(1, 0, 0, 40)
+applyBtn.BackgroundColor3 = Color3.fromRGB(90, 30, 150)
+applyBtn.Text = "âš¡ APPLY SPOOF"
+applyBtn.Font = Enum.Font.GothamBold
+applyBtn.TextSize = 14
+applyBtn.TextColor3 = Color3.new(1, 1, 1)
+Instance.new("UICorner", applyBtn).CornerRadius = UDim.new(0, 8)
+
+applyBtn.MouseButton1Click:Connect(function()
+	applySpoof(spoofMode == "none" and "pc" or spoofMode)
+	applyBtn.Text = "âœ“ APPLIED!"
+	applyBtn.BackgroundColor3 = Color3.fromRGB(30, 100, 50)
+	task.delay(1.5, function()
+		applyBtn.Text = "âš¡ APPLY SPOOF"
+		applyBtn.BackgroundColor3 = Color3.fromRGB(90, 30, 150)
+	end)
+end)
+
+--====================================================
+-- PLAYER SETUP
+--====================================================
+local function setupPlayer(plr)
+	if plr == player then return end
+	plr.CharacterAdded:Connect(function(char)
+		task.wait(0.6)
+		if hitboxEnabled then applyHitbox(char, plr) end
+	end)
+	if plr.Character and hitboxEnabled then
+		task.spawn(function()
+			task.wait(0.3)
+			applyHitbox(plr.Character, plr)
+		end)
+	end
+end
+
+for _, p in ipairs(Players:GetPlayers()) do setupPlayer(p) end
+Players.PlayerAdded:Connect(setupPlayer)
+
+Players.PlayerRemoving:Connect(function(plr)
+	if plr.Character then clearChar(plr.Character) end
+end)
+
+--====================================================
+-- TABS
+--====================================================
+local function CreateTab(name, key, y)
+	local btn = Instance.new("TextButton", Sidebar)
+	btn.Size = UDim2.new(1, -8, 0, 32)
+	btn.Position = UDim2.new(0, 4, 0, y)
+	btn.BackgroundColor3 = Color3.fromRGB(28, 16, 45)
+	btn.Text = name
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 11
+	btn.TextColor3 = Color3.fromRGB(230, 170, 255)
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+	btn.MouseButton1Click:Connect(function()
+		for _, pg in pairs(Pages) do pg.Visible = false end
+		if Pages[key] then Pages[key].Visible = true end
+	end)
+end
+
+CreateTab("ðŸ‘‹", "Welcome",  70)
+CreateTab("âš”ï¸", "Hitbox",  108)
+CreateTab("â™¡",  "Features",146)
+CreateTab("âš¡", "Movement",184)
+CreateTab("ðŸŒ", "Spoof",   222)
+
+Pages["Welcome"].Visible = true
+
+--====================================================
+-- FLOATING BUTTON + DRAG
+--====================================================
+local OpenBtn = Instance.new("ImageButton", ScreenGui)
+OpenBtn.Size = UDim2.new(0, 52, 0, 52)
+OpenBtn.Position = UDim2.new(0, 30, 0.5, -26)
+OpenBtn.BackgroundColor3 = Color3.fromRGB(20, 12, 32)
+OpenBtn.Image = LOGO_ID
+OpenBtn.Visible = false
+OpenBtn.AutoButtonColor = false
+OpenBtn.ScaleType = Enum.ScaleType.Fit
+Instance.new("UICorner", OpenBtn).CornerRadius = UDim.new(1, 0)
+Instance.new("UIStroke", OpenBtn).Color = Color3.fromRGB(180, 70, 255)
+
+Close.MouseButton1Click:Connect(function() Main.Visible = false OpenBtn.Visible = true end)
+OpenBtn.MouseButton1Click:Connect(function() Main.Visible = true OpenBtn.Visible = false end)
+
+local draggingMain, dragStart, startPos
+Top.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		draggingMain = true dragStart = input.Position startPos = Main.Position
+	end
+end)
+Top.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		draggingMain = false
+	end
+end)
+
+local btnDragging, btnStart, btnPos
+OpenBtn.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		btnDragging = true btnStart = input.Position btnPos = OpenBtn.Position
+	end
+end)
+OpenBtn.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		btnDragging = false
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if input.UserInputType ~= Enum.UserInputType.MouseMovement and input.UserInputType ~= Enum.UserInputType.Touch then return end
+	if draggingMain and dragStart then
+		local d = input.Position - dragStart
+		Main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + d.X, startPos.Y.Scale, startPos.Y.Offset + d.Y)
+	end
+	if btnDragging and btnStart then
+		local d = input.Position - btnStart
+		OpenBtn.Position = UDim2.new(btnPos.X.Scale, btnPos.X.Offset + d.X, btnPos.Y.Scale, btnPos.Y.Offset + d.Y)
+	end
+end)
+
+print("[KHUB PUBLIC] Loaded — Timebomb Public · no key")
