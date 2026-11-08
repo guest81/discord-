@@ -1,6 +1,6 @@
 print("PhantomX Premium On Top Forever")
 local success, result = pcall(function()
-    local source = game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua", true)
+    local source = game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua", true)
     if source then
         local loaded = loadstring(source)
         if loaded then return loaded() end
